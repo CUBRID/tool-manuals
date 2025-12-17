@@ -11,7 +11,6 @@ CUBRID 매니저
     install.rst
     startup.rst
     env.rst
-    query_editor.rst
     admin.rst
     monitoring.rst
     other_feature.rst
