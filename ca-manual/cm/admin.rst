@@ -425,6 +425,33 @@ testdb를 복사하는 방법은 다음과 같다. 이를 위해서는 우선 te
 
 데이터베이스 삭제 대화창에서 "백업 볼륨도 같이 삭제함"을 체크한 후 "확인"을 클릭한다.
 
+
+트리거 추가
+^^^^^^^^^^^
+
+testdb에 트리거를 추가할 수 있다.
+
+.. rubric:: testdb 클릭 > 트리거 > 트리거 추가
+
+.. image:: /images/cm-database-trigger.png
+
+*   트리거 이름 란에 트리거의 이름을 설정한다.
+*   트리거 이벤트 섹션 내에서 이벤트의 대상, 시간 유형을 설정한다.
+*   트리거 Action 섹션 내에서 수행 시점과 동작 유형을 선택한다.
+*   옵션 섹션 내에서 트리거의 설명, 상태, 우선순위를 설정한다.
+*   생성되는 트리거의 SQL문을 SQL 탭을 통해 확인할 수 있다.
+
+동의어 추가
+^^^^^^^^^^^
+
+testdb에 동의어를 추가할 수 있다.
+
+.. rubric:: testdb 클릭 > 동의어 > 동의어어 추가
+
+.. image:: /images/cm-database-synonym.png
+    
+
+
 데이터베이스 정보 조회
 ----------------------
 
@@ -458,6 +485,8 @@ OID 탐색기
 OID 탐색기를 사용하면 특정 OID를 입력하여 해당 데이터를 직접 조회할 수 있다.
 
 
+
+
 연결 정보와 서버 고유 변수 설정
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -467,34 +496,9 @@ testdb의 속성을 통해 연결정보와 서버 고유 변수를 설정할 수
 
 
 .. image:: /images/cm-database-properties-connection.png
-.. image:: /images/cm-database-properties-server-variables.png
+.. image:: /images/cm-database-properties-server-variable.png
 
 *   각 프로퍼티 요소에 대한 설명은 큐브리드 매뉴얼을 참조하도록 한다.
-
-트리거 추가
-^^^^^^^^^^^
-
-testdb에 트리거를 추가할 수 있다.
-
-.. rubric:: testdb 클릭 > 트리거 > 트리거 추가
-
-.. image:: /images/cm-database-trigger.png
-
-*   트리거 이름 란에 트리거의 이름을 설정한다.
-*   트리거 이벤트 섹션 내에서 이벤트의 대상, 시간 유형을 설정한다.
-*   트리거 Action 섹션 내에서 수행 시점과 동작 유형을 선택한다.
-*   옵션 섹션 내에서 트리거의 설명, 상태, 우선순위를 설정한다.
-*   생성되는 트리거의 SQL문을 SQL 탭을 통해 확인할 수 있다.
-
-동의어 추가
-^^^^^^^^^^^
-
-testdb에 동의어를 추가할 수 있다.
-
-.. rubric:: testdb 클릭 > 동의어 > 동의어어 추가
-
-.. image:: /images/cm-database-synonym.png
-    
 
 스키마 관리하기
 ===============
