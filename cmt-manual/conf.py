@@ -35,7 +35,7 @@ source_suffix = {
 }
 
 # CM 폴더만 빌드하기 위해 master_doc 변경
-master_doc = 'cm/index'
+master_doc = 'cmt/index'
 
 project = u'CUBRID Manager'
 copyright = u'2016, CUBRID Corparation'
@@ -97,20 +97,20 @@ latex_elements = {
     '''
 }
 latex_documents = [
-    ('cm/index', 'cubrid_manager.tex', u'CUBRID Manager Documentation', u'CUBRID Corparation', 'manual'),
+    ('cmt/index', 'cubrid_manager.tex', u'CUBRID Manager Documentation', u'CUBRID Corparation', 'manual'),
 ]
 latex_domain_indices = True
 
 # -- Options for manual page output --------------------------------------------
 
 man_pages = [
-    ('cm/index', 'cubrid_manager', u'CUBRID Manager Documentation', [u'CUBRID Corparation'], 1)
+    ('cmt/index', 'cubrid_manager', u'CUBRID Manager Documentation', [u'CUBRID Corparation'], 1)
 ]
 
 # -- Options for Texinfo output ------------------------------------------------
 
 texinfo_documents = [
-    ('cm/index', 'cubrid_manager', u'CUBRID Manager Documentation',
+    ('cmt/index', 'cubrid_manager', u'CUBRID Manager Documentation',
      u'CUBRID Corparation', 'cubrid_manager', 'One line description of project.',
      'Miscellaneous'),
 ]
