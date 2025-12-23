@@ -34,10 +34,10 @@ source_suffix = {
     '.md': 'markdown',
 }
 
-# CM 폴더만 빌드하기 위해 master_doc 변경
+# CMT
 master_doc = 'cmt/index'
 
-project = u'CUBRID Manager'
+project = u'CUBRID Migration Toolkit'
 copyright = u'2016, CUBRID Corparation'
 
 version = '10.0'
@@ -79,7 +79,7 @@ html_show_sphinx = False
 html_show_copyright = True
 html_use_index = True
 html_show_sourcelink = True
-htmlhelp_basename = 'cubrid_manager_doc'
+htmlhelp_basename = 'cubrid_migration_toolkit_doc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -97,21 +97,21 @@ latex_elements = {
     '''
 }
 latex_documents = [
-    ('cmt/index', 'cubrid_manager.tex', u'CUBRID Manager Documentation', u'CUBRID Corparation', 'manual'),
+    ('cmt/index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corparation', 'manual'),
 ]
 latex_domain_indices = True
 
 # -- Options for manual page output --------------------------------------------
 
 man_pages = [
-    ('cmt/index', 'cubrid_manager', u'CUBRID Manager Documentation', [u'CUBRID Corparation'], 1)
+    ('cmt/index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation', [u'CUBRID Corparation'], 1)
 ]
 
 # -- Options for Texinfo output ------------------------------------------------
 
 texinfo_documents = [
-    ('cmt/index', 'cubrid_manager', u'CUBRID Manager Documentation',
-     u'CUBRID Corparation', 'cubrid_manager', 'One line description of project.',
+    ('cmt/index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation',
+     u'CUBRID Corparation', 'cubrid_migration_toolkit', 'One line description of project.',
      'Miscellaneous'),
 ]
 texinfo_domain_indices = True
