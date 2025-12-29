@@ -71,7 +71,7 @@ html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     "collapse_navigation": False,
 }
-html_static_path = ['_static']
+html_static_path = ['_static', 'images']
 html_css_files = ["style.css"]
 html_last_updated_fmt = '%b %d, %Y'
 html_use_smartypants = False
