@@ -131,67 +131,15 @@ CUBRID 매니저 클라이언트를 수행 중에 발생한 오류 로그는 $CU
 =============== =========================
 단축키          동작
 =============== =========================
-Ctrl+T          질의 편집기를 열기
 Ctrl+W          활성화된 창을 닫기
 Ctrl+Shift+W    열려있는 모든 창을 닫기
 =============== =========================
 
 .. comment
 
-    Ctrl+T          Open query editor
     Ctrl+W          Close an active window
     Ctrl+Shift+W    Close all opened windows
 
-질의 편집기 단축키
-------------------
-
-=============== =========================
-단축키          동작
-=============== =========================
-F5              질의를 수행하기
-F6              질의 계획 보기
-F7              질의 이력 보기
-F8              다중 질의 실행 모드로 변환하기
-F11             질의 출력 형식을 변경하기 (원본 출력, 트리 출력, 그래프 출력)
-Ctrl+Shift+X    드래그하여 선택한 문자열을 대문자로 변환하기
-Ctrl+Shift+Y    드래그하여 선택한 문자열을 소문자로 변환하기
-F5/Ctrl+Enter   질의를 수행하기
-Ctrl+Shift+F    선택한 질의 문자열을 포맷팅하기
-Tab             들여쓰기(인덴트)
-Shift+Tab       내어쓰기(아웃덴트)
-Ctrl+/          주석 달기
-Ctrl+/          주석 제거
-Ctrl+Z          이전으로 되돌리기
-Ctrl+Y          되돌린 것을 원복하기
-Ctrl+F          찾기/대체하기
-Ctrl+C          복사하기
-Ctrl+X          자르기
-Ctrl+V          붙이기
-Ctrl+G          특정 줄로 이동하기
-=============== =========================
-
-.. comment
-
-    F5              Run the queries
-    F6              Show the query plan
-    F7              Show the query history
-    F8              Switch to multiple database query
-    F11             Change query plan display model
-    Ctrl+Shift+X    Change to upper letters(capitals)
-    Ctrl+Shift+Y    Change to lower letters
-    F5/Ctrl+Enter   Run the queries
-    Ctrl+Shift+F    Format the selected queries
-    Tab             Indent
-    Shift+Tab       Outdent
-    Ctrl+/          Add Comment
-    Ctrl+/          Delete Comment
-    Ctrl+Z          Undo
-    Ctrl+Y          Redo
-    Ctrl+F          Find/Replace
-    Ctrl+C          Copy
-    Ctrl+X          Cut
-    Ctrl+V          Paste
-    Ctrl+G          Go to line
 
 테이블/칼럼 설명 기능 사용
 ==========================
@@ -298,7 +246,7 @@ HA 프로세스 상태 확인
 
 위 출력 결과에서 마스터 서버는 "nodeA"이고, 슬레이브 서버는 "nodeB"임을 알 수 있다.
 
-여기까지 해서 간단한 HA 환경 구성이 완료되었다. 보다 자세한 사항은 :doc:`/ha`\를 참고한다.
+여기까지 해서 간단한 HA 환경 구성이 완료되었다. 보다 자세한 사항은 큐브리드 메뉴얼의 HA 설정 부분을 참고한다.
 
 오브젝트 대시보드
 =================
@@ -311,15 +259,6 @@ HA 프로세스 상태 확인
 
 .. image:: /images/cm-obj-dashboard2.png
 
-빠른 질의 입력
-==============
-
-질의 편집기에서 마우스 없이도 쉽게 질의를 입력할 수 있는 방법을 제공한다.
-
-CTRL + , 를 누르면 빠른 질의 입력 창이 뜨고 테이블명을 입력(자동 완성)한 후,
-SELECT, INSERT, UPDATE 문을 바로 질의 편집기에 입력할 수 있다.
-
-.. image:: /images/cm-quick-query.png
 
 다중 호스트 설정 편집기
 =======================
