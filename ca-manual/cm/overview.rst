@@ -21,7 +21,7 @@ CUBRID ADMIN 클라이언트는 Java 응용 프로그램으로 JDK 21 이상 버
 구조
 ====
 
-아래 그림은 CUBRID ADMIN가 서버와 통신하는 구조를 보여주고 있다. 
+아래 그림은 CUBRID ADMIN이 서버와 통신하는 구조를 보여주고 있다. 
 
 CUBRID ADMIN은 아래와 같은 기능을 제공한다.
 

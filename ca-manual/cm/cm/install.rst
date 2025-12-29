@@ -13,7 +13,7 @@ CUBRID ADMIN은 Java 실행 환경에서만 실행이 가능하기 때문에 우
     
         *   JDK 21 이상 버전을 받아 설치한다.
         *   64bit용 CUBRID ADMIN를 사용하려면 JDK 역시 64bit용으로 설치되어야 한다.그러나 64비트용 CUBRID를 사용한다고 해서 CUBRID ADMIN도 64bit용으로 설치할 필요는 없다.
-        *   간혹 시스템은 64bit이면서 32bit JDK를 설치해서 사용하는 경우가 있는데, 이러한 경우 CUBRID ADMIN은 64bit를 설치한 후 CUBRID ADMIN가 설치된 경로 아래에 64bit JDK를 jre 경로명으로 복사해 넣으면 시스템에 설치된 JDK의 영향을 받지 않고 CUBRID ADMIN를 실행할 수 있다.
+        *   간혹 시스템은 64bit이면서 32bit JDK를 설치해서 사용하는 경우가 있는데, 이러한 경우 CUBRID ADMIN은 64bit를 설치한 후 CUBRID ADMIN이 설치된 경로 아래에 64bit JDK를 jre 경로명으로 복사해 넣으면 시스템에 설치된 JDK의 영향을 받지 않고 CUBRID ADMIN를 실행할 수 있다.
 
 CUBRID ADMIN은 아래의 URL에서 받을 수 있다. 
 
@@ -42,7 +42,7 @@ CUBRID ADMIN은 자동 업데이트 기능을 내장하고 있어서 신규 버�
 
 .. note:: **백업 방법**
 
-    CUBRID ADMIN가 설치된 디렉토리에는 workspace 폴더가 있는데, 이를 다른 곳으로 백업해두면 된다. 단, "파일 > 워크스페이스 전환"으로 이미 다른 곳으로 워크스페이스를 변경하였다면 변경한 곳의 폴더를 복사해두는 것이 안전하다.
+    CUBRID ADMIN이 설치된 디렉토리에는 workspace 폴더가 있는데, 이를 다른 곳으로 백업해두면 된다. 단, "파일 > 워크스페이스 전환"으로 이미 다른 곳으로 워크스페이스를 변경하였다면 변경한 곳의 폴더를 복사해두는 것이 안전하다.
 
 삭제
 ====
