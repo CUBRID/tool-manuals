@@ -29,10 +29,10 @@
 #
 
 # assign reviewers about all files
-* @mhoh3963 @hwany7seo
+* @mhoh3963 @hwany7seo @kwonhoil @kavin0718
 
 # required reviewers for ca manual
-/ca-manual/ @mhoh3963 @hwany7seo @JohnDohnut
+/ca-manual/ @mhoh3963 @hwany7seo @kwonhoil @kavin0718 @bagus-kim @hiclass @manyoung-jeong @JohnDohnut
 
 # required reviewers for cmt manual
-/cmt-manual/ @mhoh3963 @hwany7seo @Srltas @Kang-dot
+/cmt-manual/ @mhoh3963 @hwany7seo @kwonhoil @kavin0718 @bagus-kim @hiclass @manyoung-jeong @Srltas @Kang-dot
