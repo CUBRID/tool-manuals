@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# CM 폴더만 빌드하기 위한 conf.py
+# CA 폴더만 빌드하기 위한 conf.py
 # 원본 conf.py를 복사한 후 master_doc만 변경한 버전
 
 import sys, os, sphinx
@@ -34,10 +34,10 @@ source_suffix = {
     '.md': 'markdown',
 }
 
-# CM 폴더만 빌드하기 위해 master_doc 변경
-master_doc = 'cm/index'
+# CA 폴더만 빌드하기 위해 master_doc 변경
+master_doc = 'ca/index'
 
-project = u'CUBRID Manager'
+project = u'CUBRID Admin'
 copyright = u'2016, CUBRID Corparation'
 
 version = '10.0'
@@ -79,7 +79,7 @@ html_show_sphinx = False
 html_show_copyright = True
 html_use_index = True
 html_show_sourcelink = True
-htmlhelp_basename = 'cubrid_manager_doc'
+htmlhelp_basename = 'cubrid_admin_doc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -97,21 +97,21 @@ latex_elements = {
     '''
 }
 latex_documents = [
-    ('cm/index', 'cubrid_manager.tex', u'CUBRID Manager Documentation', u'CUBRID Corparation', 'manual'),
+    ('ca/index', 'cubrid_admin.tex', u'CUBRID Admin Documentation', u'CUBRID Corparation', 'manual'),
 ]
 latex_domain_indices = True
 
 # -- Options for manual page output --------------------------------------------
 
 man_pages = [
-    ('cm/index', 'cubrid_manager', u'CUBRID Manager Documentation', [u'CUBRID Corparation'], 1)
+    ('ca/index', 'cubrid_admin', u'CUBRID Admin Documentation', [u'CUBRID Corparation'], 1)
 ]
 
 # -- Options for Texinfo output ------------------------------------------------
 
 texinfo_documents = [
-    ('cm/index', 'cubrid_manager', u'CUBRID Manager Documentation',
-     u'CUBRID Corparation', 'cubrid_manager', 'One line description of project.',
+    ('ca/index', 'cubrid_admin', u'CUBRID Admin Documentation',
+     u'CUBRID Corparation', 'cubrid_admin', 'One line description of project.',
      'Miscellaneous'),
 ]
 texinfo_domain_indices = True
