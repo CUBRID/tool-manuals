@@ -19,7 +19,7 @@ CUBRID Migration Toolkit
 
 CMT(CUBRID Migration Toolkit)은 운영 DB가 Oracle과 같이 CUBRID가 아닌 타 DBMS를 CUBRID로 전환할 때 데이터 마이그레이션을 수행하는 GUI 기반 도구이다.
 
-마이그레이션을 지원하는 DB 목록으론 Oracle, MySQL, MSSQL, MariaDB, informix가 있다.
+마이그레이션을 지원하는 DB 목록으론 Oracle, MySQL, MSSQL, MariaDB, Informix가 있다.
 
 CMT는 Java 기반 툴이기 때문에 실행에 Java 21 이상을 요구한다.
 
