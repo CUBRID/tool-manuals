@@ -47,7 +47,7 @@ html_context = {
     "switcher_url": "https://ftp.cubrid.org/CUBRID_Docs/Manuals/switcher.json"
 }
 
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', 'venv']
 
 pygments_style = 'sphinx'
 
