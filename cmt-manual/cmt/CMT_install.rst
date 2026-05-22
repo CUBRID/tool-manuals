@@ -39,4 +39,4 @@ Linux/Mac: 삭제하지 않고 sh로 설치하거나 tar.gz를 압축 해제하�
 **삭제**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-CMT를 삭제하려면 업그레이드에서 설명한 것처럼 동일한 방식으로 삭제한다. 호스트 정보까지 모두 삭제하려면 CMT를 Uninstall을 이용하여 삭제한 후 CMT 설치 폴더(Windows에서는 보통 C:\\CUBRID\\cubridmigraton)를 완전히 삭제한다.
+CMT를 삭제하려면 업그레이드에서 설명한 것처럼 동일한 방식으로 삭제한다. 호스트 정보까지 모두 삭제하려면 CMT를 Uninstall을 이용하여 삭제한 후 CMT 설치 폴더(Windows에서는 보통 C:\\CUBRID\\cubridmigration)를 완전히 삭제한다.
