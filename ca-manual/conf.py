@@ -5,6 +5,8 @@
 import sys, os, sphinx
 from pathlib import Path
 
+from sphinxawesome_theme.postprocess import Icons
+
 sys.path.append(str(Path('.').resolve()))
 
 # -- General configuration -----------------------------------------------------
@@ -67,10 +69,13 @@ simplepdf_vars = {
 
 # -- Options for HTML output ---------------------------------------------------
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinxawesome_theme'
 html_theme_options = {
-    "collapse_navigation": False,
+    "show_prev_next": "true",
+    "show_scrolltop": "true",
+    "awesome_headerlinks": "false",
 }
+html_permalinks_icon = Icons.permalinks_icon
 html_static_path = ['_static', 'images']
 html_css_files = ["style.css"]
 html_last_updated_fmt = '%b %d, %Y'
