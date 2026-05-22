@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# CM 폴더만 빌드하기 위한 conf.py
-# 원본 conf.py를 복사한 후 master_doc만 변경한 버전
 
 import sys, sphinx
 from pathlib import Path
@@ -34,7 +32,6 @@ source_suffix = {
     '.inc': 'restructuredtext',
 }
 
-# CMT
 master_doc = 'cmt/index'
 
 project = u'CUBRID Migration Toolkit'
