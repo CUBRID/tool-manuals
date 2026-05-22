@@ -3,14 +3,9 @@ Sphinx==8.2.3
 sphinxawesome-theme==6.0.0b3
 sphinx_design
 sphinx_copybutton
-myst_parser
-sphinxcontrib-plantuml
 sphinxext-rediraffe
-nbsphinx
-numpydoc
 sphinx_togglebutton
 sphinx_favicon
-sphinx_sitemap
 weasyprint==64.1
 sphinx-simplepdf==1.6
 sphinx-autobuild

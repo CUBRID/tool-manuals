@@ -2,7 +2,7 @@
 # CA 폴더만 빌드하기 위한 conf.py
 # 원본 conf.py를 복사한 후 master_doc만 변경한 버전
 
-import sys, os, sphinx
+import sys, sphinx
 from pathlib import Path
 
 from sphinxawesome_theme.postprocess import Icons
@@ -23,7 +23,6 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinxext.rediraffe',
     'sphinx_design',
-    'myst_parser',
     'sphinx_togglebutton',
     'sphinx_favicon',
 ]
@@ -33,7 +32,6 @@ templates_path = ['_templates']
 source_suffix = {
     '.rst': 'restructuredtext',
     '.inc': 'restructuredtext',
-    '.md': 'markdown',
 }
 
 # CA 폴더만 빌드하기 위해 master_doc 변경
@@ -57,11 +55,7 @@ suppress_warnings = [
     'misc.highlighting_failure'
 ]
 
-# -- Options for plantuml and simplepdf ----------------------------------------
-
-plantuml_output_format = "svg_img"
-local_plantuml_path = os.path.join(os.path.dirname(__file__), "utils", "plantuml.jar")
-plantuml = f"java -Djava.awt.headless=true -jar {local_plantuml_path}"
+# -- Options for simplepdf -----------------------------------------------------
 
 simplepdf_vars = {
     'cover-overlay': 'rgba(150, 26, 26, 0.7)',
