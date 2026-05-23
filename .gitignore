@@ -1,5 +1,6 @@
 # Build outputs
 **/_build/
+**/_static/theme.js
 
 # Project-specific
 ca-manual/_templates
