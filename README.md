@@ -16,12 +16,17 @@ Documentation for CUBRID tools.
 
 ## Build
 
-From the manual directory you want to build (`ca-manual` or `cmt-manual`):
+From the repository root, set up a virtual environment once:
 
 ```bash
 python3 -m venv venv
 ./venv/bin/pip install -r requirements.txt
-./venv/bin/python -m sphinx -b html -d _build/doctrees . _build/html
 ```
 
-The HTML output is written to `_build/html/`.
+Then build the manual you need (replace `ca-manual` with `cmt-manual` for the other):
+
+```bash
+./venv/bin/python -m sphinx -b html -d ca-manual/_build/doctrees ca-manual ca-manual/_build/html
+```
+
+The HTML output is written to `<manual>/_build/html/`.
