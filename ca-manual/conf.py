@@ -12,7 +12,6 @@ needs_sphinx = "7.3.1"
 
 extensions = [
     'sphinx_simplepdf',
-    'sphinx_copybutton',
     'sphinx.ext.napoleon',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
