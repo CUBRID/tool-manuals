@@ -1,6 +1,7 @@
 # Build outputs
 **/_build/
 **/_static/theme.js
+**/__pycache__/
 
 # Project-specific
 ca-manual/_templates
