@@ -20,13 +20,14 @@ From the repository root, set up a virtual environment once:
 
 ```bash
 python3 -m venv venv
-./venv/bin/pip install -r requirements.txt
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-Then build the manual you need (replace `ca-manual` with `cmt-manual` for the other):
+Then build a manual (use `cmt-manual` for the other):
 
 ```bash
-./venv/bin/python -m sphinx -b html -d ca-manual/_build/doctrees ca-manual ca-manual/_build/html
+make ca-manual
 ```
 
-The HTML output is written to `<manual>/_build/html/`.
+`make html` builds both. The HTML output is written to `<manual>/_build/html/`.
