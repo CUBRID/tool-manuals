@@ -1,10 +1,6 @@
 urllib3<2.0
-Sphinx==8.2.3
-sphinxawesome-theme==6.0.0b3
-sphinx_design
-sphinxext-rediraffe
-sphinx_togglebutton
-sphinx_favicon
-weasyprint==64.1
-sphinx-simplepdf==1.6
+Sphinx==9.1.0
+sphinxawesome-theme==6.0.0
+weasyprint==68.0
+sphinx-simplepdf==1.7
 sphinx-autobuild
