@@ -11,6 +11,13 @@ version = '10.0'
 release = '10.0.0'
 master_doc = 'cmt/index'
 
+html_title = f"CUBRID Migration Toolkit {version} Documentation"
+
+html_theme_options = {
+    **html_theme_options,
+    "extra_header_link_icons": github_icon("https://github.com/CUBRID/cubrid-migration"),
+}
+
 html_static_path = ['_static']
 htmlhelp_basename = 'cubrid_migration_toolkit_doc'
 

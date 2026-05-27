@@ -11,6 +11,13 @@ version = '10.0'
 release = '10.0.0'
 master_doc = 'ca/index'
 
+html_title = f"CUBRID Admin {version} Documentation"
+
+html_theme_options = {
+    **html_theme_options,
+    "extra_header_link_icons": github_icon("https://github.com/CUBRID/cubrid-manager"),
+}
+
 html_static_path = ['_static', 'images']
 htmlhelp_basename = 'cubrid_admin_doc'
 
