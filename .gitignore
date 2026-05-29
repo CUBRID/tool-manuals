@@ -1,4 +1,11 @@
-ca-manual/_build
+# Build outputs
+**/_build/
+**/_static/theme.js
+**/__pycache__/
+
+# Project-specific
 ca-manual/_templates
 ca_manual_static
 
+# OS files
+.DS_Store
