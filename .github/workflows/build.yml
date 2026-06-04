@@ -31,3 +31,6 @@ jobs:
 
       - name: Build HTML
         run: make ${{ matrix.manual }}
+
+      - name: Build PDF
+        run: make ${{ matrix.manual }}-pdf
