@@ -31,3 +31,11 @@ make ca-manual
 ```
 
 `make html` builds both. The HTML output is written to `<manual>/_build/html/`.
+
+### PDF
+
+```bash
+make ca-manual-pdf     # or: make cmt-manual-pdf
+```
+
+`make pdf` builds both. The PDF is written to `<manual>/_build/simplepdf/<Project>.pdf`.

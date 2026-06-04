@@ -38,9 +38,10 @@ suppress_warnings = [
 html_favicon = "_static/logo_only.png"
 
 # -- Options for simplepdf -----------------------------------------------------
+# Brand colors are set per manual in each conf.py.
 
 simplepdf_vars = {
-    'cover-overlay': 'rgba(150, 26, 26, 0.7)',
+    'cover': '#ffffff',
 }
 
 # -- Options for HTML output ---------------------------------------------------

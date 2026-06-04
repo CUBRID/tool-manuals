@@ -200,3 +200,18 @@ span.search-score-badge {
 button[title="Toggle color scheme"] {
     display: none;
 }
+
+/* PDF: override the simplepdf theme's Latin-only default font with the Korean fonts. */
+html {
+    font-family: var(--font-sans);
+}
+
+html pre, html code, html samp, html kbd {
+    font-family: var(--font-mono);
+}
+
+/* PDF: hanging indent so wrapped long TOC entries don't overlap the bullet. */
+.sphinxsidebarwrapper div > ul > li > ul li {
+    padding-left: 1.6em;
+    text-indent: -1.6em;
+}
