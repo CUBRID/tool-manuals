@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sys, sphinx
+import os, sys, sphinx
 from pathlib import Path
 
 from sphinxawesome_theme.postprocess import Icons
@@ -38,10 +38,23 @@ suppress_warnings = [
 html_favicon = "_static/logo_only.png"
 
 # -- Options for simplepdf -----------------------------------------------------
+# Brand colors are set per manual in each conf.py.
 
 simplepdf_vars = {
-    'cover-overlay': 'rgba(150, 26, 26, 0.7)',
+    'cover': '#ffffff',
 }
+
+
+def setup(app):
+    # simplepdf writes the assembled HTML under the build root with root-relative
+    # _static/_images links, so point WeasyPrint's base URL at the actual output
+    # directory.
+    def _set_simplepdf_base_url(app):
+        if app.builder.name == 'simplepdf':
+            app.config.simplepdf_weasyprint_flags = [
+                '--base-url', os.path.join(os.path.abspath(app.outdir), ''),
+            ]
+    app.connect('builder-inited', _set_simplepdf_base_url)
 
 # -- Options for HTML output ---------------------------------------------------
 

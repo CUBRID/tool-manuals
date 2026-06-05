@@ -21,6 +21,15 @@ html_theme_options = {
 html_static_path = ['_static']
 htmlhelp_basename = 'cubrid_migration_toolkit_doc'
 
+simplepdf_vars = {
+    **simplepdf_vars,
+    'primary': '#22783c',
+    'primary-opaque': 'rgba(34, 120, 60, 0.5)',
+    'links': '#22783c',
+    'cover-bg': '#22783c',
+    'cover-overlay': 'rgba(34, 120, 60, 0.7)',
+}
+
 latex_documents = [
     ('cmt/index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corparation', 'manual'),
 ]

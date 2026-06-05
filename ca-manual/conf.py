@@ -21,6 +21,15 @@ html_theme_options = {
 html_static_path = ['_static', 'images']
 htmlhelp_basename = 'cubrid_admin_doc'
 
+simplepdf_vars = {
+    **simplepdf_vars,
+    'primary': '#1a5096',
+    'primary-opaque': 'rgba(26, 80, 150, 0.5)',
+    'links': '#1a5096',
+    'cover-bg': '#1a5096',
+    'cover-overlay': 'rgba(26, 80, 150, 0.7)',
+}
+
 latex_documents = [
     ('ca/index', 'cubrid_admin.tex', u'CUBRID Admin Documentation', u'CUBRID Corparation', 'manual'),
 ]
