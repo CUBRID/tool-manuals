@@ -9,7 +9,7 @@ from shared_conf import *
 project = u'CUBRID Admin'
 version = '10.0'
 release = '10.0.0'
-master_doc = 'ca/index'
+master_doc = 'index'
 
 html_title = f"CUBRID Admin {version} Documentation"
 
@@ -31,15 +31,15 @@ simplepdf_vars = {
 }
 
 latex_documents = [
-    ('ca/index', 'cubrid_admin.tex', u'CUBRID Admin Documentation', u'CUBRID Corparation', 'manual'),
+    ('index', 'cubrid_admin.tex', u'CUBRID Admin Documentation', u'CUBRID Corparation', 'manual'),
 ]
 
 man_pages = [
-    ('ca/index', 'cubrid_admin', u'CUBRID Admin Documentation', [u'CUBRID Corparation'], 1)
+    ('index', 'cubrid_admin', u'CUBRID Admin Documentation', [u'CUBRID Corparation'], 1)
 ]
 
 texinfo_documents = [
-    ('ca/index', 'cubrid_admin', u'CUBRID Admin Documentation',
+    ('index', 'cubrid_admin', u'CUBRID Admin Documentation',
      u'CUBRID Corparation', 'cubrid_admin', 'One line description of project.',
      'Miscellaneous'),
 ]

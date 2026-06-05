@@ -4,7 +4,7 @@
 **저장**
 ^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image41.png
+.. image:: ./images/image41.png
    :width: 6.26805in
    :height: 1.50278in
 
@@ -13,7 +13,7 @@
 **마이그레이션 재실행**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image42.png
+.. image:: ./images/image42.png
    :width: 6.15556in
    :height: 1.41667in
 
@@ -22,7 +22,7 @@
 **요약**
 ^^^^^^^^^^^
 
-.. image:: ./cmt_images/image43.png
+.. image:: ./images/image43.png
    :width: 6.26805in
    :height: 3.4375in
 
@@ -32,7 +32,7 @@
 **상세**
 ^^^^^^^^^^^
 
-.. image:: ./cmt_images/image44.png
+.. image:: ./images/image44.png
    :width: 6.26805in
    :height: 4.12639in
 
@@ -41,7 +41,7 @@
 **변경된 객체**
 ^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image45.png
+.. image:: ./images/image45.png
    :width: 6.26805in
    :height: 2.73194in
 
@@ -50,7 +50,7 @@
 **미지원 객체**
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image46.png
+.. image:: ./images/image46.png
    :width: 6.26805in
    :height: 3.79028in
 
@@ -59,7 +59,7 @@
 **로그**
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image47.png
+.. image:: ./images/image47.png
    :width: 6.26805in
    :height: 4.12083in
 
@@ -68,7 +68,7 @@
 **설정 정보**
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image48.png
+.. image:: ./images/image48.png
    :width: 6.26805in
    :height: 4.1625in
 

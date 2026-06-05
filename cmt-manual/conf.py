@@ -9,7 +9,7 @@ from shared_conf import *
 project = u'CUBRID Migration Toolkit'
 version = '10.0'
 release = '10.0.0'
-master_doc = 'cmt/index'
+master_doc = 'index'
 
 html_title = f"CUBRID Migration Toolkit {version} Documentation"
 
@@ -31,15 +31,15 @@ simplepdf_vars = {
 }
 
 latex_documents = [
-    ('cmt/index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corparation', 'manual'),
+    ('index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corparation', 'manual'),
 ]
 
 man_pages = [
-    ('cmt/index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation', [u'CUBRID Corparation'], 1)
+    ('index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation', [u'CUBRID Corparation'], 1)
 ]
 
 texinfo_documents = [
-    ('cmt/index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation',
+    ('index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation',
      u'CUBRID Corparation', 'cubrid_migration_toolkit', 'One line description of project.',
      'Miscellaneous'),
 ]

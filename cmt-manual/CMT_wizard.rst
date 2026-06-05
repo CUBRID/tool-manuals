@@ -6,7 +6,7 @@
 
 사용자가 하고자 하는 마이그레이션 유형을 선택할 수 있다.
 
-.. image:: ./cmt_images/image7.png
+.. image:: ./images/image7.png
 
 - 원본 유형
     - 데이터를 추출하고자 하는 DB 또는 파일을 선택할 수 있다. DB는 CUBRID, MySQL, Oracle, MSSQL, MariaDB, Informix가 있고, 파일은 MySQL XML dump를 지원한다
@@ -19,25 +19,25 @@
 
 처음 설치하면 기본적으로 연결 데이터베이스 정보가 없다. 사용자가 가져오기를 원하는 원본 데이터베이스의 호스트 정보와 JDBC 연결을 추가하고 선택해야 한다.
 
-.. image:: ./cmt_images/image8.png
+.. image:: ./images/image8.png
    :width: 6.26805in
    :height: 3.74722in
 
 새로운 연결 정보를 만들기 위해서 [신규] 버튼을 클릭한다.
 
-.. image:: ./cmt_images/image9.png
+.. image:: ./images/image9.png
    :width: 4.34861in
    :height: 3.64444in
 
 CUBRID는 JDBC 드라이버를 따로 다운로드 받지 않아도 기본적으로 CMT에서 지원을 하고 있다.
 
-.. image:: ./cmt_images/image10.png
+.. image:: ./images/image10.png
    :width: 5.79167in
    :height: 3.29722in
 
 연결 정보를 입력 후 해당 데이터베이스에 접속이 가능한지 [테스트] 버튼을 클릭해 확인할 수 있다.
 
-.. image:: ./cmt_images/image11.png
+.. image:: ./images/image11.png
    :width: 5.30278in
    :height: 4.4375in
 
@@ -46,7 +46,7 @@ CUBRID는 JDBC 드라이버를 따로 다운로드 받지 않아도 기본적으
 
 온라인 CUBRID 데이터베이스를 선택한 경우 대상 데이터베이스 연결 정보를 선택해야 한다. 연결 정보가 없다면 원본 데이터베이스에서 연결 정보를 생성한 것과 동일한 방법으로 연결 정보를 생성 후 진행할 수 있다.
 
-.. image:: ./cmt_images/image12.png
+.. image:: ./images/image12.png
    :width: 6.26805in
    :height: 3.76389in
 
@@ -55,7 +55,7 @@ CUBRID는 JDBC 드라이버를 따로 다운로드 받지 않아도 기본적으
 
 오프라인 마이그레이션 (CUBRID dump, SQL 스크립트, CSV, XLS)을 선택한 경우 설정 정보들은 아래와 같다.
 
-.. image:: ./cmt_images/image13.png
+.. image:: ./images/image13.png
 
 - 파일 경로: 출력되는 파일을 사용자가 원하는 위치로 지정할 수 있다. 기본 경로 설정은 CMT가 설치된 위치에 output 디렉토리 밑으로 지정되어 있다.
 
@@ -82,7 +82,7 @@ CUBRID는 JDBC 드라이버를 따로 다운로드 받지 않아도 기본적으
 
 원본, 대상 데이터베이스 접속 유저 권한에 따라서 설정할 수 있는 대상 스키마가 달라진다.
 
-.. image:: ./cmt_images/image15.png
+.. image:: ./images/image15.png
 
 +----------------+------------------+------------------------------+------------------+-------------------------------------+
 | 원본 \ 대상    | 11.0 일반 유저   | 11.0 DBA                     | 11.2 일반 유저   | 11.2 DBA                            |
@@ -111,14 +111,14 @@ CUBRID는 JDBC 드라이버를 따로 다운로드 받지 않아도 기본적으
 
 마이그레이션 할 객체들을 확인하고, 변경할 수 있는 단계이다. 확인할 수 있는 객체들은 table, pk, fk, index, view, serial, synonym, grant가 있다.
 
-.. image:: ./cmt_images/image18.png
+.. image:: ./images/image18.png
    :width: 6.26805in
    :height: 3.60278in
 
 - Table
     - 원본 테이블, 대상 스키마, 대상 테이블에 대한 정보를 확인할 수 있다.
 
-.. image:: ./cmt_images/image19.png
+.. image:: ./images/image19.png
    :width: 6.26805in
    :height: 1.84305in
 
@@ -132,11 +132,11 @@ CUBRID는 JDBC 드라이버를 따로 다운로드 받지 않아도 기본적으
 
 테이블 노드를 선택하면 해당 테이블에 컬럼 정보들을 확인할 수 있다.
 
-.. image:: ./cmt_images/image20.png
+.. image:: ./images/image20.png
    :width: 2.14722in
    :height: 1.88472in
 
-.. image:: ./cmt_images/image21.png
+.. image:: ./images/image21.png
    :width: 6.26805in
    :height: 3.65in
 
@@ -155,11 +155,11 @@ PK (Primary key)
 
 PK 컬럼을 변경하고 한다면 PK가 아닌 컬럼에 있는 컬럼을 대상 PK 컬럼으로 옮기면 대상 PK 컬럼에 있는 컬럼들로 PK가 만들어진다.
 
-.. image:: ./cmt_images/image22.png
+.. image:: ./images/image22.png
    :width: 6.26805in
    :height: 4.48611in
 
-.. image:: ./cmt_images/image23.png
+.. image:: ./images/image23.png
    :width: 5.28333in
    :height: 3.79444in
 
@@ -168,11 +168,11 @@ FK (Foreign key)
 
 테이블의 FK 이름과 설정들을 확인하고 변경할 수 있다.
 
-.. image:: ./cmt_images/image24.png
+.. image:: ./images/image24.png
    :width: 6.14583in
    :height: 3.44861in
 
-.. image:: ./cmt_images/image25.png
+.. image:: ./images/image25.png
    :width: 6.26805in
    :height: 3.17639in
 
@@ -199,11 +199,11 @@ Index
 
 테이블의 인덱스 설정들을 확인하고 변경할 수 있다.
 
-.. image:: ./cmt_images/image26.png
+.. image:: ./images/image26.png
    :width: 6.26805in
    :height: 2.7875in
 
-.. image:: ./cmt_images/image27.png
+.. image:: ./images/image27.png
    :width: 6.26805in
    :height: 2.74583in
 
@@ -228,7 +228,7 @@ Column
 
 컬럼 노드를 선택하여 컬럼 세부 설정을 할 수 있다.
 
-.. image:: ./cmt_images/image28.png
+.. image:: ./images/image28.png
    :width: 6.26805in
    :height: 4.10833in
 
@@ -237,7 +237,7 @@ View
 
 원본 뷰, 대상 뷰 정보를 확인할 수 있다.
 
-.. image:: ./cmt_images/image29.png
+.. image:: ./images/image29.png
    :width: 6.26805in
    :height: 3.60833in
 
@@ -247,7 +247,7 @@ View
 
     - 뷰 상세 페이지를 통해 뷰 이름, View Query Spec을 변경할 수 있다.
 
-.. image:: ./cmt_images/image30.png
+.. image:: ./images/image30.png
    :width: 6.15556in
    :height: 4.23194in
 
@@ -256,7 +256,7 @@ Serial
 
 원본 시리얼, 대상 시리얼 정보를 확인할 수 있다.
 
-.. image:: ./cmt_images/image31.png
+.. image:: ./images/image31.png
    :width: 6.26805in
    :height: 3.65278in
 
@@ -266,7 +266,7 @@ Serial
 
     - 시리얼 상세 페이지를 통해 이름, 시작 값, 증가 값, 최소 값, 최대 값, 캐시 값, 순환을 변경할 수 있다.
 
-.. image:: ./cmt_images/image32.png
+.. image:: ./images/image32.png
    :width: 6.02083in
    :height: 3.32361in
 
@@ -289,7 +289,7 @@ Synonym
 
 원본 시노님, 대상 시노님 정보를 확인할 수 있다.
 
-.. image:: ./cmt_images/image33.png
+.. image:: ./images/image33.png
    :width: 6.26805in
    :height: 3.64167in
 
@@ -297,7 +297,7 @@ Synonym
 
 - 교체: 대상 데이터베이스에 같은 이름의 시노님이 이미 생성되어 있는 경우 삭제하고 새로운 시노님을 생성한다.
 
-.. image:: ./cmt_images/image34.png
+.. image:: ./images/image34.png
     :width: 6in
     :height: 2.75in
 
@@ -314,7 +314,7 @@ Grant
 
 권한 종류, 원본 스키마, 원본 오브젝트, 대상 스키마 정보를 확인할 수 있다.
 
-.. image:: ./cmt_images/image35.png
+.. image:: ./images/image35.png
    :width: 6.26805in
    :height: 3.65139in
 
@@ -324,7 +324,7 @@ SQL
 ^^^^^^^^^^^^^^^^^^
 사용자가 쿼리를 통해 원하는 record, table을 대상에 출력할 수 있다.
 
-.. image:: ./cmt_images/image16.png
+.. image:: ./images/image16.png
 
 - SQL 추가: 쿼리를 입력하는 창을 표시하여 원하는 쿼리를 입력할 수 있다
 
@@ -344,13 +344,13 @@ SQL
 ^^^^^^^^^^^^^^^^^
 마이그레이션을 실행하기 전 설정한 정보들을 확인할 수 있다.
 
-.. image:: ./cmt_images/image36.png
+.. image:: ./images/image36.png
    :width: 6.26805in
    :height: 5.05556in
 
 고급 성능 설정
 
-.. image:: ./cmt_images/image37.png
+.. image:: ./images/image37.png
    :width: 5.53056in
    :height: 2.28194in
 
@@ -365,7 +365,7 @@ DDL 미리보기
 
 이관 대상의 오브젝트의 DDL을 확인해 볼 수 있다.
 
-.. image:: ./cmt_images/image38.png
+.. image:: ./images/image38.png
    :width: 6.26805in
    :height: 5.06944in
 
@@ -381,7 +381,7 @@ DDL 미리보기
 **마이그레이션 실행**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image39.png
+.. image:: ./images/image39.png
    :width: 4.92778in
    :height: 2.66667in
 
@@ -391,7 +391,7 @@ DDL 미리보기
 
 - 마이그레이션 예약 설정: 마이그레이션 예약 설정을 할 수 있다.
 
-.. image:: ./cmt_images/image40.png
+.. image:: ./images/image40.png
     :width: 4.10417in
     :height: 3.08333in
 

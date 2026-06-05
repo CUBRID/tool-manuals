@@ -4,7 +4,7 @@
 **기본 정보**
 ^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image4.png
+.. image:: ./images/image4.png
    :width: 6.26805in
    :height: 1.63889in
 
@@ -13,7 +13,7 @@ CMT 설정을 선택할 수 있다.
 **JDBC 드라이버**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image5.png
+.. image:: ./images/image5.png
    :width: 6.26805in
    :height: 2.92778in
 
@@ -22,7 +22,7 @@ CMT에 저장되어 있는 JDBC를 확인할 수 있다. DB 유형별로 확인�
 **마이그레이션**
 ^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image6.png
+.. image:: ./images/image6.png
 
 - 성능 설정
   
