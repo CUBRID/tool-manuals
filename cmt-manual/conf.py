@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 import sys
 from pathlib import Path
 
@@ -30,13 +29,6 @@ simplepdf_vars = {
     'cover-bg': '#22783c',
     'cover-overlay': 'rgba(34, 120, 60, 0.7)',
 }
-
-# The master doc is in a subdirectory, so point WeasyPrint at the output root
-# to resolve _static/_images.
-simplepdf_weasyprint_flags = [
-    '--base-url',
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), '_build', 'simplepdf') + os.sep,
-]
 
 latex_documents = [
     ('cmt/index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corparation', 'manual'),
