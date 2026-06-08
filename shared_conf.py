@@ -21,7 +21,7 @@ source_suffix = {
     '.inc': 'restructuredtext',
 }
 
-copyright = u'2016, CUBRID Corparation'
+copyright = u'2016, CUBRID Corporation'
 
 language = 'ko'
 html_search_language = 'ko'

@@ -31,15 +31,15 @@ simplepdf_vars = {
 }
 
 latex_documents = [
-    ('index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corparation', 'manual'),
+    ('index', 'cubrid_migration_toolkit.tex', u'CUBRID Migration Toolkit Documentation', u'CUBRID Corporation', 'manual'),
 ]
 
 man_pages = [
-    ('index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation', [u'CUBRID Corparation'], 1)
+    ('index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation', [u'CUBRID Corporation'], 1)
 ]
 
 texinfo_documents = [
     ('index', 'cubrid_migration_toolkit', u'CUBRID Migration Toolkit Documentation',
-     u'CUBRID Corparation', 'cubrid_migration_toolkit', 'One line description of project.',
+     u'CUBRID Corporation', 'cubrid_migration_toolkit', 'One line description of project.',
      'Miscellaneous'),
 ]

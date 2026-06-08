@@ -31,15 +31,15 @@ simplepdf_vars = {
 }
 
 latex_documents = [
-    ('index', 'cubrid_admin.tex', u'CUBRID Admin Documentation', u'CUBRID Corparation', 'manual'),
+    ('index', 'cubrid_admin.tex', u'CUBRID Admin Documentation', u'CUBRID Corporation', 'manual'),
 ]
 
 man_pages = [
-    ('index', 'cubrid_admin', u'CUBRID Admin Documentation', [u'CUBRID Corparation'], 1)
+    ('index', 'cubrid_admin', u'CUBRID Admin Documentation', [u'CUBRID Corporation'], 1)
 ]
 
 texinfo_documents = [
     ('index', 'cubrid_admin', u'CUBRID Admin Documentation',
-     u'CUBRID Corparation', 'cubrid_admin', 'One line description of project.',
+     u'CUBRID Corporation', 'cubrid_admin', 'One line description of project.',
      'Miscellaneous'),
 ]
