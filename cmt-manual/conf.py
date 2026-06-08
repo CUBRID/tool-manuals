@@ -7,8 +7,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from shared_conf import *
 
 project = u'CUBRID Migration Toolkit'
-version = '10.0'
-release = '10.0.0'
+version = '12.0.0'
+release = '12.0.0'
 master_doc = 'index'
 
 html_title = f"CUBRID Migration Toolkit {version} Documentation"
