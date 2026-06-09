@@ -14,7 +14,7 @@
 **마이그레이션 이력**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image1.png
+.. image:: ./images/image1.png
    :width: 6.26805in
    :height: 2.80139in
 
@@ -23,7 +23,7 @@
 **마이그레이션 스크립트**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ./cmt_images/image2.png
+.. image:: ./images/image2.png
    :width: 6.26805in
    :height: 2.71667in
 
@@ -37,7 +37,7 @@ CMT 스크립트 창에서 하나의 스크립트를 선택 후 [마이그레이
 
 (Linux의 경우 Cron 구문을 사용하여 반복을 설정할 수 있다.)
 
-   .. image:: ./cmt_images/image3.png
+   .. image:: ./images/image3.png
       :width: 4.08333in
       :height: 3.07222in
 

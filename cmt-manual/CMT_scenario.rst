@@ -17,7 +17,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 새로운 마이그레이션 작업을 수행하기 위해 좌측 상단에 있는 [새 마이그레이션]을 클릭하여 마이그레이션 마법사를 실행한다.
 
-.. image:: ./cmt_images/image49.png
+.. image:: ./images/image49.png
     :width: 6.26805in
     :height: 4.75556in
 
@@ -25,7 +25,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 원본 유형은 [온라인 CUBRID 데이터베이스], 대상 유형도 [온라인 CUBRID 데이터베이스]를 선택한다.
 
-.. image:: ./cmt_images/image7.png
+.. image:: ./images/image7.png
     :width: 6.26805in
     :height: 5.04306in
 
@@ -35,7 +35,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 저장되어 있는 연결 정보가 있다면 선택만 하면 되고, 연결 정보가 없으면 [신규]를 클릭해 연결 정보를 저장 후 선택하면 된다.
 
-.. image:: ./cmt_images/image8.png
+.. image:: ./images/image8.png
 
 **D. 대상 온라인 데이터베이스 선택**
 
@@ -43,7 +43,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 저장되어 있는 연결 정보가 있다면 선택만 하면 되고, 연결 정보가 없다면 [신규]를 클릭해 연결 정보를 저장 후 선택하면 된다.
 
-.. image:: ./cmt_images/image52.png
+.. image:: ./images/image52.png
     :width: 6.26805in
     :height: 5.08194in
 
@@ -51,7 +51,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 이관하고자 하는 스키마를 선택할 수 있다. 원본 데이터베이스와 대상 데이터베이스 연결 유저에 따라서 대상 스키마를 변경할 수도 있다.
 
-.. image:: ./cmt_images/image53.png
+.. image:: ./images/image53.png
     :width: 6.26805in
     :height: 5.06528in
 
@@ -59,7 +59,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 원본 데이터베이스에서 가져온 오브젝트들을 확인하고 변경할 수 있다.
 
-.. image:: ./cmt_images/image54.png
+.. image:: ./images/image54.png
     :width: 6.26805in
     :height: 5.04167in
 
@@ -69,7 +69,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 우측 하단에 [시작하기]를 클릭하면 마이그레이션이 시작된다.
 
-.. image:: ./cmt_images/image55.png
+.. image:: ./images/image55.png
     :width: 6.26805in
     :height: 5.05556in
 
@@ -81,7 +81,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 로그는 마이그레이션이 끝난 뒤 마이그레이션 보고서에서 다시 확인할 수 있다.
 
-.. image:: ./cmt_images/image56.png
+.. image:: ./images/image56.png
     :width: 6.26805in
     :height: 4.39028in
 
@@ -89,7 +89,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 마이그레이션 작업이 끝난 뒤 결과를 보고서로 확인할 수 있다.
 
-.. image:: ./cmt_images/image57.png
+.. image:: ./images/image57.png
     :width: 6.26805in
     :height: 4.40972in
 
@@ -100,13 +100,13 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 새로운 마이그레이션 작업을 수행하기 위해 좌측 상단에 있는 [새 마이그레이션]을 클릭하여 마이그레이션 마법사를 실행한다.
 
-.. image:: ./cmt_images/image49.png
+.. image:: ./images/image49.png
     :width: 6.26805in
     :height: 4.75556in
 
 **B. 마이그레이션 유형 선택**
 
-.. image:: ./cmt_images/image58.png
+.. image:: ./images/image58.png
     :width: 6.26805in
     :height: 5.06528in
 
@@ -116,13 +116,13 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 저장되어 있는 연결 정보가 있다면 선택만 하면 되고, 연결 정보가 없으면 [신규]를 클릭해 연결 정보를 저장 후 선택하면 된다.
 
-.. image:: ./cmt_images/image8.png
+.. image:: ./images/image8.png
 
 **D. 출력 파일 설정**
 
 출력 파일을 저장할 경로를 설정하거나, DB 버전, 스키마 파일 분리 여부와 같은 기능들을 선택할 수 있다.
 
-.. image:: ./cmt_images/image13.png
+.. image:: ./images/image13.png
     :width: 6.26805in
     :height: 5.05278in
 
@@ -130,7 +130,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 이관하고자 하는 스키마를 선택할 수 있다. 오프라인 이관의 경우 대상 데이터베이스 접속 유저에 따라 대상 스키마의 이름을 직접 지정해야 한다.
 
-.. image:: ./cmt_images/image60.png
+.. image:: ./images/image60.png
     :width: 6.26805in
     :height: 5.05694in
 
@@ -138,7 +138,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 원본 데이터베이스에서 가져온 오브젝트들을 확인하고 변경할 수 있다.
 
-.. image:: ./cmt_images/image61.png
+.. image:: ./images/image61.png
     :width: 6.26805in
     :height: 5.05278in
 
@@ -148,7 +148,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 우측 하단에 [시작하기]를 클릭하면 마이그레이션이 시작된다.
 
-.. image:: ./cmt_images/image62.png
+.. image:: ./images/image62.png
     :width: 6.26805in
     :height: 5.04028in
 
@@ -160,7 +160,7 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 로그는 마이그레이션이 끝난 뒤 마이그레이션 보고서에서 다시 확인할 수 있다.
 
-.. image:: ./cmt_images/image63.png
+.. image:: ./images/image63.png
     :width: 6.26805in
     :height: 4.41528in
 
@@ -168,6 +168,6 @@ CMT를 실행하여 마이그레이션을 진행할 때 사용자가 선택할 �
 
 마이그레이션 작업이 끝난 뒤 결과를 보고서로 확인할 수 있다.
 
-.. image:: ./cmt_images/image64.png
+.. image:: ./images/image64.png
     :width: 6.26805in
     :height: 4.41806in
