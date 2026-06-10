@@ -30,6 +30,7 @@ html_use_index = True
 exclude_patterns = ['_build', 'venv']
 
 pygments_style = "nord"
+pygments_style_dark = "github-dark"
 
 suppress_warnings = [
     'misc.highlighting_failure'
