@@ -70,7 +70,7 @@ html_theme_options = {
 }
 html_permalinks_icon = Icons.permalinks_icon
 
-html_css_files = ["style.css"]
+html_css_files = ["style.css", "simplepdf-fixes.css"]
 html_js_files = ['theme-toggle.js']
 html_last_updated_fmt = '%b %d, %Y'
 html_use_smartypants = False

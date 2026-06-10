@@ -1,0 +1,10 @@
+@media print {
+    .body {
+        text-align: left;
+    }
+
+    .docutils.literal.notranslate {
+        display: inline;
+        overflow-wrap: anywhere;
+    }
+}
