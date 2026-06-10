@@ -13,16 +13,10 @@
 
 콘솔 모드는 GUI와 동일한 마이그레이션 엔진을 사용한다. 차이는 입력 방식과 사용자 상호작용에 있다.
 
-**언제 콘솔을 쓰는가**
-
-- **자동화 / 스케줄링** — cron, Windows 작업 스케줄러에서 무인 실행
-- **헤드리스 서버** — 디스플레이가 없는 Linux 서버에서 SSH로 직접 실행
-- **재현 가능한 일괄 작업** — 동일한 XML 스크립트와 ``db.conf`` 조합으로 반복 실행
-
 **설치 & 실행**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-콘솔은 GUI와 별도의 콘솔 전용 패키지로 배포된다(예: 콘솔 패키지는 ``CUBRID-Migration-Toolkit-console-...-linux.tar.gz`` 형태, GUI 패키지는 ``cubrid-migration-toolkit-...-windows-x64.zip`` 형태로 별개이다). :doc:`02_install`\의 안내대로 설치하면 콘솔 실행 파일도 함께 설치된다.
+콘솔은 GUI와 별도의 전용 패키지로 배포된다(콘솔: ``CUBRID-Migration-Toolkit-console-...-linux.tar.gz``, GUI: ``CUBRID-Migration-Toolkit-...-windows-x64.zip``). :doc:`02_install`\의 안내대로 설치하면 콘솔 실행 파일도 함께 설치된다.
 
 **실행 파일**
 """"""""""""""""""""""""""""""""""""""""""""
@@ -66,7 +60,7 @@
       - 사용하지 않음
       - 런처가 동봉된 JRE를 강제 사용
     * - 작업 디렉토리
-      - 호출 시점의 ``user.dir``
+      - 호출 시점의 현재 디렉토리(명령을 실행한 위치)
       - XML 스크립트와 ``-tp`` 경로도 이 디렉토리 기준으로 해석됨
 
 .. tip::
@@ -85,6 +79,8 @@
 
 .. code-block:: text
 
+  Thank you for using CUBRID Migration Toolkit(CMT) Console.
+
   Available <command> (Default is "start"):
       start [options] [script_file]   Start a migration task.
       script [options] [output_dir]   Build a migration script.
@@ -98,7 +94,7 @@
 **start — 마이그레이션 실행**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``start`` 명령은 XML 마이그레이션 스크립트를 읽어 실제 마이그레이션을 수행한다. 첫 번째 인자로 인식되지 않은 토큰이 들어오면 자동으로 ``start`` 로 디스패치되므로, 다음 두 표현은 동등하다.
+``start`` 명령은 XML 마이그레이션 스크립트를 읽어 실제 마이그레이션을 수행한다. 첫 번째 인자가 네 가지 하위 명령 이름이 아니면 자동으로 ``start`` 명령으로 처리되므로, 다음 두 표현은 동등하다.
 
 .. code-block:: bash
 
@@ -119,11 +115,11 @@
     * - ``-s``
       - 설정 이름
       - 스크립트 값
-      - ``db.conf`` 의 원본 데이터베이스 설정 이름. 스크립트의 원본 연결을 override한다.
+      - ``db.conf`` 의 원본 데이터베이스 설정 이름. 스크립트의 원본 연결 정보를 대체한다.
     * - ``-t``
       - 설정 이름
       - 스크립트 값
-      - ``db.conf`` 의 대상 데이터베이스 설정 이름. 스크립트의 대상 연결을 override한다.
+      - ``db.conf`` 의 대상 데이터베이스 설정 이름. 스크립트의 대상 연결 정보를 대체한다.
     * - ``-sd``
       - 파일 경로
       - 스크립트 값
@@ -143,11 +139,22 @@
     * - ``-rm``
       - ``error`` / ``info`` / ``debug``
       - (없음)
-      - 종료 직후 콘솔에 출력할 최종 보고서 상세도 (Report Mode). 지정하지 않으면 종료 후 ``report`` 명령으로 별도 조회.
+      - 이력 파일(``.mh``)에 기록되는 보고서 로그의 상세 수준 (Report Mode). 지정하지 않으면 스크립트에 설정된 수준을 따른다.
     * - ``-do``
       - ``yes`` / ``no``
       - ``no``
       - ``yes`` 면 스키마 생성을 건너뛰고 데이터만 적재한다. 대상 Table이 이미 존재해야 한다.
+
+**JDBC 드라이버 결정 순서**
+""""""""""""""""""""""""""""""""""""""""""""
+
+원본/대상에 사용할 JDBC 드라이버는 다음 우선순위로 결정된다.
+
+1. ``-sd`` / ``-td`` 옵션으로 지정한 경로
+2. ``-s`` / ``-t``\를 사용한 경우 ``db.conf``\의 ``{이름}.driver`` 값
+3. 마이그레이션 스크립트 XML에 저장된 드라이버 경로
+
+결정된 경로의 드라이버를 인식하지 못하면 ``Invalid driver : <경로>`` 메시지와 함께 중단된다. 이 경우 ``-sd`` / ``-td``\로 올바른 JAR 경로를 지정한다.
 
 **예제**
 """"""""""""""""""""""""""""""""""""""""""""
@@ -158,7 +165,7 @@
 
   ./migration.sh start migration.xml
 
-**예제 2 — ``db.conf`` 의 설정으로 연결 override**
+**예제 2 — db.conf의 설정으로 연결 정보 대체**
 
 .. code-block:: bash
 
@@ -175,7 +182,7 @@
 
 스크립트에 지정된 출력 경로 대신 ``-tp`` 디렉토리에 산출물을 저장한다.
 
-**예제 4 — 데이터 전용 마이그레이션 (스키마 생성 skip)**
+**예제 4 — 데이터 전용 마이그레이션 (스키마 생성 생략)**
 
 .. code-block:: bash
 
@@ -183,7 +190,7 @@
 
 대상에 이미 존재하는 Table에 데이터만 추가로 적재한다. 대상 스키마가 없거나 호환되지 않으면 실패한다.
 
-**예제 5 — 종료 보고서 디버그 출력 + 사용자 드라이버**
+**예제 5 — 보고서 로그 디버그 기록 + 사용자 드라이버**
 
 .. code-block:: bash
 
@@ -191,7 +198,7 @@
                        -td /opt/drivers/cubrid-jdbc.jar \
                        -rm debug migration.xml
 
-번들 드라이버 대신 별도 경로의 JDBC 드라이버를 사용하고, 종료 보고서를 디버그 수준으로 출력한다.
+번들 드라이버 대신 별도 경로의 JDBC 드라이버를 사용하고, 이력에 기록되는 보고서 로그를 디버그 수준(오류 스택트레이스 포함)으로 남긴다.
 
 **script — XML 스크립트 생성**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -222,31 +229,6 @@
       - (필수)
       - 생성된 XML 파일이 저장될 디렉토리 경로
 
-**-o 인자 처리**
-""""""""""""""""""""""""""""""""""""""""""""
-
-``-o`` 의 인자는 **디렉토리 경로** 이다. 파일 이름은 자동 생성된다.
-
-- 디렉토리가 없으면 자동으로 생성한다.
-- 같은 이름의 파일이 이미 존재하면 ``'-o' must be a directory path: <path>`` 오류로 종료한다.
-- 디렉토리에 쓰기 권한이 없으면 ``Output directory is not writable: <path>`` 오류로 종료한다.
-
-**자동 생성 파일명 규칙**
-
-::
-
-  <원본DB타입>_<원본DB이름>_<타임스탬프>.xml
-
-타임스탬프는 분 단위까지 포함된 12자리 ``yyyyMMddHHmm`` 형식이다(초 단위는 포함되지 않는다).
-
-예: ``mysql_production_202605200830.xml``
-
-생성에 성공하면 다음과 같은 메시지가 출력된다.
-
-.. code-block:: text
-
-  /home/user/scripts/mysql_production_202605200830.xml was created successfully.
-
 **예제**
 """"""""""""""""""""""""""""""""""""""""""""
 
@@ -256,7 +238,7 @@
 
   ./migration.sh script -s oracle_prod -t cubrid_prod -o /home/user/scripts
 
-``/home/user/scripts/oracle_<dbname>_<timestamp>.xml`` 파일이 생성된다.
+``/home/user/scripts/ORACLE_<dbname>_<timestamp>.xml`` 파일이 생성된다.
 
 **예제 2 — 현재 디렉토리에 생성**
 
@@ -267,7 +249,7 @@
 **report — 마이그레이션 결과 보고서**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``report`` 명령은 완료된 마이그레이션의 결과 보고서를 출력한다. 보고서는 ``start`` 명령이 자동으로 저장하는 ``.mh`` (migration history) 파일에 들어 있다. ``.mh`` 파일은 ``<밀리초epoch>.mh`` 형태로 이름이 지어지며(예: ``1716166534123.mh``), 마이그레이션 시작 시각을 ``System.currentTimeMillis()`` 값으로 그대로 사용한다.
+``report`` 명령은 완료된 마이그레이션의 결과 보고서를 출력한다. 보고서는 ``start`` 명령이 자동으로 저장하는 ``.mh`` (migration history) 파일에 들어 있다. ``.mh`` 파일은 ``<밀리초epoch>.mh`` 형태로 이름이 지어지며(예: ``1716166534123.mh``), 마이그레이션 시작 시각의 밀리초 단위 epoch 값을 그대로 사용한다.
 
 **옵션**
 """"""""""""""""""""""""""""""""""""""""""""
@@ -294,7 +276,7 @@
 보고서는 세 섹션으로 구성된다.
 
 - ``[Overview]`` — 객체 타입(Table, View, Procedure 등)별 총계, Exported / Imported 카운트
-- ``[Schema migration]`` — 각 객체별 DDL 실행 결과 (successfully / failed). 실패한 경우 DDL 본문과 오류 메시지가 함께 출력된다.
+- ``[Schema migration]`` — 각 객체별 DDL 실행 결과 (successfully / failed). 각 객체의 DDL 본문은 항상 출력되며, 실패한 경우 오류 메시지가 추가로 출력된다.
 - ``[Data migration]`` — 원본 → 대상 Table 쌍별 Total / Exported / Imported 레코드 수
 
 **페이지 진행**
@@ -323,7 +305,7 @@ ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit`` 을 입력�
 
   ./migration.sh report 1716166534123.mh
 
-이력 파일 이름은 ``System.currentTimeMillis()`` 값(밀리초 단위 epoch 시각) 뒤에 ``.mh`` 확장자가 붙은 형태이다. 사용자는 자신의 이력 디렉토리에 실제로 존재하는 파일 이름으로 대체해 입력한다.
+이력 파일 이름은 마이그레이션 시작 시각의 밀리초 epoch 값 뒤에 ``.mh`` 확장자가 붙은 형태이다. 사용자는 자신의 이력 디렉토리에 실제로 존재하는 파일 이름으로 대체해 입력한다.
 
 .. code-block:: bash
 
@@ -390,6 +372,8 @@ ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit`` 을 입력�
 
 ``1716166534123.mh`` 자리에는 실제 이력 디렉토리에 존재하는 파일 이름을 입력한다(파일명은 ``<밀리초epoch>.mh`` 형식).
 
+.. _db-conf:
+
 **db.conf — 콘솔 환경 설정 파일**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -400,10 +384,13 @@ ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit`` 을 입력�
 
 - **위치**: CMT 설치 디렉토리 루트 (``migration.sh`` / ``migration.bat`` 와 같은 디렉토리)
 - **형식**: ``{설정이름}.{속성}=값`` 형태의 키-값 프로퍼티. 한 파일에 여러 설정을 등록할 수 있다.
+- ``{설정이름}``\은 미리 정해진 값이 아니라 **사용자가 자유롭게 정하는 식별자**\이다. 여기서 정한 이름을 ``script`` / ``start`` 명령의 ``-s`` / ``-t`` 옵션 값으로 그대로 지정한다. 예를 들어 ``oracle_prod.host=...``\로 등록했다면 ``-s oracle_prod``\로 사용한다.
 - ``#`` 으로 시작하는 줄은 주석이다.
 
 **속성 표**
 """"""""""""""""""""""""""""""""""""""""""""
+
+아래 표의 ``{이름}`` 자리에는 사용자가 정한 설정 이름이 들어간다.
 
 **연결 정보 (Online DB 공통)**
 
@@ -502,7 +489,7 @@ ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit`` 을 입력�
   file_export.one_table_one_file=yes
 
 .. note::
-  ``db.conf`` 가 없거나 읽지 못하면 콘솔 시작 시 ``Load db.conf error.`` 메시지가 출력되지만, 명령 자체는 중단되지 않는다. ``-s`` / ``-t`` 를 쓰지 않는 호출(예: 스크립트 그대로 실행)은 ``db.conf`` 없이도 동작한다.
+  ``db.conf`` 가 없으면 메시지 없이 건너뛰고, 파일이 있는데 읽지 못하면 ``Load db.conf error.`` 메시지가 출력된다. 어느 경우든 명령 자체는 중단되지 않는다. ``-s`` / ``-t`` 를 쓰지 않는 호출(예: 스크립트 그대로 실행)은 ``db.conf`` 없이도 동작한다.
 
 **콘솔 진행률 / 로그 출력 포맷**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -522,35 +509,42 @@ ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit`` 을 입력�
 
 화면은 ANSI 이스케이프 코드로 갱신되어 같은 위치에 덮어 쓴다.
 
-**최종 결과 banner**
+**최종 결과 배너**
 """"""""""""""""""""""""""""""""""""""""""""
 
-마이그레이션이 끝나면 요약 정보와 결과 banner가 출력된다.
+마이그레이션이 끝나면 요약 정보와 결과 배너가 출력된다.
 
 .. code-block:: text
 
   -------------------------------------------------------------
   Migration Report summary:
       Time used: 00 00:01:23.456
-      Table: Exported[120]; Imported[120]
-      View: Exported[5]; Imported[5]
-      Sequence: Exported[3]; Imported[3]
-      PK: Exported[120]; Imported[120]
-      FK: Exported[45]; Imported[45]
-      Index: Exported[80]; Imported[80]
+      schema: Exported[1]; Imported[1]
+      table: Exported[120]; Imported[120]
+      view: Exported[5]; Imported[5]
+      primary key: Exported[120]; Imported[120]
+      foreign key: Exported[45]; Imported[45]
+      index: Exported[80]; Imported[80]
+      sequence: Exported[3]; Imported[3]
+      synonym: Exported[0]; Imported[0]
+      trigger: Exported[0]; Imported[0]
+      plcsql_function: Exported[0]; Imported[0]
+      plcsql_procedure: Exported[0]; Imported[0]
+      grant: Exported[0]; Imported[0]
+      record: Exported[4000000]; Imported[4000000]
   -------------------------------------------------------------
 
   =============================================================
   MIGRATION RESULT: SUCCESS
   =============================================================
 
-요약 라인은 고정된 ``Objects`` / ``Records`` 라벨이 아니라, **객체 타입별로 한 줄씩 동적으로 출력**\된다. 라벨은 ``MigrationOverviewResult.getObjType()`` 값을 그대로 사용하며 (예: ``Table``, ``View``, ``Sequence``, ``PK``, ``FK``, ``Index``, ``Function``, ``Procedure``, ``Synonym`` 등), 실제 출력되는 라인 집합은 마이그레이션 대상으로 선택된 객체 종류에 따라 달라진다. 형식은 모두 ``<ObjType>: Exported[N]; Imported[M]`` 이다.
+요약 라인은 고정된 ``Objects`` / ``Records`` 라벨이 아니라, **객체 타입별로 한 줄씩 출력**\된다. 객체 타입 라인은 고정된 순서로 항상 모두 출력되며, 마이그레이션 대상이 아닌 타입은 ``Exported[0]; Imported[0]``\으로 표시된다. 형식은 모두 ``<객체 타입>: Exported[N]; Imported[M]`` 이다.
 
 SQL 파일을 임포트하는 시나리오에서는 객체 타입 대신 SQL 파일명별로 ``<파일명>: Exported[N]; Imported[M]`` 라인이 출력된다.
 
-첫 줄의 ``Time used`` 는 ``TimeZoneUtils.format(...)`` 으로 포맷팅된 경과 시간이며, 형식은 ``dd HH:mm:ss.SSS`` (일 / 시 / 분 / 초 / 밀리초)이다.
+첫 줄의 ``Time used`` 는 총 경과 시간이며, 형식은 ``dd HH:mm:ss.SSS`` (일 시:분:초.밀리초)이다.
 
-오류가 한 건이라도 있으면 banner는 ``MIGRATION RESULT: FAILED`` 로 표기된다.
+오류가 한 건이라도 있으면 배너는 ``MIGRATION RESULT: FAILED`` 로 표기된다.
 
 **로그 파일**
 """"""""""""""""""""""""""""""""""""""""""""
@@ -561,6 +555,6 @@ SQL 파일을 임포트하는 시나리오에서는 객체 타입 대신 SQL 파
 - **롤링**: 100MB 또는 하루를 넘기면 ``cubrid-migration.yyyy-MM-dd.N.log.gz`` 형태로 압축 롤링된다.
 - 로그 파일은 ``logback.xml`` 설정에 따라 기본 INFO 이상 레벨로 기록된다.
 
-이력 파일(``.mh``)은 ``report`` / ``log`` 명령으로 조회용으로 별도 보관된다.
+이력 파일(``.mh``)은 ``report`` / ``log`` 명령으로 다시 조회할 수 있도록 별도로 보관된다.
 
 결과 보고서 화면은 :doc:`10_report`\를, 성능 / 동시성 / 메모리 관련 설정은 :doc:`11_config`\와 :doc:`12_advanced`\를 참고한다.

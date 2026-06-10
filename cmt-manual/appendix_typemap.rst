@@ -1,10 +1,10 @@
 :meta-keywords: cubrid migration toolkit, cmt, data type mapping, type mapping, cubrid, oracle, mysql, mariadb, mssql, informix, tibero
-:meta-description: CMT가 8개 원본 데이터베이스(CUBRID/Oracle/MySQL/MariaDB/MSSQL/Informix/Tibero/MySQL XML dump)의 데이터 타입을 CUBRID 데이터 타입으로 매핑하는 기본 규칙을 정리한 레퍼런스.
+:meta-description: CMT가 7개 원본 데이터베이스(CUBRID/Oracle/MySQL/MariaDB/MSSQL/Informix/Tibero)의 데이터 타입을 CUBRID 데이터 타입으로 매핑하는 기본 규칙을 정리한 레퍼런스.
 
 부록 A. 데이터 타입 매핑
 ---------------------------------------------
 
-본 부록은 CMT가 8개 원본 데이터베이스의 컬럼 데이터 타입을 CUBRID 데이터 타입으로 변환할 때 사용하는 **기본 매핑** 을 한 곳에 정리한 레퍼런스이다. 본문 :doc:`07_sourcedb`\에서 각 원본 DB의 특이 사항을 다루며, 매핑 전체표가 필요한 경우 본 부록을 참조한다.
+본 부록은 CMT가 7개 원본 데이터베이스의 컬럼 데이터 타입을 CUBRID 데이터 타입으로 변환할 때 사용하는 **기본 매핑** 을 한 곳에 정리한 레퍼런스이다. 본문 :doc:`07_sourcedb`\에서 각 원본 DB의 특이 사항을 다루며, 매핑 전체표가 필요한 경우 본 부록을 참조한다.
 
 표의 컬럼은 다음과 같다.
 
@@ -13,9 +13,9 @@
 
 표기 규약:
 
-- ``n``, ``p``, ``s``\은 사용자가 원본에서 지정한 값을 그대로 전달함을 의미한다 (``n`` = length/precision, ``p`` = precision, ``s`` = scale).
+- ``n``, ``p``, ``s``\는 사용자가 원본에서 지정한 값을 그대로 전달함을 의미한다 (``n`` = length/precision, ``p`` = precision, ``s`` = scale).
 - 빈 칸은 해당 자릿수가 명시되지 않거나 데이터 타입의 정의에서 결정됨을 의미한다.
-- 하나의 원본 타입에 여러 대상 후보가 있는 경우(예: ``int`` → ``int``, ``bigint``, ``numeric``, ``varchar``) **기본값** 만 본 표에 표기한다. 다른 후보로의 변경은 :doc:`11_config`\의 **데이터 타입 매핑 편집** 절 또는 마법사 **타입 매핑** 화면에서 선택할 수 있다.
+- 하나의 원본 타입에 여러 대상 후보가 있는 경우(예: ``int`` → ``int``, ``bigint``, ``numeric``, ``varchar``) **기본값** 만 본 표에 표기한다. 다른 후보로의 변경은 :doc:`11_config`\의 **데이터 타입 매핑 편집** 절에서 할 수 있다.
 
 A.1 CUBRID → CUBRID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -3,10 +3,10 @@
 
 본 챕터는 CMT를 처음 사용하는 사용자가 설치 직후 첫 마이그레이션을 직접 수행할 수 있도록 만든 단계별 가이드이다. 가장 흔한 두 가지 GUI 시나리오와 CLI 시나리오 한 가지를 다룬다.
 
-세 시나리오 모두 원본 데이터베이스로 **Oracle**\을 가정한다. Oracle 이외의 원본을 사용하는 경우에도 마법사 흐름은 동일하며, 원본 연결 정보 입력 단계의 필드 일부만 다르다. 마법사 전 단계의 모든 옵션과 분기 흐름은 :doc:`05_wizard`\에서, 콘솔 명령의 전체 레퍼런스는 :doc:`09_console`\에서 자세히 다룬다.
+세 시나리오 모두 원본 데이터베이스로 **Oracle**\을 가정한다. Oracle 이외의 원본을 사용하는 경우에도 마법사 흐름은 동일하며, 원본 연결 정보 입력 단계의 필드 일부만 다르다. 마법사 전체 단계의 모든 옵션과 분기 흐름은 :doc:`05_wizard`\에서, 콘솔 명령의 전체 레퍼런스는 :doc:`09_console`\에서 자세히 다룬다.
 
 .. note::
-  본 챕터의 화면 예시는 한국어 로케일 Windows 환경 기준이다. 메뉴와 버튼의 영문 명칭은 :doc:`04_ui`\에 함께 표기되어 있다.
+  본 챕터의 화면 예시는 한국어 로케일 Windows 환경 기준이다.
 
 시나리오 1: Oracle → 운영 CUBRID (online → online)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -15,7 +15,7 @@
 
 **사전 준비**
 
-- 원본 Oracle 접속 정보 (호스트, 포트, SID 또는 Service Name, 사용자, 비밀번호)
+- 원본 Oracle 접속 정보 (호스트, 포트, 데이터베이스 이름(SID 또는 Service Name), 사용자, 비밀번호)
 - 대상 CUBRID 접속 정보 (호스트, 포트, DB 이름, 사용자, 비밀번호)
 - Oracle JDBC 드라이버
 - CUBRID JDBC 드라이버는 CMT 배포본에 포함되어 있다.
@@ -46,7 +46,7 @@ C. 원본 데이터베이스 선택 (2단계)
 
 저장되어 있는 Oracle 연결 정보를 목록에서 선택한다. 등록된 연결 정보가 없으면 **신규** 버튼을 클릭하여 연결 정보 입력 다이얼로그를 연다.
 
-다이얼로그에서 호스트, 포트 (기본 1521), SID 또는 DB Name, 사용자, 비밀번호를 입력하고 JDBC 드라이버 경로에 ``ojdbc8.jar``\를 지정한다. **테스트** 버튼으로 접속을 확인한 뒤 **확인**\로 저장한다.
+다이얼로그에서 호스트, 포트 (기본 1521), 데이터베이스 이름(SID 또는 Service Name), 사용자, 비밀번호를 입력하고 JDBC 드라이버 경로에 ``ojdbc8.jar``\를 지정한다. **테스트** 버튼으로 접속을 확인한 뒤 **확인**\으로 저장한다.
 
 .. image:: ./cmt_images/image_quickstart_3.png
   :alt: 원본 Oracle 연결 정보 선택
@@ -54,7 +54,7 @@ C. 원본 데이터베이스 선택 (2단계)
 D. 대상 데이터베이스 선택 (3단계)
 """"""""""""""""""""""""""""""""""""
 
-대상 CUBRID 연결 정보를 같은 방식으로 선택하거나 **신규**\로 새로 등록한다. 호스트, 포트 (기본 33000), DB 이름, 사용자, 비밀번호를 입력하고 **테스트**\으로 접속을 확인한다.
+대상 CUBRID 연결 정보를 같은 방식으로 선택하거나 **신규**\로 새로 등록한다. 호스트, 포트 (기본 33000), DB 이름, 사용자, 비밀번호를 입력하고 **테스트** 버튼으로 접속을 확인한다.
 
 .. image:: ./cmt_images/image_quickstart_4.png
   :alt: 대상 CUBRID 연결 정보 선택
@@ -84,7 +84,7 @@ G. 마이그레이션 전 최종 확인 (6단계)
 
 화면 하단의 **고급 성능 설정** 버튼으로 Export/Import 스레드 수, 커밋 주기 등 성능 옵션을 조정할 수 있다. 원본 DB 종류와 대상 형식에 따라 표시되는 항목은 달라진다. 첫 마이그레이션에서는 기본값을 그대로 사용해도 충분하다.
 
-화면 하단의 **시작하기** 버튼을 누르면 실행 모드 선택 다이얼로그가 열린다. **바로 시작하기**\를 선택하면 즉시 실행되고, **예약하기**\을 선택하면 1회 또는 반복 실행으로 등록할 수 있다 (:doc:`04_ui` 참고).
+화면 하단의 **시작하기** 버튼을 누르면 실행 모드 선택 다이얼로그가 열린다. **바로 시작하기**\를 선택하면 즉시 실행되고, **예약하기**\를 선택하면 1회 또는 반복 실행으로 등록할 수 있다 (:doc:`04_ui` 참고).
 
 .. image:: ./cmt_images/image_quickstart_7.png
   :alt: 최종 확인 및 시작
@@ -136,7 +136,7 @@ B. 마이그레이션 유형 선택 (1단계)
 - **원본 유형**: **온라인 Oracle 데이터베이스**
 - **대상 유형**: **로컬 CUBRID dump 파일**
 
-대상 유형으로 **로컬 XLS 파일**\를 선택해도 이후 흐름은 거의 같다. 형식별 차이는 :doc:`08_target`\에서 다룬다.
+대상 유형으로 **로컬 XLS 파일**\을 선택해도 이후 흐름은 거의 같다. 형식별 차이는 :doc:`08_target`\에서 다룬다.
 
 .. image:: ./cmt_images/image_quickstart_11.png
   :alt: 오프라인 대상 선택
@@ -211,7 +211,7 @@ I. 마이그레이션 보고서 확인
   # 데이터 적재
   cubrid loaddb -u dba -d <data_file> mydb
 
-실제 파일명과 적재 순서는 스키마 파일 분리, Table별 파일 분할 출력 옵션에 따라 달라진다. 전체 디렉토리 구조와 적재 순서는 :doc:`08_target`\을 참고한다.
+실제 파일명과 적재 순서는 스키마 파일 분리, Table별 파일 분할 출력 옵션에 따라 달라진다. 전체 디렉토리 구조와 적재 순서는 :doc:`08_target`\를 참고한다.
 
 .. image:: ./cmt_images/image_quickstart_18.png
   :alt: 마이그레이션 보고서 (오프라인)
@@ -219,7 +219,7 @@ I. 마이그레이션 보고서 확인
 시나리오 3: 콘솔로 자동화하기
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-시나리오 1과 같은 작업 — Oracle → 운영 CUBRID — 을 콘솔만으로 실행하는 흐름이다.
+시나리오 1과 같은 작업(Oracle → 운영 CUBRID)을 콘솔만으로 실행하는 흐름이다.
 
 전체 흐름은 다음 단계로 구성된다.
 
@@ -236,22 +236,24 @@ CMT 설치 디렉토리의 ``db.conf`` 파일에 원본/대상 연결 정보를 
 .. code-block:: properties
 
   # 원본 Oracle
-  ora_src.type=oracle
-  ora_src.host=oracle.example.com
-  ora_src.port=1521
-  ora_src.dbname=ORCL
-  ora_src.user=scott
-  ora_src.password=tiger
-  ora_src.driver=/opt/drivers/ojdbc8.jar
+  oracle_prod.type=oracle
+  oracle_prod.host=oracle.example.com
+  oracle_prod.port=1521
+  oracle_prod.dbname=ORCL
+  oracle_prod.user=scott
+  oracle_prod.password=tiger
+  oracle_prod.driver=/opt/drivers/ojdbc8.jar
 
   # 대상 CUBRID
-  cub_dst.type=cubrid
-  cub_dst.host=cubrid.example.com
-  cub_dst.port=33000
-  cub_dst.dbname=mydb
-  cub_dst.user=dba
-  cub_dst.password=dba_password
-  cub_dst.driver=/opt/cubridmigration/drivers/cubrid_jdbc.jar
+  cubrid_prod.type=cubrid
+  cubrid_prod.host=cubrid.example.com
+  cubrid_prod.port=33000
+  cubrid_prod.dbname=mydb
+  cubrid_prod.user=dba
+  cubrid_prod.password=dba_password
+  cubrid_prod.driver=/opt/cubridmigration/jdbc/JDBC-11.3.2.0053-cubrid.jar
+
+``db.conf`` 속성의 전체 목록과 자세한 설명은 :ref:`db-conf`\을 참고한다.
 
 2단계: 마이그레이션 XML 생성
 """"""""""""""""""""""""""""""""
@@ -261,9 +263,9 @@ CMT 설치 디렉토리의 ``db.conf`` 파일에 원본/대상 연결 정보를 
 .. code-block:: bash
 
   cd /opt/cubridmigration
-  ./migration.sh script -s ora_src -t cub_dst -o /tmp/scripts
+  ./migration.sh script -s oracle_prod -t cubrid_prod -o /tmp/scripts
 
-성공하면 ``/tmp/scripts/`` 아래에 ``oracle_ORCL_<datetime>.xml`` 형식의 파일이 생성된다. ``-o`` 인자는 디렉토리 경로이며, 파일명은 자동으로 생성된다.
+성공하면 ``/tmp/scripts/`` 아래에 ``ORACLE_ORCL_<datetime>.xml`` 형식의 파일이 생성된다. ``-o`` 인자는 디렉토리 경로이며, 파일명은 자동으로 생성된다.
 
 생성된 XML에는 원본/대상 연결 파라미터, 객체 목록, 스키마 매핑이 모두 포함되며, 콘솔 모드에서 비대화형 실행 입력으로 사용된다.
 
@@ -274,7 +276,7 @@ CMT 설치 디렉토리의 ``db.conf`` 파일에 원본/대상 연결 정보를 
 
 .. code-block:: bash
 
-  ./migration.sh start /tmp/scripts/oracle_ORCL_202605201030.xml
+  ./migration.sh start /tmp/scripts/ORACLE_ORCL_202605201030.xml
 
 진행 상황이 콘솔에 실시간으로 표시된다.
 
@@ -301,7 +303,7 @@ CMT 설치 디렉토리의 ``db.conf`` 파일에 원본/대상 연결 정보를 
 이상으로 첫 마이그레이션 절차를 마친다. 이후 세부 기능은 다음 챕터에서 다룬다.
 
 - :doc:`04_ui` — 메인 화면, 메뉴, 툴바, 단축키
-- :doc:`05_wizard` — 마법사 전 단계의 모든 옵션과 분기
+- :doc:`05_wizard` — 마법사 전체 단계의 모든 옵션과 분기
 - :doc:`06_objects` — 데이터 타입 매핑, Column 단위 변환, WHERE 필터
 - :doc:`08_target` — dump/SQL/CSV/XLS 형식별 출력 옵션
 - :doc:`09_console` — 콘솔 명령 전체 레퍼런스

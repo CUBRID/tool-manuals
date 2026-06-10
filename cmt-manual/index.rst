@@ -5,7 +5,7 @@
 CUBRID Migration Toolkit
 **************************
 
-이 매뉴얼은 **CUBRID Migration Toolkit 12.0** 버전을 기준으로 작성된 것이며, 이보다 상위 버전인 경우 일부 기능이 변경될 수 있다.
+이 매뉴얼은 **CUBRID Migration Toolkit 12.0** 버전을 기준으로 작성되었으며, 상위 버전에서는 일부 기능이 다를 수 있다.
 
 .. toctree::
   :maxdepth: 2

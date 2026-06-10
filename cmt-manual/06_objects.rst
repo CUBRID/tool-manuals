@@ -1,7 +1,7 @@
 객체 매핑 상세
 --------------
 
-본 챕터는 마법사 5단계 **객체 맵핑**\에서 객체 유형별로 노출되는 옵션을 한곳에 모은 안내 챕터이다. 5단계의 트리 구조, 공통 동작, 툴바 버튼은 :doc:`05_wizard`\에서 다루므로 여기서는 다루지 않으며, 트리에서 객체 노드를 선택했을 때 우측에 표시되는 매핑 패널을 객체 종류별로 차례로 설명한다.
+본 챕터는 마법사 5단계 **객체 매핑**\에서 객체 유형별로 노출되는 옵션을 한곳에 모아 안내한다. 5단계의 트리 구조, 공통 동작, 툴바 버튼은 :doc:`05_wizard`\에서 다루므로 여기서는 다루지 않으며, 트리에서 객체 노드를 선택했을 때 우측에 표시되는 매핑 패널을 객체 종류별로 차례로 설명한다.
 
 객체 매핑 화면은 원본 데이터베이스에서 추출한 객체 카탈로그를 사용자가 검토하고 대상 CUBRID에 맞게 조정하는 작업 공간이다. 객체 종류에 따라 노출되는 옵션이 다르므로 본 챕터는 종류별 안내 형식으로 정리한다. 각 절은 객체 개요, 노출되는 필드/옵션, 그리고 마이그레이션 결과에 영향을 주는 주의 사항으로 구성된다.
 
@@ -19,7 +19,7 @@
       - 비고
     * - Table
       - 대상 Table명, 데이터 마이그레이션, Table 생성/재생성, PK 생성 여부, Column 순서
-      - 일반, PK, FK, Index, 사용자 정의 SQL(데이터 마이그레이션 전/후 실행) 탭 포함
+      - 일반, PK, FK, 인덱스, 사용자 정의 SQL(데이터 마이그레이션 전/후 실행) 탭 포함
     * - Column
       - 대상 Column명, 데이터 유형, NULL 허용, 기본값, 자동증분, 값 변환
       - 개별 Column 노드 선택 시 표시
@@ -84,15 +84,15 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
     * - 대상 테이블
       - 대상 CUBRID에서 사용할 Table 이름. 직접 편집할 수 있다.
     * - 데이터
-      - ``Migrating table's data option.`` 켜면 행 데이터를 적재한다.
+      - 켜면 행 데이터를 적재한다.
     * - 조건
-      - ``WHERE`` 절을 자유 입력해 부분 데이터만 추출한다. Data가 켜져 있고 원본이 온라인 연결일 때만 편집할 수 있다.
+      - ``WHERE`` 절을 자유 입력해 부분 데이터만 추출한다. **데이터**\가 켜져 있고 원본이 온라인 연결일 때만 편집할 수 있다.
     * - 생성
-      - ``Migrating table's schema option.`` 켜면 대상 Table을 ``CREATE TABLE``\로 생성한다.
+      - 켜면 대상 Table을 ``CREATE TABLE``\로 생성한다.
     * - 교체
-      - ``If this option is checked, table in the destination will be dropped.`` 켜면 기존 대상 Table을 먼저 ``DROP``\한 뒤 생성한다.
+      - 켜면 기존 대상 Table을 먼저 ``DROP``\한 뒤 생성한다.
     * - PK
-      - ``Migrating table's primary key option.`` 켜면 마이그레이션 후 ``ALTER TABLE ADD PRIMARY KEY``\를 실행해 PK 제약을 추가한다.
+      - 켜면 별도의 ``ALTER TABLE ADD PRIMARY KEY`` 문으로 PK 제약을 추가한다.
 
 **일반 탭**
 
@@ -103,13 +103,13 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
     * - 옵션
       - 설명
     * - 테이블 생성
-      - 대상 Table을 ``CREATE TABLE``\로 생성한다. 끄면 ``CREATE TABLE`` 단계를 생략하고 기존 대상 Table에 데이터만 적재한다. 이 옵션을 끄면 Replace, Reuse OID, PK 생성, FK / Index 탭이 모두 비활성화된다.
+      - 대상 Table을 ``CREATE TABLE``\로 생성한다. 끄면 ``CREATE TABLE`` 단계를 생략하고 기존 대상 Table에 데이터만 적재한다. 이 옵션을 끄면 **테이블 재생성**, **OID 재사용**, **PK 생성**, FK / 인덱스 탭이 모두 비활성화된다.
     * - 테이블 재생성
-      - 켜면 기존 대상 Table을 ``DROP``\한 뒤 다시 생성한다. Create New Table이 켜져 있을 때만 활성화된다.
+      - 켜면 기존 대상 Table을 ``DROP``\한 뒤 다시 생성한다. **테이블 생성**\이 켜져 있을 때만 활성화된다.
     * - OID 재사용
-      - 켜면 대상 Table에 ``REUSE_OID`` 속성을 부여한다 (``CREATE TABLE ... REUSE_OID``). Create New Table이 켜져 있을 때만 활성화된다.
+      - 켜면 대상 Table에 ``REUSE_OID`` 속성을 부여한다 (``CREATE TABLE ... REUSE_OID``). **테이블 생성**\이 켜져 있을 때만 활성화된다.
     * - 데이터 마이그레이션
-      - 켜면 행 데이터를 적재한다. Create New Table 또는 Migrate Data 중 하나라도 켜져 있어야 Target Table Name과 Column 그리드를 편집할 수 있다.
+      - 켜면 행 데이터를 적재한다. **테이블 생성** 또는 **데이터 마이그레이션** 중 하나라도 켜져 있어야 **대상 테이블 이름**\과 Column 그리드를 편집할 수 있다.
     * - 원본 테이블 이름
       - 원본 Table 이름 (읽기 전용).
     * - 대상 테이블 이름
@@ -126,9 +126,9 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
     * - 옵션
       - 설명
     * - Primary Key 사용으로 내보내기 최적화.
-      - 원본 PK Column을 이용해 추출을 최적화한다. Migrate Data가 켜져 있고 원본 Table에 PK가 있을 때만 활성화된다.
+      - 원본 PK Column을 이용해 추출을 최적화한다. **데이터 마이그레이션**\이 켜져 있고 원본 Table에 PK가 있을 때만 활성화된다.
     * - 대상의 최대값으로부터 시작하기 (단일컬럼 PK가 있을 경우에만 지원).
-      - 대상 Table의 PK 최대값보다 큰 행만 추출한다. 위 옵션이 켜져 있고, 대상이 온라인이며, Replace가 꺼져 있고, 단일 Column PK일 때만 활성화된다.
+      - 대상 Table의 PK 최대값보다 큰 행만 추출한다. 위 옵션이 켜져 있고, 대상이 온라인이며, **테이블 재생성**\이 꺼져 있고, 단일 Column PK일 때만 활성화된다.
 
 **PK 탭**
 
@@ -139,13 +139,13 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
     * - 옵션
       - 설명
     * - PK 생성
-      - 끄면 마이그레이션 단계에서 ``ALTER TABLE ADD PRIMARY KEY``\가 실행되지 않는다. ``CREATE TABLE`` DDL 자체에는 PK 절이 포함되지 않으므로, 이 옵션을 끄면 대상 Table이 PK 제약 없이 생성된다. Create New Table이 켜져 있을 때만 활성화된다.
-    * - 원본 PK 이름 / 대상 PK 이름
+      - 끄면 마이그레이션 단계에서 ``ALTER TABLE ADD PRIMARY KEY``\가 실행되지 않는다. ``CREATE TABLE`` DDL 자체에는 PK 절이 포함되지 않으므로, 이 옵션을 끄면 대상 Table이 PK 제약 없이 생성된다. **테이블 생성**\이 켜져 있을 때만 활성화된다.
+    * - Source PK Name / Target PK Name
       - 원본 PK 이름(읽기 전용)과 대상에서 사용할 PK 이름.
     * - 원본 PK 컬럼
       - 원본 PK를 구성하는 Column 목록 (읽기 전용, ``,``\로 구분).
     * - PK가 아닌 컬럼 / 대상 PK 컬럼
-      - 좌우 두 리스트와 ``>`` / ``<`` 버튼으로 대상 PK 구성 Column을 편집한다. ``Target PK Columns``\가 비어 있는 상태로 저장하면 ``Create PK``\가 자동으로 꺼진다.
+      - 좌우 두 리스트와 ``>`` / ``<`` 버튼으로 대상 PK 구성 Column을 편집한다. **대상 PK 컬럼**\이 비어 있는 상태로 저장하면 **PK 생성**\이 자동으로 꺼진다.
 
 **FK 탭**
 
@@ -164,7 +164,7 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
     * - 교체
       - 켜면 마이그레이션 직전에 ``ALTER TABLE DROP CONSTRAINT``\로 기존 FK를 먼저 제거한 뒤 다시 생성한다. 교체를 켜면 생성도 자동으로 켜진다.
 
-탭 자체는 일반 탭의 **테이블 생성**\이 꺼져 있으면 그리드 전체가 비활성화된다.
+일반 탭의 **테이블 생성**\이 꺼져 있으면 이 탭의 그리드 전체가 비활성화된다.
 참조 Column, 부모 Table, ON UPDATE / ON DELETE 등 FK 제약의 상세 항목은 좌측 트리의 개별 FK 노드를 선택했을 때 표시되는 별도 패널에서 다룬다.
 
 **인덱스 탭**
@@ -184,7 +184,7 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
     * - 교체
       - 켜면 마이그레이션 직전에 기존 Index를 ``ALTER TABLE DROP CONSTRAINT``\로 제거한 뒤 다시 생성한다. 교체를 켜면 생성도 자동으로 켜진다.
 
-탭 자체는 일반 탭의 **테이블 생성**\이 꺼져 있으면 그리드 전체가 비활성화된다.
+일반 탭의 **테이블 생성**\이 꺼져 있으면 이 탭의 그리드 전체가 비활성화된다.
 UNIQUE / REVERSE / Column 순서 / 정렬 방향(ASC, DESC) 등 Index 정의의 상세 항목은 좌측 트리의 개별 Index 노드를 선택했을 때 표시되는 별도 패널에서 다룬다.
 
 **사용자 정의 SQL 탭**
@@ -201,9 +201,9 @@ UNIQUE / REVERSE / Column 순서 / 정렬 방향(ASC, DESC) 등 Index 정의의 
       - 데이터 마이그레이션 종료 후에 실행할 SQL.
 
 .. note::
-   ``CREATE TABLE`` DDL에는 PRIMARY KEY 절이 포함되지 않는다. Primary Key 제약은 데이터 적재가 끝난 뒤 별도의 ``ALTER TABLE ADD PRIMARY KEY`` 단계로 추가된다. ``Create PK``\를 끄면 이 ALTER 단계가 실행되지 않을 뿐, ``CREATE TABLE`` 자체에는 영향이 없다.
+   ``CREATE TABLE`` DDL에는 PRIMARY KEY 절이 포함되지 않는다. Primary Key 제약은 별도의 ``ALTER TABLE ADD PRIMARY KEY`` 문으로 추가된다. **PK 생성**\을 끄면 이 ALTER 문이 실행되지 않을 뿐, ``CREATE TABLE`` 자체에는 영향이 없다.
 
-   Create New Table, Replace Table, Migrate Data의 조합이 마이그레이션 결과를 좌우한다. 새로 마이그레이션할 때는 Create New Table=on, Replace Table=off, Migrate Data=on으로 두고, 데이터만 추가 적재할 때는 Create New Table=off, Migrate Data=on으로 둔다.
+   **테이블 생성**, **테이블 재생성**, **데이터 마이그레이션**\의 조합이 마이그레이션 결과를 좌우한다. 새로 마이그레이션할 때는 **테이블 생성**\=on, **테이블 재생성**\=off, **데이터 마이그레이션**\=on으로 두고, 데이터만 추가 적재할 때는 **테이블 생성**\=off, **데이터 마이그레이션**\=on으로 둔다.
 
 Column 옵션
 """"""""""""""""""""""""""
@@ -248,7 +248,7 @@ Column 옵션은 두 곳에서 노출된다. Table 패널의 **일반 탭** 하�
 .. note::
    대상 Column의 데이터 타입은 ``VARCHAR(100)`` 처럼 길이/정밀도/스케일이 포함된 단일 문자열로 입력한다. 별도의 길이 입력 필드는 없다.
 
-   원본 Column의 Comment는 Column 매핑 패널에 표시되지 않는다. Comment는 추출 시 Column 모델에 보관되어 그대로 ``CREATE TABLE`` DDL의 ``COMMENT '...'`` 절로 출력된다.
+   원본 Column의 Comment는 Column 매핑 패널에 표시되지 않는다. Comment는 별도 설정 없이 그대로 ``CREATE TABLE`` DDL의 ``COMMENT '...'`` 절로 출력된다.
 
    CUBRID는 식별자를 소문자로 저장한다. Column 이름은 저장 시 자동으로 소문자로 변환된다.
 
@@ -270,12 +270,14 @@ Foreign Key 상세 패널
 
     * - 항목
       - 설명
-    * - FK 이름
+    * - 외래키 이름
       - 대상에서 사용할 제약 이름.
+    * - 외래 컬럼 정보
+      - FK를 구성하는 자식 Table 측 Column 목록.
+    * - 참조 테이블 이름
+      - FK가 참조하는 부모 Table 이름.
     * - 참조 컬럼
-      - 자식 Table 측 Column 목록.
-    * - 참조 대상
-      - 부모 Table/스키마 및 부모 측 Column 목록.
+      - 참조되는 부모 Table 측 Column 목록.
     * - ON UPDATE
       - 부모 행 갱신 시 자식 행 동작.
     * - ON DELETE
@@ -343,8 +345,8 @@ Table 패널의 **인덱스** 탭 또는 트리의 Index 노드를 선택하면 
     * - Unique
       - ``CREATE UNIQUE INDEX``\로 생성한다.
     * - Reverse
-      - ``CREATE REVERSE INDEX``\로 생성한다. CUBRID 전용으로 역순 탐색에 유리하다.
-    * - 포함 여부
+      - ``CREATE REVERSE INDEX``\로 생성한다.
+    * - 생성
       - 마이그레이션 대상에 포함할지 여부를 체크 박스로 지정한다.
 
 .. note::
@@ -524,7 +526,7 @@ Grant
 
 원본 DB에서 조회된 객체 권한을 대상 CUBRID에 ``GRANT`` 문으로 적용할지 선택한다. 객체 매핑 화면에서는 권한별 **생성** 여부만 선택하며, 권한 수신자·부여자·대상 객체 등은 직접 편집하지 않는다.
 
-좌측 트리의 **권한** 폴더에는 선택한 원본 스키마/사용자가 권한을 받은(Grantee) Table·View 객체 권한이 표시된다. 권한은 부여자(Grantor)별로 묶여 하위에 나열되며, 부여자 노드를 선택하면 해당 부여자의 권한만, 권한 종류 노드를 선택하면 부여자와 권한 종류로 한 번 더 필터링된다.
+좌측 트리의 **권한** 폴더에는 선택한 원본 스키마/사용자가 부여받은(Grantee 기준) Table·View 객체 권한이 표시된다. 권한은 부여자(Grantor)별로 묶여 하위에 나열되며, 부여자 노드를 선택하면 해당 부여자의 권한만, 권한 종류 노드를 선택하면 부여자와 권한 종류로 한 번 더 필터링된다.
 
 .. list-table::
     :header-rows: 1
@@ -544,7 +546,7 @@ Grant
       - 선택하면 마이그레이션 시 해당 권한에 대한 ``GRANT`` 문을 실행하거나 출력한다.
 
 .. note::
-   Grant 마이그레이션은 대상 CUBRID 11.2 이상에서만 지원된다. 온라인 대상 DB로 직접 마이그레이션하는 경우 대상 접속 사용자가 DBA 또는 DBA 그룹 소속이어야 한다. 조건을 만족하지 않으면 객체 매핑 단계에서 경고가 표시되고 권한 목록 또는 생성 선택이 비활성화된다.
+   Grant 마이그레이션은 대상 CUBRID 11.2 이상에서만 지원된다. 온라인 대상 DB로 직접 마이그레이션하는 경우 대상 접속 사용자가 DBA 또는 DBA 그룹 소속이어야 한다. 조건을 만족하지 않으면 객체 매핑 단계 진입 시 경고가 표시된다. 온라인 대상에서 접속 사용자가 DBA(또는 DBA 그룹)가 아니면 권한 목록이 빈 상태로 표시되고 개별 권한의 **생성** 체크박스가 비활성화된다.
 
 .. image:: ./cmt_images/image_obj_5.png
 
@@ -571,7 +573,7 @@ Function / Procedure 목록
     * - 생성
       - 해당 Function 또는 Procedure를 마이그레이션 대상에 포함할지 선택한다.
     * - 교체
-      - 켜면 마이그레이션 직전에 대상 DB의 기존 Procedure/Function를 삭제한 뒤 다시 생성한다. 교체는 생성이 켜진 경우에만 활성화된다.
+      - 켜면 **생성**\도 함께 켜진다.
 
 Function / Procedure 상세 패널
 """"""""""""""""""""""""""""""""""""""
@@ -587,21 +589,21 @@ Function 또는 Procedure 노드를 선택하면 **대상** 영역이 표시된�
     * - 생성
       - 해당 Function 또는 Procedure를 마이그레이션 대상에 포함할지 선택한다. 선택을 해제하면 대상 DDL을 편집할 수 없다.
     * - 교체
-      - 켜면 마이그레이션 직전에 대상 DB의 기존 Function/Procedure를 삭제한 뒤 다시 생성한다. 교체는 생성이 켜진 경우에만 활성화된다.
+      - **생성**\이 켜진 경우에만 선택할 수 있다.
     * - Function / Procedure DDL
       - 대상 CUBRID에서 사용할 PL/CSQL DDL을 표시한다. 필요하면 사용자가 직접 수정할 수 있다.
 
 변환 동작
 """"""""""""""""""""""""""
 
-원본 Function·Procedure의 DDL을 구문 분석하여 선언부(헤더)와 본문을 분리하고, 본문에 사용된 데이터 타입을 CUBRID 타입으로 치환한 뒤 CUBRID PL/CSQL로 옮긴다. 데이터 타입 치환을 제외한 본문의 나머지 구문은 변환하지 않고 원문 그대로 전달한다.
+원본 Function·Procedure의 DDL을 구문 분석하여 선언부(헤더)와 본문을 분리하고, 선언부와 본문에 사용된 데이터 타입을 CUBRID 타입으로 치환한 뒤 CUBRID PL/CSQL로 옮긴다. 데이터 타입 치환을 제외한 본문의 나머지 구문은 변환하지 않고 원문 그대로 전달한다.
 
 따라서 변환 후에는 대상 CUBRID에서 그대로 동작하지 않는 구문이 남을 수 있으므로, 마이그레이션이 끝난 뒤 본문을 검토하고 필요한 부분을 직접 수정해야 한다.
 
 데이터 타입 치환
 """"""""""""""""""""""""""
 
-본문에 사용된 다음 Oracle, Tibero 타입은 대상 CUBRID 타입으로 자동 치환된다.
+선언부와 본문에 사용된 다음 Oracle, Tibero 타입은 대상 CUBRID 타입으로 자동 치환된다.
 
 .. list-table::
     :header-rows: 1
@@ -636,7 +638,7 @@ Function 또는 Procedure 노드를 선택하면 **대상** 영역이 표시된�
 헤더 처리
 """"""""""""""""""""""""""
 
-- 원본의 ``AUTHID DEFINER`` 또는 ``AUTHID CURRENT_USER`` 절은 ``AUTHID OWNER``\로 치환되며, AUTHID 절이 없으면 ``AUTHID OWNER``\가 추가된다.
+- 원본의 ``AUTHID DEFINER`` 또는 ``AUTHID CURRENT_USER`` 절은 ``AUTHID OWNER``\로 치환된다.
 - Function·Procedure를 두 단계로 생성한다. 먼저 시그니처(선언부)만 등록하는 헤더를 생성하고, 이후 본문을 채운다. 이렇게 하면 Function·Procedure가 서로를 참조하더라도 생성 순서에 관계없이 등록할 수 있다. 오프라인 출력에서는 이 헤더가 ``procedure_header`` / ``function_header`` 파일로 분리되어 나온다.
 
 자동 변환되지 않는 항목
@@ -658,7 +660,7 @@ Function 또는 Procedure 노드를 선택하면 **대상** 영역이 표시된�
         UPDATE HR.employees SET salary = v_sal * 1.1 WHERE emp_id = p_id;
     END;
 
-선언부의 데이터 타입 ``NUMBER``\는 ``NUMERIC``\으로 치환되지만, 본문의 ``SELECT`` / ``UPDATE`` 문에 쓰인 스키마명 ``HR``\과 내장 함수 ``NVL``\은 그대로 남는다. 따라서 대상 CUBRID에서 ``HR`` 스키마명이나 사용된 함수가 그대로 유효한지 마이그레이션 후 확인해야 한다.
+선언부의 데이터 타입 ``NUMBER``\는 ``NUMERIC``\으로 치환되지만, 본문의 ``SELECT`` / ``UPDATE`` 문에 쓰인 스키마명 ``HR``\과 내장 함수 ``NVL``\은 그대로 남는다. 따라서 마이그레이션 후 대상 CUBRID에서 ``HR`` 스키마명과 사용된 함수가 그대로 유효한지 확인해야 한다.
 
 .. note::
    Column **기본값**\에 사용된 ``SYSDATE`` 등은 별도 규칙으로 CUBRID 함수에 매핑되지만(:doc:`07_sourcedb`\의 Oracle 절 참고), 이 규칙은 Function·Procedure **본문**\에는 적용되지 않는다.

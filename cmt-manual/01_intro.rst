@@ -1,7 +1,7 @@
 소개
 ----
 
-본 챕터는 CUBRID Migration Toolkit이 어떤 도구이며 어떤 기능을 제공하는지, 그리고 본 매뉴얼에서 사용하는 표기 규약을 설명한다.
+본 챕터는 CUBRID Migration Toolkit이 어떤 도구이고 어떤 기능을 제공하는지 소개하고, 본 매뉴얼에서 사용하는 표기 규약을 설명한다.
 
 본 매뉴얼은 CMT를 처음 사용하는 데이터베이스 관리자와 개발자를 대상으로 한다. 마이그레이션을 준비하고, GUI 또는 콘솔로 실행하고, 결과를 검증하는 전체 흐름을 다룬다.
 
@@ -10,7 +10,7 @@ CMT란
 
 **CUBRID Migration Toolkit(이하 CMT)** 은 Oracle, MySQL, MariaDB, MSSQL, Informix, Tibero, CUBRID 데이터베이스의 스키마와 데이터를 CUBRID 데이터베이스로 마이그레이션하기 위한 도구이다.
 
-CMT는 원본 데이터베이스의 객체(Table, View, Index, Serial(Sequence), Synonym, Grant, PL/SQL Procedure, PL/SQL Function 등)와 데이터를 자동으로 추출하여 CUBRID 호환 형식으로 변환한다. 변환 과정에서 데이터 타입 매핑, 컬럼 속성, 객체 이름 등을 사용자가 직접 조정할 수 있다.
+CMT는 원본 데이터베이스의 객체(Table, View, Index, Serial(Sequence), Synonym, Grant, Procedure(PL/CSQL), Function(PL/CSQL) 등)와 데이터를 자동으로 추출하여 CUBRID 호환 형식으로 변환한다. 변환 과정에서 데이터 타입 매핑, 컬럼 속성, 객체 이름 등을 사용자가 직접 조정할 수 있다.
 
 CMT는 다음 두 가지 모드로 실행할 수 있다.
 
@@ -20,7 +20,7 @@ CMT는 다음 두 가지 모드로 실행할 수 있다.
 주요 기능
 ^^^^^^^^^^^^
 
-- **스키마 마이그레이션**: Table, Column, Primary Key, Foreign Key, Index, View, Serial(Sequence), Synonym, Grant, PL/SQL Procedure, PL/SQL Function 변환
+- **스키마 마이그레이션**: Table, Column, Primary Key, Foreign Key, Index, View, Serial(Sequence), Synonym, Grant, Procedure(PL/CSQL), Function(PL/CSQL) 변환
 - **데이터 마이그레이션**: 원본 데이터를 CUBRID 호환 형식으로 변환하여 적재
 - **유연한 출력 형식**: 운영 중인 CUBRID에 직접 적재(온라인) 또는 dump/SQL/CSV/XLS 파일로 출력(오프라인)
 - **데이터 타입 매핑 사용자 정의**: 기본 매핑을 사용자가 직접 수정 가능
@@ -28,7 +28,7 @@ CMT는 다음 두 가지 모드로 실행할 수 있다.
 - **마이그레이션 예약**: 1회 실행, 매일 반복 실행, 고급(Cron 패턴) 모드 지원
 - **마이그레이션 보고서**: 객체별·레코드별로 실행 결과 확인
 
-CMT는 한 번의 작업에서 하나의 원본 데이터베이스를 하나의 대상에 매핑한다. 동일한 마이그레이션 정의를 스크립트로 저장해 두면 GUI에서 재실행하거나 콘솔에서 자동화할 수 있어, 반복적인 마이그레이션 작업에도 동일하게 적용할 수 있다.
+CMT는 한 번의 작업에서 하나의 원본 데이터베이스를 하나의 대상에 매핑한다. 마이그레이션 정의를 스크립트로 저장해 두면 GUI에서 재실행하거나 콘솔에서 자동화할 수 있어 반복 작업에 그대로 활용할 수 있다.
 
 지원 원본 데이터베이스
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -68,11 +68,11 @@ CMT는 한 번의 작업에서 하나의 원본 데이터베이스를 하나의 
     * - CUBRID dump
       - ``loaddb`` 유틸리티로 적재 가능한 CUBRID 덤프 형식 파일
     * - SQL
-      - DDL과 데이터를 테이블별 SQL 문 형태로 출력
+      - DDL과 데이터를 SQL 문(.sql) 파일로 출력
     * - CSV
-      - DDL과 데이터를 테이블별 CSV 파일로 출력
+      - 데이터를 Table별 CSV 파일로 출력하고, 스키마 DDL은 별도 SQL 파일로 생성
     * - XLS
-      - DDL과 데이터를 테이블별 Excel 파일로 출력
+      - 데이터를 Table별 Excel 파일로 출력하고, 스키마 DDL은 별도 SQL 파일로 생성
 
 매뉴얼 표기 규약
 ^^^^^^^^^^^^^^^^^^^^
