@@ -7,4 +7,9 @@
         display: inline;
         overflow-wrap: anywhere;
     }
+
+    .body img {
+        max-height: 12cm;
+        width: auto;
+    }
 }
