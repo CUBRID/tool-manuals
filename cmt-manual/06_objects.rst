@@ -71,6 +71,8 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
 
 **테이블**
 
+.. image:: ./images/객체매핑_테이블컬럼.png
+
 .. list-table::
     :header-rows: 1
     :widths: 25 75
@@ -95,6 +97,8 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
       - 켜면 별도의 ``ALTER TABLE ADD PRIMARY KEY`` 문으로 PK 제약을 추가한다.
 
 **일반 탭**
+
+.. image:: ./images/객체매핑_테이블일반.png
 
 .. list-table::
     :header-rows: 1
@@ -132,6 +136,8 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
 
 **PK 탭**
 
+.. image:: ./images/객체매핑_PK.png
+
 .. list-table::
     :header-rows: 1
     :widths: 25 75
@@ -148,6 +154,8 @@ Table 옵션은 두 곳에서 노출된다. 좌측 트리의 **테이블** 폴�
       - 좌우 두 리스트와 ``>`` / ``<`` 버튼으로 대상 PK 구성 Column을 편집한다. **대상 PK 컬럼**\이 비어 있는 상태로 저장하면 **PK 생성**\이 자동으로 꺼진다.
 
 **FK 탭**
+
+.. image:: ./images/객체매핑_FK.png
 
 .. list-table::
     :header-rows: 1
@@ -254,7 +262,7 @@ Column 옵션은 두 곳에서 노출된다. Table 패널의 **일반 탭** 하�
 
    Column 길이를 줄이면 원본 데이터가 잘릴 수 있다. 사전에 일괄 조정하려면 객체 매핑 화면 툴바의 **CHAR/VARCHAR 개별설정...** 다이얼로그를 사용한다.
 
-.. image:: ./cmt_images/image_obj_2.png
+.. image:: ./images/객체매핑_테이블컬럼.png
 
 Foreign Key 상세 패널
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -322,8 +330,6 @@ ON DELETE
 .. note::
    Oracle 원본의 ``DISABLED`` 상태 FK는 마이그레이션 대상에서 자동으로 제외된다. 원본 카탈로그에 ``DISABLED`` FK가 다수 있는 경우, 마이그레이션 후 자식 Table에서 일부 FK가 보이지 않을 수 있다.
 
-.. image:: ./cmt_images/image_obj_3.png
-
 Index 상세 패널
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -331,6 +337,8 @@ Table 패널의 **인덱스** 탭 또는 트리의 Index 노드를 선택하면 
 
 옵션
 """"""""""""""""""""""""""
+.. image:: ./images/객체매핑_인덱스.png
+
 
 .. list-table::
     :header-rows: 1
@@ -363,6 +371,8 @@ View
 
 View 목록
 """"""""""""""""""""""""""
+.. image:: ./images/객체매핑_뷰.png
+
 
 .. list-table::
     :header-rows: 1
@@ -386,6 +396,8 @@ View 목록
 
 .. list-table::
     :header-rows: 1
+.. image:: ./images/객체매핑_뷰_상세.png
+
     :widths: 25 75
 
     * - 항목
@@ -411,8 +423,6 @@ View 목록
 
    마이그레이션 후 대상 CUBRID에서 View가 정상 동작하는지 확인하고, 필요한 경우 Query Spec을 수동으로 수정한다.
 
-.. image:: ./cmt_images/image_obj_4.png
-
 Serial(Sequence)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -420,6 +430,8 @@ Serial(Sequence)
 
 Serial 목록
 """"""""""""""""""""""""""
+.. image:: ./images/객체매핑_시리얼.png
+
 
 .. list-table::
     :header-rows: 1
@@ -443,6 +455,8 @@ Serial 목록
 
 .. list-table::
     :header-rows: 1
+.. image:: ./images/객체매핑_시리얼_상세.png
+
     :widths: 25 75
 
     * - 항목
@@ -478,6 +492,8 @@ Synonym은 대상 CUBRID 11.2 이상에서 지원된다. 마이그레이션 대�
 
 Synonym 목록
 """"""""""""""""""""""""""
+.. image:: ./images/객체매핑_시노님.png
+
 
 .. list-table::
     :header-rows: 1
@@ -504,6 +520,8 @@ Synonym 목록
 
 .. list-table::
     :header-rows: 1
+.. image:: ./images/객체매핑_시노님_상세.png
+
     :widths: 25 75
 
     * - 항목
@@ -530,6 +548,8 @@ Grant
 
 .. list-table::
     :header-rows: 1
+.. image:: ./images/객체매핑_권한.png
+
     :widths: 28 72
 
     * - 항목
@@ -548,8 +568,6 @@ Grant
 .. note::
    Grant 마이그레이션은 대상 CUBRID 11.2 이상에서만 지원된다. 온라인 대상 DB로 직접 마이그레이션하는 경우 대상 접속 사용자가 DBA 또는 DBA 그룹 소속이어야 한다. 조건을 만족하지 않으면 객체 매핑 단계 진입 시 경고가 표시된다. 온라인 대상에서 접속 사용자가 DBA(또는 DBA 그룹)가 아니면 권한 목록이 빈 상태로 표시되고 개별 권한의 **생성** 체크박스가 비활성화된다.
 
-.. image:: ./cmt_images/image_obj_5.png
-
 Function(PL/CSQL) / Procedure(PL/CSQL)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -559,6 +577,8 @@ Function과 Procedure는 트리의 Procedures, Functions 폴더 아래에 표시
 
 Function / Procedure 목록
 """"""""""""""""""""""""""
+.. image:: ./images/객체매핑_procedure.png
+
 
 .. list-table::
     :header-rows: 1
@@ -582,6 +602,8 @@ Function 또는 Procedure 노드를 선택하면 **대상** 영역이 표시된�
 
 .. list-table::
     :header-rows: 1
+.. image:: ./images/객체매핑_procedure_상세.png
+
     :widths: 28 72
 
     * - 항목
@@ -677,8 +699,6 @@ Function 또는 Procedure 노드를 선택하면 **대상** 영역이 표시된�
 .. note::
   Oracle에서 ``WRAPPED``\로 난독화된 Function·Procedure는 원본 텍스트가 PL/SQL 구문이 아니므로 변환에 실패하며, 위와 같이 실패 객체로 기록된 뒤 건너뛴다.
 
-.. image:: ./cmt_images/image_obj_6.png
-
 User SQL (사용자 정의 쿼리)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -738,6 +758,8 @@ SQL 목록 관리
 
 .. list-table::
     :header-rows: 1
+.. image:: ./images/객체매핑_사용자SQL.png
+
     :widths: 25 75
 
     * - 항목
@@ -755,8 +777,6 @@ SQL 목록 관리
 
 .. note::
   SQL 본문은 결과 집합(Column)을 반환해야 한다. CMT는 입력한 SQL을 결과가 0건이 되도록 감싸 실행하여 Column 정보를 얻으므로, 결과 집합을 반환하지 않는 문은 등록할 수 없다.
-
-.. image:: ./cmt_images/image_obj_7.png
 
 객체 이름 변경 시 동작
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -782,5 +802,3 @@ SQL 목록 관리
 
 .. note::
    서로 다른 객체에 같은 대상 이름을 지정하면 다음 단계로 진행할 때 중복 오류 메시지가 표시되어 진행이 차단된다. 또한 여러 원본 스키마를 하나의 대상 스키마로 합치는 등 원본 자체에 동일한 이름의 객체가 존재하는 경우, 객체 매핑 화면에 처음 들어갈 때 중복 객체 목록이 표시된다.
-
-.. image:: ./cmt_images/image_obj_8.png
