@@ -63,6 +63,7 @@ def github_icon(url):
 html_theme = 'sphinxawesome_theme'
 html_theme_options = {
     "logo_light": "_static/logo.svg",
+    "logo_dark": "_static/logo.svg",
     "show_prev_next": "true",
     "show_scrolltop": "true",
     "awesome_headerlinks": "false",
