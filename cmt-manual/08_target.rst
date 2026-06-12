@@ -39,7 +39,7 @@
       - ``csql`` (스키마) + 외부 도구 (데이터)
       - 검토, 외부 공유, 소규모 데이터
 
-대상 유형은 6단계 **확인** 화면에서는 변경할 수 없으며, 변경하려면 이전 단계로 돌아가야 한다.
+대상 유형은 6단계 **최종 확인** 화면에서는 변경할 수 없으며, 변경하려면 이전 단계로 돌아가야 한다.
 
 온라인 CUBRID
 ^^^^^^^^^^^^^
@@ -51,17 +51,17 @@
 
 다음 순서로 수행된다.
 
-1. **스키마 생성** — 대상이 다중 스키마이고 ``user schema 추가`` 옵션이 켜져 있으면 대상에 없는 사용자 스키마를 ``CREATE USER``\로 먼저 생성한다.
-2. **DDL (Table / View / Serial / Synonym)** — Table과 View 등의 DDL을 데이터 적재 전에 실행한다. Primary Key·Index·Foreign Key는 이 단계가 아니라 데이터 적재 이후에 생성된다(아래 4단계).
+1. **스키마 생성** — 대상이 다중 스키마(11.2 이상)이면 대상에 없는 사용자 스키마를 ``CREATE USER``\로 먼저 생성한다.
+2. **DDL (Table / View / Serial / Synonym)** — Table과 View 등의 DDL을 데이터 적재 전에 실행한다. Primary Key·Index·Foreign Key는 이 단계가 아니라 데이터 적재 이후에 생성된다(아래 4번 항목).
 3. **데이터 적재** — 행을 일정 개수씩 묶어 일괄 ``INSERT`` 방식으로 적재한다. 추출과 적재는 병렬로 진행된다.
-4. **제약 조건 / Index** — Primary Key, 일반 Index, Foreign Key는 데이터 적재 이후에 생성된다. ``create_constraints_before_data`` 옵션을 켜면 Primary Key만 데이터 적재 전에 생성되며, Foreign Key는 옵션과 무관하게 항상 데이터 적재 이후에 생성된다.
+4. **제약 조건 / Index** — Primary Key, 일반 Index, Foreign Key는 데이터 적재 이후에 생성된다. 3단계 **대상 선택** 페이지의 **데이터 마이그레이션 전 PK 생성** 옵션(스크립트 속성 ``create_constraints_before_data``)을 켜면 Primary Key만 데이터 적재 전에 생성되며, Foreign Key는 옵션과 무관하게 항상 데이터 적재 이후에 생성된다.
 5. **Grant** — 데이터 적재 이후에 생성된다.
 6. **Procedure / Function** (Oracle / Tibero 원본 한정) — 헤더(시그니처)는 데이터 적재 전에 생성되고, 본문은 Grant 처리 이후 마지막 단계에서 생성된다.
 
 커밋 모델
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-- 데이터 적재 트랜잭션은 auto-commit을 끄고 ``commit_count``\에 도달할 때마다 커밋한다(기본 1,000행).
+- 데이터 적재 트랜잭션은 auto-commit을 끄고 **커밋 주기**\(스크립트 속성 ``commit_count``)에 도달할 때마다 커밋한다(기본 1,000행).
 - 커밋 단위는 Table별로 독립적이며 한 Table의 실패가 다른 Table의 진행을 막지 않는다.
 - 메모리 사용량이 임계값을 넘으면 다음 커밋이 앞당겨진다.
 
@@ -70,12 +70,7 @@
 
 마이그레이션이 사용자에 의해 취소되거나 일부 Table에서 실패한 경우, 보고서 화면 또는 마이그레이션 이력 화면에서 동일한 설정으로 다시 시작할 수 있다. 자세한 절차는 :doc:`10_report`\을 참고한다.
 
-적재 중 실패한 행은 3단계 **대상 선택** 페이지의 **입력 실패 데이터 로그 파일로 저장** 옵션을 켜면 ``<설치 경로>/workspace/cmt/errors/<타임스탬프>/`` 아래에 원본 Table별 SQL 파일로 저장된다.
-
-대상 CUBRID 버전 자동 감지
-""""""""""""""""""""""""""""""""""""""""""""""""
-
-온라인 CUBRID 대상에서는 사용자가 대상 버전을 선택하지 않는다. 마법사가 접속한 CUBRID 서버의 버전을 자동으로 감지해 대상 버전으로 설정하며, 별도의 버전 선택 UI는 표시되지 않는다.
+적재 중 실패한 행은 3단계 **대상 선택** 페이지의 **입력 실패 데이터 로그 파일로 저장** 옵션을 켜면 ``<설치 경로>/workspace/cmt/errors/<밀리초epoch>/`` 아래에 원본 Table별 SQL 파일로 저장된다.
 
 대상 CUBRID 버전별 차이
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -88,17 +83,17 @@
 
     * - 대상 버전
       - 동작
-    * - 11.0
+    * - 11.0 이하
       - 단일 스키마 모델. Synonym, Grant 객체 적재 불가.
     * - 11.2 이상
-      - 다중 스키마 모델. ``user schema 추가``\로 사용자 스키마를 분리해 적재 가능. Synonym, Grant 객체 지원.
+      - 다중 스키마 모델. 사용자 스키마를 분리해 적재 가능. Synonym, Grant 객체 지원.
 
 .. note::
    ``GRANT`` 생성 여부는 대상 버전뿐만 아니라 **대상 접속 사용자가 DBA 그룹에 속해 있는지**\도 확인한다.
 
 대상 버전 설정은 마법사 **3단계 대상 선택** 페이지에서 이루어진다.
 
-- **온라인 CUBRID** 대상: 연결한 서버의 버전이 자동으로 채택된다. 사용자가 선택할 항목은 없다.
+- **온라인 CUBRID** 대상: 마법사가 접속한 CUBRID 서버의 버전을 자동으로 감지해 대상 버전으로 채택한다. 별도의 버전 선택 UI는 표시되지 않으며 사용자가 선택할 항목은 없다.
 - **CUBRID dump / SQL / CSV / XLS 등 파일 대상**: 같은 페이지의 **CUBRID 버전:** 항목에서 ``11.2 이상`` 또는 ``11.0 이하`` 중 하나를 선택한다. 선택 결과는 위 표의 동작 차이로 이어진다.
 
 파일 출력 공통 사항
@@ -115,7 +110,7 @@ CUBRID dump, SQL 스크립트, CSV, XLS 등 파일을 생성하는 모든 대상
     <파일 저장소>/<마이그레이션 이름>/
 
 - ``<파일 저장소>``\는 마법사 3단계 **대상 선택** 페이지의 **파일 경로** 항목에서 지정한다.
-- ``<마이그레이션 이름>``\은 마법사 6단계 **확인** 화면에서 지정한 마이그레이션 이름이다.
+- ``<마이그레이션 이름>``\은 마법사 6단계 **최종 확인** 화면에서 지정한 마이그레이션 이름이다.
 
 **스키마별 하위 디렉토리**
 
@@ -153,13 +148,13 @@ CUBRID dump, SQL 스크립트, CSV, XLS 등 파일을 생성하는 모든 대상
     * - ``vclass``
       - View DDL
     * - ``vclass_query_spec``
-      - View 의 query spec
+      - View의 query spec
     * - ``pk``
       - Primary Key
     * - ``fk``
       - Foreign Key
     * - ``uk``
-      - Unique Index (Primary Key 가 아닌 unique key)
+      - Unique Index (Primary Key가 아닌 unique key)
     * - ``indexes``
       - 일반 Index
     * - ``serial``
@@ -174,10 +169,12 @@ CUBRID dump, SQL 스크립트, CSV, XLS 등 파일을 생성하는 모든 대상
       - Grant 산출물. 객체 소유자별로 파일이 하나씩 생성된다.
     * - ``info``
       - 적재 순서/메타정보 매니페스트
+    * - ``updatestatistic``
+      - 데이터가 마이그레이션된 Table에 대한 ``UPDATE STATISTICS`` 구문
     * - ``object``
       - 데이터 (한 스키마의 모든 Table 데이터를 하나의 파일로 병합)
     * - ``<테이블>``
-      - 데이터 (Table당 별도 파일, ``one_table_one_file=yes`` 일 때)
+      - 데이터 (Table당 별도 파일, ``one_table_one_file=yes``\일 때)
 
 **확장자**
 
@@ -210,13 +207,13 @@ CUBRID dump, SQL 스크립트, CSV, XLS 등 파일을 생성하는 모든 대상
 
 **LOB 경로**
 
-BLOB / CLOB Column은 dump 데이터 파일 안에 직접 쓰이지 않고, 별도 파일로 생성된다. 기본 경로는 다음과 같다.
+BLOB / CLOB Column은 데이터 파일 안에 직접 쓰이지 않고, 별도 파일로 생성된다. 기본 경로는 다음과 같다.
 
 ::
 
     <파일 저장소>/<마이그레이션 이름>/lob/
 
-데이터 파일에는 LOB 파일의 경로가 기록된다. 마법사 3단계 **대상 선택** 페이지의 **LOB files' root path**\를 비워 두면 ``<파일 저장소>/<마이그레이션 이름>/lob/<테이블명>/`` 경로가, 값을 지정하면 ``<지정 경로>/lob/<테이블명>/`` 경로가 기록된다. 이 옵션은 ``loaddb``\가 LOB 파일을 찾을 위치를 데이터 파일에 적는 용도이므로, 대상 서버에서 다른 경로를 사용할 경우 생성된 LOB 파일도 그 위치에 맞게 배치한다.
+데이터 파일에는 LOB 파일의 경로가 기록된다. 마법사 3단계 **대상 선택** 페이지의 **LOB files' root path**\를 비워 두면 ``<파일 저장소>/<마이그레이션 이름>/lob/<테이블명>/`` 경로가, 값을 지정하면 ``<지정 경로>/lob/<테이블명>/`` 경로가 기록된다. CUBRID dump 대상의 경우 이 옵션은 ``loaddb``\가 LOB 파일을 찾을 위치를 데이터 파일에 적는 용도이므로, 대상 서버에서 다른 경로를 사용할 경우 생성된 LOB 파일도 그 위치에 맞게 배치한다. ``lob/`` 아래 하위 디렉토리 깊이는 파일 수에 따라 자동으로 결정된다.
 
 **출력 예시 (전체 객체)**
 
@@ -271,29 +268,21 @@ CUBRID의 ``loaddb`` 유틸리티가 직접 적재할 수 있는 dump 파일 묶
 - ``<접두사>_<스키마>_uk`` — Unique Index (Primary Key가 아닌 unique key)
 - ``<접두사>_<스키마>_serial`` — Serial 정의
 - ``<접두사>_<스키마>_vclass`` — View DDL
-- ``<접두사>_<스키마>_vclass_query_spec`` — View 의 query spec
+- ``<접두사>_<스키마>_vclass_query_spec`` — View의 query spec
 - ``<접두사>_<스키마>_procedure``, ``<접두사>_<스키마>_function`` — PL/CSQL 본문
 - ``<접두사>_<스키마>_procedure_header`` — PL/CSQL Procedure 헤더(시그니처)
 - ``<접두사>_<스키마>_function_header`` — PL/CSQL Function 헤더(시그니처)
 - ``<접두사>_<스키마>_synonym`` — Synonym
 - ``<접두사>_<스키마>_grant.<객체 소유자>`` — Grant (객체 소유자별)
 - ``<접두사>_<스키마>_info`` — 적재 순서를 정의하는 매니페스트
+- ``<접두사>_<스키마>_updatestatistic`` — 데이터가 마이그레이션된 Table에 대한 ``UPDATE STATISTICS`` 구문
 
 데이터 파일:
 
 - ``<접두사>_<스키마>_object`` — 한 스키마의 모든 데이터를 하나로 병합 (기본)
 - ``objects/<접두사>_<스키마>_<테이블>`` — Table별로 파일을 분리할 때 (``one_table_one_file=yes``)
 
-LOB 경로
-""""""""""""""""""""""""""""""""""""""""""""""""
-
-BLOB / CLOB Column이 포함된 Table은 마이그레이션 루트 디렉토리 하위에 별도의 ``lob/`` 디렉토리를 만들고 파일을 생성한다. 데이터 파일에는 LOB 파일 경로가 기록된다.
-
-::
-
-    <파일 저장소>/<마이그레이션 이름>/
-    └── lob/
-        └── ...     # 하위 디렉토리 깊이는 파일 수에 따라 자동 결정
+LOB 파일 경로는 `파일 출력 공통 사항`_\의 **LOB 경로**\를 참고한다.
 
 SQL 스크립트
 ^^^^^^^^^^^^
@@ -375,7 +364,7 @@ Table별로 표준 CSV 파일을 만들고, 스키마와 제약 조건은 별도
         ├── cmt_demodb_uk.sql
         ├── cmt_demodb_serial.sql
         ├── cmt_demodb_info.sql
-        └── objects/                                 # CSV 는 항상 Table별 파일로 출력
+        └── objects/                                 # CSV는 항상 Table별 파일로 출력
             ├── cmt_demodb_nation.csv
             └── cmt_demodb_city.csv
 
@@ -434,7 +423,7 @@ Microsoft Excel 파일(``.xls``)을 만든다. 사람이 직접 데이터를 검
         ├── cmt_demodb_uk.sql
         ├── cmt_demodb_serial.sql
         ├── cmt_demodb_info.sql
-        └── objects/                                 # XLS 는 항상 Table별 파일로 출력
+        └── objects/                                 # XLS는 항상 Table별 파일로 출력
             ├── cmt_demodb_nation.xls
             └── cmt_demodb_city.xls
 

@@ -15,7 +15,7 @@ JDBC 드라이버
 
 CMT는 JDBC를 사용해 원본 DB에 접속한다. CUBRID JDBC 드라이버는 배포본에 번들로 포함되어 있지만, 그 외 DB(Oracle, MySQL, MariaDB, MSSQL, Informix, Tibero)는 사용자가 별도로 JDBC JAR을 준비해서 등록해야 한다.
 
-연결 다이얼로그의 **JDBC 드라이버** 항목에서 JAR 파일을 지정하거나, 메뉴 **마이그레이션 > 기본 설정**\을 열고 좌측 트리의 **JDBC 드라이버** 페이지에서 미리 등록할 수 있다.
+연결 다이얼로그의 **JDBC 드라이버** 항목에서 JAR 파일을 지정하거나, 메뉴 ``마이그레이션 > 기본 설정``\을 열고 좌측 트리의 **JDBC 드라이버** 페이지에서 미리 등록할 수 있다.
 
 문자셋
 """"""
@@ -418,7 +418,7 @@ MSSQL
       - Query Spec 자동 변환은 적용되지 않음
     * - Sequence/Serial
       - O
-      - ``IDENTITY`` Column → CUBRID Serial ``CREATE SEQUENCE`` 객체는 별도로 추출되지 않음
+      - ``IDENTITY`` Column → CUBRID Serial. ``CREATE SEQUENCE`` 객체는 별도로 추출되지 않음
     * - Synonym
       - O
       - ``sys.synonyms`` 기반으로 추출되어 CUBRID Synonym으로 마이그레이션
@@ -563,14 +563,14 @@ Tibero는 Oracle 호환 데이터베이스이며 마이그레이션 절차도 Or
 Tibero PL/SQL 변환
 """"""""""""""""""""
 
-Tibero의 PL/SQL은 Oracle PL/SQL과 동일한 변환 엔진으로 처리되어 CUBRID PL/CSQL로 옮겨진다. 변환 규칙과 실패 시 동작은 Oracle 절의 PL/SQL 변환을 참고한다.
-
-CMT는 PL/SQL Procedure / Function의 본문 안에 포함된 정적 SQL 문에 대해 스키마명 치환, CUBRID 예약어 처리(``[ ]`` / ``" "`` 감싸기) 등을 자동으로 수행하지 않는다. 마이그레이션 후 사용자가 직접 검토해 수정해야 한다.
+Tibero의 PL/SQL은 Oracle PL/SQL과 동일한 변환 엔진으로 처리되어 CUBRID PL/CSQL로 옮겨진다. 변환 규칙과 실패 시 동작은 물론, 본문 내 정적 SQL 문이 자동 변환되지 않는 제약(스키마명 치환·CUBRID 예약어 처리 미수행)도 동일하므로 Oracle 절의 PL/SQL 변환을 참고한다.
 
 MySQL XML dump
 ^^^^^^^^^^^^^^
 
-원본 DB에 직접 접속할 수 없는 환경에서, ``mysqldump --xml``\로 미리 생성해 둔 XML 덤프 파일을 입력으로 사용할 수 있다. 본 절은 올바른 형식의 덤프 파일이 준비되어 있다는 전제로 설명한다. 마법사에서 원본 유형으로 선택하고 XML 파일 경로·문자집합을 지정하는 방법은 :doc:`05_wizard`\를 참고한다.
+원본 DB에 직접 접속할 수 없는 환경에서, ``mysqldump --xml``\로 미리 생성해 둔 XML 덤프 파일을 입력으로 사용할 수 있다. 본 절은 올바른 형식의 덤프 파일이 준비되어 있다는 전제로 설명한다. 마법사에서 원본 유형으로 선택하고 XML 파일 경로·문자셋을 지정하는 방법은 :doc:`05_wizard`\를 참고한다.
+
+마이그레이션이 취소되거나 중단된 경우 저장된 마이그레이션 스크립트에서 다시 시작할 수 있다. 원본 카탈로그 정보는 스크립트에 저장된 스키마 정보에서 복원되므로 활성 DB 연결 없이도 진행할 수 있다.
 
 제약사항
 """"""""
@@ -582,8 +582,6 @@ XML 덤프에 포함된 정보만 마이그레이션할 수 있으므로 다음 
 - View
 
 Primary Key와 Index(``<key>`` 요소), Column 타입, NOT NULL 같은 ``<table_structure>`` 안에 포함된 정보는 보존된다.
-
-마이그레이션이 취소되거나 중단된 경우 저장된 마이그레이션 스크립트에서 다시 시작할 수 있다. 원본 카탈로그 정보는 스크립트에 저장된 스키마 정보에서 복원되므로 활성 DB 연결 없이도 진행할 수 있다.
 
 관련 챕터
 ^^^^^^^^^

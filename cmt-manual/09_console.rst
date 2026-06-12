@@ -16,7 +16,7 @@
 설치 & 실행
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-콘솔은 GUI와 별도의 전용 패키지로 배포된다(콘솔: ``CUBRID-Migration-Toolkit-console-...-linux.tar.gz``, GUI: ``CUBRID-Migration-Toolkit-...-windows-x64.zip``). :doc:`02_install`\의 안내대로 설치하면 콘솔 실행 파일도 함께 설치된다.
+콘솔은 GUI와 별도의 전용 패키지로 배포된다(콘솔: ``CUBRID-Migration-Toolkit-console-...-linux.tar.gz``, GUI: ``CUBRID-Migration-Toolkit-...-windows-x64.zip``). :doc:`02_install`\의 안내대로 콘솔 패키지를 설치하면 ``migration.sh`` / ``migration.bat`` 실행 파일이 설치된다.
 
 실행 파일
 """"""""""""""""""""""""""""""""""""""""""""
@@ -143,7 +143,7 @@ start — 마이그레이션 실행
     * - ``-do``
       - ``yes`` / ``no``
       - ``no``
-      - ``yes`` 면 스키마 생성을 건너뛰고 데이터만 적재한다. 대상 Table이 이미 존재해야 한다.
+      - ``yes``\면 스키마 생성을 건너뛰고 데이터만 적재한다. 대상 Table이 이미 존재해야 한다.
 
 JDBC 드라이버 결정 순서
 """"""""""""""""""""""""""""""""""""""""""""
@@ -305,7 +305,7 @@ ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit``\을 입력�
 
   ./migration.sh report 1716166534123.mh
 
-이력 파일 이름은 마이그레이션 시작 시각의 밀리초 epoch 값 뒤에 ``.mh`` 확장자가 붙은 형태이다. 사용자는 자신의 이력 디렉토리에 실제로 존재하는 파일 이름으로 대체해 입력한다.
+사용자는 자신의 이력 디렉토리에 실제로 존재하는 파일 이름으로 대체해 입력한다.
 
 .. code-block:: bash
 
@@ -347,7 +347,7 @@ log — 마이그레이션 실행 로그
 페이지 단위 보기
 """"""""""""""""""""""""""""""""""""""""""""
 
-지정한 줄 수만큼 출력한 뒤 ``<Press [enter] to continue...>`` 프롬프트가 뜬다. ENTER 로 다음 페이지, ``q`` / ``exit`` / ``quit``\로 종료한다.
+지정한 줄 수만큼 출력한 뒤 ``<Press [enter] to continue...>`` 프롬프트가 뜬다. ENTER로 다음 페이지, ``q`` / ``exit`` / ``quit``\으로 종료한다.
 
 예제
 """"""""""""""""""""""""""""""""""""""""""""
@@ -370,7 +370,7 @@ log — 마이그레이션 실행 로그
 
   ./migration.sh log 1716166534123.mh -ps 25
 
-``1716166534123.mh`` 자리에는 실제 이력 디렉토리에 존재하는 파일 이름을 입력한다(파일명은 ``<밀리초epoch>.mh`` 형식).
+``1716166534123.mh`` 자리에는 실제 이력 디렉토리에 존재하는 파일 이름을 입력한다.
 
 .. _db-conf:
 
@@ -385,14 +385,13 @@ db.conf — 콘솔 환경 설정 파일
 - **위치**: CMT 설치 디렉토리 루트 (``migration.sh`` / ``migration.bat``\와 같은 디렉토리)
 - **형식**: ``{설정이름}.{속성}=값`` 형태의 키-값 프로퍼티. 한 파일에 여러 설정을 등록할 수 있다.
 - ``{설정이름}``\은 미리 정해진 값이 아니라 **사용자가 자유롭게 정하는 식별자**\이다. 여기서 정한 이름을 ``script`` / ``start`` 명령의 ``-s`` / ``-t`` 옵션 값으로 그대로 지정한다. 예를 들어 ``oracle_prod.host=...``\로 등록했다면 ``-s oracle_prod``\로 사용한다.
-- ``#``\으로 시작하는 줄은 주석이다.
 
 속성 표
 """"""""""""""""""""""""""""""""""""""""""""
 
 아래 표의 ``{이름}`` 자리에는 사용자가 정한 설정 이름이 들어간다.
 
-**연결 정보 (Online DB 공통)**
+**연결 정보 (온라인 DB 공통)**
 
 .. list-table::
     :header-rows: 1
@@ -449,16 +448,18 @@ db.conf — 콘솔 환경 설정 파일
       - 파일 인코딩
     * - ``{이름}.split_schema``
       - ``yes`` / ``no``
-      - 스키마 DDL을 객체 종류별 파일로 분리할지 여부. ``yes`` 면 ``class``, ``pk``, ``fk``, ``indexes`` 등으로 나뉘고, ``no`` 면 통합 스키마 파일 위주로 생성된다.
+      - 스키마 DDL을 객체 종류별 파일로 분리할지 여부. ``yes``\면 ``class``, ``pk``, ``fk``, ``indexes`` 등으로 나뉘고, ``no``\면 통합 스키마 파일 위주로 생성된다.
     * - ``{이름}.add_schema``
       - ``yes`` / ``no``
-      - DDL 객체 이름에 사용자 스키마 prefix(``[owner].``) 포함 여부. ``yes`` 면 모든 DDL의 객체 이름이 스키마 prefix와 함께 출력된다. 기본값 ``yes`` (값이 비어 있거나 ``no``\가 아니면 모두 ``yes``\로 간주).
+      - DDL 객체 이름에 사용자 스키마 prefix(``[owner].``) 포함 여부. ``yes``\면 모든 DDL의 객체 이름이 스키마 prefix와 함께 출력된다. 기본값 ``yes`` (값이 비어 있거나 ``no``\가 아니면 모두 ``yes``\로 간주).
     * - ``{이름}.one_table_one_file``
       - ``yes`` / ``no``
       - CUBRID dump / SQL 대상에서 데이터 파일을 Table당 한 파일로 분리할지 여부. CSV / XLS 대상은 이 값과 무관하게 출력 동작상 항상 Table별 파일을 사용한다.
 
 예시 db.conf
 """"""""""""""""""""""""""""""""""""""""""""
+
+대상이 온라인 CUBRID인 경우:
 
 .. code-block:: properties
 
@@ -482,14 +483,25 @@ db.conf — 콘솔 환경 설정 파일
   cubrid_prod.charset=utf8
   cubrid_prod.driver=<설치 경로>/jdbc/JDBC-11.3.2.0053-cubrid.jar
 
+대상이 파일 출력인 경우:
+
+.. code-block:: properties
+
+  # Oracle 원본
+  oracle_prod.host=oracle.internal
+  oracle_prod.port=1521
+  oracle_prod.dbname=ORCL
+  oracle_prod.type=oracle
+  oracle_prod.user=migration
+  oracle_prod.password=OraclePassword
+  oracle_prod.charset=UTF-8
+  oracle_prod.driver=<Oracle JDBC 드라이버 jar 경로>
+
   # 파일 출력 대상 (unload)
   file_export.type=unload
   file_export.output=/var/exports/mydb
   file_export.charset=UTF-8
   file_export.one_table_one_file=yes
-
-.. note::
-  ``db.conf``\가 없으면 메시지 없이 건너뛰고, 파일이 있는데 읽지 못하면 ``Load db.conf error.`` 메시지가 출력된다. 어느 경우든 명령 자체는 중단되지 않는다. ``-s`` / ``-t``\를 쓰지 않는 호출(예: 스크립트 그대로 실행)은 ``db.conf`` 없이도 동작한다.
 
 콘솔 진행률 / 로그 출력 포맷
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -538,11 +550,11 @@ db.conf — 콘솔 환경 설정 파일
   MIGRATION RESULT: SUCCESS
   =============================================================
 
+요약의 ``Time used`` 줄은 총 경과 시간이며, 형식은 ``dd HH:mm:ss.SSS`` (일 시:분:초.밀리초)이다.
+
 요약 라인은 고정된 ``Objects`` / ``Records`` 라벨이 아니라, **객체 타입별로 한 줄씩 출력**\된다. 객체 타입 라인은 고정된 순서로 항상 모두 출력되며, 마이그레이션 대상이 아닌 타입은 ``Exported[0]; Imported[0]``\으로 표시된다. 형식은 모두 ``<객체 타입>: Exported[N]; Imported[M]``\이다.
 
 SQL 파일을 임포트하는 시나리오에서는 객체 타입 대신 SQL 파일명별로 ``<파일명>: Exported[N]; Imported[M]`` 라인이 출력된다.
-
-첫 줄의 ``Time used``\는 총 경과 시간이며, 형식은 ``dd HH:mm:ss.SSS`` (일 시:분:초.밀리초)이다.
 
 오류가 한 건이라도 있으면 배너는 ``MIGRATION RESULT: FAILED``\로 표기된다.
 
@@ -557,4 +569,4 @@ SQL 파일을 임포트하는 시나리오에서는 객체 타입 대신 SQL 파
 
 이력 파일(``.mh``)은 ``report`` / ``log`` 명령으로 다시 조회할 수 있도록 별도로 보관된다.
 
-결과 보고서 화면은 :doc:`10_report`\을, 성능 / 동시성 / 메모리 관련 설정은 :doc:`11_config`\와 :doc:`12_advanced`\을 참고한다.
+결과 보고서 화면은 :doc:`10_report`\을, 성능 / 동시성 / 메모리 관련 설정은 :doc:`11_config`\과 :doc:`12_advanced`\을 참고한다.
