@@ -145,17 +145,6 @@ start — 마이그레이션 실행
       - ``no``
       - ``yes``\면 스키마 생성을 건너뛰고 데이터만 적재한다. 대상 Table이 이미 존재해야 한다.
 
-JDBC 드라이버 결정 순서
-""""""""""""""""""""""""""""""""""""""""""""
-
-원본/대상에 사용할 JDBC 드라이버는 다음 우선순위로 결정된다.
-
-1. ``-sd`` / ``-td`` 옵션으로 지정한 경로
-2. ``-s`` / ``-t``\를 사용한 경우 ``db.conf``\의 ``{이름}.driver`` 값
-3. 마이그레이션 스크립트 XML에 저장된 드라이버 경로
-
-결정된 경로의 드라이버를 인식하지 못하면 ``Invalid driver : <경로>`` 메시지와 함께 중단된다. 이 경우 ``-sd`` / ``-td``\로 올바른 JAR 경로를 지정한다.
-
 예제
 """"""""""""""""""""""""""""""""""""""""""""
 
@@ -249,7 +238,7 @@ script — XML 스크립트 생성
 report — 마이그레이션 결과 보고서
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``report`` 명령은 완료된 마이그레이션의 결과 보고서를 출력한다. 보고서는 ``start`` 명령이 자동으로 저장하는 ``.mh`` (migration history) 파일에 들어 있다. ``.mh`` 파일은 ``<밀리초epoch>.mh`` 형태로 이름이 지어지며(예: ``1716166534123.mh``), 마이그레이션 시작 시각의 밀리초 단위 epoch 값을 그대로 사용한다.
+``report`` 명령은 완료된 마이그레이션의 결과 보고서를 출력한다. 보고서는 ``start`` 명령이 자동으로 저장하는 ``.mh`` (migration history) 파일에 들어 있다. ``.mh`` 파일은 ``<타임스탬프>.mh`` 형태로 이름이 지어지며(예: ``1716166534123.mh``), 마이그레이션 시작 시각의 밀리초 단위 숫자를 그대로 사용한다.
 
 옵션
 """"""""""""""""""""""""""""""""""""""""""""
@@ -470,7 +459,6 @@ db.conf — 콘솔 환경 설정 파일
   oracle_prod.type=oracle
   oracle_prod.user=migration
   oracle_prod.password=OraclePassword
-  oracle_prod.charset=UTF-8
   oracle_prod.driver=<Oracle JDBC 드라이버 jar 경로>
 
   # CUBRID 대상
@@ -480,7 +468,6 @@ db.conf — 콘솔 환경 설정 파일
   cubrid_prod.type=cubrid
   cubrid_prod.user=dba
   cubrid_prod.password=CubridPassword
-  cubrid_prod.charset=utf8
   cubrid_prod.driver=<설치 경로>/jdbc/JDBC-11.3.2.0053-cubrid.jar
 
 대상이 파일 출력인 경우:
@@ -494,13 +481,11 @@ db.conf — 콘솔 환경 설정 파일
   oracle_prod.type=oracle
   oracle_prod.user=migration
   oracle_prod.password=OraclePassword
-  oracle_prod.charset=UTF-8
   oracle_prod.driver=<Oracle JDBC 드라이버 jar 경로>
 
   # 파일 출력 대상 (unload)
   file_export.type=unload
   file_export.output=/var/exports/mydb
-  file_export.charset=UTF-8
   file_export.one_table_one_file=yes
 
 콘솔 진행률 / 로그 출력 포맷
@@ -518,8 +503,6 @@ db.conf — 콘솔 환경 설정 파일
 
 - **첫 줄**: 전체 진행률 — 완료 레코드 수 / 총 레코드 수와 백분율
 - **Table 줄**: 현재 처리 중인 각 Table의 ``소유자.테이블명(순번/전체) | 적재 레코드 / 전체 레코드 백분율``
-
-화면은 ANSI 이스케이프 코드로 갱신되어 같은 위치에 덮어쓴다.
 
 최종 결과 배너
 """"""""""""""""""""""""""""""""""""""""""""
@@ -553,8 +536,6 @@ db.conf — 콘솔 환경 설정 파일
 요약의 ``Time used`` 줄은 총 경과 시간이며, 형식은 ``dd HH:mm:ss.SSS`` (일 시:분:초.밀리초)이다.
 
 요약 라인은 고정된 ``Objects`` / ``Records`` 라벨이 아니라, **객체 타입별로 한 줄씩 출력**\된다. 객체 타입 라인은 고정된 순서로 항상 모두 출력되며, 마이그레이션 대상이 아닌 타입은 ``Exported[0]; Imported[0]``\으로 표시된다. 형식은 모두 ``<객체 타입>: Exported[N]; Imported[M]``\이다.
-
-SQL 파일을 임포트하는 시나리오에서는 객체 타입 대신 SQL 파일명별로 ``<파일명>: Exported[N]; Imported[M]`` 라인이 출력된다.
 
 오류가 한 건이라도 있으면 배너는 ``MIGRATION RESULT: FAILED``\로 표기된다.
 

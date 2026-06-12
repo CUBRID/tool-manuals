@@ -258,8 +258,6 @@ Column 옵션은 두 곳에서 노출된다. Table 패널의 **일반 탭** 하�
 .. note::
    대상 Column의 데이터 타입은 ``VARCHAR(100)``\처럼 길이/정밀도/스케일이 포함된 단일 문자열로 입력한다. 별도의 길이 입력 필드는 없다.
 
-   원본 Column의 Comment는 Column 매핑 패널에 표시되지 않는다. Comment는 별도 설정 없이 그대로 ``CREATE TABLE`` DDL의 ``COMMENT '...'`` 절로 출력된다.
-
    CUBRID는 식별자를 소문자로 저장한다. Column 이름은 저장 시 자동으로 소문자로 변환된다.
 
    Column 길이를 줄이면 원본 데이터가 잘릴 수 있다. 사전에 일괄 조정하려면 객체 매핑 화면 툴바의 **CHAR/VARCHAR 개별설정...** 다이얼로그를 사용한다.
@@ -367,10 +365,10 @@ View
 
 원본 View는 좌측 트리의 **뷰** 폴더 아래에 표시된다. **뷰** 폴더를 선택하면 우측에 전체 View 목록이 표시되고, 개별 View 노드를 선택하면 해당 View의 상세 패널이 표시된다.
 
-.. image:: ./images/객체매핑_뷰.png
-
 View 목록
 """"""""""""""""""""""""""
+
+.. image:: ./images/객체매핑_뷰.png
 
 .. list-table::
     :header-rows: 1
@@ -426,10 +424,10 @@ Serial(Sequence)
 
 원본 Serial 또는 Sequence는 좌측 트리의 **시리얼** 폴더 아래에 표시된다. **시리얼** 폴더를 선택하면 전체 Serial 목록이 표시되고, 개별 Serial 노드를 선택하면 해당 Serial의 상세 패널이 표시된다.
 
-.. image:: ./images/객체매핑_시리얼.png
-
 Serial 목록
 """"""""""""""""""""""""""
+
+.. image:: ./images/객체매핑_시리얼.png
 
 .. list-table::
     :header-rows: 1
@@ -488,10 +486,10 @@ Synonym
 
 Synonym은 대상 CUBRID 11.2 이상에서 지원된다. 마이그레이션 대상은 PRIVATE Synonym으로 제한되며, PUBLIC Synonym은 추출 단계에서 제외된다.
 
-.. image:: ./images/객체매핑_시노님.png
-
 Synonym 목록
 """"""""""""""""""""""""""
+
+.. image:: ./images/객체매핑_시노님.png
 
 .. list-table::
     :header-rows: 1
@@ -573,10 +571,10 @@ Function과 Procedure의 마이그레이션은 **Oracle/Tibero 원본에서만**
 
 Function과 Procedure는 트리의 Procedures, Functions 폴더 아래에 표시된다. 개별 노드를 선택하면 변환된 PL/CSQL DDL이 우측 패널에 표시된다.
 
-.. image:: ./images/객체매핑_procedure.png
-
 Function / Procedure 목록
 """"""""""""""""""""""""""
+
+.. image:: ./images/객체매핑_procedure.png
 
 .. list-table::
     :header-rows: 1
@@ -623,51 +621,21 @@ Function 또는 Procedure 노드를 선택하면 **대상** 영역이 표시된�
 데이터 타입 치환
 """"""""""""""""""""""""""
 
-선언부와 본문에 사용된 다음 Oracle, Tibero 타입은 대상 CUBRID 타입으로 자동 치환된다.
-
-.. list-table::
-    :header-rows: 1
-    :widths: 50 50
-
-    * - 원본 타입
-      - 대상 타입
-    * - ``VARCHAR2``
-      - ``VARCHAR``
-    * - ``NVARCHAR2``
-      - ``VARCHAR``
-    * - ``NCHAR``
-      - ``CHAR``
-    * - ``NUMBER``
-      - ``NUMERIC``
-    * - ``FLOAT``
-      - ``NUMERIC``
-    * - ``BINARY_FLOAT``
-      - ``FLOAT``
-    * - ``BINARY_DOUBLE``
-      - ``DOUBLE``
-    * - ``DATE``
-      - ``DATETIME``
-
-다음 타입은 CUBRID에 대응 타입이 없어 자동 치환되지 않으며, 본문의 해당 위치에 ``/* 타입명 (unsupported) */`` 형태의 주석으로 대체된다.
-마이그레이션 후 사용자가 직접 수정해야 한다.
-
-``LONG``, ``LONG RAW``, ``RAW``, ``INTERVAL YEAR TO MONTH``, ``INTERVAL DAY TO SECOND``,
-``TIMESTAMP WITH TIME ZONE``, ``TIMESTAMP WITH LOCAL TIME ZONE``, ``BLOB``, ``CLOB``,
-``NCLOB``, ``BFILE``, ``ROWID``, ``UROWID``
+선언부와 본문에 사용된 Oracle, Tibero 데이터 타입은 대상 CUBRID 타입으로 자동 치환된다. CUBRID에 대응 타입이 없어 치환할 수 없는 타입은 해당 위치가 ``/* 타입명 (unsupported) */`` 형태의 주석으로 대체되므로, 마이그레이션 후 사용자가 직접 수정해야 한다.
 
 헤더 처리
 """"""""""""""""""""""""""
 
-- 원본의 ``AUTHID DEFINER`` 또는 ``AUTHID CURRENT_USER`` 절은 ``AUTHID OWNER``\로 치환된다.
-- Function·Procedure를 두 단계로 생성한다. 먼저 시그니처(선언부)만 등록하는 헤더를 생성하고, 이후 본문을 채운다. 이렇게 하면 Function·Procedure가 서로를 참조하더라도 생성 순서에 관계없이 등록할 수 있다. 오프라인 출력에서는 이 헤더가 ``procedure_header`` / ``function_header`` 파일로 분리되어 나온다.
+Function·Procedure는 두 단계로 생성된다. 먼저 시그니처(선언부)만 등록하는 헤더를 생성하고, 이후 본문을 채운다. 이렇게 하면 Function·Procedure가 서로를 참조하더라도 생성 순서에 관계없이 등록할 수 있다. 오프라인 출력에서는 이 헤더가 ``procedure_header`` / ``function_header`` 파일로 분리되어 나온다.
 
 자동 변환되지 않는 항목
 """"""""""""""""""""""""""
 
-다음 항목은 변환되지 않고 원문 그대로 전달되므로, 마이그레이션 후 직접 검토해야 한다.
+.. warning::
+   다음 항목은 변환되지 않고 원문 그대로 전달되므로, 마이그레이션 후 직접 검토해야 한다.
 
-- **본문 내 정적 SQL**: ``SELECT`` / ``INSERT`` / ``UPDATE`` / ``DELETE`` 문은 그대로 옮겨진다. 문장에 사용된 스키마명·객체명은 스키마 매핑을 따르지 않으며, CUBRID 예약어 인용(``[ ]`` / ``" "``)도 자동으로 처리되지 않는다.
-- **내장 함수**: ``NVL``, ``DECODE``, ``TO_CHAR``, ``SYSDATE`` 등 Oracle 내장 함수 이름은 변환되지 않는다.
+   - **본문 내 정적 SQL**: ``SELECT`` / ``INSERT`` / ``UPDATE`` / ``DELETE`` 문은 그대로 옮겨진다. 문장에 사용된 스키마명·객체명은 스키마 매핑을 따르지 않으며, CUBRID 예약어 인용(``[ ]`` / ``" "``)도 자동으로 처리되지 않는다.
+   - **내장 함수**: ``NVL``, ``DECODE``, ``TO_CHAR``, ``SYSDATE`` 등 Oracle 내장 함수 이름은 변환되지 않는다.
 
 예를 들어 다음과 같은 Oracle Procedure를 변환하면,
 
@@ -776,27 +744,18 @@ SQL 목록 관리
 .. note::
   SQL 본문은 결과 집합(Column)을 반환해야 한다. CMT는 입력한 SQL을 결과가 0건이 되도록 감싸 실행하여 Column 정보를 얻으므로, 결과 집합을 반환하지 않는 문은 등록할 수 없다.
 
-객체 이름 변경 시 동작
+이름 검증
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-객체 매핑 화면에서 Table, Column, Foreign Key, Index, View, Serial(Sequence), Synonym, Function(PL/CSQL), Procedure(PL/CSQL) 등의 대상 이름을 원본과 다르게 입력할 수 있다. 이름을 변경하면 마이그레이션 스크립트에 원본 이름(``name``)과 대상 이름(``target_name``)이 함께 저장된다.
-
-변경된 이름은 마이그레이션 종료 후 보고서의 **변경된 객체** 탭에서 "유형 / 원본 객체 / 대상 객체" 형태로 확인할 수 있다. 단, 이 탭에 표시되는 객체는 **Schema, Table, View, Serial, Synonym**\에 한정되며, 원본 이름과 대상 이름이 다른 경우에만 기록된다.
-
-.. note::
-   Primary Key의 구성 Column은 Column 이름을 변경하면 변경된 대상 Column 이름으로 갱신된다. 그러나 Foreign Key의 참조 Column·참조 Table, Index의 구성 Column은 원본 이름을 기준으로 생성되므로, 참조하는 Column·Table 이름을 변경한 경우 마이그레이션 후 결과 DDL을 확인하는 것이 안전하다.
-
-.. note::
-   스키마(소유자) 이름을 변경하면 Function·Procedure의 **선언부(헤더)** 객체 이름은 새 스키마로 재작성되지만, **본문 안의 스키마 한정 참조는 변경되지 않는다**. 본문에 다른 스키마를 직접 참조하는 구문이 있으면 마이그레이션 후 직접 수정해야 한다.
-
-이름 검증
-""""""""""""""""""""""""""
-
-대상 이름이 다음에 해당하면 객체 매핑 화면에서 오류로 표시되고 다음 단계로 진행할 수 없다.
+객체 매핑 화면에서 입력한 대상 이름이 다음에 해당하면 오류로 표시되고 다음 단계로 진행할 수 없다.
 
 - 이름이 비어 있는 경우
 - 허용 길이를 초과하는 경우
 - ``"``, ``[``, ``]`` 문자를 포함하는 경우
 
-.. note::
-   서로 다른 객체에 같은 대상 이름을 지정하면 다음 단계로 진행할 때 중복 오류 메시지가 표시되어 진행이 차단된다. 또한 여러 원본 스키마를 하나의 대상 스키마로 합치는 등 원본 자체에 동일한 이름의 객체가 존재하는 경우, 객체 매핑 화면에 처음 들어갈 때 중복 객체 목록이 표시된다.
+관련 챕터
+^^^^^^^^^
+
+- :doc:`05_wizard` — 객체 매핑 화면이 속한 마법사 단계 흐름
+- :doc:`07_sourcedb` — 원본 DB별 지원 객체와 주의사항
+- :doc:`appendix_typemap` — 데이터 타입 기본 매핑 전체 표
