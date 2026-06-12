@@ -224,3 +224,11 @@ html pre, html code, html samp, html kbd {
     padding-left: 1.6em;
     text-indent: -1.6em;
 }
+
+@media screen {
+    #content code:not(pre code) {
+        padding-block: 0.125rem;
+        line-height: inherit;
+        margin-top: 0;
+    }
+}
