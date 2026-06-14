@@ -16,7 +16,7 @@
 설치 & 실행
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-콘솔은 GUI와 별도의 전용 패키지로 배포된다(콘솔: ``CUBRID-Migration-Toolkit-console-...-linux.tar.gz``, GUI: ``CUBRID-Migration-Toolkit-...-windows-x64.zip``). :doc:`02_install`\의 안내대로 콘솔 패키지를 설치하면 ``migration.sh`` / ``migration.bat`` 실행 파일이 설치된다.
+콘솔은 GUI와 별도의 전용 패키지로 배포된다(GUI 패키지와 달리 파일 이름에 ``-console-``\이 포함된다). :doc:`02_install`\의 안내대로 콘솔 패키지를 설치하면 ``migration.sh`` / ``migration.bat`` 실행 파일이 설치된다.
 
 실행 파일
 """"""""""""""""""""""""""""""""""""""""""""
@@ -65,6 +65,9 @@
 
 .. tip::
   ``-Xmx`` 값으로 최대 힙 크기를 조정할 수 있으며, GUI 모드의 힙 조정은 :doc:`12_advanced`\을 참고한다.
+
+.. important::
+  ``migration.sh`` / ``migration.bat``\은 현재 작업 디렉토리(``$PWD``)를 기준으로 동봉된 JRE와 실행 파일을 찾는다. 따라서 **CMT 설치 디렉토리로 이동한 뒤 실행**\해야 하며, 다른 위치에서 절대 경로로 호출하면 JRE를 찾지 못해 실패한다.
 
 헬프 보기
 """"""""""""""""""""""""""""""""""""""""""""
@@ -183,8 +186,8 @@ start — 마이그레이션 실행
 
 .. code-block:: bash
 
-  ./migration.sh start -sd <Oracle JDBC 드라이버 jar 경로> \
-                       -td <CUBRID JDBC 드라이버 jar 경로> \
+  ./migration.sh start -sd <Oracle JDBC 드라이버 JAR 경로> \
+                       -td <CUBRID JDBC 드라이버 JAR 경로> \
                        -rm debug migration.xml
 
 번들 드라이버 대신 별도 경로의 JDBC 드라이버를 사용하고, 이력에 기록되는 보고서 로그를 디버그 수준(오류 스택트레이스 포함)으로 남긴다.
@@ -264,7 +267,7 @@ report — 마이그레이션 결과 보고서
 
 보고서는 세 섹션으로 구성된다.
 
-- ``[Overview]`` — 객체 타입(Table, View, Procedure 등)별 총계, Exported / Imported 카운트
+- ``[Overview]`` — 객체 종류(Table, View, Procedure 등)별 총계, Exported / Imported 개수
 - ``[Schema migration]`` — 각 객체별 DDL 실행 결과 (successfully / failed). 각 객체의 DDL 본문은 항상 출력되며, 실패한 경우 오류 메시지가 추가로 출력된다.
 - ``[Data migration]`` — 원본 → 대상 Table 쌍별 Total / Exported / Imported 레코드 수
 
@@ -277,7 +280,7 @@ report — 마이그레이션 결과 보고서
 
   <Press [enter] to continue...>
 
-ENTER 키로 다음 페이지를 본다. ``q`` / ``exit`` / ``quit``\을 입력하면 중단한다. ``-ao`` 옵션을 주면 일시 정지 없이 끝까지 출력한다.
+Enter 키를 누르면 다음 페이지가 출력된다. ``q`` / ``exit`` / ``quit``\을 입력하면 중단한다. ``-ao`` 옵션을 주면 일시 정지 없이 끝까지 출력한다.
 
 예제
 """"""""""""""""""""""""""""""""""""""""""""
@@ -366,7 +369,7 @@ log — 마이그레이션 실행 로그
 db.conf — 콘솔 환경 설정 파일
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``db.conf``\는 콘솔 모드에서 원본 / 대상 데이터베이스 연결 정보를 저장하는 Java 프로퍼티 파일이다. ``-s`` / ``-t`` 옵션이 이 파일에서 설정 이름을 찾아 연결 정보를 채워 넣는다.
+``db.conf``\는 콘솔 모드에서 원본 / 대상 데이터베이스 연결 정보를 저장하는 Java 프로퍼티 파일이다. ``-s`` / ``-t`` 옵션이 이 파일에서 설정 이름을 찾아 해당 설정의 연결 정보를 적용한다.
 
 위치 및 형식
 """"""""""""""""""""""""""""""""""""""""""""
@@ -459,7 +462,7 @@ db.conf — 콘솔 환경 설정 파일
   oracle_prod.type=oracle
   oracle_prod.user=migration
   oracle_prod.password=OraclePassword
-  oracle_prod.driver=<Oracle JDBC 드라이버 jar 경로>
+  oracle_prod.driver=<Oracle JDBC 드라이버 JAR 경로>
 
   # CUBRID 대상
   cubrid_prod.host=cubrid.internal
@@ -481,7 +484,7 @@ db.conf — 콘솔 환경 설정 파일
   oracle_prod.type=oracle
   oracle_prod.user=migration
   oracle_prod.password=OraclePassword
-  oracle_prod.driver=<Oracle JDBC 드라이버 jar 경로>
+  oracle_prod.driver=<Oracle JDBC 드라이버 JAR 경로>
 
   # 파일 출력 대상 (unload)
   file_export.type=unload
@@ -502,7 +505,7 @@ db.conf — 콘솔 환경 설정 파일
 표시 항목:
 
 - **첫 줄**: 전체 진행률 — 완료 레코드 수 / 총 레코드 수와 백분율
-- **Table 줄**: 현재 처리 중인 각 Table의 ``소유자.테이블명(순번/전체) | 적재 레코드 / 전체 레코드 백분율``
+- **Table 줄**: 현재 처리 중인 각 Table의 ``소유자.테이블명(순번/전체) | 적재 레코드 / 전체 레코드 진행률``
 
 최종 결과 배너
 """"""""""""""""""""""""""""""""""""""""""""
@@ -535,7 +538,7 @@ db.conf — 콘솔 환경 설정 파일
 
 요약의 ``Time used`` 줄은 총 경과 시간이며, 형식은 ``dd HH:mm:ss.SSS`` (일 시:분:초.밀리초)이다.
 
-요약 라인은 고정된 ``Objects`` / ``Records`` 라벨이 아니라, **객체 타입별로 한 줄씩 출력**\된다. 객체 타입 라인은 고정된 순서로 항상 모두 출력되며, 마이그레이션 대상이 아닌 타입은 ``Exported[0]; Imported[0]``\으로 표시된다. 형식은 모두 ``<객체 타입>: Exported[N]; Imported[M]``\이다.
+요약 라인은 고정된 ``Objects`` / ``Records`` 라벨이 아니라, **객체 종류별로 한 줄씩 출력**\된다. 객체 종류 라인은 고정된 순서로 항상 모두 출력되며, 마이그레이션 대상이 아닌 타입은 ``Exported[0]; Imported[0]``\으로 표시된다. 형식은 모두 ``<객체 종류>: Exported[N]; Imported[M]``\이다.
 
 오류가 한 건이라도 있으면 배너는 ``MIGRATION RESULT: FAILED``\로 표기된다.
 
