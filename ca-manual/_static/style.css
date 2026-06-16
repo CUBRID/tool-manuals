@@ -48,14 +48,6 @@ http://scripts.sil.org/OFL
     --sd-color-primary: hsl(var(--accent-foreground)) !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --accent-foreground: 180 70% 54% !important;
-    --foreground: 200 16% 78% !important;
-    --sd-color-primary: hsl(var(--accent-foreground)) !important;
-  }
-}
-
 pre code, code, samp {
     font-family: var(--font-mono);
     font-size: 0.85rem;
