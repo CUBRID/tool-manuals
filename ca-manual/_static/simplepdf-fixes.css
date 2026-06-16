@@ -1,0 +1,15 @@
+@media print {
+    .body {
+        text-align: left;
+    }
+
+    .docutils.literal.notranslate {
+        display: inline;
+        overflow-wrap: anywhere;
+    }
+
+    .body img {
+        max-height: 12cm;
+        width: auto;
+    }
+}

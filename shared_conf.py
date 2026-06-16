@@ -30,6 +30,7 @@ html_use_index = True
 exclude_patterns = ['_build', 'venv']
 
 pygments_style = "nord"
+pygments_style_dark = "github-dark"
 
 suppress_warnings = [
     'misc.highlighting_failure'
@@ -62,6 +63,7 @@ def github_icon(url):
 html_theme = 'sphinxawesome_theme'
 html_theme_options = {
     "logo_light": "_static/logo.svg",
+    "logo_dark": "_static/logo.svg",
     "show_prev_next": "true",
     "show_scrolltop": "true",
     "awesome_headerlinks": "false",
@@ -69,7 +71,7 @@ html_theme_options = {
 }
 html_permalinks_icon = Icons.permalinks_icon
 
-html_css_files = ["style.css"]
+html_css_files = ["style.css", "simplepdf-fixes.css"]
 html_js_files = ['theme-toggle.js']
 html_last_updated_fmt = '%b %d, %Y'
 html_use_smartypants = False

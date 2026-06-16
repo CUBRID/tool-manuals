@@ -1,6 +1,6 @@
 SPHINXBUILD ?= sphinx-build
 SED_FIX = sed 's|<span class="sr-only">Copy code</span>|<span class="sr-only"></span>|g' \
-          $$(find / -name theme.js | grep sphinxawesome_theme)
+          "$$(python3 -c 'import sphinxawesome_theme, os; print(os.path.join(os.path.dirname(sphinxawesome_theme.__file__), "static", "theme.js"))')"
 
 MANUALS = ca-manual cmt-manual
 PDF_TARGETS = $(addsuffix -pdf,$(MANUALS))
