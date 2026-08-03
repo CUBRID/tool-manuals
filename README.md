@@ -8,6 +8,7 @@ Documentation for CUBRID tools.
 |---|---|
 | `ca-manual` | CUBRID Admin |
 | `cmt-manual` | CUBRID Migration Toolkit |
+| `web-manager-manual` | CUBRID Web Manager (beta) |
 
 ## Prerequisites
 
@@ -24,18 +25,19 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Then build a manual (use `cmt-manual` for the other):
+Then build a manual (each directory builds independently — swap in `cmt-manual` or `web-manager-manual`):
 
 ```bash
 make ca-manual
+make web-manager-manual
 ```
 
-`make html` builds both. The HTML output is written to `<manual>/_build/html/`.
+`make html` builds all manuals. The HTML output is written to `<manual>/_build/html/`.
 
 ### PDF
 
 ```bash
-make ca-manual-pdf     # or: make cmt-manual-pdf
+make ca-manual-pdf              # or: make cmt-manual-pdf / make web-manager-manual-pdf
 ```
 
-`make pdf` builds both. The PDF is written to `<manual>/_build/simplepdf/<Project>.pdf`.
+`make pdf` builds all manuals. The PDF is written to `<manual>/_build/simplepdf/<Project>.pdf`.
