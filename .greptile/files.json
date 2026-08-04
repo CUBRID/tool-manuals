@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "docs/STYLE_GUIDE.ko.md",
+      "description": "CUBRID 도구 매뉴얼 표기 표준 정본(CUBRIDMAN-343). 한국어 33개·영문 34개 표기 규칙, 문자 인코딩 표기 기준, 예외 조건, reStructuredText 작성 규칙을 포함한다. 표기 관련 판단이 갈릴 때 최종 근거로 사용한다.",
+      "scope": ["**/*.rst"]
+    },
+    {
+      "path": "README.md",
+      "description": "저장소 구성과 매뉴얼 디렉터리별 대응 제품(ca-manual=CUBRID Admin, cmt-manual=CUBRID Migration Toolkit), Sphinx 빌드 절차."
+    }
+  ]
+}
