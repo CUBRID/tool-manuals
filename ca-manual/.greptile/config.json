@@ -3,7 +3,7 @@
   "rules": [
     {
       "id": "ca-product-name",
-      "rule": "이 매뉴얼의 제품 명칭 표기는 'CUBRID Admin'으로 통일되어 있다(현재 본문 127건, 다른 변형 0건). 새로 작성하는 문장도 'CUBRID Admin'을 사용한다. 'CUBRID ADMIN', 'CUBRID admin', '큐브리드 어드민', 'CUBRID 관리자 도구', 'CUBRID Administrator' 등 다른 변형이 새로 들어오면 지적한다. 약어는 'CA'이다. 일반명사로서의 '관리자'(사람 역할)와 'DBA'는 그대로 사용한다. 이 불일치를 발견하면 어느 쪽으로 통일할지 결정이 필요하다는 점만 알린다.",
+      "rule": "이 매뉴얼의 제품 명칭 기준 표기는 'CUBRID Admin'이다(저장소 README.md 표기를 기준으로 확정). 새로 작성하거나 수정하는 문장은 'CUBRID Admin'을 사용한다. 'CUBRID ADMIN', 'CUBRID admin', '큐브리드 어드민', 'CUBRID 관리자 도구', 'CUBRID Administrator' 등 다른 변형이 새로 들어오면 지적한다. 약어는 'CA'이다. 일반명사로서의 '관리자'(사람 역할)와 'DBA'는 그대로 사용한다. 현재 본문에는 대문자 'CUBRID ADMIN'이 127건 남아 있으며 이는 전부 금지 표기다. 전수 수정은 별도 일괄 수정 PR로 처리하므로, 이 PR에서 변경되지 않은 줄의 'CUBRID ADMIN'은 지적하지 않는다. 반면 작성자가 'CUBRID ADMIN'이 포함된 줄을 수정했다면 그 줄에 대해서는 'CUBRID Admin'으로 함께 고치도록 지적한다.",
       "scope": ["**/*.rst"],
       "severity": "high"
     },
