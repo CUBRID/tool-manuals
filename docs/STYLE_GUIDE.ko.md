@@ -2,7 +2,9 @@
 
 > 적용 대상: `CUBRID/tool-manuals` 저장소의 모든 `.rst` 문서
 > 근거: [CUBRIDMAN-343](http://jira.cubrid.org/browse/CUBRIDMAN-343)
-> 이 문서는 표기 표준의 **정본**입니다. Greptile 리뷰 규칙(`.greptile/rules.md`)과 내용이 어긋나면 이 문서를 우선합니다.
+> 이 문서는 표기 표준의 **정본**입니다. 표준을 바꿀 때는 이 문서를 먼저 고칩니다.
+> Greptile 봇 입력(`.greptile/config.json`, `.greptile/rules.md`)은 이 표준을 리뷰용으로 옮긴 것입니다.
+> `ca-manual`(CUBRID Admin)과 `cmt-manual`(CUBRID Migration Toolkit)은 대상 제품만 다르고 이 표준을 동일하게 적용합니다.
 
 ---
 
@@ -10,9 +12,9 @@
 
 1. [이 문서를 읽는 이유](#1-이-문서를-읽는-이유)
 2. [모드 구분](#2-모드-구분)
-3. [한국어 표기 규칙 34개](#3-한국어-표기-규칙-34개)
+3. [한국어 표기 규칙](#3-한국어-표기-규칙)
    - [3-1. `query` 번역 판정 순서](#3-1-query-번역-판정-순서)
-4. [영문 표기 규칙 34개](#4-영문-표기-규칙-34개)
+4. [영문 표기 규칙](#4-영문-표기-규칙)
    - [4-1. 영문 축약형 금지](#4-1-영문-축약형-금지)
 5. [문자 인코딩 표기 기준](#5-문자-인코딩-표기-기준)
 6. [표기 규칙 적용 제외 대상](#6-표기-규칙-적용-제외-대상)
@@ -62,7 +64,7 @@ Greptile은 두 유형을 **별도 코멘트로 분리**하도록 설정되어 �
 
 ---
 
-## 3. 한국어 표기 규칙 34개
+## 3. 한국어 표기 규칙
 
 | 번호 | 오류 표기 | 권장 표기 | 모드 | 예외 및 비고 |
 |:---:|:---|:---|:---:|:---|
@@ -152,25 +154,23 @@ Greptile은 두 유형을 **별도 코멘트로 분리**하도록 설정되어 �
 
 첫 등장 시 `슬로우 쿼리(slow query)`로 원어를 병기합니다.
 
-### 실측 근거 (develop 기준)
+### 판정 결과 요약
 
-| 표기 | `cubrid-manual` `ko` | `tool-manuals` |
-|:---|---:|---:|
-| 질의 | 1,475 | 44 |
-| 쿼리 | 260 | 9 |
-| 부질의 | 197 | — |
-| 서브 쿼리 / 서브쿼리 / 하위 질의 | 28 / 9 / 11 | — |
-| **슬로우 쿼리** | **21** | 0 |
-| 슬로우쿼리 | 0 | 0 |
-| 느린 질의 | 1 | 0 |
+| 표기 | 적용 기준 | 판정 |
+|:---|:---:|:---|
+| `슬로우 쿼리` | 1번 | 제품 식별자와 연동되므로 음차와 원어 띄어쓰기를 유지합니다. |
+| `부질의` | 2번 | CUBRID 매뉴얼에서 이미 정착한 순화어이므로 순화어를 씁니다. |
+| `질의` | 3번 | 그 외 일반 명사는 순화합니다. |
 
-`부질의`는 197건 대 48건이므로 2번 기준(정착한 순화어)이 성립합니다.
-`슬로우 쿼리`는 21건 대 0건이므로 붙여쓰기 표기를 표준으로 삼을 근거가 없습니다.
-`tool-manuals`에는 네 표기 모두 0건이므로 5·31·34번은 이 저장소에서 **예방 목적** 규칙입니다.
+`슬로우쿼리`, `느린 질의`, `느린 쿼리`는 모두 `슬로우 쿼리`로 수정합니다.
+`서브 쿼리`, `서브쿼리`, `하위 질의`는 모두 `부질의`로 수정합니다.
+
+> 지적할 때는 세 기준 중 어느 것에 해당하는지 밝힙니다.
+> 그래야 같은 `query`가 문서에서 다르게 번역된 이유를 작성자가 납득할 수 있습니다.
 
 ---
 
-## 4. 영문 표기 규칙 34개
+## 4. 영문 표기 규칙
 
 | 번호 | 오류 표기 | 권장 표기 | 모드 | 예외 및 비고 |
 |:---:|:---|:---|:---:|:---|
@@ -213,19 +213,27 @@ Greptile은 두 유형을 **별도 코멘트로 분리**하도록 설정되어 �
 
 영문 서술 문장에 축약형을 사용하지 않습니다. 매뉴얼은 격식체 기술 문서이므로 원형을 씁니다.
 
-| 축약형 | 원형 | 축약형 | 원형 |
-|:---|:---|:---|:---|
-| can't | cannot | isn't | is not |
-| won't | will not | aren't | are not |
-| don't | do not | wasn't | was not |
-| doesn't | does not | weren't | were not |
-| didn't | did not | hasn't | has not |
-| shouldn't | should not | haven't | have not |
-| wouldn't | would not | hadn't | had not |
-| couldn't | could not | mustn't | must not |
-| it's | it is | that's | that is |
-| there's | there is | let's | let us |
-| you're | you are | they're / we're | they are / we are |
+축약형은 목록으로 외우지 않고 **세 가지 패턴**으로 판정합니다.
+축약형은 형태론적으로 닫힌 집합이므로 세 패턴이 전부를 덮습니다.
+
+| 패턴 | 판정 기준 | 예 |
+|:---:|:---|:---|
+| 1 | `n't`로 끝난다 | `can't`→`cannot`, `doesn't`→`does not`, `weren't`→`were not` |
+| 2 | 아포스트로피 뒤에 `s` `re` `ll` `ve` `d` `m`이 온다 | `it's`→`it is`, `you're`→`you are`, `I'm`→`I am`, `we'll`→`we will`, `I've`→`I have`, `he'd`→`he would` |
+| 3 | `let's` | `let us` |
+
+> 위 예는 **대상 목록이 아닙니다.** 세 패턴에 해당하면 예에 없어도 수정 대상입니다.
+> 목록 방식으로 관리하지 않는 이유는 10절 한계에 있습니다. 규칙 한 개에 항목을 20개 이상 나열하면 뒤쪽 항목이 누락됩니다.
+
+원형이 불규칙한 항목만 따로 확인합니다.
+
+```text
+won't   → will not     (will + not)
+shan't  → shall not    (shall + not)
+can't   → cannot       (한 단어로 붙여 씀)
+```
+
+나머지는 아포스트로피를 기준으로 분리하면 됩니다.
 
 **소유격은 축약형이 아닙니다.** 아포스트로피가 있어도 수정하지 않습니다.
 
@@ -238,7 +246,7 @@ it's not supported     (X) it is not supported
 
 제외 대상은 6절과 같습니다. 추가로 외부 문서·표준 문서에서 그대로 인용한 문장도 제외합니다.
 
-> `develop` 기준 현재 본문의 축약형은 **0건**입니다. 이 규칙은 유입 방지 목적이며 일괄 수정 대상이 없습니다.
+> 이 규칙은 축약형이 새로 유입되는 것을 막는 것이 목적입니다. 따라서 한 건만 있어도 지적 대상입니다.
 
 ---
 
@@ -304,6 +312,43 @@ EUC-KR 인코딩을 사용하려면 ``--db-locale=ko_KR.euckr`` 옵션을 지정
 | 제품 명칭 | 정식 제품명과 상표. `CUBRID Admin`, `CUBRID Migration Toolkit` |
 | UI 라벨 | 제품 화면에 표시되는 버튼·탭·메뉴·필드 라벨의 인용 |
 
+위 항목은 제품 동작과 직결됩니다. 표기 규칙을 적용하면 문서가 실제 제품과 어긋납니다.
+
+### 구체 예
+
+두 매뉴얼에서 실제로 판정이 필요한 문자열입니다.
+
+| 분류 | 예 |
+|:---|:---|
+| 설정 파일 파라미터 | `data_buffer_size`, `max_clients`, `ha_mode`, `error_log`, `SERVICE`, `BROKER_PORT` |
+| 유틸리티와 옵션 | `cubrid service`, `cubrid server`, `cubrid backupdb`, `cubrid restoredb`, `cubrid checkdb`, `cubrid statdump`, `cubrid applyinfo`, `cubrid_replay`, `broker_log_top`, `csql`, `migration.sh`, `migration.bat` |
+| 환경 변수 | `CUBRID`, `CUBRID_DATABASES`, `CUBRID_MSG_LANG`, `CUBRID_TMP`, `LD_LIBRARY_PATH`, `PATH` |
+| 로케일·인코딩 옵션값 | `ko_KR.euckr`, `ko_KR.utf8`, `en_US.iso88591` |
+| 출력 지표명 | `Num_data_page_fetches`, `Num_query_selects`, `LOCK ESCALATION` |
+| 시스템 카탈로그 | `db_class`, `db_attribute`, `db_user`, `db_index` |
+| 데이터 타입명 | Oracle `NUMBER`·`VARCHAR2`·`CLOB`·`DATE`, MySQL `TINYINT`·`DATETIME`·`TEXT`·`ENUM`, MSSQL `NVARCHAR`·`MONEY`·`UNIQUEIDENTIFIER`, CUBRID `BIGINT`·`STRING`·`BLOB`·`DATETIMETZ` |
+| 접속 정보 | `com.mysql.cj.jdbc.Driver`, `jdbc:cubrid:localhost:33000:demodb:::`, 포트 번호 |
+| 설정·스크립트 | 마이그레이션 설정 XML/JSON의 요소명과 속성명 |
+
+로케일·인코딩 옵션값은 5절의 예외를 함께 확인합니다. 설명 문장의 `euckr`은 `EUC-KR`로 수정하지만 옵션값 자리의 `euckr`은 유지합니다.
+
+### 자주 발생하는 실수
+
+제외 대상을 잘못 판정한 사례입니다. 수정하기 전에 이 표를 확인합니다.
+
+| 대상 | 잘못된 처리 | 올바른 처리 |
+|:---|:---|:---|
+| `error_log` 파라미터 | `오류_log`로 치환 | 파라미터명이므로 원문 유지 |
+| `ko_KR.euckr` 옵션값 | `ko_KR.EUC-KR`로 치환 | 옵션값이므로 소문자 유지(5절) |
+| 설명 문장의 `euckr` | 원문 유지 | `EUC-KR`로 수정(5절) |
+| `statdump` 출력 지표명 | 한글로 치환 | 출력 원문이므로 유지 |
+| `$CUBRID`, 디렉터리 경로 | 표기 규칙 적용 | 경로이므로 유지 |
+| 타입 매핑 표의 셀 값 | 18번 `datatype` → `data type` 적용 | 각 제품 공식 표기이므로 유지 |
+| 화면 라벨의 `컬럼` | `칼럼`으로 치환 | UI 라벨이므로 유지 |
+| 서술 문장의 `컬럼` | 원문 유지 | `칼럼`으로 수정(2번) |
+| 이미지 파일명 변경 | 참조 갱신 누락 | 모든 참조 지시자를 함께 갱신 |
+| 접속 URL의 대소문자 | 표기 규칙 적용 | 접속 정보이므로 유지 |
+
 ### UI 라벨 처리 원칙
 
 제품 화면 문자열과 표준 표기가 어긋날 때의 처리입니다.
@@ -335,12 +380,7 @@ UI 라벨을 표준 표기로 바꾸면 **문서와 화면이 어긋나 고객�
 
 ### 문체
 
-이 저장소의 기준 문체는 **`~한다`체(평서체)** 입니다.
-
-| 디렉터리 | 한다체 | 합니다체 |
-|:---|:---:|:---:|
-| `ca-manual` | 513 | 5 |
-| `cmt-manual` | 726 | 2 |
+이 저장소의 기준 문체는 **`~한다`체(평서체)** 입니다. 두 매뉴얼 모두 이 문체를 씁니다.
 
 새로 추가·수정하는 문장은 `~한다`, `~된다`, `~있다`로 종결합니다.
 표·그림 캡션, 목록 항목의 명사형 종결, 오류 메시지 원문 인용은 예외입니다.
@@ -349,14 +389,55 @@ UI 라벨을 표준 표기로 바꾸면 **문서와 화면이 어긋나 고객�
 
 ### 제품 명칭
 
-| 제품 | 본문 표기 | 약어 | 현재 본문 |
-|:---|:---|:---|:---:|
-| CUBRID Admin | `CUBRID Admin` | `CA` | 127건 |
-| CUBRID Migration Toolkit | `CUBRID Migration Toolkit` | `CMT` | 8건 / CMT 76건 |
+제품 명칭은 매뉴얼마다 다른 유일한 항목입니다. Greptile 규칙도 이 항목만 디렉터리 범위로 구분되어 있습니다.
 
+| 대상 디렉터리 | 제품 | 기준 표기 | 약어 |
+|:---|:---|:---|:---|
+| `ca-manual` | CUBRID Admin | `CUBRID Admin` | `CA` |
+| `cmt-manual` | CUBRID Migration Toolkit | `CUBRID Migration Toolkit` | `CMT` |
 
-`마이그레이션 툴킷`(현재 2건)은 제품 정식 명칭이 아니므로 `CUBRID Migration Toolkit`으로 수정합니다.
-공통 규칙 18번 `툴킷 → 도구 모음`을 제품 명칭에 적용하지 않습니다.
+| 대상 디렉터리 | 금지 표기 |
+|:---|:---|
+| `ca-manual` | `CUBRID ADMIN`, `CUBRID admin`, `큐브리드 어드민`, `CUBRID 관리자 도구`, `CUBRID Administrator` |
+| `cmt-manual` | `마이그레이션 툴킷`, `CUBRID 마이그레이션 도구 모음`, `큐브리드 마이그레이션 툴`, `CUBRID Migration Tool` |
+
+`CUBRID Admin`을 기준으로 삼은 근거는 저장소 `README.md`의 표기입니다.
+일반명사로서의 `관리자`(사람 역할)와 `DBA`는 그대로 씁니다.
+
+공통 규칙 18번 `툴킷 → 도구 모음`은 `CUBRID Migration Toolkit`과 그 한글 병기에 적용하지 않습니다.
+
+> 본문에는 아직 금지 표기가 남아 있습니다. 전수 수정은 별도 일괄 수정 PR로 처리합니다.
+> 따라서 변경하지 않은 줄은 리뷰 지적 대상이 아닙니다.
+> 다만 금지 표기가 포함된 줄을 수정했다면 그 줄의 제품 명칭도 함께 고칩니다.
+
+### 절차 문서 안전성
+
+데이터 손실이나 되돌릴 수 없는 변경을 유발하는 절차는 사전 조건과 경고를 함께 적습니다.
+경고 없이 명령어나 화면 조작 순서만 적으면 리뷰에서 지적됩니다.
+
+| 절차 | 반드시 함께 적을 것 |
+|:---|:---|
+| 백업·복구(`backupdb`, `restoredb`) | 복구 가능 시점, 아카이브 로그 보존 여부 |
+| 데이터베이스 삭제(`deletedb`) | 되돌릴 수 없음, 사전 백업 권고 |
+| HA 전환 | 전환 중 서비스 영향, 복제 지연 확인 |
+| 볼륨 추가·확장 | 디스크 여유 공간, 서버 재시작 필요 여부 |
+| 마이그레이션 대상 스키마 덮어쓰기 | 기존 데이터 유실 가능성, 대상 DB 사전 백업 |
+
+`.. warning::` 또는 `.. note::` 지시자로 표시합니다. 금지 표현과 대안은 8절을 참조하십시오.
+
+### 단계 번호와 이미지 정합성
+
+두 매뉴얼 모두 화면 캡처와 절차 설명이 짝을 이룹니다.
+
+| 확인 항목 | 기준 |
+|:---|:---|
+| 단계 번호 | 문서 순서와 실제 조작 순서가 일치 |
+| 이미지 대응 | 각 단계가 참조하는 화면 캡처가 그 단계의 화면 |
+| 마법사 흐름 | `Next`·`Back` 흐름이 문서 순서와 일치 |
+| 타입 매핑 | 표의 원본·대상 타입 대응이 본문 설명과 일치 |
+| 상호 참조 | `:ref:` 타깃이 실제 존재하는 라벨 |
+
+절차 문장을 추가·삭제·재배열했다면 참조하는 이미지와 단계 번호를 함께 고칩니다.
 
 ### 이미지 파일명 변경 시
 
@@ -415,12 +496,11 @@ grep -rnE "\b(can|won|don|doesn|didn|isn|aren|wasn|weren|hasn|haven|hadn|shouldn
 ```
 
 > 축약형 검색식은 `'t`, `'s`, `'re` 앞 단어를 명시해 소유격(`user's`, `Oracle's`)이 걸리지 않게 했습니다.
-> `develop` 기준 검출 0건이므로 결과가 나오면 이번 PR에서 새로 들어온 것입니다.
+> 소유격이 걸렸다면 수정 대상이 아닙니다.
 
 검색 결과가 나오면 6절의 **제외 대상인지 먼저 판정**한 뒤 수정합니다.
 
-> `develop` 브랜치 기준 한국어 AUTO 항목은 119건 검출됩니다(영문은 0건).
-> 이 중 상당수는 UI 라벨이므로 **검출 건수와 수정 건수는 다릅니다.**
+> 검출 결과에는 UI 라벨과 옵션값이 섞여 있으므로 **검출 건수와 수정 건수는 다릅니다.**
 > 자신이 변경한 줄만 책임 범위입니다. 기존 오류의 전수 수정은 별도 표준화 작업으로 처리합니다.
 
 ### 1-1단계 — UI 라벨 오검출 걸러내기
@@ -491,19 +571,24 @@ PR을 올리면 이 표준을 근거로 자동 리뷰 코멘트가 달립니다.
 
 ```
 .greptile/
-├── config.json                  공통 설정 + 공통 표기 규칙
-├── rules.md                     공통 표기 기준
-└── files.json                   이 문서를 리뷰 근거로 참조
-ca-manual/.greptile/
-├── config.json                  CA 전용 규칙 + 제외 대상
-└── rules.md                     CA 전용 기준
-cmt-manual/.greptile/
-├── config.json                  CMT 전용 규칙 + 제외 대상
-└── rules.md                     CMT 전용 기준
+├── config.json      봇 판정 로직. 규칙 문장, 제외 대상, 코멘트 형식
+├── rules.md         봇 컨텍스트. 항목표와 판정 원칙
+└── files.json       이 문서를 리뷰 근거로 읽도록 지시
+docs/
+└── STYLE_GUIDE.ko.md   사람이 읽는 정본
 ```
 
-상위 디렉터리 규칙과 하위 디렉터리 규칙은 **덮어쓰지 않고 합쳐집니다.**
-`ca-manual/`의 파일을 리뷰할 때는 루트 규칙 + `ca-manual` 규칙이 모두 적용됩니다.
+설정은 저장소 루트 한 곳에서만 관리합니다.
+`ca-manual`과 `cmt-manual`은 대상 제품만 다르고 표기 표준이 동일하기 때문입니다.
+
+매뉴얼별로 달라지는 항목은 규칙의 적용 범위(`scope`)로 구분합니다.
+현재 이렇게 구분된 규칙은 제품 명칭 두 개(`ca-product-name`, `cmt-product-name`)뿐입니다.
+
+| 규칙 | 적용 범위 |
+|:---|:---|
+| `ca-product-name` | `ca-manual/**/*.rst` |
+| `cmt-product-name` | `cmt-manual/**/*.rst` |
+| 그 외 전체 | `**/*.rst` |
 
 ### 코멘트 형식
 
@@ -537,8 +622,8 @@ TOBE: 사용자 권한을 확인한다.
 @greptileai 이 부분은 cubrid.conf 파라미터명이라 원문을 유지해야 합니다.
 ```
 
-봇이 같은 오탐을 반복하면 해당 디렉터리의 `.greptile/config.json`
-`instructions`에 제외 조건을 추가하거나, `disabledRules`에 규칙 ID를 넣습니다.
+봇이 같은 오탐을 반복하면 `.greptile/config.json`의 `instructions` 제외 대상 목록에 조건을 추가하거나,
+`disabledRules`에 규칙 ID를 넣습니다. 11절 절차를 따릅니다.
 
 ### 재리뷰
 
@@ -558,7 +643,13 @@ Greptile은 **PR에서 변경된 부분**을 검토합니다.
 검증 결과(PR #16) 실제로 다음 한계가 확인되었습니다.
 
 - 한 규칙에 20개 이상의 치환 항목을 나열하면 **뒤쪽 항목이 누락**될 수 있습니다.
-  축약형을 별도 규칙(`en-contraction-guard`)으로 분리한 이유입니다.
+  따라서 규칙 하나의 치환 항목은 **20개 미만**으로 유지합니다.
+  넘으면 두 가지 방법으로 해소합니다.
+  - **분할**: 항목을 성질별로 나눠 규칙 두 개로 만듭니다.
+    한국어 AUTO 항목을 `ko-notation-auto`(외래어 표기)와 `ko-term-unify-auto`(용어 통일·띄어쓰기)로 나눈 이유입니다.
+  - **패턴화**: 항목을 열거하지 않고 판정 패턴으로 서술합니다.
+    축약형을 `en-contraction-guard`에서 세 패턴으로 서술한 이유입니다(4-1절).
+    열거 방식은 목록에 없는 항목을 놓치므로 닫힌 집합에는 패턴화가 낫습니다.
 - `severity` 값은 배지 등급으로 전달되지 않습니다. 코멘트 제목으로 구분합니다.
 - 여러 항목을 묶어 지적할 때 그 범위 안의 일부 항목이 빠질 수 있습니다.
 
@@ -572,38 +663,42 @@ Greptile은 **PR에서 변경된 부분**을 검토합니다.
 
 1. Jira에 이슈를 등록하고 변경 근거를 남깁니다(국립국어원 기준, 제품 UI 변경, 상표 정책 등).
 2. 이 문서(`docs/STYLE_GUIDE.ko.md`)를 먼저 수정합니다.
-3. `.greptile/rules.md`와 관련 `config.json`의 규칙 문장을 동일하게 반영합니다.
-4. 기존 문서의 전수 수정이 필요한지 판단하고, 필요하면 별도 PR로 분리합니다.
-5. 하나의 PR에서 3~4를 함께 처리하지 않습니다.
+3. `.greptile/rules.md`와 `.greptile/config.json`의 규칙 문장에 반영합니다. 두 파일 모두 저장소 루트에 있습니다.
+4. 규칙 문장에 항목을 추가했다면 **그 규칙의 치환 항목이 20개 미만인지 확인**합니다.
+   20개 이상이면 규칙을 분할하거나 패턴화합니다(10절 한계 참조).
+5. 기존 문서의 전수 수정이 필요한지 판단하고, 필요하면 별도 PR로 분리합니다.
+6. 하나의 PR에서 3~5를 함께 처리하지 않습니다.
 
 ### 규칙 ID 목록
 
 `disabledRules`로 예외 처리할 때 사용하는 ID입니다.
 
-| 위치 | 규칙 ID | 심각도 |
-|:---|:---|:---:|
-| 루트 | `ko-notation-auto` | high |
-| 루트 | `ko-notation-manual` | low |
-| 루트 | `en-notation-auto` | high |
-| 루트 | `en-notation-word` | high |
-| 루트 | `en-contraction-guard` | high |
-| 루트 | `en-notation-manual` | low |
-| 루트 | `encoding-notation-context` | medium |
-| 루트 | `ko-honorific-consistency` | low |
-| 루트 | `ui-label-verbatim` | medium |
-| ca-manual | `ca-product-name` | high |
-| ca-manual | `ca-ui-menu-path` | high |
-| ca-manual | `ca-config-literal-guard` | medium |
-| ca-manual | `ca-procedure-safety` | medium |
-| cmt-manual | `cmt-product-name` | high |
-| cmt-manual | `cmt-ui-label-quoting` | medium |
-| cmt-manual | `cmt-typemap-literal-guard` | medium |
-| cmt-manual | `cmt-image-step-sync` | medium |
+모든 규칙은 `.greptile/config.json` 한 파일에 있습니다.
 
-특정 디렉터리에서만 규칙을 끄려면 그 디렉터리의 `.greptile/config.json`에 다음을 추가합니다.
+| 규칙 ID | 심각도 | 적용 범위 | 담당 |
+|:---|:---:|:---|:---|
+| `ko-notation-auto` | high | 전체 | 한국어 외래어 표기 오류 |
+| `ko-term-unify-auto` | high | 전체 | 한국어 용어 통일·띄어쓰기 |
+| `ko-notation-manual` | low | 전체 | 한국어 문맥 판단 항목 |
+| `en-notation-auto` | high | 전체 | 영문 표기 오류 |
+| `en-notation-word` | high | 전체 | 영문 단어 경계 판단 항목 |
+| `en-contraction-guard` | high | 전체 | 영문 축약형 |
+| `en-notation-manual` | low | 전체 | 영문 문맥 판단 항목 |
+| `encoding-notation-context` | medium | 전체 | 문자 인코딩 표기(5절) |
+| `ko-honorific-consistency` | low | 전체 | 문체 통일 |
+| `ui-label-verbatim` | medium | 전체 | UI 라벨 원문 유지 판정 |
+| `doc-procedure-safety` | medium | 전체 | 절차 문서 안전성 |
+| `doc-image-step-sync` | medium | 전체 | 단계 번호·이미지 정합성 |
+| `ca-product-name` | high | `ca-manual` | CUBRID Admin 명칭 |
+| `cmt-product-name` | high | `cmt-manual` | CUBRID Migration Toolkit 명칭 |
+
+규칙을 끄려면 `.greptile/config.json`의 `disabledRules`에 ID를 넣습니다.
 
 ```json
 {
   "disabledRules": ["en-notation-word"]
 }
 ```
+
+특정 디렉터리에서만 끄려면 그 디렉터리에 `.greptile/config.json`을 새로 만들어야 합니다.
+다만 그 순간 규칙이 두 곳으로 갈라지므로, 먼저 규칙 문장의 제외 조건으로 해결할 수 있는지 검토합니다.
