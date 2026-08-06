@@ -2,7 +2,7 @@
   "files": [
     {
       "path": "docs/STYLE_GUIDE.ko.md",
-      "description": "CUBRID 도구 매뉴얼 표기 표준 정본(CUBRIDMAN-343). 한국어·영문 표기 규칙 항목표, 문자 인코딩 표기 기준, 제외 조건, 제품별 명칭 기준, reStructuredText 작성 규칙을 포함한다. 표기 관련 판단이 갈릴 때 최종 근거로 사용한다. ca-manual과 cmt-manual에 동일하게 적용된다.",
+      "description": "CUBRID 도구 매뉴얼 표기 표준 원본(CUBRIDMAN-343). 한국어·영문 표기 규칙 항목표, 문자 인코딩 표기 기준, 제외 조건, 제품별 명칭 기준, reStructuredText 작성 규칙을 포함한다. 표기 관련 판단이 갈릴 때 최종 근거로 사용한다. ca-manual과 cmt-manual에 동일하게 적용된다.",
       "scope": ["**/*.rst"]
     },
     {

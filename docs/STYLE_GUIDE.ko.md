@@ -2,8 +2,8 @@
 
 > 적용 대상: `CUBRID/tool-manuals` 저장소의 모든 `.rst` 문서
 > 근거: [CUBRIDMAN-343](http://jira.cubrid.org/browse/CUBRIDMAN-343)
-> 이 문서는 표기 표준의 **정본**입니다. 표준을 바꿀 때는 이 문서를 먼저 고칩니다.
-> Greptile 봇 입력(`.greptile/config.json`, `.greptile/rules.md`)은 이 표준을 리뷰용으로 옮긴 것입니다.
+> 이 문서는 표기 표준의 **원본**이며 작성자가 참고하는 문서입니다. 표준을 바꿀 때는 이 문서를 먼저 고칩니다.
+> Greptile 봇 입력(`.greptile/config.json`, `.greptile/rules.md`)은 이 표준을 리뷰용으로 옮긴 사본입니다.
 > `ca-manual`(CUBRID Admin)과 `cmt-manual`(CUBRID Migration Toolkit)은 대상 제품만 다르고 이 표준을 동일하게 적용합니다.
 
 ---
@@ -571,11 +571,11 @@ PR을 올리면 이 표준을 근거로 자동 리뷰 코멘트가 달립니다.
 
 ```
 .greptile/
-├── config.json      봇 판정 로직. 규칙 문장, 제외 대상, 코멘트 형식
-├── rules.md         봇 컨텍스트. 항목표와 판정 원칙
-└── files.json       이 문서를 리뷰 근거로 읽도록 지시
+├── config.json      봇이 판정에 쓰도록 규칙화한 사본
+├── rules.md         봇에 주입하는 컨텍스트 사본
+└── files.json       봇이 원본을 읽도록 경로를 지시
 docs/
-└── STYLE_GUIDE.ko.md   사람이 읽는 정본
+└── STYLE_GUIDE.ko.md   원본. 표준 근거이며 작성자 참고용 문서
 ```
 
 설정은 저장소 루트 한 곳에서만 관리합니다.
