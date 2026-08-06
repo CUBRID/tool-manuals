@@ -94,6 +94,7 @@
       "id": "ca-product-name",
       "rule": "ca-manual의 제품 명칭 기준 표기는 'CUBRID Admin'이다. 저장소 README.md가 이 표기를 쓰므로 기준으로 확정했다. 새로 작성하거나 수정하는 문장은 'CUBRID Admin'을 사용한다. 'CUBRID ADMIN', 'CUBRID admin', '큐브리드 어드민', 'CUBRID 관리자 도구', 'CUBRID Administrator' 등 다른 변형이 들어오면 지적한다. 약어는 'CA'이다. 일반명사로서의 '관리자'(사람 역할)와 'DBA'는 그대로 사용한다. 본문에는 아직 금지 표기가 남아 있으나 전수 수정은 별도 일괄 수정 PR로 처리한다. 따라서 이 PR에서 변경되지 않은 줄의 금지 표기는 지적하지 않는다. 반면 작성자가 금지 표기가 포함된 줄을 수정했다면 그 줄에 대해서는 'CUBRID Admin'으로 함께 고치도록 지적한다.",
       "scope": [
+        "ca-manual/*.rst",
         "ca-manual/**/*.rst"
       ],
       "severity": "high"
@@ -102,6 +103,7 @@
       "id": "cmt-product-name",
       "rule": "cmt-manual의 제품 정식 명칭은 'CUBRID Migration Toolkit'이며 약어는 'CMT'이다. 공통 규칙 ko-notation-manual의 '툴킷 → 도구 모음' 항목을 이 제품 명칭과 그 한글 병기에 적용하지 않는다. '마이그레이션 툴킷', 'CUBRID 마이그레이션 도구 모음', '큐브리드 마이그레이션 툴', 'CUBRID Migration Tool' 같은 임의 표기는 지적한다.",
       "scope": [
+        "cmt-manual/*.rst",
         "cmt-manual/**/*.rst"
       ],
       "severity": "high"

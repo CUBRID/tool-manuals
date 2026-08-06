@@ -586,9 +586,14 @@ docs/
 
 | 규칙 | 적용 범위 |
 |:---|:---|
-| `ca-product-name` | `ca-manual/**/*.rst` |
-| `cmt-product-name` | `cmt-manual/**/*.rst` |
+| `ca-product-name` | `ca-manual/*.rst`, `ca-manual/**/*.rst` |
+| `cmt-product-name` | `cmt-manual/*.rst`, `cmt-manual/**/*.rst` |
 | 그 외 전체 | `**/*.rst` |
+
+두 매뉴얼의 `.rst` 파일은 현재 모두 매뉴얼 디렉터리 바로 아래에 있습니다.
+글로브의 `**` 가 디렉터리 0개를 포함하는지는 구현에 따라 다르므로,
+직하위 패턴과 중첩 패턴을 함께 지정해 어느 쪽이든 누락되지 않게 합니다.
+하위 디렉터리를 새로 만들어도 두 번째 패턴이 받습니다.
 
 ### 코멘트 형식
 
