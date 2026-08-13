@@ -10,7 +10,7 @@ CMT란
 
 **CUBRID Migration Toolkit(이하 CMT)**\은 Oracle, MySQL, MariaDB, MSSQL, Informix, Tibero, CUBRID 데이터베이스의 스키마와 데이터를 CUBRID 데이터베이스로 마이그레이션하기 위한 도구이다.
 
-CMT는 원본 데이터베이스의 객체(Table, View, Index, Serial(Sequence), Synonym, Grant, Procedure(PL/CSQL), Function(PL/CSQL) 등)와 데이터를 자동으로 추출하여 CUBRID 호환 형식으로 변환한다. 변환 과정에서 데이터 타입 매핑, 컬럼 속성, 객체 이름 등을 사용자가 직접 조정할 수 있다.
+CMT는 원본 데이터베이스의 객체(Table, View, Index, Serial(Sequence), Synonym, Grant, Procedure(PL/CSQL), Function(PL/CSQL) 등)와 데이터를 자동으로 추출하여 CUBRID 호환 형식으로 변환한다. 변환 과정에서 데이터 타입 매핑, 칼럼 속성, 객체 이름 등을 사용자가 직접 조정할 수 있다.
 
 CMT는 다음 두 가지 모드로 실행할 수 있다.
 
