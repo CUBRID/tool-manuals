@@ -13,9 +13,13 @@
 
 툴바 **+ Add** 를 클릭하면 **New Connection** 모달이 열린다. 섹션 구성:
 
-* **Identity** — Alias, Group 드롭다운 (기본값: "No group")
-* **Host** — IP Address / Domain, Port (기본값: 8001)
-* **Credentials** — Username, Password
+.. note::
+
+    ``*`` 표시된 항목은 필수 입력 항목입니다.
+
+* **Identity** — Alias(별칭) \*, Group 드롭다운 (기본값: "No group", 선택 입력)
+* **Host** — IP Address / Domain(주소) \*, Port(포트) \* (기본값: 8001)
+* **Credentials** — Username(사용자 이름) \*, Password(비밀번호) \*
 
 하단 버튼: **Cancel** / **Save Changes** (로그인 없이 저장만) / **Test Connection & Save** (연결 확인 후 즉시 로그인까지).
 
@@ -25,7 +29,12 @@
 호스트 수정
 ===========
 
-우클릭 → **Edit Host** 를 선택하면 **Modify Host** 모달이 열린다. Credentials에 **New Password** (비워두면 기존 비밀번호 유지)가 있다.
+우클릭 → **Edit Host** 를 선택하면 **Modify Host** 모달이 열린다.
+
+.. note::
+
+    ``*`` 표시된 항목은 필수 입력 항목입니다. Alias(별칭) \*, IP Address / Domain(주소) \*, Port(포트) \*,
+    Username(사용자 이름) \* 는 필수이다. Credentials의 **New Password** (비워두면 기존 비밀번호 유지)는 선택 입력이다.
 
 .. warning::
 
@@ -41,7 +50,8 @@
 그룹 생성 / 이름 변경
 =====================
 
-툴바 **New Group** 또는 그룹 우클릭 → **Rename Group** 을 선택한다. 필드는 **Group Name** 하나이다.
+툴바 **New Group** 또는 그룹 우클릭 → **Rename Group** 을 선택한다. 필드는 **Group Name(그룹 이름)** \* 하나이며, 필수 입력 항목이다
+(비워두고 저장하면 "그룹 이름을 입력하세요." 오류가 표시된다).
 
 그룹 삭제
 =========
@@ -69,6 +79,12 @@ CMS 사용자 관리
 
 섹션: **System administrator**, **Management users** (각 행에 DB creation authority / Broker authority / Status monitor authority가 표시된다).
 
+.. note::
+
+    ``*`` 표시된 항목은 필수 입력 항목입니다. **Add User** 모달에서 Login ID(로그인 ID) \* 는 항상 필수이며,
+    Password(비밀번호) \* 는 신규 사용자를 추가할 때만 필수이다. 이미 있는 사용자를 수정할 때는 비밀번호를 비워두면
+    기존 값이 유지되지만, 비밀번호를 입력했다면 Password Confirm(비밀번호 확인) \* 도 함께 입력해야 한다.
+
 * **Add User** 로 로그인 ID/비밀번호와 권한(각각 none/admin, none/monitor/admin)을 설정해 추가한다.
 * 행에 마우스를 올리면 수정/삭제 아이콘이 나타난다. 기본 admin 계정은 삭제할 수 없다.
 
@@ -76,6 +92,7 @@ CMS 사용자 관리
 =======================
 
 로그인된 호스트 우클릭 → **Change Password** 를 선택하면 **Change Manager Passcode** 모달이 열린다.
+필드: New Passcode(새 암호) \*, Verify New Passcode(암호 확인) \* — 둘 다 필수 입력 항목이며 서로 일치해야 한다.
 
 .. warning::
 

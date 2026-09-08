@@ -8,46 +8,21 @@
 배포 방식
 =========
 
-두 가지 방식 중 하나를 선택한다.
+배포용 실행파일은 직접 빌드하지 않고, FTP 서버에서 다운로드하여 사용한다.
 
-방법 A — Node.js 직접 실행
---------------------------
-
-.. code-block:: bash
-
-    npm run build:server
-    # → dist/apps/api-server/main.js + dist/apps/api-server/public/ 생성
-
-배포 서버에서 ``cwm.conf`` 를 설정한 뒤 실행한다.
-
-.. code-block:: bash
-
-    node dist/apps/api-server/main.js
-
-방법 B — 단일 실행파일 패키징 (권장)
-------------------------------------
-
-Node.js 설치 없이 실행 가능한 실행파일로 패키징한다.
-
-.. code-block:: bash
-
-    npm run package:server           # 전 플랫폼 동시
-    npm run package:server:linux     # Linux용
-    npm run package:server:win       # Windows용
-    npm run package:server:mac       # macOS용
-
-결과물은 ``dist/executables/`` 아래에 생성된다.
+#. FTP 서버(TODO: 주소 기입)에 접속하여 대상 플랫폼용 실행파일을 내려받는다.
+#. 압축을 해제하면 다음과 같은 구성이다.
 
 .. code-block:: text
 
-    dist/executables/
+    cubrid-web-manager/
       ├── cubrid-web-manager-linux          # Linux 실행파일 (Node.js + 프론트엔드 내장)
       ├── cubrid-web-manager-macos          # macOS 실행파일
       ├── cubrid-web-manager.exe            # Windows 실행파일
       └── conf/
           └── cwm.conf.sample                # 설정 파일 샘플 → cwm.conf로 복사 후 편집
 
-업데이트할 때는 실행파일만 교체하면 되고, ``conf/`` 는 건드리지 않는다.
+업데이트할 때는 실행파일만 새로 받아 교체하면 되고, ``conf/`` 는 건드리지 않는다.
 
 cwm.conf 설정
 =============

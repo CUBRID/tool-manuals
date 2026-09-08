@@ -12,13 +12,14 @@ CUBRID Web Manager는 CUBRID Admin(CA)을 계승하는 차세대 CUBRID 데이�
     install.rst
     access.rst
     auth.rst
-    navigation.rst
     host.rst
+    navigation.rst
     database.rst
     backup.rst
     automation.rst
     dashboard.rst
     db_user.rst
     broker.rst
+    logs.rst
     server_dashboard.rst
     known_issues.rst

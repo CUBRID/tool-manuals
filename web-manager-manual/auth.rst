@@ -7,7 +7,11 @@
 
 .. image:: /images/login.png
 
-필드: **Username**, **Password** (옆 눈 모양 아이콘으로 표시/숨김 토글). 우측 상단에 언어(한/영)와 다크모드 토글 버튼이 있다.
+.. note::
+
+    ``*`` 표시된 항목은 필수 입력 항목입니다.
+
+필드: **Username(사용자 이름)** \*, **Password(비밀번호)** \* (옆 눈 모양 아이콘으로 표시/숨김 토글). 우측 상단에 언어(한/영)와 다크모드 토글 버튼이 있다.
 
 #. 아무것도 채우지 않고 Login을 누르면 "Username ... required" / "Password ... required" 인라인 오류가 표시된다.
 #. 잘못된 정보로 로그인하면 **Authentication Failed** 오류 배너가 뜨고 로그인 페이지에 그대로 남는다.
@@ -19,7 +23,11 @@
 
 .. image:: /images/register.png
 
-필드: **Username**, **Password** (4단계 강도 표시: Weak/Average/Good/Strong), **Password Confirm**.
+.. note::
+
+    ``*`` 표시된 항목은 필수 입력 항목입니다.
+
+필드: **Username(사용자 이름)** \*, **Password(비밀번호)** \* (4단계 강도 표시: Weak/Average/Good/Strong), **Password Confirm(비밀번호 확인)** \*.
 
 * 비밀번호 규칙: 최소 8자, 영문자와 숫자를 각각 1개 이상 포함해야 한다.
 * Username은 최소 3자 이상이어야 한다.

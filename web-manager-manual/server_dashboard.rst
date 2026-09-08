@@ -24,8 +24,21 @@ HA 필터(All/Master/Slave/Replica)를 확인할 수 있다.
 Cubrid Config 편집
 ===================
 
-상단 메뉴 **Host Service Management** → **Config Param** → **Edit Cubrid Config** 를 선택한다.
+상단 메뉴 **Host Service Management** → **Edit Config Files** → **Edit Cubrid Config** 를 선택한다.
+cubrid.conf를 대상으로 한다.
 
 .. warning::
 
     저장 시 문법 검사 없이 즉시 반영되니 신중하게 사용한다.
+
+CM Config 편집
+===================
+
+상단 메뉴 **Host Service Management** → **Edit Config Files** → **Edit CM Config** 를 선택한다.
+cm.conf(CMS 자체 설정 파일)를 대상으로 하며, 편집기 화면 구성과 저장 방식은 Cubrid Config 편집과 동일하다.
+
+.. warning::
+
+    저장 시 문법 검사 없이 즉시 반영되니 신중하게 사용한다.
+
+Broker Config 편집은 :doc:`broker` 문서를 참고한다 (브로커 탭의 "ALL BROKERS" 메뉴에서 연다).
