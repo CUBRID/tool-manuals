@@ -29,6 +29,19 @@ Delete Database가 있다.
     information/Param Dump/Plan Dump), Properties까지 — 예외 없이 로그인 상태를 먼저 요구하며, 로그인
     안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
 
+HA 상태 표시
+============
+
+.. image:: /images/database-ha-status.png
+
+호스트가 HA로 구성되어 있고 해당 데이터베이스가 ``cubrid_ha.conf``\ 의 ``ha_db_list``\ 에 있으면, 데이터베이스
+이름 옆에 **HA** 배지가 표시된다. 이 배지 옆에는 해당 데이터베이스의 실시간 복제 상태 배지가 하나 더
+붙는다: **active** / **standby** / **to-be-active** / **to-be-standby** / **maintenance** / **dead** /
+**idle** 중 하나이며, CUBRID 엔진의 ``HA_SERVER_STATE``\ 를 그대로 표시한 것이다 (마스터/슬레이브/레플리카
+같은 노드 단위 역할과는 별개로, 이 데이터베이스 서버 프로세스 자체의 복제 상태를 뜻한다). 두 배지 모두
+호스트의 HA 하트비트 데이터가 있어야 표시되며, 이 데이터는 HA로 알려진 호스트에 접속하면 자동으로
+조회된다. Server Dashboard의 Databases 목록에도 동일한 배지가 표시된다.
+
 데이터베이스 생성
 ==================
 
