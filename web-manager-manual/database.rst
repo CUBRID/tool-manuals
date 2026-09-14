@@ -42,6 +42,61 @@ HA 상태 표시
 호스트의 HA 하트비트 데이터가 있어야 표시되며, 이 데이터는 HA로 알려진 호스트에 접속하면 자동으로
 조회된다. Server Dashboard의 Databases 목록에도 동일한 배지가 표시된다.
 
+공간 모니터 (Space)
+====================
+
+.. image:: /images/database-space-monitor.png
+
+데이터베이스 노드 하위의 **Space** 를 더블클릭하면 데이터베이스 공간 모니터 탭이 열린다. 상단에 데이터베이스 이름,
+사용/전체 용량, 여유 공간, 사용률(페이지 크기·로그 페이지 크기 포함)이 요약되고, 아래에 세 개의 표와 도넛 차트가 나온다.
+
+* **볼륨 분류(Volume Categorization)** — 유형(Type)/용도(Purpose)별로 묶은 요약 표. 각 행에는 볼륨 개수, 사용/여유/전체
+  용량, 사용률이 표시되며, 유형 배지를 클릭하면 해당 카테고리의 볼륨 카테고리 모니터가 열린다.
+* **볼륨 구성(Physical Volume Topology)** — 볼륨 파일 하나당 한 행으로, 유형/용도, 페이지 단위 할당량(사용/전체
+  페이지, 여유 비율 막대), 날짜, 경로가 표시된다. 볼륨 이름을 클릭하면 해당 볼륨의 볼륨 정보 화면이 열린다.
+* **파일 공간 사용량(File Space Usage)** — 데이터 유형별 파일 개수와 사용/전체 용량.
+* **분포(Distribution)** — 사용/여유 비율을 보여주는 도넛 차트.
+
+Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **Log**(하위에 **Active**, **Archive**) 카테고리
+노드가 있으며, 각 카테고리를 펼치면 그 카테고리에 속한 개별 볼륨 파일 노드가 나타난다.
+
+.. image:: /images/database-volume-category-monitor.png
+
+카테고리 노드(예: Permanent Data)를 더블클릭하면 볼륨 카테고리 모니터가 열린다. 해당 카테고리의 볼륨 개수, 전체 용량,
+사용률 카드와 전체 사용률 막대, 그리고 볼륨별 표(볼륨 이름, 사용량 막대, 전체 용량, 페이지 수)가 표시된다.
+
+.. image:: /images/database-volume-info-monitor.png
+
+개별 볼륨 파일 노드를 더블클릭하면 볼륨 정보 화면이 열린다. 사용/여유 용량 막대와 함께 볼륨 이름, 위치, 용도, 페이지
+크기, 총/사용/여유 페이지 수, 총 용량이 표로 표시된다.
+
+.. note::
+
+    세 화면 모두 헤더에 자동 새로고침 배지(LIVE/PAUSED)와 새로고침 설정 아이콘이 있다. 새로고침 간격 설정은
+    :doc:`dashboard` 문서를 참고한다.
+
+전체 데이터베이스 메뉴 (ALL DATABASES)
+========================================
+
+.. image:: /images/database-all-databases-menu.png
+
+"Databases" 트리 루트를 우클릭하면 "ALL DATABASES" 메뉴가 나타난다. :doc:`broker` 의 "ALL BROKERS" 메뉴와 같은
+성격의, 해당 호스트의 데이터베이스 전체를 대상으로 하는 일괄 작업 메뉴이다.
+
+* **Start All Databases** — 현재 중지된 데이터베이스를 전부 시작한다.
+* **Stop All Databases** — 현재 활성 데이터베이스를 전부 중지한다.
+* **Restart All Databases** — 현재 활성 데이터베이스를 전부 중지했다가 다시 시작한다.
+* **Create Database** — 아래 "데이터베이스 생성" 마법사를 연다.
+* **Refresh** — 데이터베이스 목록을 새로고침한다.
+* **Properties** — 데이터베이스 속성 화면을 연다.
+
+.. image:: /images/database-start-all-confirm.png
+
+.. note::
+
+    Start All/Stop All/Restart All은 각각 별도의 확인 다이얼로그를 거친다. Stop All과 Restart All은 "활성 연결과
+    트랜잭션이 모두 끊깁니다"라는 경고 문구를 포함한다.
+
 데이터베이스 생성
 ==================
 

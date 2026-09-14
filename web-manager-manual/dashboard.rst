@@ -42,3 +42,17 @@ Database Info
 .. warning::
 
     Properties의 "Apply Changes"는 실제 호스트의 cubrid.conf를 즉시 덮어쓴다.
+
+자동 새로고침 간격 설정
+========================
+
+.. image:: /images/monitoring-refresh-interval.png
+
+Database Dashboard를 비롯해 실시간 데이터를 보여주는 화면들(Server Dashboard, Broker Status, Space/Volume
+모니터 등) 우측 상단의 타이머 아이콘을 클릭하면 새로고침 간격 설정 팝오버가 열린다. **Dashboard**\ (데이터베이스
+처리량/디스크 I/O 지표)와 **Broker**\ (브로커 연결/부하 상태) 두 항목을 독립적으로 설정한다.
+
+* 각 항목마다 **Off / 1s / 3s / 5s / 10s / 30s** 프리셋 버튼과, 직접 초 단위 숫자를 입력하는 커스텀 입력란(0~86400초,
+  즉 최대 24시간)이 있다.
+* **Apply** 를 눌러야 반영되며, 설정은 사용자 계정에 저장되어 다음 로그인에도 유지된다.
+* 하나라도 0(Off)보다 크게 설정되어 있으면 타이머 아이콘에 초록 점이 표시된다.
