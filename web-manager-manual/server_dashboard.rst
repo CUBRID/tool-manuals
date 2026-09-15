@@ -18,13 +18,13 @@ Service Dashboard (전체 현황)
 
 .. image:: /images/service-dashboard.png
 
-상단 메뉴 **Host Service Management** → **Service Dashboard** 를 선택한다. 등록된 모든 호스트 목록과
+상단 메뉴 **호스트 서비스 관리(Host Service Management)** → **서비스 대시보드(Service Dashboard)** 를 선택한다. 등록된 모든 호스트 목록과
 HA 필터(All/Master/Slave/Replica)를 확인할 수 있다.
 
 Cubrid Config 편집
 ===================
 
-상단 메뉴 **Host Service Management** → **Edit Config Files** → **Edit Cubrid Config** 를 선택한다.
+상단 메뉴 **호스트 서비스 관리(Host Service Management)** → **설정 파일 편집(Edit Config Files)** → **CUBRID 설정 편집(Edit Cubrid Config)** 를 선택한다.
 cubrid.conf를 대상으로 한다.
 
 .. warning::
@@ -34,7 +34,7 @@ cubrid.conf를 대상으로 한다.
 CM Config 편집
 ===================
 
-상단 메뉴 **Host Service Management** → **Edit Config Files** → **Edit CM Config** 를 선택한다.
+상단 메뉴 **호스트 서비스 관리(Host Service Management)** → **설정 파일 편집(Edit Config Files)** → **CM 설정 편집(Edit CM Config)** 를 선택한다.
 cm.conf(CMS 자체 설정 파일)를 대상으로 하며, 편집기 화면 구성과 저장 방식은 Cubrid Config 편집과 동일하다.
 
 .. warning::

@@ -2,7 +2,7 @@
 호스트 관리
 ***************
 
-사이드바 상단 섹션명은 **Server List** 이며, 툴바에 **+ Add** (호스트 추가), **New Group**, (호스트가 1개 이상이면) **Login All** 버튼이 있다.
+사이드바 상단 섹션명은 **서버 목록(Server List)** 이며, 툴바에 **+ Add** (호스트 추가), **새 그룹(New Group)**, (호스트가 1개 이상이면) **전체 로그인(Login All)** 버튼이 있다.
 
 .. image:: /images/host-tree.png
 
@@ -11,17 +11,17 @@
 
 .. image:: /images/host-add.png
 
-툴바 **+ Add** 를 클릭하면 **New Connection** 모달이 열린다. 섹션 구성:
+툴바 **+ Add** 를 클릭하면 **새 연결(New Connection)** 모달이 열린다. 섹션 구성:
 
 .. note::
 
     ``*`` 표시된 항목은 필수 입력 항목입니다.
 
-* **Identity** — Alias(별칭) \*, Group 드롭다운 (기본값: "No group", 선택 입력)
-* **Host** — IP Address / Domain(주소) \*, Port(포트) \* (기본값: 8001)
-* **Credentials** — Username(사용자 이름) \*, Password(비밀번호) \*
+* **식별 정보(Identity)** — Alias(별칭) \*, Group 드롭다운 (기본값: "No group", 선택 입력)
+* **호스트(Host)** — IP Address / Domain(주소) \*, Port(포트) \* (기본값: 8001)
+* **인증 정보(Credentials)** — Username(사용자 이름) \*, Password(비밀번호) \*
 
-하단 버튼: **Cancel** / **Save Changes** (로그인 없이 저장만) / **Test Connection & Save** (연결 확인 후 즉시 로그인까지).
+하단 버튼: **취소(Cancel)** / **변경 저장(Save Changes)** (로그인 없이 저장만) / **연결 테스트 및 저장(Test Connection & Save)** (연결 확인 후 즉시 로그인까지).
 
 * 빈 값으로 제출하면 각 필드에 대해 필수 입력 오류가 표시된다.
 * 이미 등록된 주소:포트로 추가하면 중복 오류가 표시된다.
@@ -29,34 +29,34 @@
 호스트 수정
 ===========
 
-우클릭 → **Edit Host** 를 선택하면 **Modify Host** 모달이 열린다.
+우클릭 → **호스트 편집(Edit Host)** 를 선택하면 **호스트 수정(Modify Host)** 모달이 열린다.
 
 .. note::
 
     ``*`` 표시된 항목은 필수 입력 항목입니다. Alias(별칭) \*, IP Address / Domain(주소) \*, Port(포트) \*,
-    Username(사용자 이름) \* 는 필수이다. Credentials의 **New Password** (비워두면 기존 비밀번호 유지)는 선택 입력이다.
+    Username(사용자 이름) \* 는 필수이다. Credentials의 **새 비밀번호(New Password)** (비워두면 기존 비밀번호 유지)는 선택 입력이다.
 
 .. warning::
 
-    **Test Connection & Save** 는 로그인 시도 *전에* 새 비밀번호를 먼저 저장한다. 즉 비밀번호를 잘못 입력해서 로그인이 실패해도
+    **연결 테스트 및 저장(Test Connection & Save)** 는 로그인 시도 *전에* 새 비밀번호를 먼저 저장한다. 즉 비밀번호를 잘못 입력해서 로그인이 실패해도
     저장된 비밀번호는 이미 잘못된 값으로 덮어써진 상태이다. 로그인 실패 시 즉시 올바른 비밀번호로 다시 저장해야 접속이 복구된다.
 
 호스트 삭제
 ===========
 
-우클릭 → **Delete Host** 를 선택하면 **Remove Host Connection** 모달이 열린다. 이 작업은 되돌릴 수 없다.
-버튼: **Keep Host** (취소) / **Confirm Removal** (삭제).
+우클릭 → **호스트 삭제(Delete Host)** 를 선택하면 **호스트 연결 제거(Remove Host Connection)** 모달이 열린다. 이 작업은 되돌릴 수 없다.
+버튼: **유지(Keep Host)** (취소) / **제거 확인(Confirm Removal)** (삭제).
 
 그룹 생성 / 이름 변경
 =====================
 
-툴바 **New Group** 또는 그룹 우클릭 → **Rename Group** 을 선택한다. 필드는 **Group Name(그룹 이름)** \* 하나이며, 필수 입력 항목이다
+툴바 **새 그룹(New Group)** 또는 그룹 우클릭 → **그룹 이름 변경(Rename Group)** 을 선택한다. 필드는 **그룹 이름(Group Name)** \* 하나이며, 필수 입력 항목이다
 (비워두고 저장하면 "그룹 이름을 입력하세요." 오류가 표시된다).
 
 그룹 삭제
 =========
 
-그룹 우클릭 → **Delete Group** 을 선택한다.
+그룹 우클릭 → **그룹 삭제(Delete Group)** 을 선택한다.
 
 .. warning::
 
@@ -65,33 +65,33 @@
 그룹 멤버 관리
 ==============
 
-그룹 우클릭 → **Manage Group** 을 선택한다. 호스트 목록에서 체크하면 그룹에 추가되고, 체크 해제하면 Ungrouped로 이동한다.
+그룹 우클릭 → **그룹 관리(Manage Group)** 을 선택한다. 호스트 목록에서 체크하면 그룹에 추가되고, 체크 해제하면 Ungrouped로 이동한다.
 저장 후 그룹이 자동으로 펼쳐지지 않으므로 직접 펼쳐서 확인한다.
 
 CMS 사용자 관리
 ===============
 
-로그인된 호스트 우클릭 → **User Management** 를 선택한다.
+로그인된 호스트 우클릭 → **사용자 관리(User Management)** 를 선택한다.
 
 .. note::
 
     "CMS 사용자"는 CUBRID DB 사용자나 웹매니저 로그인 계정과는 별개로, 호스트에 연결된 CMS 관리자 계정을 뜻한다.
 
-섹션: **System administrator**, **Management users** (각 행에 DB creation authority / Broker authority / Status monitor authority가 표시된다).
+섹션: **시스템 관리자(System administrator)**, **관리 사용자(Management users)** (각 행에 DB creation authority / Broker authority / Status monitor authority가 표시된다).
 
 .. note::
 
-    ``*`` 표시된 항목은 필수 입력 항목입니다. **Add User** 모달에서 Login ID(로그인 ID) \* 는 항상 필수이며,
+    ``*`` 표시된 항목은 필수 입력 항목입니다. **사용자 추가(Add User)** 모달에서 Login ID(로그인 ID) \* 는 항상 필수이며,
     Password(비밀번호) \* 는 신규 사용자를 추가할 때만 필수이다. 이미 있는 사용자를 수정할 때는 비밀번호를 비워두면
     기존 값이 유지되지만, 비밀번호를 입력했다면 Password Confirm(비밀번호 확인) \* 도 함께 입력해야 한다.
 
-* **Add User** 로 로그인 ID/비밀번호와 권한(각각 none/admin, none/monitor/admin)을 설정해 추가한다.
+* **사용자 추가(Add User)** 로 로그인 ID/비밀번호와 권한(각각 none/admin, none/monitor/admin)을 설정해 추가한다.
 * 행에 마우스를 올리면 수정/삭제 아이콘이 나타난다. 기본 admin 계정은 삭제할 수 없다.
 
 비밀번호(Passcode) 변경
 =======================
 
-로그인된 호스트 우클릭 → **Change Password** 를 선택하면 **Change Manager Passcode** 모달이 열린다.
+로그인된 호스트 우클릭 → **비밀번호 변경(Change Password)** 를 선택하면 **관리자 암호 변경(Change Manager Passcode)** 모달이 열린다.
 필드: New Passcode(새 암호) \*, Verify New Passcode(암호 확인) \* — 둘 다 필수 입력 항목이며 서로 일치해야 한다.
 
 .. warning::
@@ -103,15 +103,15 @@ CMS 사용자 관리
 
 .. image:: /images/host-server-version.png
 
-호스트 우클릭 → **Server Version** 을 선택하거나, 상단 **Help** 메뉴 → **Server Version** 을 선택하면(이 경우
+호스트 우클릭 → **서버 버전(Server Version)** 을 선택하거나, 상단 **도움말(Help)** 메뉴 → **서버 버전(Server Version)** 을 선택하면(이 경우
 사이드바에서 호스트가 선택되어 있어야 활성화된다) 열린다. CMS의 환경 정보 조회 응답을 그대로 보여주는 읽기 전용
 화면이다.
 
-* **CUBRID Version** — CUBRID 엔진 버전.
-* **OS Platform** — 호스트의 OS/플랫폼 정보.
-* **Broker** — 브로커 버전.
-* **Install Path** — CUBRID 설치 경로.
-* **Databases** — 데이터베이스가 저장되는 경로.
+* **CUBRID 버전(CUBRID Version)** — CUBRID 엔진 버전.
+* **OS(OS Platform)** — 호스트의 OS/플랫폼 정보.
+* **브로커(Broker)** — 브로커 버전.
+* **설치 경로(Install Path)** — CUBRID 설치 경로.
+* **데이터베이스(Databases)** — 데이터베이스가 저장되는 경로.
 
 다중 호스트 선택 (일괄 작업)
 ============================
@@ -123,9 +123,9 @@ Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클�
 
 .. image:: /images/host-bulk-context-menu.png
 
-* **Login Selected Hosts** — 선택된 호스트 중 아직 로그인되지 않은 것만 로그인한다 (이미 로그인된 호스트는 건너뛴다).
-* **Move to Group** — 하위 메뉴에서 "Ungrouped" 또는 기존 그룹 중 하나를 선택하면 선택된 호스트 전부가 그 그룹으로 이동한다.
-* **Delete Selected Hosts** — 확인 모달이 뜨며, 선택한 호스트 개수가 표시된다.
+* **선택한 호스트 로그인(Login Selected Hosts)** — 선택된 호스트 중 아직 로그인되지 않은 것만 로그인한다 (이미 로그인된 호스트는 건너뛴다).
+* **그룹으로 이동(Move to Group)** — 하위 메뉴에서 "Ungrouped" 또는 기존 그룹 중 하나를 선택하면 선택된 호스트 전부가 그 그룹으로 이동한다.
+* **선택한 호스트 삭제(Delete Selected Hosts)** — 확인 모달이 뜨며, 선택한 호스트 개수가 표시된다.
 
 .. image:: /images/host-bulk-delete-confirm.png
 
@@ -136,5 +136,5 @@ Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클�
 호스트 내보내기 / 가져오기
 ==========================
 
-상단 **File** 메뉴 → **Export Host** / **Import Host** 를 선택한다. Export는 확인창 없이 바로 파일을 다운로드하며,
+상단 **파일(File)** 메뉴 → **호스트 내보내기(Export Host)** / **호스트 가져오기(Import Host)** 를 선택한다. Export는 확인창 없이 바로 파일을 다운로드하며,
 Import 시 이미 등록된 호스트는 DUPLICATE 배지가 붙고 체크할 수 없다.

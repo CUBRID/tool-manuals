@@ -7,7 +7,7 @@ Query Plan (쿼리 자동 실행)
 
 .. image:: /images/query-plan.png
 
-데이터베이스 → Job automation → **Query Plan** 폴더 우클릭 → **Add Query Plan** 을 선택한다.
+데이터베이스 → Job automation → **질의 자동화 계획(Query Plan)** 폴더 우클릭 → **질의 자동화 계획 추가(Add Query Plan)** 을 선택한다.
 Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시각), SQL문을 입력한다.
 
 .. note::
@@ -25,24 +25,24 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
 .. image:: /images/automation-auto-query-log.png
 
-데이터베이스 → Job automation → **Query Plan** 폴더 우클릭 → **Auto Query Log** 를 선택하면 열린다. 질의
+데이터베이스 → Job automation → **질의 자동화 계획(Query Plan)** 폴더 우클릭 → **질의 자동화 계획 수행로그(Auto Query Log)** 를 선택하면 열린다. 질의
 자동화 계획이 실제로 실행된 이력을 보여주는 읽기 전용 로그 화면이다.
 
-* 컬럼: **Query ID**, **Execution Time**, **Description** — Description 칸은 텍스트에 "success"가 포함되면
+* 컬럼: **질의 ID(Query ID)**, **실행 시간(Execution Time)**, **설명(Description)** — Description 칸은 텍스트에 "success"가 포함되면
   초록색 체크 아이콘, "auto job start"가 포함되면 파란색 재생 아이콘, 그 외에는 빨간색 오류 아이콘과 함께
   표시된다.
 * ID/설명으로 필터링, 15건 단위 페이지네이션 또는 전체 보기 전환이 가능하다.
 * 현재 선택된 데이터베이스로 목록이 좁혀지며, 선택된 데이터베이스가 없으면 호스트 전체 이력("Global Query
   Execution History")을 보여준다.
-* **Refresh** 버튼으로 다시 불러온다.
+* **새로 고침(Refresh)** 버튼으로 다시 불러온다.
 
 볼륨 추가
 =========
 
 .. image:: /images/database-add-volume.png
 
-데이터베이스 → **Space** 폴더 우클릭 → **Add Volume**, 또는 데이터베이스 우클릭 → Manage Database →
-**Add Database Volume** — 둘 다 같은 모달을 연다. 필드 설명(Purpose/Path/Size)과 ``addvoldb`` 유틸리티 옵션
+데이터베이스 → **공간(Space)** 폴더 우클릭 → **볼륨 추가(Add Volume)**, 또는 데이터베이스 우클릭 → Manage Database →
+**데이터베이스 볼륨 추가(Add Database Volume)** — 둘 다 같은 모달을 연다. 필드 설명(Purpose/Path/Size)과 ``addvoldb`` 유틸리티 옵션
 대응 관계는 :doc:`database` 의 "볼륨 추가" 절 참고.
 
 자동 볼륨 확장 설정 (Set Automation Volume)
@@ -50,7 +50,7 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
 .. image:: /images/automation-set-volume.png
 
-데이터베이스 → **Space** 폴더 우클릭 → **Set Automation Volume** 을 선택한다.
+데이터베이스 → **공간(Space)** 폴더 우클릭 → **볼륨 자동 추가 설정(Set Automation Volume)** 을 선택한다.
 
 .. important::
 
@@ -61,11 +61,11 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
 * 토글 하나로 **Data + Index Volume** 정책 전체를 켜고 끈다. 데이터 볼륨과 인덱스 볼륨을 따로 설정할 수는
   없고, 하나의 임계값/확장 크기가 데이터 볼륨과 인덱스 볼륨 양쪽에 동일하게 적용된다.
-* **Trigger threshold** — 여유 공간이 이 비율(%) 이하로 떨어지면 자동 확장이 실행된다. 5~30% 사이에서
+* **임계값(Trigger threshold)** — 여유 공간이 이 비율(%) 이하로 떨어지면 자동 확장이 실행된다. 5~30% 사이에서
   슬라이더로 조절한다.
 * **Expansion Size (MB)** — 자동 확장 시 늘어나는 용량(MB). 16KB 페이지 크기 기준으로 환산한 **Extension
   Pages**\ (페이지 수)가 옆에 읽기 전용으로 함께 표시된다.
-* **Save** 를 눌러야 저장된다.
+* **저장(Save)** 를 눌러야 저장된다.
 
 .. note::
 
@@ -77,13 +77,13 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
 .. image:: /images/automation-auto-volume-log.png
 
-데이터베이스 → **Space** 폴더 우클릭 → **Auto Volume Log** 를 선택하면 열린다. 자동 볼륨 확장이 실제로
+데이터베이스 → **공간(Space)** 폴더 우클릭 → **볼륨 자동 확장 로그(Auto Volume Log)** 를 선택하면 열린다. 자동 볼륨 확장이 실제로
 실행된 이력을 보여주는 읽기 전용 로그 화면이다.
 
-* 컬럼: **Database**, **Volume name**, **Purpose**, **Pages**, **Time**, **Outcome** — Auto Backup Log/Auto
-  Query Log와 달리 결과가 별도의 **Outcome** 컬럼으로 분리되어 있고, 성공/시작/실패에 따라 각각 초록/노랑/빨강
+* 컬럼: **데이터베이스(Database)**, **볼륨 이름(Volume name)**, **용도(Purpose)**, **페이지(Pages)**, **시간(Time)**, **결과(Outcome)** — Auto Backup Log/Auto
+  Query Log와 달리 결과가 별도의 **결과(Outcome)** 컬럼으로 분리되어 있고, 성공/시작/실패에 따라 각각 초록/노랑/빨강
   아이콘과 색으로 표시된다.
 * 볼륨 이름/결과/데이터베이스명으로 필터링, 15건 단위 페이지네이션 또는 전체 보기 전환이 가능하다.
 * 현재 선택된 데이터베이스로 목록이 좁혀지며, 선택된 데이터베이스가 없으면 호스트 전체 이력("Global Volume
   Auto Expansion History")을 보여준다.
-* **Refresh** 버튼으로 다시 불러온다.
+* **새로 고침(Refresh)** 버튼으로 다시 불러온다.
