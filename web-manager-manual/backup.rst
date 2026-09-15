@@ -65,6 +65,21 @@ logs/Check consistency/Compress/Threads/Online·Offline)는 예약된 시각에 
     CMS 호스트의 OS 사용자가 기본 백업 디렉터리에 쓰기 권한이 없으면 "Permission denied" 오류가 발생할 수 있다.
     이는 환경 설정 문제이며 앱의 오류가 아니다. 그 외의 오류 메시지가 표시되면 실제 문제일 가능성이 높다.
 
+백업 자동화 계획 수행 로그 (Auto Backup Log)
+==============================================
+
+.. image:: /images/backup-auto-log.png
+
+데이터베이스 → Job automation → **Backup Plan** 폴더 우클릭 → **Auto Backup Log** 를 선택하면 열린다. 예약된
+Backup Plan이 실제로 실행된 이력을 보여주는 읽기 전용 로그 화면이다.
+
+* 컬럼: **Backup ID**, **Log Time**, **Description** — Description 칸은 텍스트에 "success"가 포함되면 초록색
+  체크 아이콘, "auto job start"가 포함되면 파란색 재생 아이콘, 그 외에는 빨간색 오류 아이콘과 함께 표시된다.
+* ID/설명으로 필터링, 15건 단위 페이지네이션 또는 전체 보기 전환이 가능하다.
+* 현재 선택된 데이터베이스로 목록이 좁혀지며, 선택된 데이터베이스가 없으면 호스트 전체 이력("Global Backup
+  History")을 보여준다.
+* **Refresh** 버튼으로 다시 불러온다.
+
 복원
 ====
 
