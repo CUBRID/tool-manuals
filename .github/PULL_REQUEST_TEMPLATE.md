@@ -1,4 +1,4 @@
-<http://jira.cubrid.org/browse/TOOLS-0000>
+<http://jira.cubrid.org/browse/CUBRIDMAN-0000>
 
 ### Purpose
 N/A
