@@ -3,6 +3,10 @@
         text-align: left;
     }
 
+    .body h1, .body h2, .body h3, .body h4, .body h5, .body h6 {
+        break-after: avoid;
+    }
+
     .docutils.literal.notranslate {
         display: inline;
         overflow-wrap: anywhere;
@@ -11,5 +15,8 @@
     .body img {
         max-height: 12cm;
         width: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

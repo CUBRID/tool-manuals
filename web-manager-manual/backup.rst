@@ -162,19 +162,11 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
   있는 파일.
 * **Schema / Object(Data) / Index 파일 경로** — 각각 ``loaddb -s`` (스키마 파일), ``-d`` (데이터 파일),
   ``-i`` (인덱스 파일).
+* **Trigger 파일 경로** — 화면에는 있지만 실제로 동작하지 않는다. :doc:`known_issues` 참고.
 
-.. warning::
+.. note::
 
-    **"Check syntax and load database" 체크박스는 이름과 반대로 동작할 수 있다.** 체크를 켜면(문자 그대로
-    "신택스 검사 후 적재") 실제로는 아무 옵션도 추가되지 않아 평소와 동일하게 적재가 진행되고, **체크를 끄면**
-    오히려 신택스 검사 없이 데이터만 적재하는 ``--load-only`` 가 켜진다. "신택스만 검사하고 적재하지 않는" 옵션
-    (``--data-file-check-only``)은 이 화면에서는 아예 선택할 수 없다.
-
-.. warning::
-
-    **"Trigger" 파일 선택 항목은 실제로 동작하지 않는다.** 화면에서 트리거 파일을 지정해도, CMS 쪽 코드에서
-    해당 처리 부분이 비활성화되어 있어(``#if 0``) 어떤 옵션도 ``loaddb`` 에 전달되지 않는다. 트리거는 이 화면으로
-    적재할 수 없다.
+    **"Check syntax and load database"는 기본적으로 꺼져 있으며, 꺼진 상태에서는** ``--load-only`` **옵션이 활성화된다.**
 
 .. warning::
 

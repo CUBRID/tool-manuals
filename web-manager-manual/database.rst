@@ -1,18 +1,19 @@
-************************************
-데이터베이스 트리 / 라이프사이클
-************************************
+************************
+데이터베이스 트리
+************************
 
 .. image:: /images/database-tree.png
 
 데이터베이스 노드를 펼치면 **사용자(Users)**, **작업 자동화(Job automation)**, **공간(Space)** 하위 노드가 나타난다.
-우클릭 → **데이터베이스 관리(Manage Database)** 안에 Unload Database, Load Database, Check Database, Compact Database,
-Add Database Volume, Optimize Database, Copy Database, Rename Database, Restore Database, Backup Database,
-Delete Database가 있다.
+우클릭 → **데이터베이스 관리(Manage Database)** 안에 데이터베이스 언로드(Unload Database), 데이터베이스 로드(Load Database),
+데이터베이스 검사(Check Database), 데이터베이스 공간 정리(Compact Database), 데이터베이스 볼륨 추가(Add Database Volume),
+데이터베이스 최적화(Optimize Database), 데이터베이스 복사(Copy Database), 데이터베이스 이름 변경(Rename Database),
+데이터베이스 복구(Restore Database), 데이터베이스 백업(Backup Database), 데이터베이스 삭제(Delete Database)가 있다.
 
 .. note::
 
-    Load/Optimize/Copy/Rename/Restore/Delete는 데이터베이스가 실행 중이면 비활성화된다. 먼저 중지해야 한다.
-    반대로 **데이터베이스 정보(Database Info)** 하위의 Locking Information/Transaction information/Plan Dump는 실행 중일 때만
+    데이터베이스 로드/최적화/복사/이름 변경/복구/삭제는 데이터베이스가 실행 중이면 비활성화된다. 먼저 중지해야 한다.
+    반대로 **데이터베이스 정보(Database Info)** 하위의 잠금 정보/트랜잭션 정보/질의 수행 계획은 실행 중일 때만
     활성화된다 (실시간 서버 상태를 조회하는 항목이므로).
 
 로그인 여부 표시
@@ -23,11 +24,10 @@ Delete Database가 있다.
 
 .. important::
 
-    **해당 데이터베이스에 로그인하지 않은 상태에서는 어떤 작업도 실행할 수 없다.** Start/Stop Database,
-    Manage Database의 11개 항목(Unload/Load/Check/Compact/Add Database Volume/Optimize/Copy/Rename/
-    Restore/Backup/Delete) 전부, Database Info의 4개 항목(Locking Information/Transaction
-    information/Param Dump/Plan Dump), Properties까지 — 예외 없이 로그인 상태를 먼저 요구하며, 로그인
-    안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
+    **해당 데이터베이스에 로그인하지 않은 상태에서는 어떤 작업도 실행할 수 없다.** 데이터베이스 시작/중지,
+    데이터베이스 관리의 11개 항목(언로드/로드/검사/공간 정리/볼륨 추가/최적화/복사/이름 변경/복구/백업/삭제)
+    전부, 데이터베이스 정보의 4개 항목(잠금 정보/트랜잭션 정보/파라미터 덤프/질의 수행 계획), 속성까지 —
+    예외 없이 로그인 상태를 먼저 요구하며, 로그인 안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
 
 HA 상태 표시
 ============
@@ -101,12 +101,6 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
 데이터베이스 생성
 ==================
 
-.. image:: /images/database-create.png
-.. image:: /images/database-create-step2.png
-.. image:: /images/database-create-step3.png
-.. image:: /images/database-create-step4.png
-.. image:: /images/database-create-step5.png
-
 "Databases" 트리 루트 우클릭 → **데이터베이스 생성(Create Database)** 를 선택하면 5단계 마법사가 열린다:
 General Information → Additional Volume Information → Automatic volume extension → Set DBA Password → Database Information(검토).
 실제로는 CUBRID의 ``createdb`` 유틸리티를 실행한다.
@@ -115,25 +109,41 @@ General Information → Additional Volume Information → Automatic volume exten
 
     ``*`` 표시된 항목은 필수 입력 항목입니다.
 
-#. **일반 정보(General Information)** — Database name(데이터베이스 이름) \* 은 ``createdb`` 의 커맨드라인 인자로 전달된다.
-   Locale은 ``createdb`` 의 두 번째 인자(``<데이터베이스 로케일>``, 형식은 ``<language>.<charset>``, 예:
-   ``en_US.iso88591``)로 전달된다. Page size는 ``--db-page-size``, Volume size는 ``--db-volume-size``, Volume
-   path는 ``-F, --file-path``, Log page size는 ``--log-page-size``, Log volume size는 ``--log-volume-size``,
-   Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"은 ``createdb`` 옵션이 아니라
-   생성 후 api-server가 별도로 수행하는 후속 단계다.
-#. **추가 볼륨 정보(Additional Volume Information)** — 추가 볼륨이 필요 없으면 그대로 다음으로 진행한다 (이 단계의 볼륨
-   이름/크기/경로는 선택 입력이다). 여기서 입력한 볼륨 목록은 CMS가 제어 파일로 만들어 ``--more-volume-file`` 로
-   전달한다.
-#. **볼륨 자동 확장(Automatic volume extension)** — 자동 확장 설정(기본값을 그대로 사용해도 된다)을 확인한다. 이 설정은
-   ``createdb`` 의 옵션이 아니라 CMS의 별도 자동-볼륨-확장 기능(``setAutoAddVol``)을 구성하는 것이다.
-#. **DBA 비밀번호 설정(Set DBA Password)** — Password/Password Confirm은 **선택 입력**\ 이다. 둘 다 비워두면 DBA 계정에 비밀번호 없이
-   생성되며, 값을 입력할 경우에는 8자 이상이어야 하고 Password/Password Confirm이 서로 일치해야 다음 단계로
-   진행할 수 있다. 이 역시 ``createdb`` 자체의 옵션이 아니라, 생성 후 별도로 실행되는 사용자 정보 갱신 단계다.
-#. **검토(Database Information)** — 요약을 확인하고 **완료(Finish)** 를 클릭하면 실제 생성 작업이 시작된다. 완료까지
-   최대 2분 정도 걸릴 수 있다.
+.. image:: /images/database-create.png
+
+**1단계. 일반 정보(General Information)** — Database name(데이터베이스 이름) \* 은 ``createdb`` 의 커맨드라인 인자로 전달된다.
+Locale은 ``createdb`` 의 두 번째 인자(``<데이터베이스 로케일>``, 형식은 ``<language>.<charset>``, 예:
+``en_US.iso88591``)로 전달된다. Page size는 ``--db-page-size``, Volume size는 ``--db-volume-size``, Volume
+path는 ``-F, --file-path``, Log page size는 ``--log-page-size``, Log volume size는 ``--log-volume-size``,
+Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"은 ``createdb`` 옵션이 아니라
+생성 후 api-server가 별도로 수행하는 후속 단계다.
+
+.. image:: /images/database-create-step2.png
+
+**2단계. 추가 볼륨 정보(Additional Volume Information)** — 추가 볼륨이 필요 없으면 그대로 다음으로 진행한다 (이 단계의 볼륨
+이름/크기/경로는 선택 입력이다). 여기서 입력한 볼륨 목록은 CMS가 제어 파일로 만들어 ``--more-volume-file`` 로
+전달한다.
+
+.. image:: /images/database-create-step3.png
+
+**3단계. 볼륨 자동 확장(Automatic volume extension)** — 자동 확장 설정(기본값을 그대로 사용해도 된다)을 확인한다. 이 설정은
+``createdb`` 의 옵션이 아니라 CMS의 별도 자동-볼륨-확장 기능(``setAutoAddVol``)을 구성하는 것이다.
+
+.. image:: /images/database-create-step4.png
+
+**4단계. DBA 비밀번호 설정(Set DBA Password)** — Password/Password Confirm은 **선택 입력**\ 이다. 둘 다 비워두면 DBA 계정에 비밀번호 없이
+생성되며, 값을 입력할 경우에는 8자 이상이어야 하고 Password/Password Confirm이 서로 일치해야 다음 단계로
+진행할 수 있다. 이 역시 ``createdb`` 자체의 옵션이 아니라, 생성 후 별도로 실행되는 사용자 정보 갱신 단계다.
+
+.. image:: /images/database-create-step5.png
+
+**5단계. 검토(Database Information)** — 요약을 확인하고 **완료(Finish)** 를 클릭하면 실제 생성 작업이 시작된다. 완료까지
+최대 2분 정도 걸릴 수 있다.
 
 데이터베이스 로그인
 ====================
+
+.. image:: /images/database-login.png
 
 데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 모달이 열린다. User name(기본값 "dba")과 Password를 입력한다.
 **비밀번호 저장(Save Password)** 를 켜두면 다음부터 다시 입력하지 않아도 된다.
@@ -154,10 +164,11 @@ General Information → Additional Volume Information → Automatic volume exten
 
 저장된 로그인 프로필이 있는 데이터베이스는 다음 두 항목도 함께 나타난다.
 
-* **데이터베이스 자격증명 변경(Update Database Credentials)** — Login Database와 같은 모달을 다시 열어 저장된 사용자명/비밀번호를 갱신한다.
-* **저장된 자격증명 삭제(Forget Saved Credentials)** — 저장된 로그인 프로필 자체를 삭제한다. 다음부터는 다시 수동으로 로그인해야 한다.
+* **데이터베이스 자격증명 변경(Update Database Credentials)** — 위 "데이터베이스 로그인" 절과 같은 모달을 다시 열어 저장된 사용자명/비밀번호를 갱신한다.
 
 .. image:: /images/database-forget-credentials-confirm.png
+
+* **저장된 자격증명 삭제(Forget Saved Credentials)** — 저장된 로그인 프로필 자체를 삭제한다. 다음부터는 다시 수동으로 로그인해야 한다.
 
 시작 / 중지
 ===========
@@ -167,7 +178,11 @@ General Information → Additional Volume Information → Automatic volume exten
 
 .. image:: /images/database-stop-confirm.png
 
+**데이터베이스 중지(Stop Database)** 확인 다이얼로그.
+
 .. image:: /images/database-start-confirm.png
+
+**데이터베이스 시작(Start Database)** 확인 다이얼로그.
 
 .. note::
 
@@ -240,21 +255,23 @@ Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. �
 점검 / 압축 / 최적화
 ======================
 
-.. image:: /images/database-check.png
-
-.. image:: /images/database-compact.png
-
-.. image:: /images/database-optimize.png
-
 Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이터베이스 공간 정리(Compact Database)**, **데이터베이스 최적화(Optimize Database)** 는 옵션을 선택하고
 실행 버튼을 누르면 작업이 시작되는 진단/유지보수성 실행 다이얼로그이다. 실행하면 진행 상태 모달로 전환되고,
 완료되면 성공 모달이 표시된다 (다른 CMS 작업과 동일하게 :doc:`automation` 에서 설명하는 백그라운드 전환도
 가능하다). Unload Database의 필드 설명은 :doc:`backup` 참고.
 
+.. image:: /images/database-check.png
+
 * **데이터베이스 검사(Check Database)** — 옵션은 **비일관성 발견 시 복구(Repair when inconsistency)** 하나뿐이다. 실제로는
   ``checkdb -r`` 로 전달된다.
+
+.. image:: /images/database-compact.png
+
 * **데이터베이스 공간 정리(Compact Database)** — 옵션은 **상세 정보 출력(Verbose monitoring)** 하나뿐이다. 실제로는 ``compactdb -v`` 로
   전달된다.
+
+.. image:: /images/database-optimize.png
+
 * **데이터베이스 최적화(Optimize Database)** — **클래스 이름(Class name)** 을 지정하면 해당 클래스의 통계 정보만, 비워두면 전체
   클래스의 통계 정보를 갱신한다.
 
@@ -273,12 +290,13 @@ Manage Database → **데이터베이스 로드(Load Database)** (데이터베�
 삭제
 ====
 
-.. image:: /images/database-delete.png
-
 Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계로 진행된다.
 
-#. 삭제될 볼륨 목록과 경고를 확인하고 **계속(Proceed)** 를 클릭한다.
-#. DBA User name(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
-   없지만, 값이 올바르지 않으면 인증 단계에서 오류가 표시되어 삭제가 진행되지 않는다.
+.. image:: /images/database-delete.png
+
+**1단계.** 삭제될 볼륨 목록과 경고를 확인하고 **계속(Proceed)** 를 클릭한다.
 
 .. image:: /images/database-delete-confirm.png
+
+**2단계.** DBA User name(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
+없지만, 값이 올바르지 않으면 인증 단계에서 오류가 표시되어 삭제가 진행되지 않는다.
