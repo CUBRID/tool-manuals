@@ -81,6 +81,7 @@ async function sweepStrayModals(page) {
 }
 
 async function main() {
+  const failures = [];
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 1440, height: 900 } });
   const page = await context.newPage();
@@ -138,7 +139,7 @@ async function main() {
     await shotModal(page, 'host-export');
     await page.getByTestId('import-export-host-cancel-btn').click({ timeout: 3000 }).catch(() => page.keyboard.press('Escape'));
     await page.waitForTimeout(300);
-  } catch (err) { await debugShot(page, 'host-export', err); }
+  } catch (err) { failures.push('host-export'); await debugShot(page, 'host-export', err); }
 
   // ── Feature: File menu → Import Host modal (initial file-picker step) ──
   try {
@@ -151,7 +152,7 @@ async function main() {
     await shotModal(page, 'host-import');
     await page.getByTestId('import-export-host-cancel-btn').click({ timeout: 3000 }).catch(() => page.keyboard.press('Escape'));
     await page.waitForTimeout(300);
-  } catch (err) { await debugShot(page, 'host-import', err); }
+  } catch (err) { failures.push('host-import'); await debugShot(page, 'host-import', err); }
 
   // ── Feature: Login Database modal (empty/default state, before submit) ──
   // The target db may already be logged in and/or have a saved credential
@@ -208,9 +209,13 @@ async function main() {
     await shotModal(page, 'database-login');
     await page.getByTestId('login-database-cancel-btn').click({ timeout: 3000 }).catch(() => page.keyboard.press('Escape'));
     await page.waitForTimeout(300);
-  } catch (err) { await debugShot(page, 'database-login', err); }
+  } catch (err) { failures.push('database-login'); await debugShot(page, 'database-login', err); }
 
   await browser.close();
+
+  if (failures.length) {
+    throw new Error(`${failures.length} capture(s) failed: ${failures.join(', ')}`);
+  }
 }
 
 main().catch((err) => {

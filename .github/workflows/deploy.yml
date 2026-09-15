@@ -1,0 +1,140 @@
+name: Deploy Docs
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+# ---------------------------------------------------------------------------
+# Triggered by workflow_run, so this workflow's own YAML always comes from
+# the default branch, never from a PR head — a fork PR cannot alter what
+# runs here. It never checks out the triggering PR's code; it only downloads
+# the already-built static HTML/PDF artifacts produced by build.yml and
+# publishes them, so it's safe to grant it write access even when the
+# triggering run came from a fork.
+# ---------------------------------------------------------------------------
+jobs:
+  load_metadata:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      event_name: ${{ steps.meta.outputs.event_name }}
+      pr_number: ${{ steps.meta.outputs.pr_number }}
+      merged_pr: ${{ steps.meta.outputs.merged_pr }}
+      ref_name: ${{ steps.meta.outputs.ref_name }}
+      short_sha: ${{ steps.meta.outputs.short_sha }}
+    steps:
+      - name: Download metadata
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: pr-metadata
+          path: ./meta
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Load metadata
+        id: meta
+        run: |
+          echo "event_name=$(cat ./meta/event_name)" >> "$GITHUB_OUTPUT"
+          echo "pr_number=$(cat ./meta/pr_number)"    >> "$GITHUB_OUTPUT"
+          echo "merged_pr=$(cat ./meta/merged_pr)"    >> "$GITHUB_OUTPUT"
+          echo "ref_name=$(cat ./meta/ref_name)"      >> "$GITHUB_OUTPUT"
+          echo "short_sha=$(cat ./meta/short_sha)"    >> "$GITHUB_OUTPUT"
+
+  # ---------------------------------------------------------------------------
+  # Deploy to gh-pages (one manual at a time)
+  # ---------------------------------------------------------------------------
+  deploy_docs:
+    needs: load_metadata
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
+    strategy:
+      matrix:
+        manual: [ca-manual, cmt-manual, web-manager-manual]
+      max-parallel: 1
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: build-artifact-${{ matrix.manual }}
+          path: ./dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      # --- PR Preview Deploy ---
+      - name: Deploy Preview
+        if: needs.load_metadata.outputs.event_name == 'pull_request'
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          destination_dir: pr-preview/${{ needs.load_metadata.outputs.pr_number }}/${{ matrix.manual }}
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      # --- Official Deploy (per-commit) ---
+      - name: Deploy Official (per-commit)
+        if: needs.load_metadata.outputs.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          destination_dir: ${{ matrix.manual }}/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+  # ---------------------------------------------------------------------------
+  # Post comments (after deploy finishes)
+  # ---------------------------------------------------------------------------
+  comment_on_pr:
+    needs: [load_metadata, deploy_docs]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      # --- Case A: PR Preview Links ---
+      - name: Comment PR Preview Links
+        if: needs.load_metadata.outputs.event_name == 'pull_request'
+        uses: thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6 # v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ needs.load_metadata.outputs.pr_number }}
+          message: |
+            ✅ **Manual Preview is Ready!**
+
+            | Manual | 🌐 Web | 📄 PDF |
+            | :--- | :--- | :--- |
+            | CUBRID Admin | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.load_metadata.outputs.pr_number }}/ca-manual/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.load_metadata.outputs.pr_number }}/ca-manual/CUBRID%20Admin.pdf) |
+            | CUBRID Migration Toolkit | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.load_metadata.outputs.pr_number }}/cmt-manual/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.load_metadata.outputs.pr_number }}/cmt-manual/CUBRID%20Migration%20Toolkit.pdf) |
+            | CUBRID Web Manager | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.load_metadata.outputs.pr_number }}/web-manager-manual/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.load_metadata.outputs.pr_number }}/web-manager-manual/CUBRID%20Web%20Manager.pdf) |
+          comment_tag: tool-manuals-preview
+          mode: recreate
+
+      # --- Case B: Official Deployment Success (merge only) ---
+      - name: Comment Official Deploy Success
+        if: needs.load_metadata.outputs.event_name == 'push' && needs.load_metadata.outputs.merged_pr != ''
+        uses: thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6 # v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ needs.load_metadata.outputs.merged_pr }}
+          message: |
+            🚀 **Official Deployment Complete!** (`${{ needs.load_metadata.outputs.short_sha }}`)
+
+            | Manual | 🌐 Web | 📄 PDF |
+            | :--- | :--- | :--- |
+            | CUBRID Admin | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/ca-manual/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/ca-manual/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}/CUBRID%20Admin.pdf) |
+            | CUBRID Migration Toolkit | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/cmt-manual/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/cmt-manual/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}/CUBRID%20Migration%20Toolkit.pdf) |
+            | CUBRID Web Manager | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/web-manager-manual/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/web-manager-manual/${{ needs.load_metadata.outputs.ref_name }}/${{ needs.load_metadata.outputs.short_sha }}/CUBRID%20Web%20Manager.pdf) |
+          comment_tag: tool-manuals-official-deploy
+          mode: create
