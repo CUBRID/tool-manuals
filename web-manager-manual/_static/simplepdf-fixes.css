@@ -19,4 +19,21 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    /* `.. image:: ... :align: left/right` — float so the paragraph right
+       after it wraps alongside instead of stacking below (matches the HTML
+       build's style.css rule for the same classes). */
+    .body img.align-left {
+        float: left;
+        display: block;
+        margin: 0 1.2em 0.8em 0;
+        max-height: 8cm;
+    }
+
+    .body img.align-right {
+        float: right;
+        display: block;
+        margin: 0 0 0.8em 1.2em;
+        max-height: 8cm;
+    }
 }

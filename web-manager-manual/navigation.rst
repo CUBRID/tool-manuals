@@ -16,6 +16,8 @@
 ====================
 
 .. image:: /images/navigation-help-menu.png
+   :width: 260px
+   :align: left
 
 상단 메뉴바의 **도움말(Help)** 메뉴를 클릭하면 아래 항목이 나온다.
 
@@ -26,5 +28,9 @@
   연다.
 * **업데이트 확인(Check for Updates)** — 항상 비활성화되어 있다. 클릭해도 아무 동작이 일어나지 않는다.
 * **서버 버전(Server Version)** — 사이드바에서 호스트가 선택되어 있어야 활성화된다. :doc:`host` 의 "서버 버전" 절 참고.
-* **CUBRID Admin 정보(About CUBRID Admin)** — 웹매니저 자체의 버전과 저작권 정보를 보여주는 모달을 연다. CUBRID 엔진 버전이 아니라
-  웹매니저 애플리케이션 자체의 정보이다(CUBRID 엔진 버전은 위 "Server Version"에서 확인한다).
+* **CUBRID Admin 정보(About CUBRID Admin)** — NCA 자체의 버전과 저작권 정보를 보여주는 모달을 연다. CUBRID 엔진 버전이 아니라
+  NCA 애플리케이션 자체의 정보이다(CUBRID 엔진 버전은 위 "Server Version"에서 확인한다).
+
+.. raw:: html
+
+   <div style="clear: both;"></div>

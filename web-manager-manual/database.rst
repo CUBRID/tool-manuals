@@ -32,8 +32,6 @@
 HA 상태 표시
 ============
 
-.. image:: /images/database-ha-status.png
-
 호스트가 HA로 구성되어 있고 해당 데이터베이스가 ``cubrid_ha.conf``\ 의 ``ha_db_list``\ 에 있으면, 데이터베이스
 이름 옆에 **HA** 배지가 표시된다(로케일과 무관하게 화면에 항상 "HA"로만 표시된다). 이 배지 옆에는 해당 데이터베이스의 실시간 복제 상태 배지가 하나 더
 붙는다: **active** / **standby** / **to-be-active** / **to-be-standby** / **maintenance** / **dead** /
@@ -80,6 +78,8 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
 ========================================
 
 .. image:: /images/database-all-databases-menu.png
+   :width: 260px
+   :align: left
 
 "Databases" 트리 루트를 우클릭하면 "ALL DATABASES" 메뉴가 나타난다. :doc:`broker` 의 "ALL BROKERS" 메뉴와 같은
 성격의, 해당 호스트의 데이터베이스 전체를 대상으로 하는 일괄 작업 메뉴이다.
@@ -90,6 +90,10 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
 * **데이터베이스 생성(Create Database)** — 아래 "데이터베이스 생성" 마법사를 연다.
 * **새로 고침(Refresh)** — 데이터베이스 목록을 새로고침한다.
 * **속성(Properties)** — 데이터베이스 속성 화면을 연다.
+
+.. raw:: html
+
+   <div style="clear: both;"></div>
 
 .. image:: /images/database-start-all-confirm.png
 
@@ -195,11 +199,10 @@ Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"
 
 Manage Database → **데이터베이스 이름 변경(Rename Database)** (실행 중이면 비활성화). "서비스가 완전히 중지된 상태인지 확인하라"는 경고가 표시된다.
 **새 데이터베이스 이름(New Database Name)** \* 은 필수 입력 항목이며, 값을 입력해야 실행 버튼이 활성화된다
-(영문자로 시작하는 1~17자의 영문/숫자/밑줄/하이픈만 허용). 실제로는 CUBRID의 ``renamedb`` 유틸리티를 실행하며,
-새 이름은 커맨드라인 인자(positional argument)로 그대로 전달된다.
+(영문자로 시작하는 1~17자의 영문/숫자/밑줄/하이픈만 허용).
 
-* **백업 볼륨 강제 삭제(Force delete backup volume)** — ``renamedb -d``. 켜면 기존 백업 볼륨을 지운다(공식
-  기본값은 "지우지 않음").
+* **백업 볼륨 강제 삭제(Force delete backup volume)** — 켜면 기존 백업 볼륨을 지운다.
+  기본값: 꺼짐(지우지 않음).
 
 .. note::
 
@@ -212,20 +215,37 @@ Manage Database → **데이터베이스 이름 변경(Rename Database)** (실�
 .. image:: /images/database-copy.png
 
 Manage Database → **데이터베이스 복사(Copy Database)** (원본이 중지 상태여야 한다). 실제로는 CUBRID의 ``copydb`` 유틸리티를
-실행한다. 아래 필드는 각각 ``copydb`` 의 옵션 하나에 대응한다(공식 ``--help`` 텍스트 기준).
+실행한다.
 
-* **대상 데이터베이스 이름(Database Name)** \* — 필수. 비워두면 실행 버튼을 눌러도 오류 없이 아무 반응이 없다.
-  ``copydb`` 의 커맨드라인 인자(positional argument)로 전달된다.
-* **파일 경로(File path)** — ``copydb -F``. 데이터베이스가 저장되는 디렉터리 경로.
-* **확장 볼륨 경로(Extend volume path)** — ``copydb -E``. 확장 볼륨이 저장되는 디렉터리 경로.
-* **로그 파일 경로(Log file path)** — ``copydb -L``. 로그 볼륨이 저장되는 디렉터리 경로. 위 세 경로 필드는 기본값이
-  채워져 있으며 선택적으로 수정한다.
-* **볼륨별 개별 지정(Copy individual volumes)** — 켜면 위 File path/Extend volume path 대신, 볼륨별로 새 이름과
-  경로를 지정하는 표가 나타난다. 이 표의 내용은 ``copydb -i`` (제어 파일)로 전달된다 — 켜져 있으면 File
-  path/Extend volume path 필드 자체가 무시된다.
-* **기존 데이터베이스 덮어쓰기(Replace existing database)** — ``copydb -r``. 같은 이름의 데이터베이스가 있으면
-  덮어쓴다(공식 기본값은 "덮어쓰기 안 함").
-* **복사 후 원본 삭제(Delete Source After Copy)** — 위험한 옵션이므로 신중하게 사용한다.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
+
+    * - 항목
+      - 설명
+      - 기본값
+    * - 대상 데이터베이스 이름(Database Name) \*
+      - 필수. 비워두면 실행 버튼을 눌러도 오류 없이 아무 반응이 없다
+      - —
+    * - 파일 경로(File path)
+      - 데이터베이스가 저장되는 디렉터리 경로
+      - 자동 채움
+    * - 확장 볼륨 경로(Extend volume path)
+      - 확장 볼륨이 저장되는 디렉터리 경로
+      - 자동 채움
+    * - 로그 파일 경로(Log file path)
+      - 로그 볼륨이 저장되는 디렉터리 경로
+      - 자동 채움
+    * - 볼륨별 개별 지정(Copy individual volumes)
+      - 켜면 위 File path/Extend volume path 대신, 볼륨별로 새 이름과 경로를 지정하는 표가 나타나고
+        그 두 필드는 무시된다
+      - 꺼짐
+    * - 기존 데이터베이스 덮어쓰기(Replace existing database)
+      - 같은 이름의 데이터베이스가 있으면 덮어쓴다
+      - 꺼짐
+    * - 복사 후 원본 삭제(Delete Source After Copy)
+      - 위험한 옵션이므로 신중하게 사용한다
+      - 꺼짐
 
 .. warning::
 
@@ -240,13 +260,27 @@ Manage Database → **데이터베이스 복사(Copy Database)** (원본이 중�
 
 Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. 실제로는 CUBRID의 ``addvoldb`` 유틸리티를 실행한다.
 
-* **용도(Purpose)** — ``addvoldb -p``. 화면에서는 Data/Temp 두 가지만 선택할 수 있다. ``addvoldb`` 자체는
-  INDEX/GENERIC까지 총 4가지 값을 허용하지만, 이 화면에서는 그 두 값을 선택할 수 없다.
-* **경로(Path)** — ``addvoldb -F``. 저장 경로. 호스트에서 조회한 현재 상태로 자동 채워지며, 존재하지 않으면
-  CMS가 생성한다.
-* **크기(Size)** — ``addvoldb --db-volume-size``. 프리셋 버튼 또는 직접 입력.
-* **볼륨 이름(Volume name)** — 이 화면에는 입력란이 없다. ``addvoldb`` 의 ``-n, --volume-name`` (지정하지 않으면
-  ``"db"_ext1`` 형태의 이름이 자동 생성됨)에 빈 값이 전달된다.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
+
+    * - 항목
+      - 설명
+      - 기본값
+    * - 용도(Purpose)
+      - 화면에서는 Data/Temp 두 가지만 선택할 수 있다. ``addvoldb`` 의 ``--help`` 텍스트에는 INDEX/GENERIC까지
+        4가지가 나오지만, 엔진 내부에는 이제 이 두 가지 용도만 남아 있다 — INDEX/GENERIC은 별도 기능이 아니라
+        Data로 취급되는 사실상 사용되지 않는(deprecated) 값이다
+      - —
+    * - 경로(Path)
+      - 저장 경로. 호스트에서 조회한 현재 상태로 자동 채워지며, 존재하지 않으면 CMS가 생성한다
+      - 자동 채움
+    * - 크기(Size)
+      - 프리셋 버튼 또는 직접 입력
+      - —
+    * - 볼륨 이름(Volume name)
+      - 이 화면에는 입력란이 없다. 지정하지 않으면 ``"db"_ext1`` 형태의 이름이 자동 생성된다
+      - 자동 생성
 
 .. warning::
 

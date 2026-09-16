@@ -7,19 +7,33 @@
 
 .. image:: /images/backup-database.png
 
-Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한다. 아래 필드는 실제로는 CMS를 거쳐 CUBRID의 ``backupdb``
-유틸리티를 실행시키며, 각 설명은 CUBRID 엔진의 공식 ``--help`` 텍스트(``msg/ko_KR.utf8/utils.msg``)를 그대로
-옮긴 것이다.
+Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한다.
 
-* **백업 레벨(Backup Level)** — ``backupdb -l``. 0(전체), 1(증분 1), 2(증분 2) 중 선택.
-* **백업 디렉터리(Backup Directory)** \* — ``backupdb -D``. 백업 볼륨이 저장될 디렉터리 경로. 지정하지 않으면
-  로그 디렉터리에 저장된다.
-* **병렬 스레드 수(Parallel threads)** — ``backupdb -t``. 백업을 수행하는 스레드 개수. 기본값은 자동.
-* **데이터베이스 정합성 확인(Check database consistency)**, 기본 켜짐 — 체크를 켜면 아무 옵션도 추가되지 않는다
-  (정합성 확인이 기본 동작). **체크를 끄면** ``--no-check`` 가 추가되어 정합성 확인을 건너뛴다.
-* **불필요한 로그 파일 삭제(Delete unnecessary archived logs)** — ``backupdb -r``. 켜면 더 이상 필요 없는 로그
-  파일을 지운다. CUBRID 공식 설명에 "유의해서 사용해야 합니다"라는 경고가 포함되어 있다.
-* **백업 볼륨 압축(Compress backup volume)**, 기본 켜짐 — 켜면 ``--compress`` 가 추가된다.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
+
+    * - 항목
+      - 설명
+      - 기본값
+    * - 백업 레벨(Backup Level)
+      - 0(전체) / 1(증분 1) / 2(증분 2) 중 선택
+      - 0(전체)
+    * - 백업 디렉터리(Backup Directory) \*
+      - 백업 볼륨이 저장될 디렉터리 경로. 지정하지 않으면 로그 디렉터리에 저장된다
+      - —
+    * - 병렬 스레드 수(Parallel threads)
+      - 백업을 수행하는 스레드 개수
+      - 자동
+    * - 데이터베이스 정합성 확인(Check database consistency)
+      - 끄면 정합성 확인을 건너뛴다
+      - 켜짐
+    * - 불필요한 로그 파일 삭제(Delete unnecessary archived logs)
+      - 켜면 더 이상 필요 없는 로그 파일을 지운다 (CUBRID 공식 설명에 "유의해서 사용해야 합니다"라는 경고 포함)
+      - 꺼짐
+    * - 백업 볼륨 압축(Compress backup volume)
+      - 켜면 백업 볼륨을 압축한다
+      - 켜짐
 
 .. note::
 
@@ -42,23 +56,34 @@ Backup Plan은 즉시 백업과 달리 CMS의 예약 실행 기능이다. Plan I
 logs/Check consistency/Compress/Threads/Online·Offline)는 예약된 시각에 CMS가 실제로 ``backupdb`` 를
 실행할 때 즉시 백업과 동일한 옵션으로 전달된다(위 "즉시 백업 실행" 절 참고).
 
-* **계획 ID(Plan ID)**, **경로(Path)**, 반복 주기(월간/주간/일간/특정 요일)와 시각 — CMS/webmanager 고유의 스케줄
-  개념으로, CUBRID 유틸리티에는 대응하는 옵션이 없다.
-* **온라인 모드 / 오프라인 모드(Online mode / Offline mode)** — 백업 시점에 데이터베이스를 CS 모드(``-C, --CS-mode``)로 볼지 SA 모드
-  (``-S, --SA-mode``)로 볼지 선택한다. 즉시 백업(Backup Database)에서는 이 선택지가 없고 CMS가 현재 상태를
-  자동으로 감지하지만, Backup Plan에서는 사용자가 직접 지정한다.
-* **통계 정보 갱신(Update statistics)** — 켜져 있고 **오프라인 모드(Offline mode)**\ 로 설정된 계획인 경우, 백업이 끝난 뒤 CMS가
-  별도로 ``cubrid optimizedb`` 를 (클래스 지정 없이, 즉 전체 클래스 대상으로) 실행한다. Online mode 계획에서는
-  이 옵션이 켜져 있어도 실행되지 않는다.
-* **보관할 백업 세트 수(retention)** — 화면에는 존재하지만, 실제로 CMS가 이 값을 근거로 오래된 백업을 자동
-  삭제하는 동작은 코드상 확인되지 않는다. 값을 설정해도 자동 정리가 보장되지 않으므로, 오래된 백업 삭제는
-  직접 관리해야 한다.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
+
+    * - 항목
+      - 설명
+      - 기본값
+    * - 계획 ID(Plan ID) / 경로(Path) / 반복 주기·시각
+      - CMS/webmanager 고유의 예약 스케줄 정보(반복 주기는 월간/주간/일간/특정 요일 중 선택)
+      - —
+    * - 온라인 모드 / 오프라인 모드(Online mode / Offline mode)
+      - 백업 시점에 데이터베이스를 어떤 모드로 볼지 선택한다. 즉시 백업(Backup Database)은 CMS가 현재 상태를
+        자동으로 감지하지만, Backup Plan은 사용자가 직접 지정한다
+      - —
+    * - 통계 정보 갱신(Update statistics)
+      - 켜져 있고 **오프라인 모드(Offline mode)**\ 로 설정된 계획이면, 백업이 끝난 뒤 전체 클래스 대상 통계
+        정보를 갱신한다 (Online mode 계획에서는 켜져 있어도 실행되지 않는다)
+      - 꺼짐
+    * - 보관할 백업 세트 수(retention)
+      - 화면에는 있지만, 이 값을 근거로 오래된 백업을 자동 삭제하는 동작은 확인되지 않는다 — 오래된 백업
+        삭제는 직접 관리해야 한다
+      - —
 
 .. warning::
 
     Plan ID(계획 ID)와 Path(경로) 필드는 화면 자체의 필수 입력 검증이 없다 — 기본값이 자동으로 채워지지만, 이를
     지우고 빈 값으로 실행해도 오류 없이 그대로 저장된다. 두 값 모두 실제로 의미 있는 값을 직접 확인하고 입력하는
-    것을 권장한다 (알려진 제약사항, :doc:`known_issues` 참고).
+    것을 권장한다 (:doc:`known_issues` 참고).
 
 .. warning::
 
@@ -86,17 +111,26 @@ Backup Plan이 실제로 실행된 이력을 보여주는 읽기 전용 로그 �
 .. image:: /images/database-restore.png
 
 Manage Database → **데이터베이스 복구(Restore Database)** (데이터베이스가 중지 상태여야 한다). 복원 시점 선택 또는 백업 레벨별 파일을 직접 지정할 수 있다.
-아래 옵션은 실제로 CUBRID의 ``restoredb`` 유틸리티로 전달된다(공식 ``--help`` 텍스트 기준).
 
-* **복구 시점 지정(Specify restore date)** — ``restoredb -d``. 백업 시점(``backuptime``) 또는
-  ``dd-mm-yyyy:hh:mm:ss`` 형식의 특정 시각으로 데이터베이스 상태를 복구한다.
-* **백업 레벨 선택(Select backup information)** + 레벨별 파일 경로 — ``restoredb -l`` (복구에 사용할 백업 레벨,
-  기본값 0/전체) 과 ``restoredb -B`` (백업 볼륨이 있는 디렉터리 경로).
-* **부분 복구 수행(Perform partial recovery)** — ``restoredb -p``. 아카이브 로그가 없을 경우 강제로 부분 복구를
-  수행한다.
-* **복원 경로 변경(Change restore path)** — ``restoredb -u``. 이 옵션은 실제로 값을 커맨드라인 인자로 넘기지
-  않는다 — CMS가 먼저 데이터베이스 위치 파일 자체를 새 경로로 다시 쓴 다음, 옵션 없는 ``-u`` 플래그만 붙여서
-  "위치 파일에 설정된 경로로 복구하라"고 지시하는 방식으로 동작한다.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
+
+    * - 항목
+      - 설명
+      - 기본값
+    * - 복구 시점 지정(Specify restore date)
+      - 백업 시점 또는 ``dd-mm-yyyy:hh:mm:ss`` 형식의 특정 시각으로 데이터베이스 상태를 복구한다
+      - —
+    * - 백업 레벨 선택(Select backup information)
+      - 복구에 사용할 백업 레벨과 백업 볼륨이 있는 디렉터리 경로
+      - 레벨 0(전체)
+    * - 부분 복구 수행(Perform partial recovery)
+      - 아카이브 로그가 없을 경우 강제로 부분 복구를 수행한다
+      - 꺼짐
+    * - 복원 경로 변경(Change restore path)
+      - 데이터베이스 위치 파일을 새 경로로 다시 쓴 뒤, 그 경로를 기준으로 복구하도록 지시한다
+      - 꺼짐
 
 .. note::
 
@@ -110,23 +144,42 @@ Manage Database → **데이터베이스 복구(Restore Database)** (데이터�
 .. image:: /images/database-unload.png
 
 Manage Database → **데이터베이스 언로드(Unload Database...)** 를 선택한다. 대상 디렉터리, 스키마/데이터 포함 범위, 테이블 선택 등을
-설정한다. 아래 옵션은 실제로 CUBRID의 ``unloaddb`` 유틸리티로 전달된다(공식 ``--help`` 텍스트 기준).
+설정한다.
 
-* **대상 디렉터리(Target Directory)** \* — ``unloaddb -O``. 출력 디렉터리 경로.
-* **Schema 포함 / Data 포함** — ``unloaddb -s`` (스키마만) / ``-d`` (오브젝트만). 둘 다 켜면 두 플래그가 모두
-  전달되어 스키마와 데이터 둘 다 처리된다(둘 다 처리하는 것이 기본 동작이기도 하다).
-* **선택한 테이블만(테이블 목록)** — ``unloaddb -i``. 지정한 테이블 이름 목록만 처리한다(기본값은 전체 클래스).
-* **참조 테이블 포함(Include referenced tables)** — ``unloaddb --include-reference``. 공식 설명에 따르면 이
-  옵션은 "-i(테이블 지정)가 함께 지정되어야" 의미가 있다.
-* **구분 식별자 사용(Use delimited identifier)** — ``unloaddb --use-delimiter``. 식별자 처음과 끝에 큰따옴표를
-  사용한다.
-* **출력 파일 접두어(Prefix output files)** — ``unloaddb --output-prefix``. 지정하지 않으면 데이터베이스 이름이
-  접두어로 사용된다.
-* **해시 파일(File for hash)** — ``unloaddb --hash-file``.
-* **캐시 페이지 수(Number of cached pages)** — ``unloaddb --cached-pages``. 공식 기본값은 "계산됨"(자동
-  계산)이다.
-* **예상 인스턴스 수(Estimated instances)** — ``unloaddb --estimated-size``. 공식 기본값도 "계산됨"(자동
-  계산)이다.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
+
+    * - 항목
+      - 설명
+      - 기본값
+    * - 대상 디렉터리(Target Directory) \*
+      - 출력 디렉터리 경로
+      - —
+    * - Schema 포함 / Data 포함
+      - 스키마만 / 오브젝트만 처리할지 선택한다. 둘 다 켜면 스키마와 데이터 둘 다 처리된다
+      - 둘 다 켜짐
+    * - 선택한 테이블만(테이블 목록)
+      - 지정한 테이블 이름 목록만 처리한다
+      - 전체 클래스
+    * - 참조 테이블 포함(Include referenced tables)
+      - "선택한 테이블만"이 함께 지정되어야 의미가 있다
+      - 꺼짐
+    * - 구분 식별자 사용(Use delimited identifier)
+      - 식별자 처음과 끝에 큰따옴표를 사용한다
+      - 꺼짐
+    * - 출력 파일 접두어(Prefix output files)
+      - 지정하지 않으면 데이터베이스 이름이 접두어로 사용된다
+      - 데이터베이스 이름
+    * - 해시 파일(File for hash)
+      - 해시 파일 경로
+      - —
+    * - 캐시 페이지 수(Number of cached pages)
+      - —
+      - 계산됨(자동)
+    * - 예상 인스턴스 수(Estimated instances)
+      - —
+      - 계산됨(자동)
 
 .. warning::
 
@@ -145,28 +198,48 @@ Manage Database → **데이터베이스 언로드(Unload Database...)** 를 선
 
 .. image:: /images/database-load.png
 
-Manage Database → **데이터베이스 로드(Load Database...)** 를 선택한다. 아래 옵션은 실제로 CUBRID의 ``loaddb`` 유틸리티로
-전달된다(공식 ``--help`` 텍스트 기준).
+Manage Database → **데이터베이스 로드(Load Database...)** 를 선택한다.
 
-* **사용자 이름 / 비밀번호(User Name / Password)** — ``loaddb -u`` / ``-p``.
-* **신택스 검사 후 적재(Check syntax and load database)** — 체크를 켜면 아무 옵션도 추가되지 않는다(기본
-  동작). **체크를 끄면** ``--load-only`` (``-l``, 신택스 체크 없이 데이터 파일만 적재, SA 모드 전용)가 추가된다.
-* **로그 기록 안 함(No log)** — ``loaddb --no-logging``.
-* **예상 인스턴스 수(Estimated instances)** — ``loaddb --estimated-size``. 공식 기본값은 5000.
-* **주기적 커밋 카운트(Periodic commit)** — ``loaddb -c``. 공식 문서상 기본값은 10240.
-* **Don't use OID(OID 사용 안 함)** — ``loaddb --no-oid``.
-* **Don't update statistics(통계 정보 갱신 안 함)** — ``loaddb --no-statistics``.
-* **에러 제어 파일(Error control file)** — ``loaddb --error-control-file``. 적재 시 발생하는 에러에 대한
-  제어 파일.
-* **제외 테이블 파일(Ignored table file)** — ``loaddb --ignore-class-file``. 적재하지 않을 클래스 이름이
-  있는 파일.
-* **Schema / Object(Data) / Index 파일 경로** — 각각 ``loaddb -s`` (스키마 파일), ``-d`` (데이터 파일),
-  ``-i`` (인덱스 파일).
-* **Trigger 파일 경로** — 화면에는 있지만 실제로 동작하지 않는다. :doc:`known_issues` 참고.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 55 15
 
-.. note::
-
-    **"Check syntax and load database"는 기본적으로 꺼져 있으며, 꺼진 상태에서는** ``--load-only`` **옵션이 활성화된다.**
+    * - 항목
+      - 설명
+      - 기본값
+    * - 사용자 이름 / 비밀번호(User Name / Password)
+      - 적재를 수행할 DB 계정 정보
+      - —
+    * - 신택스 검사 후 적재(Check syntax and load database)
+      - 기본적으로 꺼져 있으며, **꺼진 상태에서는 신택스 검사 없이 데이터만 적재한다.**
+      - 꺼짐
+    * - 로그 기록 안 함(No log)
+      - 트랜잭션 로그를 기록하지 않고 적재한다
+      - 꺼짐
+    * - 예상 인스턴스 수(Estimated instances)
+      - 적재할 데이터 양을 미리 추정한 값
+      - 5000
+    * - 주기적 커밋 카운트(Periodic commit)
+      - 지정한 레코드 수마다 커밋한다
+      - 10240
+    * - Don't use OID(OID 사용 안 함)
+      - 객체 ID(OID)를 사용하지 않고 적재한다
+      - 꺼짐
+    * - Don't update statistics(통계 정보 갱신 안 함)
+      - 적재 후 통계 정보를 갱신하지 않는다
+      - 꺼짐
+    * - 에러 제어 파일(Error control file)
+      - 적재 중 발생하는 에러 처리 방식을 지정한 파일
+      - —
+    * - 제외 테이블 파일(Ignored table file)
+      - 적재에서 제외할 테이블 이름 목록 파일
+      - —
+    * - Schema / Object(Data) / Index 파일 경로
+      - 각각 스키마 / 데이터 / 인덱스 파일 경로
+      - —
+    * - Trigger 파일 경로
+      - 화면에는 있지만 실제로 동작하지 않는다. :doc:`known_issues` 참고.
+      - —
 
 .. warning::
 

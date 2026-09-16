@@ -13,13 +13,38 @@
 
 툴바 **+ Add** 를 클릭하면 **새 연결(New Connection)** 모달이 열린다. 섹션 구성:
 
-.. note::
+.. list-table::
+    :header-rows: 1
+    :widths: 20 30 15 15
 
-    ``*`` 표시된 항목은 필수 입력 항목입니다.
-
-* **식별 정보(Identity)** — Alias(별칭) \*, Group 드롭다운 (기본값: "No group", 선택 입력)
-* **호스트(Host)** — IP Address / Domain(주소) \*, Port(포트) \* (기본값: 8001)
-* **인증 정보(Credentials)** — Username(사용자 이름) \*, Password(비밀번호) \*
+    * - 구분
+      - 항목
+      - 필수 여부
+      - 기본값
+    * - 식별 정보(Identity)
+      - Alias(별칭)
+      - 필수
+      - —
+    * - 식별 정보(Identity)
+      - Group
+      - 선택
+      - No group
+    * - 호스트(Host)
+      - IP Address / Domain(주소)
+      - 필수
+      - —
+    * - 호스트(Host)
+      - Port(포트)
+      - 필수
+      - 8001
+    * - 인증 정보(Credentials)
+      - Username(사용자 이름)
+      - 필수
+      - —
+    * - 인증 정보(Credentials)
+      - Password(비밀번호)
+      - 필수
+      - —
 
 하단 버튼: **취소(Cancel)** / **변경 저장(Save Changes)** (로그인 없이 저장만) / **연결 테스트 및 저장(Test Connection & Save)** (연결 확인 후 즉시 로그인까지).
 
@@ -46,6 +71,26 @@
 
 우클릭 → **호스트 삭제(Delete Host)** 를 선택하면 **호스트 연결 제거(Remove Host Connection)** 모달이 열린다. 이 작업은 되돌릴 수 없다.
 버튼: **유지(Keep Host)** (취소) / **제거 확인(Confirm Removal)** (삭제).
+
+전체 로그인 (Login All)
+========================
+
+.. image:: /images/host-login-all-result.png
+   :width: 380px
+   :align: left
+
+툴바의 **전체 로그인(Login All)** 버튼(로그인 안 된 호스트가 1개 이상 있을 때만 표시)을 클릭하면, 저장된 비밀번호로
+아직 로그인하지 않은 호스트 전체에 한 번에 로그인을 시도한다. 완료되면 성공/실패 호스트 개수를 요약한 결과 모달이
+뜨며, 실패한 호스트는 이름과 실패 사유가 함께 표시된다. 로그인이 필요한 호스트가 하나도 없으면 버튼 자체가
+보이지 않는다.
+
+.. raw:: html
+
+   <div style="clear: both;"></div>
+
+.. note::
+
+    그룹 우클릭 메뉴에도 같은 기능이 있으며, 이 경우 해당 그룹에 속한 호스트로만 범위가 좁혀진다.
 
 그룹 생성 / 이름 변경
 =====================
@@ -75,7 +120,7 @@ CMS 사용자 관리
 
 .. note::
 
-    "CMS 사용자"는 CUBRID DB 사용자나 웹매니저 로그인 계정과는 별개로, 호스트에 연결된 CMS 관리자 계정을 뜻한다.
+    "CMS 사용자"는 CUBRID DB 사용자나 NCA 로그인 계정과는 별개로, 호스트에 연결된 CMS 관리자 계정을 뜻한다.
 
 섹션: **시스템 관리자(System administrator)**, **관리 사용자(Management users)** (각 행에 DB creation authority / Broker authority / Status monitor authority가 표시된다).
 
@@ -107,19 +152,36 @@ CMS 사용자 관리
 사이드바에서 호스트가 선택되어 있어야 활성화된다) 열린다. CMS의 환경 정보 조회 응답을 그대로 보여주는 읽기 전용
 화면이다.
 
-* **CUBRID 버전(CUBRID Version)** — CUBRID 엔진 버전.
-* **OS(OS Platform)** — 호스트의 OS/플랫폼 정보.
-* **브로커(Broker)** — 브로커 버전.
-* **설치 경로(Install Path)** — CUBRID 설치 경로.
-* **데이터베이스(Databases)** — 데이터베이스가 저장되는 경로.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 70
+
+    * - 항목
+      - 설명
+    * - CUBRID 버전(CUBRID Version)
+      - CUBRID 엔진 버전
+    * - OS(OS Platform)
+      - 호스트의 OS/플랫폼 정보
+    * - 브로커(Broker)
+      - 브로커 버전
+    * - 설치 경로(Install Path)
+      - CUBRID 설치 경로
+    * - 데이터베이스(Databases)
+      - 데이터베이스가 저장되는 경로
 
 다중 호스트 선택 (일괄 작업)
 ============================
 
 .. image:: /images/host-bulk-select.png
+   :width: 380px
+   :align: left
 
 Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클릭으로 마지막에 클릭한 호스트부터 범위 선택할 수 있다
 (그룹이 달라도 함께 선택 가능하다). 선택된 상태에서 우클릭하면 일괄 작업 메뉴가 뜬다.
+
+.. raw:: html
+
+   <div style="clear: both;"></div>
 
 .. image:: /images/host-bulk-context-menu.png
 
@@ -143,11 +205,23 @@ Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클�
 
 **호스트 내보내기(Export Host)** 모달에는 현재 등록된 모든 호스트가 표에 나열된다. 체크된 호스트만 내보내기 대상이 된다.
 
-* **형식** — 세 가지 드롭다운 옵션이 있으며, 로케일과 무관하게 항상 다음 영문 그대로 표시된다: **Web Manager XML** (기본값,
-  자체 XML 포맷), **Web Manager JSON** (자체 JSON 포맷), **CUBRID Admin XML** (레거시 데스크톱 CUBRID Admin 툴로 가져올 수 있는
-  CA 호환 XML).
-* **파일명** — 기본값은 "export_servers"이며 직접 수정할 수 있다. 확장자는 형식에 따라 자동으로 붙는다: JSON 형식은 ``.JSON``,
-  나머지 두 XML 형식은 ``.XML``.
+형식 드롭다운 옵션(로케일과 무관하게 항상 다음 영문 그대로 표시된다):
+
+.. list-table::
+    :header-rows: 1
+    :widths: 30 70
+
+    * - 형식
+      - 설명
+    * - Web Manager XML
+      - 자체 XML 포맷 (기본값)
+    * - Web Manager JSON
+      - 자체 JSON 포맷
+    * - CUBRID Admin XML
+      - 레거시 CUBRID Admin으로 가져올 수 있는 호환 XML
+
+**파일명** — 기본값은 "export_servers"이며 직접 수정할 수 있다. 확장자는 형식에 따라 자동으로 붙는다: JSON 형식은 ``.JSON``,
+나머지 두 XML 형식은 ``.XML``.
 
 .. note::
 

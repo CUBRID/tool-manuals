@@ -6,12 +6,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from shared_conf import *
 
-project = u'CUBRID Web Manager'
+project = u'Next CUBRID Admin'
 version = 'beta'
 release = 'beta'
 master_doc = 'index'
 
-html_title = f"CUBRID Web Manager {version} Documentation"
+html_title = f"Next CUBRID Admin {version} Documentation"
 
 html_theme_options = {
     **html_theme_options,
@@ -31,15 +31,15 @@ simplepdf_vars = {
 }
 
 latex_documents = [
-    ('index', 'cubrid_webmanager.tex', u'CUBRID Web Manager Documentation', u'CUBRID Corporation', 'manual'),
+    ('index', 'cubrid_webmanager.tex', u'Next CUBRID Admin Documentation', u'CUBRID Corporation', 'manual'),
 ]
 
 man_pages = [
-    ('index', 'cubrid_webmanager', u'CUBRID Web Manager Documentation', [u'CUBRID Corporation'], 1)
+    ('index', 'cubrid_webmanager', u'Next CUBRID Admin Documentation', [u'CUBRID Corporation'], 1)
 ]
 
 texinfo_documents = [
-    ('index', 'cubrid_webmanager', u'CUBRID Web Manager Documentation',
+    ('index', 'cubrid_webmanager', u'Next CUBRID Admin Documentation',
      u'CUBRID Corporation', 'cubrid_webmanager', 'One line description of project.',
      'Miscellaneous'),
 ]

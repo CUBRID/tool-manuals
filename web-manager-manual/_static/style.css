@@ -211,3 +211,15 @@ html pre, html code, html samp, html kbd {
     padding-left: 1.6em;
     text-indent: -1.6em;
 }
+
+/* `.. image:: ... :align: left/right` — float the screenshot so the
+   paragraph right after it wraps alongside instead of stacking below. */
+#content img.align-left {
+    float: left;
+    margin: 0.25rem 1.5rem 1rem 0;
+}
+
+#content img.align-right {
+    float: right;
+    margin: 0.25rem 0 1rem 1.5rem;
+}
