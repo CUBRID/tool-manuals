@@ -20,39 +20,13 @@ permissions:
 # separate workflow triggered by workflow_run: its YAML is always read from
 # the default branch (never from a PR head), so a fork PR cannot smuggle in
 # changes to the privileged deploy steps.
+#
+# deploy.yml does NOT trust anything this workflow computes (event type,
+# branch, commit, PR number) — a fork PR can edit this file's steps freely,
+# so none of that would be authoritative. It only decides what to build;
+# deploy.yml re-derives who/what/where from the workflow_run event itself.
 # ---------------------------------------------------------------------------
 jobs:
-  metadata:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: read
-    steps:
-      - name: Resolve merged PR number (push event only)
-        if: github.event_name == 'push'
-        id: pr_info
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR_NUMBER=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" --jq '.[0].number // empty')
-          echo "merged_pr=$PR_NUMBER" >> "$GITHUB_OUTPUT"
-
-      - name: Save event metadata
-        run: |
-          mkdir -p meta
-          echo "${{ github.event_name }}"                >  meta/event_name
-          echo "${{ github.event.pull_request.number }}"  >  meta/pr_number
-          echo "${{ steps.pr_info.outputs.merged_pr }}"   >  meta/merged_pr
-          echo "${{ github.ref_name }}"                   >  meta/ref_name
-          echo "${GITHUB_SHA::7}"                          >  meta/short_sha
-
-      - name: Upload metadata
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: pr-metadata
-          path: meta
-          retention-days: 7
-
   build_docs:
     runs-on: ubuntu-latest
     strategy:
