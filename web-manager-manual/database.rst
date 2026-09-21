@@ -1,5 +1,5 @@
 ************************
-데이터베이스 트리
+데이터베이스 관리
 ************************
 
 .. image:: /images/database-tree.png
@@ -14,9 +14,9 @@
     * - 기능
       - 설명
     * - 데이터베이스 언로드(Unload Database)
-      - 스키마/데이터를 파일로 내보낸다 (:doc:`backup` 참고)
+      - 스키마/데이터를 파일로 내보낸다
     * - 데이터베이스 로드(Load Database)
-      - 언로드된 파일을 데이터베이스에 적재한다 (:doc:`backup` 참고)
+      - 언로드된 파일을 데이터베이스에 적재한다
     * - 데이터베이스 검사(Check Database)
       - 데이터베이스 정합성을 검사한다
     * - 데이터베이스 공간 정리(Compact Database)
@@ -30,9 +30,9 @@
     * - 데이터베이스 이름 변경(Rename Database)
       - 데이터베이스 이름을 바꾼다
     * - 데이터베이스 복구(Restore Database)
-      - 백업으로부터 데이터베이스를 복원한다 (:doc:`backup` 참고)
+      - 백업으로부터 데이터베이스를 복원한다
     * - 데이터베이스 백업(Backup Database)
-      - 데이터베이스를 백업한다 (:doc:`backup` 참고)
+      - 데이터베이스를 백업한다
     * - 데이터베이스 삭제(Delete Database)
       - 데이터베이스를 영구히 삭제한다
 
@@ -41,6 +41,39 @@
     데이터베이스 로드/최적화/복사/이름 변경/복구/삭제는 데이터베이스가 실행 중이면 비활성화된다. 먼저 중지해야 한다.
     반대로 **데이터베이스 정보(Database Info)** 하위의 잠금 정보/트랜잭션 정보/질의 수행 계획은 실행 중일 때만
     활성화된다.
+
+데이터베이스 정보 (Database Info)
+====================================
+
+우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다.
+
+* **속성(Properties)** — 접속/서버 파라미터 조회 및 수정.
+* **파라미터 덤프(Param Dump)** — 파라미터 값 비교.
+
+.. image:: /images/database-param-dump.png
+
+* **잠금 정보(Locking Information)** — 잠금 세션/객체/에스컬레이션 정보.
+
+.. image:: /images/database-lock-info.png
+
+* **트랜잭션 정보(Transaction information)** — 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능.
+
+.. image:: /images/database-transaction-info.png
+
+* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프.
+
+.. image:: /images/database-plan-dump.png
+
+.. warning::
+
+    Properties의 "Apply Changes"는 실제 호스트의 cubrid.conf를 즉시 덮어쓴다.
+
+.. important::
+
+    Properties가 편집하는 대상은 **여는 경로에 따라 다르다.** 특정 데이터베이스를 우클릭해서 열면 cubrid.conf의
+    ``[@데이터베이스명]`` 섹션(그 데이터베이스만의 개별 설정)을 편집한다. 반면 위 "전체 데이터베이스 메뉴"처럼
+    특정 데이터베이스가 선택되지 않은 상태(데이터베이스 트리 루트)에서 Properties를 열면 ``[common]`` 섹션
+    (호스트 전체 기본값)을 편집한다 — 둘은 서로 다른 섹션이니 어느 쪽을 열었는지 화면 제목에서 확인한다.
 
 로그인 여부 표시
 ================
@@ -202,12 +235,6 @@ General Information → Additional Volume Information → Automatic volume exten
 데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 대화창이 열린다. User name(기본값 "dba")과 Password를 입력한다.
 **비밀번호 저장(Save Password)** 를 켜두면 다음부터 다시 입력하지 않아도 된다.
 
-.. note::
-
-    User name이 비어 있으면 로그인 버튼을 눌러도 아무 반응이 없다 (오류 메시지 없이 조용히 무시된다). Password는
-    화면 자체에는 필수 표시가 없다 — 비밀번호가 없는 계정(예: public)은 비워두고 로그인할 수 있으며, 값이 틀리면
-    CMS 인증 단계에서 오류가 표시된다.
-
 로그아웃 / 저장된 자격증명 관리
 ================================
 
@@ -336,7 +363,7 @@ Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. �
 Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이터베이스 공간 정리(Compact Database)**, **데이터베이스 최적화(Optimize Database)** 는 옵션을 선택하고
 실행 버튼을 누르면 작업이 시작되는 진단/유지보수성 실행 대화창이다. 실행하면 진행 상태 대화창으로 전환되고,
 완료되면 성공 대화창이 표시된다 (다른 CMS 작업과 동일하게 :doc:`automation` 에서 설명하는 백그라운드 전환도
-가능하다). Unload Database의 필드 설명은 :doc:`backup` 참고.
+가능하다).
 
 .. image:: /images/database-check.png
 
@@ -356,12 +383,281 @@ Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이�
     Optimize Database 메뉴 항목은 데이터베이스가 실행 중이면 비활성화된다 — 이 화면에서는 오프라인 상태에서만
     실행할 수 있다.
 
-로드
-====
+데이터베이스 백업
+==================
+
+.. image:: /images/backup-database.png
+
+Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 25 18 42 15
+
+    * - 항목
+      - CLI 대응
+      - 설명
+      - 기본값
+    * - 백업 레벨(Backup Level)
+      - ``-l, --level``
+      - 0(전체) / 1(증분 1) / 2(증분 2) 중 선택
+      - 0(전체)
+    * - 백업 디렉터리(Backup Directory) \*
+      - ``-D, --destination-path``
+      - 백업 볼륨이 저장될 디렉터리 경로. 지정하지 않으면 로그 디렉터리에 저장된다
+      - —
+    * - 병렬 스레드 수(Parallel threads)
+      - ``-t, --thread-count``
+      - 백업을 수행하는 스레드 개수
+      - 자동
+    * - 데이터베이스 정합성 확인(Check database consistency)
+      - ``--no-check`` (끌 때 적용)
+      - 끄면 정합성 확인을 건너뛴다
+      - 켜짐
+    * - 불필요한 로그 파일 삭제(Delete unnecessary archived logs)
+      - ``-r, --remove-archive``
+      - 켜면 더 이상 필요 없는 로그 파일을 지운다 (주의해서 사용해야 한다)
+      - 꺼짐
+    * - 백업 볼륨 압축(Compress backup volume)
+      - ``-z, --compress``
+      - 켜면 백업 볼륨을 압축한다
+      - 켜짐
+
+백업 볼륨 이름은 백업 레벨과 무관하게 항상 ``데이터베이스이름_backup`` 으로 고정되어 저장되며, 별도로
+지정할 수 없다.
+
+백업 계획 (예약 백업)
+=====================
+
+.. image:: /images/backup-plan.png
+
+데이터베이스 → Job automation → **백업 자동화 계획(Backup Plan)** 폴더 우클릭 → **백업 자동화 계획 추가(Create Backup Plan)** 을 선택한다.
+
+Backup Plan은 즉시 백업과 달리 지정한 시각에 예약 실행되는 기능이다. Plan ID·스케줄 관련 필드를 제외한
+백업 옵션(Backup Level/Path/Delete archive logs/Check consistency/Compress/Threads/Online·Offline)은
+위 "데이터베이스 백업" 절과 동일하다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 25 12 48 15
+
+    * - 항목
+      - CLI 대응
+      - 설명
+      - 기본값
+    * - 계획 ID(Plan ID) / 경로(Path) / 반복 주기·시각
+      - —
+      - CMS/webmanager 고유의 예약 스케줄 정보(반복 주기는 월간/주간/일간/특정 요일 중 선택)
+      - —
+    * - 온라인 모드 / 오프라인 모드(Online mode / Offline mode)
+      - —
+      - 백업 시점에 데이터베이스를 어떤 모드로 볼지 선택한다. 즉시 백업(Backup Database)은 CMS가 현재 상태를
+        자동으로 감지하지만, Backup Plan은 사용자가 직접 지정한다
+      - —
+    * - 통계 정보 갱신(Update statistics)
+      - —
+      - 켜져 있고 **오프라인 모드(Offline mode)**\ 로 설정된 계획이면, 백업이 끝난 뒤 전체 클래스 대상 통계
+        정보를 갱신한다 (Online mode 계획에서는 켜져 있어도 실행되지 않는다)
+      - 꺼짐
+    * - 보관할 백업 세트 수(retention)
+      - —
+      - 화면에는 있지만, 이 값을 근거로 오래된 백업을 자동 삭제하는 동작은 확인되지 않는다 — 오래된 백업
+        삭제는 직접 관리해야 한다
+      - —
+
+백업 자동화 계획 수행 로그 (Auto Backup Log)
+==============================================
+
+.. image:: /images/backup-auto-log.png
+
+데이터베이스 → Job automation → **백업 자동화 계획(Backup Plan)** 폴더 우클릭 → **백업 자동화 계획 수행로그(Auto Backup Log)** 를 선택하면 열린다. 예약된
+Backup Plan이 실제로 실행된 이력을 보여주는 읽기 전용 로그 화면이다.
+
+컬럼은 **백업 ID(Backup ID)**, **로그 시간(Log Time)**, **설명(Description)** 으로 구성되며, Description
+텍스트 내용에 따라 다음과 같이 아이콘이 표시된다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 50 50
+
+    * - Description 텍스트
+      - 표시 아이콘
+    * - "success" 포함
+      - 초록색 체크
+    * - "auto job start" 포함
+      - 파란색 재생
+    * - 그 외
+      - 빨간색 오류
+
+* ID/설명으로 필터링, 15건 단위 페이지네이션 또는 전체 보기 전환이 가능하다.
+* 현재 선택된 데이터베이스로 목록이 좁혀지며, 선택된 데이터베이스가 없으면 호스트 전체 이력("Global Backup
+  History")을 보여준다.
+* **새로 고침(Refresh)** 버튼으로 다시 불러온다.
+
+데이터베이스 복구
+==================
+
+.. image:: /images/database-restore.png
+
+Manage Database → **데이터베이스 복구(Restore Database)** (데이터베이스가 중지 상태여야 한다). 복원 시점 선택 또는 백업 레벨별 파일을 직접 지정할 수 있다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 25 18 42 15
+
+    * - 항목
+      - CLI 대응
+      - 설명
+      - 기본값
+    * - 복구 시점 지정(Specify restore date)
+      - ``-d, --up-to-date``
+      - 백업 시점 또는 ``dd-mm-yyyy:hh:mm:ss`` 형식의 특정 시각으로 데이터베이스 상태를 복구한다
+      - —
+    * - 백업 레벨 선택(Select backup information)
+      - ``-l, --level`` / ``-B, --backup-file-path``
+      - 복구에 사용할 백업 레벨과 백업 볼륨이 있는 디렉터리 경로
+      - 레벨 0(전체)
+    * - 부분 복구 수행(Perform partial recovery)
+      - ``-p, --partial-recovery``
+      - 아카이브 로그가 없을 경우 강제로 부분 복구를 수행한다
+      - 꺼짐
+    * - 복원 경로 변경(Change restore path)
+      - ``-u, --use-database-location-path``
+      - 데이터베이스 위치 파일을 새 경로로 다시 쓴 뒤, 그 경로를 기준으로 복구하도록 지시한다
+      - 꺼짐
+
+.. warning::
+
+    HA 복제에 포함된 데이터베이스는 이 화면으로 복원할 수 없다 — 시도하면 오류가 표시된다. 호스트에 직접
+    접속해 콘솔에서 ``restoreslave`` 유틸리티를 사용해야 한다.
+
+데이터베이스 언로드
+====================
+
+.. image:: /images/database-unload.png
+
+Manage Database → **데이터베이스 언로드(Unload Database...)** 를 선택한다. "선택한 테이블만"을 지정하지 않으면 기본적으로
+전체 클래스가 언로드된다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 25 18 42 15
+
+    * - 항목
+      - CLI 대응
+      - 설명
+      - 기본값
+    * - 대상 디렉터리(Target Directory) \*
+      - ``-O, --output-path``
+      - 출력 디렉터리 경로
+      - —
+    * - Schema 포함 / Data 포함
+      - ``-s, --schema-only`` / ``-d, --data-only``
+      - 스키마만 / 오브젝트만 처리할지 선택한다. 둘 다 켜면 스키마와 데이터 둘 다 처리된다
+      - 둘 다 켜짐
+    * - 선택한 테이블만(테이블 목록)
+      - ``-i, --input-class-file``
+      - 지정한 테이블 이름 목록만 처리한다
+      - 전체 클래스
+    * - 참조 테이블 포함(Include referenced tables)
+      - ``--include-reference``
+      - "선택한 테이블만"이 함께 지정되어야 의미가 있다
+      - 꺼짐
+    * - 구분 식별자 사용(Use delimited identifier)
+      - ``--use-delimiter``
+      - 식별자 처음과 끝에 큰따옴표를 사용한다
+      - 꺼짐
+    * - 출력 파일 접두어(Prefix output files)
+      - ``--output-prefix``
+      - 지정하지 않으면 데이터베이스 이름이 접두어로 사용된다
+      - 데이터베이스 이름
+    * - 해시 파일(File for hash)
+      - ``--hash-file``
+      - 해시 파일 경로
+      - —
+    * - 캐시 페이지 수(Number of cached pages)
+      - ``--cached-pages``
+      - 언로드 작업에 사용할 캐시 페이지 수
+      - 계산됨(자동)
+    * - 예상 인스턴스 수(Estimated instances)
+      - ``--estimated-size``
+      - 언로드할 데이터 양을 미리 추정한 값
+      - 계산됨(자동)
+
+.. warning::
+
+    "LO file count per directory" 필드는 ``unloaddb`` 의 ``--lo-count`` 옵션에 대응하는데, 이 옵션은 이미
+    지원 종료되어 제거된(deprecated) 옵션이다.
+
+.. note::
+
+    Schema/Data 포함 범위는 최소 하나 이상 "포함"으로 선택해야 하고, "선택한 테이블만" 옵션을 쓸 경우 테이블을
+    최소 1개 이상 선택해야 한다.
+
+데이터베이스 로드
+==================
 
 .. image:: /images/database-load.png
 
-Manage Database → **데이터베이스 로드(Load Database)** (데이터베이스가 중지 상태여야 한다). 자세한 필드 설명은 :doc:`backup` 참고.
+Manage Database → **데이터베이스 로드(Load Database...)** 를 선택한다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 25 18 42 15
+
+    * - 항목
+      - CLI 대응
+      - 설명
+      - 기본값
+    * - 사용자 이름 / 비밀번호(User Name / Password)
+      - ``-u, --user`` / ``-p, --password``
+      - 적재를 수행할 DB 계정 정보
+      - —
+    * - 신택스 검사 후 적재(Check syntax and load database)
+      - ``-l, --load-only`` (끌 때 적용)
+      - 기본적으로 꺼져 있으며, **꺼진 상태에서는 신택스 검사 없이 데이터만 적재한다.**
+      - 꺼짐
+    * - 로그 기록 안 함(No log)
+      - ``--no-logging``
+      - 트랜잭션 로그를 기록하지 않고 적재한다
+      - 꺼짐
+    * - 예상 인스턴스 수(Estimated instances)
+      - ``--estimated-size``
+      - 적재할 데이터 양을 미리 추정한 값
+      - 5000
+    * - 주기적 커밋 카운트(Periodic commit)
+      - ``-c, --periodic-commit``
+      - 지정한 레코드 수마다 커밋한다
+      - 10240
+    * - Don't use OID(OID 사용 안 함)
+      - ``--no-oid``
+      - 객체 ID(OID)를 사용하지 않고 적재한다
+      - 꺼짐
+    * - Don't update statistics(통계 정보 갱신 안 함)
+      - ``--no-statistics``
+      - 적재 후 통계 정보를 갱신하지 않는다
+      - 꺼짐
+    * - 에러 제어 파일(Error control file)
+      - ``--error-control-file``
+      - 적재 중 발생하는 에러 처리 방식을 지정한 파일
+      - —
+    * - 제외 테이블 파일(Ignored table file)
+      - ``--ignore-class-file``
+      - 적재에서 제외할 테이블 이름 목록 파일
+      - —
+    * - Schema / Object(Data) / Index 파일 경로
+      - ``-s, --schema-file`` / ``-d, --data-file`` / ``-i, --index-file``
+      - 각각 스키마 / 데이터 / 인덱스 파일 경로. 언로드로 생성된 파일 목록에서 선택하거나 경로를 직접 입력할 수
+        있다
+      - —
+    * - Trigger 파일 경로
+      - ``--trigger-file``
+      - 화면에는 있지만 실제로 동작하지 않는다. :doc:`known_issues` 참고.
+      - —
+
+.. warning::
+
+    Load의 기본 대상은 기존 데이터베이스이므로, 잘못 실행하면 실제 데이터를 덮어쓸 수 있다. 실행 전 대상 데이터베이스명을 반드시 확인한다.
 
 삭제
 ====

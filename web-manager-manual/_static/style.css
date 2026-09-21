@@ -54,7 +54,14 @@ pre code, code, samp {
     line-height: 1rem;
     font-variation-settings: normal;
     margin-top: calc(var(--spacing) * 2);
-    padding-block: calc(var(--spacing) * 2);
+    padding-block: calc(var(--spacing) * 0.5);
+    /* Inline code chips (e.g. in wrapped table cells or paragraphs) would
+       otherwise render one background box spanning the whole element's
+       bounding rect, which bleeds into the line above/below wherever the
+       chip's text wraps onto a second line. box-decoration-break: clone
+       gives each wrapped line-fragment its own independent box instead. */
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
 }
 
 .highlight pre {
@@ -113,11 +120,16 @@ table {
   table-layout: fixed;
   overflow-wrap: anywhere;
   max-width: -webkit-fill-available;
+  /* The theme sets a tight line-height (~1.43) tuned for small Latin text;
+     wrapped Korean cell text needs more vertical room or lines crowd/overlap
+     each other. */
+  line-height: 1.65;
 }
 
 table th,
 table td {
   font-size: 1rem;
+  vertical-align: top;
 }
 
 table tbody td:first-child {
@@ -218,11 +230,14 @@ html pre, html code, html samp, html kbd {
 
 /* Screenshots often have a white/light UI background that otherwise blends
    into the page — give every screenshot a visible boundary, rounded corners,
-   and margin so it reads as its own block instead of running into the text
-   right above/below it. */
+   and margin so it reads as its own block. The top/bottom margin is
+   asymmetric on purpose: a bigger gap before the image separates it from
+   whatever came before (e.g. the previous wizard step), while a smaller
+   gap after it keeps the image visually paired with the caption/step text
+   that immediately follows — image + text should read as one set. */
 #content img {
     display: block;
-    margin: 1.5rem 0;
+    margin: 2rem 0 0.5rem;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);

@@ -15,12 +15,6 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
 .. note::
 
-    Query ID(질의 ID) \*, Password(비밀번호) \*, SQL문 \* 을 비워두면 각각 "질의 자동화 계획 ID가 필요합니다.",
-    "데이터베이스 비밀번호가 필요합니다.", "SQL 구문을 입력해야 합니다." 오류가 표시된다. Username은 기본값
-    "public"이 채워져 있으며, 선택 입력이다.
-
-.. note::
-
     수정 시 Query ID는 읽기 전용이며, Password는 매번 빈 값으로 표시되므로(CMS가 값을 절대 돌려주지 않음) 수정할 때마다 다시 입력해야 한다.
 
 질의 자동화 계획 수행 로그 (Auto Query Log)

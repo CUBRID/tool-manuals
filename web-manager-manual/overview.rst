@@ -27,7 +27,6 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 * :doc:`navigation`
 * :doc:`host`
 * :doc:`database`
-* :doc:`backup`
 * :doc:`automation`
 * :doc:`dashboard`
 * :doc:`db_user`
@@ -71,7 +70,7 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
   CUBRID 데이터베이스 안의 DBA/일반 사용자 계정). 셋은 저장 위치도, 비밀번호도 전부 별개다.
 * **네 종류의 계획/자동화** — ① 작업 자동화(Job automation, 데이터베이스 트리 하위의 폴더 이름으로, 아래
   세 항목을 묶는 상위 분류일 뿐이다), ② 질의 자동화(Query Plan, :doc:`automation`, SQL문을 예약 시각에
-  자동 실행), ③ 백업 계획(Backup Plan, :doc:`backup`, 백업을 예약 시각에 자동 실행), ④ 질의 수행 계획
+  자동 실행), ③ 백업 계획(Backup Plan, :doc:`database`, 백업을 예약 시각에 자동 실행), ④ 질의 수행 계획
   (Plan Dump, :doc:`dashboard`, 예약과 무관하게 현재 캐시된 쿼리 실행 계획을 조회하는 화면). ②·③은 예약
   실행이고, ④는 이름은 비슷하지만 예약과 전혀 관계없는 실시간 조회 화면이다.
 * **자동 새로고침 / LIVE·PAUSED 배지** — 실시간 지표를 보여주는 화면(Server Dashboard, Database Dashboard,

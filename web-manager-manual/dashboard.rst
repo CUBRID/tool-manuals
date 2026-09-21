@@ -1,5 +1,5 @@
 *************************************
-데이터베이스 대시보드 / 정보 대화창
+데이터베이스 대시보드
 *************************************
 
 Database Dashboard
@@ -27,41 +27,6 @@ Database Dashboard
       - 락/트랜잭션 목록
     * - 작업 자동화(Job automation)
       - Backup Plan / Query Plan 요약
-
-Database Info
-=============
-
-우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다. Locking Information/Transaction
-information/Plan Dump는 데이터베이스가 실행 중일 때만 활성화된다.
-
-* **속성(Properties)** — 접속/서버 파라미터 조회 및 수정.
-* **파라미터 덤프(Param Dump)** — 파라미터 값 비교.
-
-.. image:: /images/database-param-dump.png
-
-* **잠금 정보(Locking Information)** — 잠금 세션/객체/에스컬레이션 정보.
-
-.. image:: /images/database-lock-info.png
-
-* **트랜잭션 정보(Transaction information)** — 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능.
-
-.. image:: /images/database-transaction-info.png
-
-* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프.
-
-.. image:: /images/database-plan-dump.png
-
-.. warning::
-
-    Properties의 "Apply Changes"는 실제 호스트의 cubrid.conf를 즉시 덮어쓴다.
-
-.. important::
-
-    Properties가 편집하는 대상은 **여는 경로에 따라 다르다.** 특정 데이터베이스를 우클릭해서 열면 cubrid.conf의
-    ``[@데이터베이스명]`` 섹션(그 데이터베이스만의 개별 설정)을 편집한다. 반면 :doc:`database` 의 "전체
-    데이터베이스 메뉴"처럼 특정 데이터베이스가 선택되지 않은 상태(데이터베이스 트리 루트)에서 Properties를 열면
-    ``[common]`` 섹션(호스트 전체 기본값)을 편집한다 — 둘은 서로 다른 섹션이니 어느 쪽을 열었는지 화면 제목에서
-    확인한다.
 
 자동 새로고침 간격 설정
 ========================
