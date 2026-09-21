@@ -216,6 +216,23 @@ html pre, html code, html samp, html kbd {
     text-indent: -1.6em;
 }
 
+/* Screenshots often have a white/light UI background that otherwise blends
+   into the page — give every screenshot a visible boundary, rounded corners,
+   and margin so it reads as its own block instead of running into the text
+   right above/below it. */
+#content img {
+    display: block;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.dark #content img {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
 /* `.. image:: ... :align: left/right` — float the screenshot so the
    paragraph right after it wraps alongside instead of stacking below. */
 #content img.align-left {
