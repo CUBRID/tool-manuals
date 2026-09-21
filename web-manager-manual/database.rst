@@ -40,7 +40,7 @@
 
     데이터베이스 로드/최적화/복사/이름 변경/복구/삭제는 데이터베이스가 실행 중이면 비활성화된다. 먼저 중지해야 한다.
     반대로 **데이터베이스 정보(Database Info)** 하위의 잠금 정보/트랜잭션 정보/질의 수행 계획은 실행 중일 때만
-    활성화된다 (실시간 서버 상태를 조회하는 항목이므로).
+    활성화된다.
 
 로그인 여부 표시
 ================
@@ -50,9 +50,8 @@
 
 .. important::
 
-    **해당 데이터베이스에 로그인하지 않은 상태에서는 어떤 작업도 실행할 수 없다.** 데이터베이스 시작/중지,
-    Manage Database의 모든 기능, Database Info의 모든 항목, 속성까지 예외 없이 로그인 상태를 먼저 요구하며,
-    로그인 안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
+    **해당 데이터베이스에 로그인하지 않은 상태에서는 우클릭 메뉴의 어떤 기능도 실행할 수 없다** (Manage Database,
+    Database Info, Space 하위 기능 포함). 로그인 안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
 
 HA 상태 표시
 ============
@@ -139,21 +138,12 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
 
 .. image:: /images/database-start-all-confirm.png
 
-.. note::
-
-    Start All/Stop All/Restart All은 각각 별도의 확인 대화창을 거친다. Stop All과 Restart All은 "활성 연결과
-    트랜잭션이 모두 끊깁니다"라는 경고 문구를 포함한다.
-
 데이터베이스 생성
 ==================
 
 "Databases" 트리 루트 우클릭 → **데이터베이스 생성(Create Database)** 를 선택하면 5단계 마법사가 열린다:
 General Information → Additional Volume Information → Automatic volume extension → Set DBA Password → Database Information(검토).
 실제로는 CUBRID의 ``createdb`` 유틸리티를 실행한다.
-
-.. note::
-
-    ``*`` 표시된 항목은 필수 입력 항목입니다.
 
 .. image:: /images/database-create.png
 
@@ -164,11 +154,11 @@ General Information → Additional Volume Information → Automatic volume exten
     :widths: 35 65
 
     * - 항목
-      - ``createdb`` 전달 방식
+      - CLI 대응
     * - Database name(데이터베이스 이름) \*
-      - 커맨드라인 인자
-    * - Locale
-      - 두 번째 인자(``<언어>.<문자셋>``, 예: ``en_US.iso88591``)
+      - —
+    * - Locale (예: ``en_US.iso88591``)
+      - —
     * - Page size
       - ``--db-page-size``
     * - Volume size
@@ -181,8 +171,8 @@ General Information → Additional Volume Information → Automatic volume exten
       - ``--log-volume-size``
     * - Log path
       - ``-L, --log-path``
-    * - Start database after creation
-      - ``createdb`` 옵션이 아닌 생성 후 후속 단계
+
+**Start database after creation** 은 ``createdb`` 옵션이 아니라 생성 완료 후 별도로 실행되는 단계다.
 
 .. image:: /images/database-create-step2.png
 
@@ -202,8 +192,7 @@ General Information → Additional Volume Information → Automatic volume exten
 
 .. image:: /images/database-create-step5.png
 
-**5단계. 검토(Database Information)** — 요약을 확인하고 **완료(Finish)** 를 클릭하면 실제 생성 작업이 시작된다. 완료까지
-최대 2분 정도 걸릴 수 있다.
+**5단계. 검토(Database Information)** — 요약을 확인하고 **완료(Finish)** 를 클릭하면 실제 생성 작업이 시작된다.
 
 데이터베이스 로그인
 ====================
@@ -215,9 +204,9 @@ General Information → Additional Volume Information → Automatic volume exten
 
 .. note::
 
-    User name이 비어 있으면 로그인 버튼을 눌러도 아무 반응이 없다 (오류 메시지 없이 조용히 무시된다). 기본값 "dba"를
-    지우지 않는 것을 권장한다. Password는 화면 자체에는 필수 표시가 없다 — 비밀번호가 없는 계정(예: public)은
-    비워두고 로그인할 수 있으며, 값이 틀리면 CMS 인증 단계에서 오류가 표시된다.
+    User name이 비어 있으면 로그인 버튼을 눌러도 아무 반응이 없다 (오류 메시지 없이 조용히 무시된다). Password는
+    화면 자체에는 필수 표시가 없다 — 비밀번호가 없는 계정(예: public)은 비워두고 로그인할 수 있으며, 값이 틀리면
+    CMS 인증 단계에서 오류가 표시된다.
 
 로그아웃 / 저장된 자격증명 관리
 ================================
@@ -248,10 +237,6 @@ General Information → Additional Volume Information → Automatic volume exten
 .. image:: /images/database-start-confirm.png
 
 **데이터베이스 시작(Start Database)** 확인 대화창.
-
-.. note::
-
-    Copy Database 같은 무거운 작업 직후에는 몇 분간 로그인이 일시적으로 지연될 수 있다. 앱의 문제가 아니라 CMS 호스트 자체의 특성이다.
 
 이름 변경
 =========
@@ -311,8 +296,8 @@ Manage Database → **데이터베이스 복사(Copy Database)** (원본이 중�
 .. warning::
 
     "Delete Source After Copy"는 ``copydb`` 자체의 원본 삭제 옵션(``-d, --delete-source``)을 쓰지 않는다.
-    대신 복사가 끝난 뒤 **별도의 ``cubrid deletedb`` 프로세스** 를 원본 데이터베이스에 대해 추가로 실행하는
-    방식으로 동작한다. 즉 복사와 삭제는 하나의 원자적(atomic) 작업이 아니라 순차적인 두 단계이다.
+    대신 복사가 끝난 뒤 원본 데이터베이스에 대해 별도로 삭제를 실행하는 방식으로 동작한다 — 복사와 삭제가
+    순차적인 두 단계로 이뤄진다.
 
 볼륨 추가 (Add Database Volume)
 ================================
@@ -391,9 +376,3 @@ Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계�
 
 **2단계.** DBA User name(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
 없지만, 값이 올바르지 않으면 인증 단계에서 오류가 표시되어 삭제가 진행되지 않는다.
-
-.. note::
-
-    삭제가 끝나면 해당 데이터베이스가 :doc:`server_dashboard` 의 "Auto Startup" 목록(호스트 ``cubrid.conf`` 의
-    ``[service]`` 섹션 ``server`` 파라미터)에 남아 있을 경우 그 항목도 함께 정리를 시도한다 — 다만 이 정리는
-    최선 노력(best-effort) 방식이라, 실패하더라도 데이터베이스 자체의 삭제는 이미 완료된 상태로 처리된다.

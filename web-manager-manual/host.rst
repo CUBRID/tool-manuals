@@ -67,9 +67,7 @@ NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의
 
 .. note::
 
-    ``*`` 표시된 항목은 필수 입력 항목입니다. Alias(별칭) \*, IP Address / Domain(주소) \*, Port(포트) \*,
-    Username(사용자 이름) \* 는 반드시 입력해야 한다. Credentials의 **새 비밀번호(New Password)** (비워두면 기존 비밀번호 유지)는
-    선택적으로 입력할 수 있는 값이다.
+    Credentials의 **새 비밀번호(New Password)** 는 선택 입력이다 — 비워두면 기존 비밀번호가 유지된다.
 
 .. warning::
 
@@ -127,13 +125,13 @@ CMS 사용자 관리
 
     "CMS 사용자"는 CUBRID DB 사용자나 NCA 로그인 계정과는 별개로, 호스트에 연결된 CMS 관리자 계정을 뜻한다.
 
-섹션: **시스템 관리자(System administrator)**, **관리 사용자(Management users)** (각 행에 DB creation authority / Broker authority / Status monitor authority가 표시된다).
+섹션: **시스템 관리자(System administrator)**, **관리 사용자(Management users)** (각 행에 DB 생성 권한 / 브로커 관리 권한 / 모니터링 권한이 표시된다).
 
 .. note::
 
-    ``*`` 표시된 항목은 필수 입력 항목입니다. **사용자 추가(Add User)** 대화창에서 Login ID(로그인 ID) \* 는 항상 필수이며,
-    Password(비밀번호) \* 는 신규 사용자를 추가할 때만 필수이다. 이미 있는 사용자를 수정할 때는 비밀번호를 비워두면
-    기존 값이 유지되지만, 비밀번호를 입력했다면 Password Confirm(비밀번호 확인) \* 도 함께 입력해야 한다.
+    **사용자 추가(Add User)** 대화창에서 Password(비밀번호)는 신규 사용자를 추가할 때만 필수이다. 이미 있는
+    사용자를 수정할 때는 비밀번호를 비워두면 기존 값이 유지되지만, 비밀번호를 입력했다면 Password Confirm
+    (비밀번호 확인)도 함께 입력해야 한다.
 
 * **사용자 추가(Add User)** 로 로그인 ID/비밀번호와 권한(각각 none/admin, none/monitor/admin)을 설정해 추가한다.
 * 행에 마우스를 올리면 수정/삭제 아이콘이 나타난다. 기본 admin 계정은 삭제할 수 없다.
@@ -148,7 +146,7 @@ CMS 사용자 관리
 
 .. warning::
 
-    비밀번호를 바꾼 뒤 실제로 반영됐는지 꼭 확인한다. 실패 시 즉시 원래 비밀번호로 되돌리는 것을 권장한다.
+    비밀번호를 바꾼 뒤 실제로 반영됐는지 확인한다. 실패했다면 즉시 원래 비밀번호로 되돌린다.
 
 서버 버전
 =========

@@ -22,16 +22,9 @@ Server Dashboard
     * - System Status
       - 호스트 OS의 CPU/메모리 사용률 등 시스템 리소스 현황을 보여준다.
     * - Databases
-      - 이 호스트의 데이터베이스 목록과 실행 상태, 부팅 시 자동 시작 여부("Auto Startup")를 보여준다.
+      - 이 호스트의 데이터베이스 목록과 실행 상태를 보여준다.
     * - Environment Details
       - CUBRID 버전, 설치 경로 등 호스트 환경 정보를 보여준다 (:doc:`host` 의 "서버 버전" 절과 같은 정보다).
-
-.. warning::
-
-    Databases 섹션의 "Auto Startup" 토글은 이 화면에서 바로 켜고 끌 수 있다. 켜면 해당 데이터베이스 이름이
-    호스트의 ``cubrid.conf`` 파일 ``[service]`` 섹션의 ``server`` 파라미터(자동시작 데이터베이스 목록,
-    쉼표로 구분)에 즉시 추가되고, 끄면 그 목록에서 즉시 제거된다 — CMS를 통해 원격으로 수정되며, 별도
-    저장 버튼 없이 토글하는 순간 반영된다.
 
 Service Dashboard (전체 현황)
 ==============================

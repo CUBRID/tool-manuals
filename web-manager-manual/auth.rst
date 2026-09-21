@@ -7,10 +7,6 @@
 
 .. image:: /images/login.png
 
-.. note::
-
-    ``*`` 표시된 항목은 필수 입력 항목입니다.
-
 필드: **사용자 이름(Username)** \*, **비밀번호(Password)** \* (옆 눈 모양 아이콘으로 표시/숨김 토글). 우측 상단에 언어(한/영)와 다크모드 토글 버튼이 있다.
 
 #. 아무것도 채우지 않고 Login을 누르면 "Username ... required" / "Password ... required" 인라인 오류가 표시된다.
@@ -22,10 +18,6 @@
 ========
 
 .. image:: /images/register.png
-
-.. note::
-
-    ``*`` 표시된 항목은 필수 입력 항목입니다.
 
 필드: **사용자 이름(Username)** \*, **비밀번호(Password)** \* (4단계 강도 표시: Weak/Average/Good/Strong), **비밀번호 확인(Password Confirm)** \*.
 

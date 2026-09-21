@@ -13,9 +13,8 @@ CUBRID 데이터베이스 안에 실제로 존재하는 DB 계정(``db_user``/``
 
 .. note::
 
-    ``*`` 표시된 항목은 필수 입력 항목입니다. Username(사용자 이름) \* 만 필수이며, 값이 없으면 **사용자 생성(Create User)**
-    버튼 자체가 비활성화된다. Description, Password/Password Confirm은 화면상 선택적으로 입력할 수 있는 값이다 — Password를 비워두면
-    비밀번호 없는 사용자로 생성된다 (CUBRID에서 자체적으로 허용되는 구성이지만, 운영 환경에서는 권장하지 않는다).
+    Username(사용자 이름) \* 만 필수이며, 값이 없으면 **사용자 생성(Create User)** 버튼 자체가 비활성화된다.
+    Password/Password Confirm은 선택 입력이다 — 비워두면 비밀번호 없는 사용자로 생성된다.
 
 .. note::
 

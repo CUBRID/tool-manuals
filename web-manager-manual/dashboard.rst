@@ -31,33 +31,25 @@ Database Dashboard
 Database Info
 =============
 
-우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다. Locking Information/Transaction information/Plan Dump는
-데이터베이스가 실행 중일 때만 활성화된다 (실시간 서버 상태 조회이므로).
+우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다. Locking Information/Transaction
+information/Plan Dump는 데이터베이스가 실행 중일 때만 활성화된다.
 
-.. list-table::
-    :header-rows: 1
-    :widths: 30 70
+* **속성(Properties)** — 접속/서버 파라미터 조회 및 수정.
+* **파라미터 덤프(Param Dump)** — 파라미터 값 비교.
 
-    * - 항목
-      - 설명
-    * - **속성(Properties)**
-      - 접속/서버 파라미터 조회 및 수정
-    * - **파라미터 덤프(Param Dump)**
-      - 파라미터 값 비교
+.. image:: /images/database-param-dump.png
 
-        .. image:: /images/database-param-dump.png
-    * - **잠금 정보(Locking Information)**
-      - 잠금 세션/객체/에스컬레이션 정보
+* **잠금 정보(Locking Information)** — 잠금 세션/객체/에스컬레이션 정보.
 
-        .. image:: /images/database-lock-info.png
-    * - **트랜잭션 정보(Transaction information)**
-      - 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능
+.. image:: /images/database-lock-info.png
 
-        .. image:: /images/database-transaction-info.png
-    * - **질의 수행 계획(Plan Dump)**
-      - 쿼리 실행 계획 캐시 덤프
+* **트랜잭션 정보(Transaction information)** — 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능.
 
-        .. image:: /images/database-plan-dump.png
+.. image:: /images/database-transaction-info.png
+
+* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프.
+
+.. image:: /images/database-plan-dump.png
 
 .. warning::
 
@@ -82,5 +74,5 @@ Database Dashboard를 비롯해 실시간 데이터를 보여주는 화면들(Se
 
 * 각 항목마다 **꺼짐(Off)** / 1s / 3s / 5s / 10s / 30s 프리셋 버튼과, 직접 초 단위 숫자를 입력하는 커스텀 입력란(0~86400초,
   즉 최대 24시간)이 있다.
-* **적용(Apply)** 를 눌러야 반영되며, 설정은 사용자 계정에 저장되어 다음 로그인에도 유지된다.
+* 설정은 사용자 계정에 저장되어 다음 로그인에도 유지된다.
 * 하나라도 0(Off)보다 크게 설정되어 있으면 타이머 아이콘에 초록 점이 표시된다.

@@ -91,7 +91,7 @@
 
 .. warning::
 
-    **적용(Apply)** 는 실제 ``cubrid_broker.conf``\ 에 해당 브로커 섹션 값만 즉시 반영한다. 신중하게 사용한다.
+    한 번 누르면 즉시 반영되므로 신중하게 사용한다.
 
 로그 뷰어
 =========
@@ -99,5 +99,4 @@
 .. image:: /images/broker-log-viewer.png
 
 브로커의 **SQL 로그(SQL Log)** 폴더를 확장하고 파일을 더블클릭하면 Log Viewer 탭이 열린다.
-모드 전환 버튼 3개(**원시 로그(Raw Log)** / **파싱된 SQL(Parsed SQL)** / **Top SQL**)로 보기 방식을 바꿀 수 있다
-(``Top SQL``\ 은 로케일과 무관하게 화면에 항상 영문으로만 표시된다).
+모드 전환 버튼 3개(**원시 로그(Raw Log)** / **파싱된 SQL(Parsed SQL)** / **Top SQL**)로 보기 방식을 바꿀 수 있다.
