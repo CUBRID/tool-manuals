@@ -42,27 +42,28 @@
     반대로 **데이터베이스 정보(Database Info)** 하위의 잠금 정보/트랜잭션 정보/질의 수행 계획은 실행 중일 때만
     활성화된다.
 
-데이터베이스 정보 (Database Info)
-====================================
+데이터베이스 정보(Database Info)
+===================================
 
 우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다.
 
 * **속성(Properties)** — 접속/서버 파라미터 조회 및 수정.
-* **파라미터 덤프(Param Dump)** — 파라미터 값 비교.
 
 .. image:: /images/database-param-dump.png
 
-* **잠금 정보(Locking Information)** — 잠금 세션/객체/에스컬레이션 정보.
+* **파라미터 덤프(Param Dump)** — 파라미터 값 비교.
 
 .. image:: /images/database-lock-info.png
 
-* **트랜잭션 정보(Transaction information)** — 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능.
+* **잠금 정보(Locking Information)** — 잠금 세션/객체/에스컬레이션 정보.
 
 .. image:: /images/database-transaction-info.png
 
-* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프.
+* **트랜잭션 정보(Transaction information)** — 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능.
 
 .. image:: /images/database-plan-dump.png
+
+* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프.
 
 .. warning::
 
@@ -89,21 +90,51 @@
 프로필 저장 여부 표시
 ======================
 
-서버에 저장된 로그인 프로필이 있으면 자물쇠 아이콘 옆에 열쇠 아이콘이 뜨고, 없으면 뜨지 않는다.
+서버에 저장된 데이터베이스 로그인 프로필이 있으면 자물쇠 아이콘 옆에 열쇠 아이콘이 뜨고, 없으면 뜨지 않는다.
 
 HA 상태 표시
 ============
 
 호스트가 HA로 구성되어 있고 해당 데이터베이스가 ``cubrid_ha.conf``\ 의 ``ha_db_list``\ 에 있으면, 데이터베이스
-이름 옆에 **HA** 배지가 표시된다(로케일과 무관하게 화면에 항상 "HA"로만 표시된다). 이 배지 옆에는 해당 데이터베이스의 실시간 복제 상태 배지가 하나 더
-붙는다: **active** / **standby** / **to-be-active** / **to-be-standby** / **maintenance** / **dead** /
-**idle** 중 하나이며, CUBRID 엔진의 ``HA_SERVER_STATE``\ 를 그대로 표시한 것이다 (마스터/슬레이브/레플리카
-같은 노드 단위 역할과는 별개로, 이 데이터베이스 서버 프로세스 자체의 복제 상태를 뜻한다). 두 배지 모두
-호스트의 HA 하트비트 데이터가 있어야 표시되며, 이 데이터는 HA로 알려진 호스트에 접속하면 자동으로
+이름 옆에 **HA** 배지가 표시된다(로케일과 무관하게 화면에 항상 "HA"로만 표시된다).
+
+이 배지 옆에는 해당 데이터베이스의 실시간 상태를 나타내는 배지가 하나 더 붙는다 — 마스터/슬레이브/레플리카
+같은 노드 단위 역할과는 별개로, 이 데이터베이스 서버 프로세스 자체의 복제 상태(CUBRID 엔진의
+``HA_SERVER_STATE``)를 그대로 보여주는 것이다. DB 상태의 종류는 다음과 같다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 20 80
+
+    * - 상태
+      - 설명
+    * - active
+      - 마스터 노드에서 실행 중인 서버의 일반적인 상태. 읽기/쓰기를 포함한 모든 서비스를 제공한다.
+    * - standby
+      - 슬레이브·레플리카 노드에서 실행 중인 서버의 일반적인 상태. 읽기 전용 서비스만 제공한다.
+    * - to-be-active
+      - 장애 조치(failover) 등으로 standby 서버가 active로 전환되는 중간 상태. 기존 마스터로부터 받은
+        트랜잭션 로그를 반영하며 active가 될 준비를 한다.
+    * - to-be-standby
+      - active 서버가 standby로 전환되는 중간 상태(to-be-active의 반대 방향).
+    * - maintenance
+      - 운영 편의를 위해 수동으로 전환할 수 있는 상태. csql로만 접속할 수 있고 사용자에게는 서비스를
+        제공하지 않는다.
+    * - idle
+      - 아직 역할이 정해지지 않은 초기 상태.
+    * - dead
+      - 서버가 죽은 것으로 간주되는 가상 상태 — 실제로 그 상태로 실행 중인 프로세스가 있는 것은 아니다.
+
+.. note::
+
+    각 상태와 전환 원리에 대한 더 자세한 내용은 `CUBRID 매뉴얼 HA 장
+    <https://www.cubrid.org/manual/ko/11.4/ha.html>`_ 을 참고한다.
+
+두 배지 모두 호스트의 HA 하트비트 데이터가 있어야 표시되며, 이 데이터는 HA로 알려진 호스트에 접속하면 자동으로
 조회된다. Server Dashboard의 Databases 목록에도 동일한 배지가 표시된다.
 
-공간 모니터 (Space)
-====================
+공간 모니터(Space)
+===================
 
 .. image:: /images/database-space-monitor.png
 
@@ -146,8 +177,8 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
     세 화면 모두 헤더에 자동 새로고침 배지(LIVE/PAUSED)와 새로고침 설정 아이콘이 있다. 새로고침 간격 설정은
     :doc:`dashboard` 문서를 참고한다.
 
-전체 데이터베이스 메뉴 (ALL DATABASES)
-========================================
+전체 데이터베이스 메뉴(ALL DATABASES)
+=======================================
 
 .. image:: /images/database-all-databases-menu.png
    :width: 260px
@@ -176,8 +207,8 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
 
 .. image:: /images/database-start-all-confirm.png
 
-데이터베이스 생성
-==================
+데이터베이스 생성(Create Database)
+====================================
 
 "Databases" 트리 루트 우클릭 → **데이터베이스 생성(Create Database)** 를 선택하면 5단계 마법사가 열린다:
 General Information → Additional Volume Information → Automatic volume extension → Set DBA Password → Database Information(검토).
@@ -232,32 +263,32 @@ General Information → Additional Volume Information → Automatic volume exten
 
 **5단계. 검토(Database Information)** — 요약을 확인하고 **완료(Finish)** 를 클릭하면 실제 생성 작업이 시작된다.
 
-데이터베이스 로그인
-====================
+데이터베이스 로그인(Login Database)
+=====================================
 
 .. image:: /images/database-login.png
 
 데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 대화창이 열린다. User name(기본값 "dba")과 Password를 입력한다.
 **비밀번호 저장(Save Password)** 를 켜두면 다음부터 다시 입력하지 않아도 된다.
 
-로그아웃 / 저장된 자격증명 관리
-================================
+로그아웃(Logout Database) / 저장된 자격증명 관리
+===================================================
 
 .. image:: /images/database-logout-confirm.png
 
 로그인된 상태에서 우클릭하면 **데이터베이스 로그아웃(Logout Database)** 가 나타난다. 클릭하면 확인 대화창이 뜨고, 확인하면 로그인 상태만
 해제된다 (저장된 비밀번호는 유지된다).
 
-저장된 로그인 프로필이 있는 데이터베이스는 다음 두 항목도 함께 나타난다.
+저장된 데이터베이스 로그인 프로필이 있는 데이터베이스는 다음 두 항목도 함께 나타난다.
 
 * **데이터베이스 자격증명 변경(Update Database Credentials)** — 위 "데이터베이스 로그인" 절과 같은 대화창을 다시 열어 저장된 사용자명/비밀번호를 갱신한다.
 
 .. image:: /images/database-forget-credentials-confirm.png
 
-* **저장된 자격증명 삭제(Forget Saved Credentials)** — 저장된 로그인 프로필 자체를 삭제한다. 다음부터는 다시 수동으로 로그인해야 한다.
+* **저장된 자격증명 삭제(Forget Saved Credentials)** — 저장된 데이터베이스 로그인 프로필 자체를 삭제한다. 다음부터는 다시 수동으로 로그인해야 한다.
 
-시작 / 중지
-===========
+시작(Start Database) / 중지(Stop Database)
+=============================================
 
 우클릭 시 **데이터베이스 중지(Stop Database)** 와 **데이터베이스 시작(Start Database)** 중 정확히 하나만 보이며, 로그인되어 있지 않으면 둘 다 비활성화된다.
 클릭하면 바로 실행되지 않고 확인 대화창이 한 번 더 뜬다.
@@ -270,8 +301,8 @@ General Information → Additional Volume Information → Automatic volume exten
 
 **데이터베이스 시작(Start Database)** 확인 대화창.
 
-이름 변경
-=========
+이름 변경(Rename Database)
+============================
 
 .. image:: /images/database-rename.png
 
@@ -287,8 +318,8 @@ Manage Database → **데이터베이스 이름 변경(Rename Database)** (실�
     (``renamedb -E``). 볼륨별 개별 재배치는 이 화면에서 지원하지 않는다. 이름을 바꿔도 백업 이력이나 Backup
     Plan에 등록된 경로는 자동으로 따라 바뀌지 않으므로, 필요하면 직접 갱신해야 한다.
 
-복사
-====
+복사(Copy Database)
+=====================
 
 .. image:: /images/database-copy.png
 
@@ -331,7 +362,7 @@ Manage Database → **데이터베이스 복사(Copy Database)** (원본이 중�
     대신 복사가 끝난 뒤 원본 데이터베이스에 대해 별도로 삭제를 실행하는 방식으로 동작한다 — 복사와 삭제가
     순차적인 두 단계로 이뤄진다.
 
-볼륨 추가 (Add Database Volume)
+볼륨 추가(Add Database Volume)
 ================================
 
 .. image:: /images/database-add-volume.png
@@ -362,8 +393,8 @@ Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. �
 
     실행하면 실제로 볼륨 파일이 영구적으로 추가된다 — 되돌릴 수 없는 작업이다.
 
-점검 / 압축 / 최적화
-======================
+검사(Check Database) / 압축(Compact Database) / 최적화(Optimize Database)
+============================================================================
 
 Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이터베이스 공간 정리(Compact Database)**, **데이터베이스 최적화(Optimize Database)** 는 옵션을 선택하고
 실행 버튼을 누르면 작업이 시작되는 진단/유지보수성 실행 대화창이다. 실행하면 진행 상태 대화창으로 전환되고,
@@ -388,8 +419,8 @@ Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이�
     Optimize Database 메뉴 항목은 데이터베이스가 실행 중이면 비활성화된다 — 이 화면에서는 오프라인 상태에서만
     실행할 수 있다.
 
-데이터베이스 백업
-==================
+데이터베이스 백업(Backup Database)
+====================================
 
 .. image:: /images/backup-database.png
 
@@ -431,8 +462,8 @@ Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한
 백업 볼륨 이름은 백업 레벨과 무관하게 항상 ``데이터베이스이름_backup`` 으로 고정되어 저장되며, 별도로
 지정할 수 없다.
 
-백업 계획 (예약 백업)
-=====================
+백업 계획(Backup Plan)
+========================
 
 .. image:: /images/backup-plan.png
 
@@ -470,8 +501,8 @@ Backup Plan은 즉시 백업과 달리 지정한 시각에 예약 실행되는 �
         삭제는 직접 관리해야 한다
       - —
 
-백업 자동화 계획 수행 로그 (Auto Backup Log)
-==============================================
+백업 자동화 계획 수행 로그(Auto Backup Log)
+=============================================
 
 .. image:: /images/backup-auto-log.png
 
@@ -499,8 +530,8 @@ Backup Plan이 실제로 실행된 이력을 보여주는 읽기 전용 로그 �
   History")을 보여준다.
 * **새로 고침(Refresh)** 버튼으로 다시 불러온다.
 
-데이터베이스 복구
-==================
+데이터베이스 복구(Restore Database)
+=====================================
 
 .. image:: /images/database-restore.png
 
@@ -536,8 +567,8 @@ Manage Database → **데이터베이스 복구(Restore Database)** (데이터�
     HA 복제에 포함된 데이터베이스는 이 화면으로 복원할 수 없다 — 시도하면 오류가 표시된다. 호스트에 직접
     접속해 콘솔에서 ``restoreslave`` 유틸리티를 사용해야 한다.
 
-데이터베이스 언로드
-====================
+데이터베이스 언로드(Unload Database)
+======================================
 
 .. image:: /images/database-unload.png
 
@@ -599,8 +630,8 @@ Manage Database → **데이터베이스 언로드(Unload Database...)** 를 선
     Schema/Data 포함 범위는 최소 하나 이상 "포함"으로 선택해야 하고, "선택한 테이블만" 옵션을 쓸 경우 테이블을
     최소 1개 이상 선택해야 한다.
 
-데이터베이스 로드
-==================
+데이터베이스 로드(Load Database)
+==================================
 
 .. image:: /images/database-load.png
 
@@ -664,8 +695,8 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
 
     Load의 기본 대상은 기존 데이터베이스이므로, 잘못 실행하면 실제 데이터를 덮어쓸 수 있다. 실행 전 대상 데이터베이스명을 반드시 확인한다.
 
-삭제
-====
+삭제(Delete Database)
+=======================
 
 Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계로 진행된다.
 

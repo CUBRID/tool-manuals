@@ -5,7 +5,7 @@
 이 장에서 다루는 예약 실행(Query Plan/Backup Plan과 같은 계열)과 자동 볼륨 확장은 CMS가 직접 실행한다.
 따라서 NCA가 꺼져 있어도 CMS가 살아있는 호스트에서는 예약된 작업이 그대로 실행된다.
 
-Query Plan (쿼리 자동 실행)
+쿼리 자동 실행(Query Plan)
 ===========================
 
 .. image:: /images/query-plan.png
@@ -17,8 +17,8 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
     수정 시 Query ID는 읽기 전용이며, Password는 매번 빈 값으로 표시되므로(CMS가 값을 절대 돌려주지 않음) 수정할 때마다 다시 입력해야 한다.
 
-질의 자동화 계획 수행 로그 (Auto Query Log)
-=============================================
+질의 자동화 계획 수행 로그(Auto Query Log)
+============================================
 
 .. image:: /images/automation-auto-query-log.png
 
@@ -31,8 +31,8 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 * 현재 선택된 데이터베이스로 목록이 좁혀지며, 선택된 데이터베이스가 없으면 호스트 전체 이력("Global Query
   Execution History")을 보여준다.
 
-볼륨 추가
-=========
+볼륨 추가(Add Volume)
+======================
 
 .. image:: /images/database-add-volume.png
 
@@ -40,8 +40,8 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 **데이터베이스 볼륨 추가(Add Database Volume)** — 둘 다 같은 대화창을 연다. 필드 설명(Purpose/Path/Size)과 ``addvoldb`` 유틸리티 옵션
 대응 관계는 :doc:`database` 의 "볼륨 추가" 절 참고.
 
-자동 볼륨 확장 설정 (Set Automation Volume)
-=============================================
+자동 볼륨 확장 설정(Set Automation Volume)
+============================================
 
 .. image:: /images/automation-set-volume.png
 
@@ -73,8 +73,8 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
         옆에 읽기 전용으로 함께 표시된다
       - —
 
-볼륨 자동 확장 로그 (Auto Volume Log)
-=======================================
+볼륨 자동 확장 로그(Auto Volume Log)
+======================================
 
 .. image:: /images/automation-auto-volume-log.png
 

@@ -9,23 +9,23 @@
 세 화면 모두 문법 검사 없이 저장한 내용이 즉시 반영되는 순수 텍스트 편집기이며, 되돌리기(Undo) 버튼으로 직전
 입력을 취소할 수 있다. 단, 저장을 누른 뒤에는 되돌리기로 되돌릴 수 없다.
 
-CUBRID 설정 편집
-==================
+CUBRID 설정 편집(Edit CUBRID Config)
+======================================
 
 .. image:: /images/server-cubrid-config-edit.png
 
-호스트의 ``cubrid.conf`` 설정 파일을 편집하는 화면이다. **CUBRID 설정 편집(Edit Cubrid Config)** 을 선택하면 열린다.
+호스트의 ``cubrid.conf`` 설정 파일을 편집하는 화면이다. **CUBRID 설정 편집(Edit CUBRID Config)** 을 선택하면 열린다.
 
-CM 설정 편집
-==============
+CM 설정 편집(Edit CM Config)
+==============================
 
 .. image:: /images/server-cm-config-edit.png
 
 호스트에서 실행 중인 CMS(CUBRID Manager Server) 자체의 설정 파일인 ``cm.conf`` 를 편집하는 화면이다.
 **CM 설정 편집(Edit CM Config)** 을 선택하면 열리며, 편집기 화면 구성과 저장 방식은 CUBRID 설정 편집과 동일하다.
 
-브로커 설정 편집
-==================
+브로커 설정 편집(Edit Broker Config)
+======================================
 
 .. image:: /images/broker-config-edit.png
 

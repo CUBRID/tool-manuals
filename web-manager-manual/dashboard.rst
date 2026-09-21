@@ -2,8 +2,8 @@
 데이터베이스 대시보드
 *************************************
 
-Database Dashboard
-===================
+데이터베이스 대시보드(Database Dashboard)
+===========================================
 
 .. image:: /images/database-dashboard.png
 

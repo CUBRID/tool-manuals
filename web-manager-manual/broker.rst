@@ -16,8 +16,8 @@
     이 호스트에서 다른 작업(백업, 데이터베이스 생성 등)이 진행 중이면 브로커 시작/중지 메뉴 전체가
     비활성화된다. CUBRID 엔진 자체의 제약이 아니라, 동시 요청으로 인한 충돌을 막기 위한 NCA 쪽 정책이다.
 
-전체 브로커 상태 보기 (Show Status)
-=====================================
+전체 브로커 상태 보기(Show Status)
+====================================
 
 .. image:: /images/broker-show-status.png
 
@@ -62,8 +62,8 @@
 ``cubrid_broker.conf`` 파일 전체를 여는 **브로커 설정 편집(Edit Broker Config)** 화면은 :doc:`config_editor`
 문서에서 따로 설명한다.
 
-브로커 속성 (Properties)
-==========================
+브로커 속성(Properties)
+=========================
 
 .. image:: /images/broker-properties.png
 
@@ -93,8 +93,8 @@
 
     한 번 적용하면 롤백할 수 없으므로 신중하게 사용한다.
 
-로그 뷰어
-=========
+로그 뷰어(Log Viewer)
+======================
 
 .. image:: /images/broker-log-viewer.png
 

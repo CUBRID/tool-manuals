@@ -2,8 +2,8 @@
 서버 / 서비스 대시보드
 **************************
 
-Server Dashboard
-=================
+서버 대시보드(Server Dashboard)
+=================================
 
 .. image:: /images/server-dashboard.png
 
@@ -26,8 +26,8 @@ Server Dashboard
     * - Environment Details
       - CUBRID 버전, 설치 경로 등 호스트 환경 정보를 보여준다 (:doc:`host` 의 "서버 버전" 절과 같은 정보다).
 
-Service Dashboard (전체 현황)
-==============================
+서비스 대시보드(Service Dashboard)
+====================================
 
 .. image:: /images/service-dashboard.png
 
