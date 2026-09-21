@@ -1,0 +1,19 @@
+{% extends "!layout.html" %}
+{% block extrahead %}
+{{ super() }}
+<script>
+  (function () {
+    // sphinxawesome_theme's own inline dark-mode script falls back to the
+    // OS/browser prefers-color-scheme whenever no explicit choice is stored,
+    // and even re-applies dark mode over a stored "false" when the OS is
+    // dark (its check is `stored === "true" OR matchMedia dark`). That makes
+    // the manual open in dark colors on any machine with Windows/browser
+    // dark mode on. Re-resolve the theme here so light is always the
+    // default and only an explicit reader toggle (which persists "true")
+    // turns dark mode on.
+    var dark = localStorage.getItem("_x_darkMode") === "true";
+    localStorage.setItem("_x_darkMode", String(dark));
+    document.documentElement.classList.toggle("dark", dark);
+  })();
+</script>
+{% endblock %}

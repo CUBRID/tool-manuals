@@ -1,5 +1,5 @@
 *************************************
-데이터베이스 대시보드 / 정보 모달
+데이터베이스 대시보드 / 정보 대화창
 *************************************
 
 Database Dashboard
@@ -9,12 +9,24 @@ Database Dashboard
 
 데이터베이스를 더블클릭하면 열리며, 6개 섹션으로 구성된다 (각 섹션은 헤더를 클릭해 접고 펼 수 있다).
 
-#. **성능 지표(Performance Metrics)** — CPU, Memory, TPS, QPS, Buffer Hit 등 실시간 지표
-#. **스토리지 볼륨(Storage Volumes)** — 볼륨별 종류/용도/사용량/경로
-#. **파일 분포(File Distribution)** — 파일 종류별 분포
-#. **CAS 브로커(CAS Brokers)** — 브로커별 상태, 행마다 Restart CAS / SQL Logs / Slow Query Logs 실행 가능
-#. **잠금 및 트랜잭션(Lock and Transaction)** — 락/트랜잭션 목록
-#. **작업 자동화(Job automation)** — Backup Plan / Query Plan 요약
+.. list-table::
+    :header-rows: 1
+    :widths: 30 70
+
+    * - 섹션
+      - 설명
+    * - 성능 지표(Performance Metrics)
+      - CPU, Memory, TPS, QPS, Buffer Hit 등 실시간 지표
+    * - 스토리지 볼륨(Storage Volumes)
+      - 볼륨별 종류/용도/사용량/경로
+    * - 파일 분포(File Distribution)
+      - 파일 종류별 분포
+    * - CAS 브로커(CAS Brokers)
+      - 브로커별 상태. 행마다 Restart CAS / SQL Logs / Slow Query Logs 실행 가능
+    * - 잠금 및 트랜잭션(Lock and Transaction)
+      - 락/트랜잭션 목록
+    * - 작업 자동화(Job automation)
+      - Backup Plan / Query Plan 요약
 
 Database Info
 =============

@@ -5,10 +5,36 @@
 .. image:: /images/database-tree.png
 
 데이터베이스 노드를 펼치면 **사용자(Users)**, **작업 자동화(Job automation)**, **공간(Space)** 하위 노드가 나타난다.
-우클릭 → **데이터베이스 관리(Manage Database)** 안에 데이터베이스 언로드(Unload Database), 데이터베이스 로드(Load Database),
-데이터베이스 검사(Check Database), 데이터베이스 공간 정리(Compact Database), 데이터베이스 볼륨 추가(Add Database Volume),
-데이터베이스 최적화(Optimize Database), 데이터베이스 복사(Copy Database), 데이터베이스 이름 변경(Rename Database),
-데이터베이스 복구(Restore Database), 데이터베이스 백업(Backup Database), 데이터베이스 삭제(Delete Database)가 있다.
+데이터베이스를 우클릭하면 **데이터베이스 관리(Manage Database)** 하위에서 사용할 수 있는 기능은 다음과 같다.
+
+.. list-table::
+    :header-rows: 1
+    :widths: 35 65
+
+    * - 기능
+      - 설명
+    * - 데이터베이스 언로드(Unload Database)
+      - 스키마/데이터를 파일로 내보낸다 (:doc:`backup` 참고)
+    * - 데이터베이스 로드(Load Database)
+      - 언로드된 파일을 데이터베이스에 적재한다 (:doc:`backup` 참고)
+    * - 데이터베이스 검사(Check Database)
+      - 데이터베이스 정합성을 검사한다
+    * - 데이터베이스 공간 정리(Compact Database)
+      - 사용하지 않는 공간을 정리한다
+    * - 데이터베이스 볼륨 추가(Add Database Volume)
+      - 저장 공간(볼륨)을 추가한다
+    * - 데이터베이스 최적화(Optimize Database)
+      - 클래스 통계 정보를 갱신한다
+    * - 데이터베이스 복사(Copy Database)
+      - 데이터베이스 전체를 다른 이름으로 복제한다
+    * - 데이터베이스 이름 변경(Rename Database)
+      - 데이터베이스 이름을 바꾼다
+    * - 데이터베이스 복구(Restore Database)
+      - 백업으로부터 데이터베이스를 복원한다 (:doc:`backup` 참고)
+    * - 데이터베이스 백업(Backup Database)
+      - 데이터베이스를 백업한다 (:doc:`backup` 참고)
+    * - 데이터베이스 삭제(Delete Database)
+      - 데이터베이스를 영구히 삭제한다
 
 .. note::
 
@@ -79,27 +105,34 @@ Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로�
 
 .. image:: /images/database-all-databases-menu.png
    :width: 260px
-   :align: left
 
 "Databases" 트리 루트를 우클릭하면 "ALL DATABASES" 메뉴가 나타난다. :doc:`broker` 의 "ALL BROKERS" 메뉴와 같은
 성격의, 해당 호스트의 데이터베이스 전체를 대상으로 하는 일괄 작업 메뉴이다.
 
-* **모든 데이터베이스 시작(Start All Databases)** — 현재 중지된 데이터베이스를 전부 시작한다.
-* **모든 데이터베이스 중지(Stop All Databases)** — 현재 활성 데이터베이스를 전부 중지한다.
-* **모든 데이터베이스 재시작(Restart All Databases)** — 현재 활성 데이터베이스를 전부 중지했다가 다시 시작한다.
-* **데이터베이스 생성(Create Database)** — 아래 "데이터베이스 생성" 마법사를 연다.
-* **새로 고침(Refresh)** — 데이터베이스 목록을 새로고침한다.
-* **속성(Properties)** — 데이터베이스 속성 화면을 연다.
+.. list-table::
+    :header-rows: 1
+    :widths: 35 65
 
-.. raw:: html
-
-   <div style="clear: both;"></div>
+    * - 기능
+      - 설명
+    * - 모든 데이터베이스 시작(Start All Databases)
+      - 현재 중지된 데이터베이스를 전부 시작한다
+    * - 모든 데이터베이스 중지(Stop All Databases)
+      - 현재 활성 데이터베이스를 전부 중지한다
+    * - 모든 데이터베이스 재시작(Restart All Databases)
+      - 현재 활성 데이터베이스를 전부 중지했다가 다시 시작한다
+    * - 데이터베이스 생성(Create Database)
+      - 아래 "데이터베이스 생성" 마법사를 연다
+    * - 새로 고침(Refresh)
+      - 데이터베이스 목록을 새로고침한다
+    * - 속성(Properties)
+      - 데이터베이스 속성 화면을 연다
 
 .. image:: /images/database-start-all-confirm.png
 
 .. note::
 
-    Start All/Stop All/Restart All은 각각 별도의 확인 다이얼로그를 거친다. Stop All과 Restart All은 "활성 연결과
+    Start All/Stop All/Restart All은 각각 별도의 확인 대화창을 거친다. Stop All과 Restart All은 "활성 연결과
     트랜잭션이 모두 끊깁니다"라는 경고 문구를 포함한다.
 
 데이터베이스 생성
@@ -115,17 +148,37 @@ General Information → Additional Volume Information → Automatic volume exten
 
 .. image:: /images/database-create.png
 
-**1단계. 일반 정보(General Information)** — Database name(데이터베이스 이름) \* 은 ``createdb`` 의 커맨드라인 인자로 전달된다.
-Locale은 ``createdb`` 의 두 번째 인자(``<데이터베이스 로케일>``, 형식은 ``<language>.<charset>``, 예:
-``en_US.iso88591``)로 전달된다. Page size는 ``--db-page-size``, Volume size는 ``--db-volume-size``, Volume
-path는 ``-F, --file-path``, Log page size는 ``--log-page-size``, Log volume size는 ``--log-volume-size``,
-Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"은 ``createdb`` 옵션이 아니라
-생성 후 api-server가 별도로 수행하는 후속 단계다.
+**1단계. 일반 정보(General Information)**
+
+.. list-table::
+    :header-rows: 1
+    :widths: 35 65
+
+    * - 항목
+      - ``createdb`` 전달 방식
+    * - Database name(데이터베이스 이름) \*
+      - 커맨드라인 인자
+    * - Locale
+      - 두 번째 인자(``<언어>.<문자셋>``, 예: ``en_US.iso88591``)
+    * - Page size
+      - ``--db-page-size``
+    * - Volume size
+      - ``--db-volume-size``
+    * - Volume path
+      - ``-F, --file-path``
+    * - Log page size
+      - ``--log-page-size``
+    * - Log volume size
+      - ``--log-volume-size``
+    * - Log path
+      - ``-L, --log-path``
+    * - Start database after creation
+      - ``createdb`` 옵션이 아니라, 생성 후 api-server가 별도로 수행하는 후속 단계다
 
 .. image:: /images/database-create-step2.png
 
 **2단계. 추가 볼륨 정보(Additional Volume Information)** — 추가 볼륨이 필요 없으면 그대로 다음으로 진행한다 (이 단계의 볼륨
-이름/크기/경로는 선택 입력이다). 여기서 입력한 볼륨 목록은 CMS가 제어 파일로 만들어 ``--more-volume-file`` 로
+이름/크기/경로는 선택적으로 입력할 수 있다). 여기서 입력한 볼륨 목록은 CMS가 제어 파일로 만들어 ``--more-volume-file`` 로
 전달한다.
 
 .. image:: /images/database-create-step3.png
@@ -135,7 +188,7 @@ Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"
 
 .. image:: /images/database-create-step4.png
 
-**4단계. DBA 비밀번호 설정(Set DBA Password)** — Password/Password Confirm은 **선택 입력**\ 이다. 둘 다 비워두면 DBA 계정에 비밀번호 없이
+**4단계. DBA 비밀번호 설정(Set DBA Password)** — Password/Password Confirm은 선택적으로 입력할 수 있는 값이다. 둘 다 비워두면 DBA 계정에 비밀번호 없이
 생성되며, 값을 입력할 경우에는 8자 이상이어야 하고 Password/Password Confirm이 서로 일치해야 다음 단계로
 진행할 수 있다. 이 역시 ``createdb`` 자체의 옵션이 아니라, 생성 후 별도로 실행되는 사용자 정보 갱신 단계다.
 
@@ -149,7 +202,7 @@ Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"
 
 .. image:: /images/database-login.png
 
-데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 모달이 열린다. User name(기본값 "dba")과 Password를 입력한다.
+데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 대화창이 열린다. User name(기본값 "dba")과 Password를 입력한다.
 **비밀번호 저장(Save Password)** 를 켜두면 다음부터 다시 입력하지 않아도 된다.
 
 .. note::
@@ -163,12 +216,12 @@ Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"
 
 .. image:: /images/database-logout-confirm.png
 
-로그인된 상태에서 우클릭하면 **데이터베이스 로그아웃(Logout Database)** 가 나타난다. 클릭하면 확인 다이얼로그가 뜨고, 확인하면 로그인 상태만
+로그인된 상태에서 우클릭하면 **데이터베이스 로그아웃(Logout Database)** 가 나타난다. 클릭하면 확인 대화창이 뜨고, 확인하면 로그인 상태만
 해제된다 (저장된 비밀번호는 유지된다).
 
 저장된 로그인 프로필이 있는 데이터베이스는 다음 두 항목도 함께 나타난다.
 
-* **데이터베이스 자격증명 변경(Update Database Credentials)** — 위 "데이터베이스 로그인" 절과 같은 모달을 다시 열어 저장된 사용자명/비밀번호를 갱신한다.
+* **데이터베이스 자격증명 변경(Update Database Credentials)** — 위 "데이터베이스 로그인" 절과 같은 대화창을 다시 열어 저장된 사용자명/비밀번호를 갱신한다.
 
 .. image:: /images/database-forget-credentials-confirm.png
 
@@ -178,15 +231,15 @@ Log path는 ``-L, --log-path`` 로 전달된다. "Start database after creation"
 ===========
 
 우클릭 시 **데이터베이스 중지(Stop Database)** 와 **데이터베이스 시작(Start Database)** 중 정확히 하나만 보이며, 로그인되어 있지 않으면 둘 다 비활성화된다.
-클릭하면 바로 실행되지 않고 확인 다이얼로그가 한 번 더 뜬다.
+클릭하면 바로 실행되지 않고 확인 대화창이 한 번 더 뜬다.
 
 .. image:: /images/database-stop-confirm.png
 
-**데이터베이스 중지(Stop Database)** 확인 다이얼로그.
+**데이터베이스 중지(Stop Database)** 확인 대화창.
 
 .. image:: /images/database-start-confirm.png
 
-**데이터베이스 시작(Start Database)** 확인 다이얼로그.
+**데이터베이스 시작(Start Database)** 확인 대화창.
 
 .. note::
 
@@ -208,6 +261,8 @@ Manage Database → **데이터베이스 이름 변경(Rename Database)** (실�
 
     확장 볼륨 경로는 화면에 노출되지 않고, 현재 데이터베이스 디렉터리의 상위 디렉터리로 자동 계산되어
     ``renamedb -E`` 로 전달된다. 볼륨별 개별 재배치(``-i, --control-file``)는 이 화면에서 지원하지 않는다.
+    ``renamedb`` 자체가 로컬 ``databases.txt`` 항목과 물리 볼륨 파일 이름만 바꾸는 유틸리티이므로, 이름을
+    바꿔도 백업 이력이나 Backup Plan에 등록된 경로 등은 자동으로 따라 바뀌지 않는다 — 필요하면 직접 갱신해야 한다.
 
 복사
 ====
@@ -290,8 +345,8 @@ Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. �
 ======================
 
 Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이터베이스 공간 정리(Compact Database)**, **데이터베이스 최적화(Optimize Database)** 는 옵션을 선택하고
-실행 버튼을 누르면 작업이 시작되는 진단/유지보수성 실행 다이얼로그이다. 실행하면 진행 상태 모달로 전환되고,
-완료되면 성공 모달이 표시된다 (다른 CMS 작업과 동일하게 :doc:`automation` 에서 설명하는 백그라운드 전환도
+실행 버튼을 누르면 작업이 시작되는 진단/유지보수성 실행 대화창이다. 실행하면 진행 상태 대화창으로 전환되고,
+완료되면 성공 대화창이 표시된다 (다른 CMS 작업과 동일하게 :doc:`automation` 에서 설명하는 백그라운드 전환도
 가능하다). Unload Database의 필드 설명은 :doc:`backup` 참고.
 
 .. image:: /images/database-check.png
@@ -334,3 +389,9 @@ Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계�
 
 **2단계.** DBA User name(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
 없지만, 값이 올바르지 않으면 인증 단계에서 오류가 표시되어 삭제가 진행되지 않는다.
+
+.. note::
+
+    삭제가 끝나면 해당 데이터베이스가 :doc:`server_dashboard` 의 "Auto Startup" 목록(호스트 ``cubrid.conf`` 의
+    ``[service]`` 섹션 ``server`` 파라미터)에 남아 있을 경우 그 항목도 함께 정리를 시도한다 — 다만 이 정리는
+    최선 노력(best-effort) 방식이라, 실패하더라도 데이터베이스 자체의 삭제는 이미 완료된 상태로 처리된다.

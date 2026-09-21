@@ -2,6 +2,10 @@
 쿼리 자동화 / 볼륨
 **********************
 
+이 장에서 다루는 예약 실행(Query Plan/Backup Plan과 같은 계열)과 자동 볼륨 확장은 전부 CMS 자체의 스케줄링
+기능이다 — NCA 서버에는 별도의 스케줄 정보가 저장되지 않으며, 예약된 시각이 되면 CMS가 직접 실행한다. NCA가
+꺼져 있어도 CMS가 살아있는 호스트에서는 예약된 작업이 그대로 실행된다.
+
 Query Plan (쿼리 자동 실행)
 ===========================
 
@@ -14,7 +18,8 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 
     ``*`` 표시된 항목은 필수 입력 항목입니다. Query ID(질의 ID) \*, Password(비밀번호) \*, SQL문 \* 은 모두 필수이며
     비워두면 각각 "질의 자동화 계획 ID가 필요합니다.", "데이터베이스 비밀번호가 필요합니다.", "SQL 구문을 입력해야
-    합니다." 오류가 표시된다. Username은 기본값 "public"이 채워져 있으며 선택 입력이다.
+    합니다." 오류가 표시된다. Username은 기본값 "public"이 채워져 있으며, 그대로 두거나 다른 값으로 바꿔 선택적으로
+    입력할 수 있다.
 
 .. note::
 
@@ -42,7 +47,7 @@ Query ID, Username(기본값 "public"), Password, 실행 스케줄(주기, 시�
 .. image:: /images/database-add-volume.png
 
 데이터베이스 → **공간(Space)** 폴더 우클릭 → **볼륨 추가(Add Volume)**, 또는 데이터베이스 우클릭 → Manage Database →
-**데이터베이스 볼륨 추가(Add Database Volume)** — 둘 다 같은 모달을 연다. 필드 설명(Purpose/Path/Size)과 ``addvoldb`` 유틸리티 옵션
+**데이터베이스 볼륨 추가(Add Database Volume)** — 둘 다 같은 대화창을 연다. 필드 설명(Purpose/Path/Size)과 ``addvoldb`` 유틸리티 옵션
 대응 관계는 :doc:`database` 의 "볼륨 추가" 절 참고.
 
 자동 볼륨 확장 설정 (Set Automation Volume)

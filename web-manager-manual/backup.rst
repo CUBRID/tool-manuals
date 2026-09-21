@@ -44,6 +44,10 @@ Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한
 
     이전 버전에 있던 "Volume Name" 입력란은 제거되었다. Backup Directory 하나만 입력하면 된다.
 
+백업 볼륨 이름은 백업 레벨과 무관하게 항상 ``데이터베이스이름_backup`` 으로 고정해서 저장되는데, 이는 볼륨
+이름이 비어 있으면 경로에 문자 그대로 ``"(null)"`` 이 들어가는 일부 버전의 CMS 버그(CBRD-27065)를 피하기 위한
+NCA 쪽 우회 처리이다 (CMS 11.5 이상에서는 해당 버그 자체가 수정되어 있다).
+
 백업 계획 (예약 백업)
 =====================
 
@@ -81,7 +85,7 @@ logs/Check consistency/Compress/Threads/Online·Offline)는 예약된 시각에 
 
 .. warning::
 
-    Plan ID(계획 ID)와 Path(경로) 필드는 화면 자체의 필수 입력 검증이 없다 — 기본값이 자동으로 채워지지만, 이를
+    Plan ID(계획 ID)와 Path(경로) 필드는 값을 반드시 입력하도록 강제하는 검증이 화면에 없다 — 기본값이 자동으로 채워지지만, 이를
     지우고 빈 값으로 실행해도 오류 없이 그대로 저장된다. 두 값 모두 실제로 의미 있는 값을 직접 확인하고 입력하는
     것을 권장한다 (:doc:`known_issues` 참고).
 
@@ -137,6 +141,13 @@ Manage Database → **데이터베이스 복구(Restore Database)** (데이터�
     체크박스로 켜는 옵션(특정 시점 지정, 백업 파일 직접 지정, 복원 경로 변경 등)은 켜는 순간 관련 입력란이 필수로
     바뀐다. 예를 들어 "Specify restore date"를 켜면 Date/Time을 비워둘 수 없고, "Select backup information"을
     켜면 해당 레벨의 백업 파일 경로를 비워둘 수 없다 — 값이 없으면 **복구 실행(Execute Restore)** 버튼이 비활성화된다.
+
+.. warning::
+
+    HA 복제에 포함된 데이터베이스는 이 화면으로 복원할 수 없다 — 시도하면 오류가 표시된다. 이 화면이 쓰는 일반
+    ``restoredb`` 는 HA 복제 재개 위치를 기록하는 ``ha_apply_info`` 카탈로그를 갱신하지 않기 때문이다. CUBRID는
+    HA용으로 별도의 ``restoreslave`` 유틸리티를 제공하지만, NCA는 이를 호출하지 않는다 — HA 데이터베이스를
+    복원해야 하면 호스트에 직접 접속해 CLI로 처리해야 한다.
 
 언로드
 ======

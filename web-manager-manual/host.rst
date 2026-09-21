@@ -2,6 +2,10 @@
 호스트 관리
 ***************
 
+NCA가 관리할 CUBRID 서버(호스트)를 등록·삭제하고 그룹으로 묶어 관리하는 화면이다. 여기서 "호스트에 로그인"한다는 것은
+NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의 API에 접속하는 것이며, CUBRID 엔진에 직접 접속하는
+것이 아니다.
+
 사이드바 상단 섹션명은 **서버 목록(Server List)** 이며, 툴바에 **+ Add** (호스트 추가), **새 그룹(New Group)**, (호스트가 1개 이상이면) **전체 로그인(Login All)** 버튼이 있다.
 
 .. image:: /images/host-tree.png
@@ -11,7 +15,7 @@
 
 .. image:: /images/host-add.png
 
-툴바 **+ Add** 를 클릭하면 **새 연결(New Connection)** 모달이 열린다. 섹션 구성:
+툴바 **+ Add** 를 클릭하면 **새 연결(New Connection)** 대화창이 열린다. 대화창의 섹션 구성은 다음과 같다.
 
 .. list-table::
     :header-rows: 1
@@ -51,15 +55,24 @@
 * 빈 값으로 제출하면 각 필드에 대해 필수 입력 오류가 표시된다.
 * 이미 등록된 주소:포트로 추가하면 중복 오류가 표시된다.
 
+.. note::
+
+    **저장(Save Changes)** 을 누르는 시점에는 호스트에 아무 요청도 가지 않는다 — Alias/주소/포트/사용자 이름/비밀번호는
+    NCA 서버가 로그인 계정별로 관리하는 자체 파일(``storage/`` 아래, 계정 식별자로 이름 붙은 파일 하나)에 그대로
+    저장될 뿐이다. 이 파일 전체는 AES-256으로 암호화되어 저장되며, 암호화 키는 ``cwm-vault/secrets.json`` 의
+    SEED/SALT에서 유도된다 (:doc:`install` 의 SEED/SALT 경고 참고). 실제로 호스트에 접속을 시도하는 것은
+    **연결 테스트 및 저장** 을 눌렀을 때뿐이다.
+
 호스트 수정
 ===========
 
-우클릭 → **호스트 편집(Edit Host)** 를 선택하면 **호스트 수정(Modify Host)** 모달이 열린다.
+우클릭 → **호스트 편집(Edit Host)** 를 선택하면 **호스트 수정(Modify Host)** 대화창이 열린다.
 
 .. note::
 
     ``*`` 표시된 항목은 필수 입력 항목입니다. Alias(별칭) \*, IP Address / Domain(주소) \*, Port(포트) \*,
-    Username(사용자 이름) \* 는 필수이다. Credentials의 **새 비밀번호(New Password)** (비워두면 기존 비밀번호 유지)는 선택 입력이다.
+    Username(사용자 이름) \* 는 반드시 입력해야 한다. Credentials의 **새 비밀번호(New Password)** (비워두면 기존 비밀번호 유지)는
+    선택적으로 입력할 수 있는 값이다.
 
 .. warning::
 
@@ -69,24 +82,19 @@
 호스트 삭제
 ===========
 
-우클릭 → **호스트 삭제(Delete Host)** 를 선택하면 **호스트 연결 제거(Remove Host Connection)** 모달이 열린다. 이 작업은 되돌릴 수 없다.
+우클릭 → **호스트 삭제(Delete Host)** 를 선택하면 **호스트 연결 제거(Remove Host Connection)** 대화창이 열린다. 이 작업은 되돌릴 수 없다.
 버튼: **유지(Keep Host)** (취소) / **제거 확인(Confirm Removal)** (삭제).
 
 전체 로그인 (Login All)
 ========================
 
 .. image:: /images/host-login-all-result.png
-   :width: 380px
-   :align: left
+   :width: 340px
 
 툴바의 **전체 로그인(Login All)** 버튼(로그인 안 된 호스트가 1개 이상 있을 때만 표시)을 클릭하면, 저장된 비밀번호로
-아직 로그인하지 않은 호스트 전체에 한 번에 로그인을 시도한다. 완료되면 성공/실패 호스트 개수를 요약한 결과 모달이
+아직 로그인하지 않은 호스트 전체에 한 번에 로그인을 시도한다. 완료되면 성공/실패 호스트 개수를 요약한 결과 대화창이
 뜨며, 실패한 호스트는 이름과 실패 사유가 함께 표시된다. 로그인이 필요한 호스트가 하나도 없으면 버튼 자체가
 보이지 않는다.
-
-.. raw:: html
-
-   <div style="clear: both;"></div>
 
 .. note::
 
@@ -126,7 +134,12 @@ CMS 사용자 관리
 
 .. note::
 
-    ``*`` 표시된 항목은 필수 입력 항목입니다. **사용자 추가(Add User)** 모달에서 Login ID(로그인 ID) \* 는 항상 필수이며,
+    여기서 다루는 "사용자"는 호스트의 CMS 자체 관리자 계정이다 — 추가/수정/삭제는 호스트 쪽 CMS 계정 저장소를
+    바로 수정하며, NCA 서버에는 아무것도 저장되지 않는다.
+
+.. note::
+
+    ``*`` 표시된 항목은 필수 입력 항목입니다. **사용자 추가(Add User)** 대화창에서 Login ID(로그인 ID) \* 는 항상 필수이며,
     Password(비밀번호) \* 는 신규 사용자를 추가할 때만 필수이다. 이미 있는 사용자를 수정할 때는 비밀번호를 비워두면
     기존 값이 유지되지만, 비밀번호를 입력했다면 Password Confirm(비밀번호 확인) \* 도 함께 입력해야 한다.
 
@@ -136,8 +149,10 @@ CMS 사용자 관리
 비밀번호 변경
 =============
 
-로그인된 호스트 우클릭 → **비밀번호 변경(Change Password)** 를 선택하면 **관리자 비밀번호 변경(Change Manager Password)** 모달이 열린다.
+로그인된 호스트 우클릭 → **비밀번호 변경(Change Password)** 를 선택하면 **관리자 비밀번호 변경(Change Manager Password)** 대화창이 열린다.
 필드: New Password(새 비밀번호) \*, Verify New Password(비밀번호 확인) \* — 둘 다 필수 입력 항목이며 서로 일치해야 한다.
+호스트의 CMS 관리자 비밀번호 자체를 바꾸는 것이며, NCA에 저장된 호스트 접속 비밀번호는 자동으로 갱신되지 않는다
+— 그래서 아래 경고처럼 실패 시 되돌리는 것이 중요하다.
 
 .. warning::
 
@@ -173,23 +188,24 @@ CMS 사용자 관리
 ============================
 
 .. image:: /images/host-bulk-select.png
-   :width: 380px
-   :align: left
+   :width: 420px
 
 Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클릭으로 마지막에 클릭한 호스트부터 범위 선택할 수 있다
-(그룹이 달라도 함께 선택 가능하다). 선택된 상태에서 우클릭하면 일괄 작업 메뉴가 뜬다.
+(그룹이 달라도 함께 선택 가능하다).
 
-.. raw:: html
-
-   <div style="clear: both;"></div>
+선택된 상태에서 우클릭하면 다음과 같은 일괄 작업 메뉴가 뜬다.
 
 .. image:: /images/host-bulk-context-menu.png
+   :width: 240px
 
 * **선택한 호스트 로그인(Login Selected Hosts)** — 선택된 호스트 중 아직 로그인되지 않은 것만 로그인한다 (이미 로그인된 호스트는 건너뛴다).
 * **그룹으로 이동(Move to Group)** — 하위 메뉴에서 "Ungrouped" 또는 기존 그룹 중 하나를 선택하면 선택된 호스트 전부가 그 그룹으로 이동한다.
-* **선택한 호스트 삭제(Delete Selected Hosts)** — 확인 모달이 뜨며, 선택한 호스트 개수가 표시된다.
+* **선택한 호스트 삭제(Delete Selected Hosts)** — 확인 대화창이 뜨며, 선택한 호스트 개수가 표시된다.
+
+**선택한 호스트 삭제** 를 누르면 다음 확인 대화창이 뜬다.
 
 .. image:: /images/host-bulk-delete-confirm.png
+   :width: 420px
 
 .. warning::
 
@@ -198,14 +214,14 @@ Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클�
 호스트 내보내기 / 가져오기
 ==========================
 
-상단 **파일(File)** 메뉴 → **호스트 내보내기(Export Host)** / **호스트 가져오기(Import Host)** 를 선택하면 각각 전용 모달이 열린다.
-두 모달 모두 호스트 목록을 체크박스가 있는 표로 보여주며, 상단의 **전체 선택** 체크박스로 한 번에 모두 선택하거나 해제할 수 있다.
+상단 **파일(File)** 메뉴 → **호스트 내보내기(Export Host)** / **호스트 가져오기(Import Host)** 를 선택하면 각각 전용 대화창이 열린다.
+두 대화창 모두 호스트 목록을 체크박스가 있는 표로 보여주며, 상단의 **전체 선택** 체크박스로 한 번에 모두 선택하거나 해제할 수 있다.
 
 .. image:: /images/host-export.png
 
-**호스트 내보내기(Export Host)** 모달에는 현재 등록된 모든 호스트가 표에 나열된다. 체크된 호스트만 내보내기 대상이 된다.
+**호스트 내보내기(Export Host)** 대화창에는 현재 등록된 모든 호스트가 표에 나열된다. 체크된 호스트만 내보내기 대상이 된다.
 
-형식 드롭다운 옵션(로케일과 무관하게 항상 다음 영문 그대로 표시된다):
+형식 드롭다운 옵션은 다음과 같다(로케일과 무관하게 항상 다음 영문 그대로 표시된다).
 
 .. list-table::
     :header-rows: 1
@@ -213,9 +229,9 @@ Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클�
 
     * - 형식
       - 설명
-    * - Web Manager XML
+    * - Next CUBRID Admin XML
       - 자체 XML 포맷 (기본값)
-    * - Web Manager JSON
+    * - Next CUBRID Admin JSON
       - 자체 JSON 포맷
     * - CUBRID Admin XML
       - 레거시 CUBRID Admin으로 가져올 수 있는 호환 XML
@@ -229,8 +245,8 @@ Ctrl/Cmd-클릭으로 호스트를 하나씩 추가 선택하거나, Shift-클�
 
 .. image:: /images/host-import.png
 
-**호스트 가져오기(Import Host)** 모달은 처음에 파일 선택 화면만 보여준다. ``.xml`` / ``.json`` / ``.prefs`` / ``.properties`` /
-``.txt`` 파일을 드래그 앤 드롭하거나 클릭하여 선택한다. 지원 형식은 화면에 표시된 다음 안내 문구 그대로다: "Web Manager
+**호스트 가져오기(Import Host)** 대화창은 처음에 파일 선택 화면만 보여준다. ``.xml`` / ``.json`` / ``.prefs`` / ``.properties`` /
+``.txt`` 파일을 드래그 앤 드롭하거나 클릭하여 선택한다. 지원 형식은 화면에 표시된 다음 안내 문구 그대로다: "Next CUBRID Admin
 XML/JSON, CUBRID Admin 호스트 XML, 또는 레거시 데스크톱 .prefs / .properties 파일입니다. 형식이 지원하는 경우 호스트 그룹도
 보존됩니다. .prefs의 암호화된 비밀번호는 가져오지 않습니다."
 

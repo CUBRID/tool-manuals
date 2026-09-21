@@ -111,9 +111,13 @@ table {
   word-break: auto-phrase;
   word-wrap: break-word;
   table-layout: fixed;
-  zoom: 0.86;
   overflow-wrap: anywhere;
   max-width: -webkit-fill-available;
+}
+
+table th,
+table td {
+  font-size: 1rem;
 }
 
 table tbody td:first-child {
