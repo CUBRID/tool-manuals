@@ -62,4 +62,6 @@
 로그아웃(Logout) / 언어 전환(Language)
 ========================================
 
+.. image:: /images/auth-header-controls.png
+
 **로그아웃(Logout)** 버튼을 누르면 확인창 없이 즉시 로그아웃되어 로그인 화면으로 돌아간다.

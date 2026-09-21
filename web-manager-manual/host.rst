@@ -98,11 +98,19 @@ NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의
 그룹 생성(New Group) / 이름 변경(Rename Group)
 ================================================
 
+.. image:: /images/host-group-new.png
+
 툴바 **새 그룹(New Group)** 또는 그룹 우클릭 → **그룹 이름 변경(Rename Group)** 을 선택한다. 필드는 **그룹 이름(Group Name)** \* 하나이며, 필수 입력 항목이다
 (비워두고 저장하면 "그룹 이름을 입력하세요." 오류가 표시된다).
 
+.. image:: /images/host-group-rename.png
+
+**그룹 이름 변경(Rename Group)** 은 같은 대화창을 재사용하며, 기존 이름이 미리 채워진 채로 열린다.
+
 그룹 삭제(Delete Group)
 ========================
+
+.. image:: /images/host-group-delete-confirm.png
 
 그룹 우클릭 → **그룹 삭제(Delete Group)** 을 선택한다.
 
@@ -113,11 +121,15 @@ NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의
 그룹 멤버 관리(Manage Group)
 ==============================
 
+.. image:: /images/host-group-manage.png
+
 그룹 우클릭 → **그룹 관리(Manage Group)** 을 선택한다. 호스트 목록에서 체크하면 그룹에 추가되고, 체크 해제하면 Ungrouped로 이동한다.
 저장 후 그룹이 자동으로 펼쳐지지 않으므로 직접 펼쳐서 확인한다.
 
 CMS 사용자 관리(User Management)
 ==================================
+
+.. image:: /images/host-cms-user-management.png
 
 로그인된 호스트 우클릭 → **사용자 관리(User Management)** 를 선택한다.
 
