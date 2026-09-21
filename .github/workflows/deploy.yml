@@ -43,17 +43,42 @@ jobs:
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: echo "short_sha=${HEAD_SHA::7}" >> "$GITHUB_OUTPUT"
 
-      # Works for both cases: for an open PR (fork or not), the API resolves
-      # the PR whose head is this commit; for a post-merge push, it resolves
-      # the PR that merge commit closed. workflow_run.pull_requests isn't
-      # used here because GitHub leaves it empty for fork-originated PRs.
+      # workflow_run.pull_requests is GitHub's own record of which PR(s) this
+      # run belongs to and is authoritative when present — prefer it over
+      # any API lookup. It's populated for pull_request runs from the same
+      # repository, but left empty for fork-originated PRs.
+      #
+      # For the fork case we fall back to searching by commit SHA, but that
+      # search can return multiple PRs if the same commit is shared across
+      # more than one open PR — blindly taking the first result could
+      # deploy this run's preview into a different PR's path and comment
+      # there instead. So for a pull_request run we filter the candidates
+      # down to the one whose head repo + branch match this run's own
+      # (both come from the trusted workflow_run event, not from anything
+      # build.yml computed). For a push run (post-merge, official deploy)
+      # there's no such ambiguity to resolve against — head_branch there is
+      # the branch merged INTO (e.g. develop), not the merged PR's own head
+      # — so we just take the PR the merge commit closed.
       - name: Resolve associated PR number
         id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event.workflow_run.event }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
+          SAME_REPO_PRS: ${{ toJson(github.event.workflow_run.pull_requests) }}
         run: |
-          PR_NUMBER=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}/pulls" --jq '.[0].number // empty')
+          PR_NUMBER=$(echo "$SAME_REPO_PRS" | jq -r '.[0].number // empty')
+
+          if [ -z "$PR_NUMBER" ] && [ "$EVENT_NAME" = "pull_request" ]; then
+            PR_NUMBER=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}/pulls" \
+              --jq --arg repo "$HEAD_REPO" --arg branch "$HEAD_BRANCH" \
+              '[.[] | select(.head.repo.full_name == $repo and .head.ref == $branch)][0].number // empty')
+          elif [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}/pulls" --jq '.[0].number // empty')
+          fi
+
           echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
 
   # ---------------------------------------------------------------------------
