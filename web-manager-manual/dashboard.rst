@@ -34,22 +34,30 @@ Database Info
 우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다. Locking Information/Transaction information/Plan Dump는
 데이터베이스가 실행 중일 때만 활성화된다 (실시간 서버 상태 조회이므로).
 
-* **속성(Properties)** — 접속/서버 파라미터 조회 및 수정
-* **파라미터 덤프(Param Dump)** — 파라미터 값 비교
+.. list-table::
+    :header-rows: 1
+    :widths: 30 70
 
-  .. image:: /images/database-param-dump.png
+    * - 항목
+      - 설명
+    * - **속성(Properties)**
+      - 접속/서버 파라미터 조회 및 수정
+    * - **파라미터 덤프(Param Dump)**
+      - 파라미터 값 비교
 
-* **잠금 정보(Locking Information)** — 잠금 세션/객체/에스컬레이션 정보
+        .. image:: /images/database-param-dump.png
+    * - **잠금 정보(Locking Information)**
+      - 잠금 세션/객체/에스컬레이션 정보
 
-  .. image:: /images/database-lock-info.png
+        .. image:: /images/database-lock-info.png
+    * - **트랜잭션 정보(Transaction information)**
+      - 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능
 
-* **트랜잭션 정보(Transaction information)** — 활성 트랜잭션 목록, 트랜잭션 강제 종료 가능
+        .. image:: /images/database-transaction-info.png
+    * - **질의 수행 계획(Plan Dump)**
+      - 쿼리 실행 계획 캐시 덤프
 
-  .. image:: /images/database-transaction-info.png
-
-* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프
-
-  .. image:: /images/database-plan-dump.png
+        .. image:: /images/database-plan-dump.png
 
 .. warning::
 

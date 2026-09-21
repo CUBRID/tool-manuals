@@ -51,9 +51,8 @@
 .. important::
 
     **해당 데이터베이스에 로그인하지 않은 상태에서는 어떤 작업도 실행할 수 없다.** 데이터베이스 시작/중지,
-    데이터베이스 관리의 11개 항목(언로드/로드/검사/공간 정리/볼륨 추가/최적화/복사/이름 변경/복구/백업/삭제)
-    전부, 데이터베이스 정보의 4개 항목(잠금 정보/트랜잭션 정보/파라미터 덤프/질의 수행 계획), 속성까지 —
-    예외 없이 로그인 상태를 먼저 요구하며, 로그인 안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
+    Manage Database의 모든 기능, Database Info의 모든 항목, 속성까지 예외 없이 로그인 상태를 먼저 요구하며,
+    로그인 안 된 상태에서는 메뉴 항목 자체가 비활성화된다.
 
 HA 상태 표시
 ============
@@ -74,12 +73,22 @@ HA 상태 표시
 데이터베이스 노드 하위의 **공간(Space)** 를 더블클릭하면 데이터베이스 공간 모니터 탭이 열린다. 상단에 데이터베이스 이름,
 사용/전체 용량, 여유 공간, 사용률(페이지 크기·로그 페이지 크기 포함)이 요약되고, 아래에 세 개의 표와 도넛 차트가 나온다.
 
-* **볼륨 분류(Volume Categorization)** — 유형(Type)/용도(Purpose)별로 묶은 요약 표. 각 행에는 볼륨 개수, 사용/여유/전체
-  용량, 사용률이 표시되며, 유형 배지를 클릭하면 해당 카테고리의 볼륨 카테고리 모니터가 열린다.
-* **볼륨 구성(Physical Volume Topology)** — 볼륨 파일 하나당 한 행으로, 유형/용도, 페이지 단위 할당량(사용/전체
-  페이지, 여유 비율 막대), 날짜, 경로가 표시된다. 볼륨 이름을 클릭하면 해당 볼륨의 볼륨 정보 화면이 열린다.
-* **파일 공간 사용량(File Space Usage)** — 데이터 유형별 파일 개수와 사용/전체 용량.
-* **분포(Distribution)** — 사용/여유 비율을 보여주는 도넛 차트.
+.. list-table::
+    :header-rows: 1
+    :widths: 30 70
+
+    * - 표
+      - 설명
+    * - 볼륨 분류(Volume Categorization)
+      - 유형(Type)/용도(Purpose)별로 묶은 요약 표. 볼륨 개수, 사용/여유/전체 용량, 사용률이 표시되며, 유형
+        배지를 클릭하면 해당 카테고리의 볼륨 카테고리 모니터가 열린다.
+    * - 볼륨 구성(Physical Volume Topology)
+      - 볼륨 파일 하나당 한 행으로, 유형/용도, 페이지 단위 할당량(사용/전체 페이지, 여유 비율 막대), 날짜,
+        경로가 표시된다. 볼륨 이름을 클릭하면 해당 볼륨의 볼륨 정보 화면이 열린다.
+    * - 파일 공간 사용량(File Space Usage)
+      - 데이터 유형별 파일 개수와 사용/전체 용량.
+    * - 분포(Distribution)
+      - 사용/여유 비율을 보여주는 도넛 차트.
 
 Space 하위에는 **Permanent Data**, **Permanent Temp**, **Temporary**, **로그(Log)**\ (하위에 **활성(Active)**, **Archive**) 카테고리
 (``Permanent Data``/``Permanent Temp``/``Temporary``/``Archive``\ 는 로케일과 무관하게 화면에 항상 영문으로만 표시된다)
@@ -173,24 +182,23 @@ General Information → Additional Volume Information → Automatic volume exten
     * - Log path
       - ``-L, --log-path``
     * - Start database after creation
-      - ``createdb`` 옵션이 아니라, 생성 후 api-server가 별도로 수행하는 후속 단계다
+      - ``createdb`` 옵션이 아닌 생성 후 후속 단계
 
 .. image:: /images/database-create-step2.png
 
 **2단계. 추가 볼륨 정보(Additional Volume Information)** — 추가 볼륨이 필요 없으면 그대로 다음으로 진행한다 (이 단계의 볼륨
-이름/크기/경로는 선택적으로 입력할 수 있다). 여기서 입력한 볼륨 목록은 CMS가 제어 파일로 만들어 ``--more-volume-file`` 로
-전달한다.
+이름/크기/경로는 선택적으로 입력할 수 있다).
 
 .. image:: /images/database-create-step3.png
 
 **3단계. 볼륨 자동 확장(Automatic volume extension)** — 자동 확장 설정(기본값을 그대로 사용해도 된다)을 확인한다. 이 설정은
-``createdb`` 의 옵션이 아니라 CMS의 별도 자동-볼륨-확장 기능(``setAutoAddVol``)을 구성하는 것이다.
+``createdb`` 의 옵션이 아니라 CMS의 별도 자동 볼륨 확장 기능이다.
 
 .. image:: /images/database-create-step4.png
 
 **4단계. DBA 비밀번호 설정(Set DBA Password)** — Password/Password Confirm은 선택적으로 입력할 수 있는 값이다. 둘 다 비워두면 DBA 계정에 비밀번호 없이
 생성되며, 값을 입력할 경우에는 8자 이상이어야 하고 Password/Password Confirm이 서로 일치해야 다음 단계로
-진행할 수 있다. 이 역시 ``createdb`` 자체의 옵션이 아니라, 생성 후 별도로 실행되는 사용자 정보 갱신 단계다.
+진행할 수 있다.
 
 .. image:: /images/database-create-step5.png
 
@@ -254,15 +262,13 @@ Manage Database → **데이터베이스 이름 변경(Rename Database)** (실�
 **새 데이터베이스 이름(New Database Name)** \* 은 필수 입력 항목이며, 값을 입력해야 실행 버튼이 활성화된다
 (영문자로 시작하는 1~17자의 영문/숫자/밑줄/하이픈만 허용).
 
-* **백업 볼륨 강제 삭제(Force delete backup volume)** — 켜면 기존 백업 볼륨을 지운다.
-  기본값: 꺼짐(지우지 않음).
+**백업 볼륨 강제 삭제(Force delete backup volume)** 를 켜면 기존 백업 볼륨을 지운다. 기본값은 꺼짐(지우지 않음)이다.
 
 .. note::
 
-    확장 볼륨 경로는 화면에 노출되지 않고, 현재 데이터베이스 디렉터리의 상위 디렉터리로 자동 계산되어
-    ``renamedb -E`` 로 전달된다. 볼륨별 개별 재배치(``-i, --control-file``)는 이 화면에서 지원하지 않는다.
-    ``renamedb`` 자체가 로컬 ``databases.txt`` 항목과 물리 볼륨 파일 이름만 바꾸는 유틸리티이므로, 이름을
-    바꿔도 백업 이력이나 Backup Plan에 등록된 경로 등은 자동으로 따라 바뀌지 않는다 — 필요하면 직접 갱신해야 한다.
+    확장 볼륨 경로는 화면에 노출되지 않고 현재 데이터베이스 디렉터리의 상위 디렉터리로 자동 계산된다
+    (``renamedb -E``). 볼륨별 개별 재배치는 이 화면에서 지원하지 않는다. 이름을 바꿔도 백업 이력이나 Backup
+    Plan에 등록된 경로는 자동으로 따라 바뀌지 않으므로, 필요하면 직접 갱신해야 한다.
 
 복사
 ====
@@ -323,9 +329,7 @@ Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. �
       - 설명
       - 기본값
     * - 용도(Purpose)
-      - 화면에서는 Data/Temp 두 가지만 선택할 수 있다. ``addvoldb`` 의 ``--help`` 텍스트에는 INDEX/GENERIC까지
-        4가지가 나오지만, 엔진 내부에는 이제 이 두 가지 용도만 남아 있다 — INDEX/GENERIC은 별도 기능이 아니라
-        Data로 취급되는 사실상 사용되지 않는(deprecated) 값이다
+      - Data 또는 Temp 중에서 선택한다
       - —
     * - 경로(Path)
       - 저장 경로. 호스트에서 조회한 현재 상태로 자동 채워지며, 존재하지 않으면 CMS가 생성한다
@@ -351,13 +355,11 @@ Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이�
 
 .. image:: /images/database-check.png
 
-* **데이터베이스 검사(Check Database)** — 옵션은 **비일관성 발견 시 복구(Repair when inconsistency)** 하나뿐이다. 실제로는
-  ``checkdb -r`` 로 전달된다.
+* **데이터베이스 검사(Check Database)** — 옵션은 **비일관성 발견 시 복구(Repair when inconsistency)** 하나뿐이다 (``checkdb -r``).
 
 .. image:: /images/database-compact.png
 
-* **데이터베이스 공간 정리(Compact Database)** — 옵션은 **상세 정보 출력(Verbose monitoring)** 하나뿐이다. 실제로는 ``compactdb -v`` 로
-  전달된다.
+* **데이터베이스 공간 정리(Compact Database)** — 옵션은 **상세 정보 출력(Verbose monitoring)** 하나뿐이다 (``compactdb -v``).
 
 .. image:: /images/database-optimize.png
 

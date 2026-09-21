@@ -14,8 +14,7 @@ CUBRID 설정 편집
 
 .. image:: /images/server-cubrid-config-edit.png
 
-호스트의 ``cubrid.conf`` 설정 파일(엔진 전역 설정, 데이터베이스별 ``[@dbname]`` 섹션과 공통 ``[common]``
-섹션을 포함)을 편집하는 화면이다. **CUBRID 설정 편집(Edit Cubrid Config)** 을 선택하면 열린다.
+호스트의 ``cubrid.conf`` 설정 파일을 편집하는 화면이다. **CUBRID 설정 편집(Edit Cubrid Config)** 을 선택하면 열린다.
 
 .. warning::
 
