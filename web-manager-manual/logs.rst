@@ -16,6 +16,9 @@
 
 .. image:: /images/log-tree.png
 
+.. image:: /images/logs-context-menu.png
+   :width: 480px
+
 브로커 로그(Broker Logs)
 ==========================
 

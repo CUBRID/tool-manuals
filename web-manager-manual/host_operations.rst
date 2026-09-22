@@ -5,6 +5,16 @@
 :doc:`host` 의 서버 목록에서 실행할 수 있는 개별 작업(추가/수정/삭제, 그룹 관리, CMS 사용자 관리 등)의
 화면별 사용법을 정리한다.
 
+호스트를 우클릭하면 아래와 같은 메뉴가 열린다.
+
+.. image:: /images/host-context-menu.png
+   :width: 480px
+
+그룹을 우클릭하면 그룹 전용 메뉴가 열린다.
+
+.. image:: /images/host-group-context-menu.png
+   :width: 480px
+
 호스트 추가(Add Host)
 ======================
 

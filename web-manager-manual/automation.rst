@@ -8,7 +8,11 @@
 쿼리 자동 실행(Query Plan)
 ===========================
 
+**작업 자동화(Job automation)** 폴더를 펼치면 나오는 **질의 자동화 계획(Query Plan)** 폴더를 우클릭하면
+아래와 같은 메뉴가 열린다.
+
 .. image:: /images/database-query-plan-menu.png
+   :width: 520px
 
 .. image:: /images/query-plan.png
 
@@ -46,10 +50,11 @@
 볼륨 추가(Add Volume)
 ======================
 
-.. image:: /images/database-space-menu.png
+**공간(Space)** 폴더를 우클릭하면 아래와 같은 메뉴가 열린다. 이 절의 세 기능(볼륨 추가/자동 볼륨 확장
+설정/자동 볼륨 확장 로그)은 모두 이 같은 메뉴에서 연다.
 
-아래 세 기능(볼륨 추가/자동 볼륨 확장 설정/자동 볼륨 확장 로그)은 모두 **공간(Space)** 폴더의 같은 우클릭
-메뉴에서 연다.
+.. image:: /images/database-space-menu.png
+   :width: 520px
 
 .. image:: /images/database-add-volume.png
 

@@ -8,8 +8,15 @@
 
 * 브로커를 더블클릭하면 상태 탭이 열린다.
 * 우클릭 시 **브로커 중지(Stop Broker)** 와 **브로커 시작(Start Broker)** 중 정확히 하나만 표시된다.
+
+.. image:: /images/broker-context-menu.png
+   :width: 480px
+
 * 탭-스위처 아이콘 자체를 우클릭하면 "ALL BROKERS" 메뉴(Start All / Stop All / Restart All / **브로커 설정 편집(Edit Broker Config)** /
   **상태 보기(Show Status)** 등)가 나온다.
+
+.. image:: /images/broker-all-menu.png
+   :width: 480px
 
 .. note::
 

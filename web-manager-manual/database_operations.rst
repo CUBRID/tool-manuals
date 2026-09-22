@@ -308,7 +308,11 @@ Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한
 백업 계획(Backup Plan)
 ========================
 
+**작업 자동화(Job automation)** 폴더를 펼치면 나오는 **백업 자동화 계획(Backup Plan)** 폴더를 우클릭하면
+아래와 같은 메뉴가 열린다.
+
 .. image:: /images/database-backup-plan-menu.png
+   :width: 520px
 
 .. image:: /images/backup-plan.png
 
