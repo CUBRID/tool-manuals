@@ -56,7 +56,7 @@
     * - CUBRID 도구 개발(CUBRID tools developments)
       - 새 탭에서 CUBRID Manager GitHub 저장소(https://github.com/CUBRID/cubrid-manager)를 연다
     * - 업데이트 확인(Check for Updates)
-      - 새 버전이 있는지 확인하는 기능이나, 현재는 비활성화되어 있다
+      - 새 버전이 있는지 확인하는 기능. 자세한 내용은 :doc:`known_issues` 참고
     * - 서버 버전(Server Version)
       - 사이드바에서 호스트가 선택되어 있어야 활성화된다. :doc:`host` 의 "서버 버전" 절 참고
     * - CUBRID Admin 정보(About CUBRID Admin)
