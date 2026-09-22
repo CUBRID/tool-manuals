@@ -23,6 +23,10 @@
 General Information → Additional Volume Information → Automatic volume extension → Set DBA Password → Database Information(검토).
 실제로는 CUBRID의 ``createdb`` 유틸리티를 실행한다.
 
+.. warning::
+
+    HA로 설정된 호스트에서는 새 데이터베이스 이름과 무관하게 생성 자체가 막힌다. 자세한 내용은 :doc:`ha` 참고.
+
 .. image:: /images/database-create.png
 
 **1단계. 일반 정보(General Information)**
@@ -147,6 +151,11 @@ Manage Database → **데이터베이스 이름 변경(Rename Database)** (실�
     확장 볼륨 경로는 화면에 노출되지 않고 현재 데이터베이스 디렉터리의 상위 디렉터리로 자동 계산된다
     (``renamedb -E``). 볼륨별 개별 재배치는 이 화면에서 지원하지 않는다. 이름을 바꿔도 백업 이력이나 Backup
     Plan에 등록된 경로는 자동으로 따라 바뀌지 않으므로, 필요하면 직접 갱신해야 한다.
+
+.. warning::
+
+    HA 복제에 포함된 데이터베이스는 이름을 바꿀 수 없다 — 시도하면 오류가 표시된다. 자세한 내용은 :doc:`ha`
+    참고.
 
 복사(Copy Database)
 =====================
@@ -545,6 +554,11 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
 
     Load의 기본 대상은 기존 데이터베이스이므로, 잘못 실행하면 실제 데이터를 덮어쓸 수 있다. 실행 전 대상 데이터베이스명을 반드시 확인한다.
 
+.. warning::
+
+    HA 복제에 포함된 데이터베이스는 이 화면으로 로드할 수 없다 — 시도하면 오류가 표시된다. 자세한 내용은
+    :doc:`ha` 참고.
+
 삭제(Delete Database)
 =======================
 
@@ -558,3 +572,8 @@ Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계�
 
 **2단계.** DBA User name(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
 없지만, 값이 올바르지 않으면 인증 단계에서 오류가 표시되어 삭제가 진행되지 않는다.
+
+.. warning::
+
+    HA로 설정된 호스트에서는 삭제할 데이터베이스가 HA 구성원인지와 무관하게 이 화면 자체가 막힌다. 자세한
+    내용은 :doc:`ha` 참고.
