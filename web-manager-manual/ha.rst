@@ -5,11 +5,13 @@ HA
 이 장은 CUBRID HA(복제) 구성을 NCA에서 다룰 때 알아야 할 것만 정리한다. HA 복제 자체의 원리·설정 방법은
 `CUBRID 매뉴얼 HA 장 <https://www.cubrid.org/manual/ko/11.4/ha.html>`_ 을 참고한다.
 
+.. _ha-badges:
+
 HA 배지와 복제 상태
 ======================
 
-호스트가 HA로 구성되어 있고 해당 데이터베이스가 ``cubrid_ha.conf`` 의 ``ha_db_list`` 에 있으면, :doc:`database`
-의 트리에서 데이터베이스 이름 옆에 **HA** 배지가 표시된다(로케일과 무관하게 항상 "HA"로만 표시된다).
+호스트가 HA로 구성되어 있고 해당 데이터베이스가 ``cubrid_ha.conf`` 의 ``ha_db_list`` 에 있으면, :ref:`database-ha-status`
+에서 보듯 데이터베이스 트리의 이름 옆에 **HA** 배지가 표시된다(로케일과 무관하게 항상 "HA"로만 표시된다).
 
 이 배지 옆에는 그 데이터베이스 서버 프로세스 자체의 복제 상태(CUBRID 엔진의 ``HA_SERVER_STATE``)를 보여주는
 배지가 하나 더 붙는다 — 마스터/슬레이브/레플리카 같은 노드 단위 역할과는 별개의 정보다.
@@ -38,19 +40,23 @@ HA 배지와 복제 상태
       - 서버가 죽은 것으로 간주되는 가상 상태 — 실제로 그 상태로 실행 중인 프로세스가 있는 것은 아니다.
 
 두 배지 모두 호스트의 HA 하트비트 데이터가 있어야 표시되며, 이 데이터는 HA로 알려진 호스트에 접속하면 자동으로
-조회된다. :doc:`server_dashboard` 의 Databases 목록에도 동일한 배지가 표시된다.
+조회된다. :ref:`server-dashboard-section` 의 Databases 목록에도 동일한 배지가 표시된다.
+
+.. _ha-in-dashboard:
 
 대시보드에서 HA 확인하기
 ==========================
 
 .. image:: /images/server-dashboard.png
 
-HA로 구성된 호스트를 더블클릭해 :doc:`server_dashboard` 를 열면, 맨 위에 **HA 클러스터 상태** 카드가
+HA로 구성된 호스트를 더블클릭해 :ref:`server-dashboard-section` 를 열면, 맨 위에 **HA 클러스터 상태** 카드가
 추가로 나타난다(HA가 아닌 호스트에는 나타나지 않는다). 클러스터에 속한 각 노드의 호스트명과 역할
 (MASTER/SLAVE/REPLICA)을 배지로 보여주며, 응답하지 않는 노드는 빨간 점으로 표시된다.
 
-여러 호스트를 한 화면에서 비교하는 :doc:`server_dashboard` 의 **서비스 대시보드(Service Dashboard)** 에는
+여러 호스트를 한 화면에서 비교하는 :ref:`service-dashboard-section` 에는
 HA 필터(All/Master/Slave/Replica)가 있어, 특정 역할의 호스트만 걸러 볼 수 있다.
+
+.. _ha-start-stop-difference:
 
 시작/중지의 차이
 ==================
@@ -58,6 +64,8 @@ HA 필터(All/Master/Slave/Replica)가 있어, 특정 역할의 호스트만 걸
 HA로 구성된 데이터베이스라고 해서 시작/중지 조작이 달라지지는 않는다. 데이터베이스를 하나씩 시작/중지할 때는
 물론, **전체 데이터베이스 시작/중지(ALL DATABASES)** 메뉴에서도 현재 중지된(또는 활성) 데이터베이스마다
 개별적으로 시작/중지가 실행되며, HA 여부에 따라 여러 데이터베이스를 하나로 묶어 처리하지 않는다.
+
+.. _ha-restricted-operations:
 
 제한되는 작업
 ==============

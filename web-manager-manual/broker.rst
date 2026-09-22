@@ -63,8 +63,8 @@
     * - 오류 쿼리 수
       - 오류로 끝난 쿼리의 누적 개수
 
-행을 클릭하면 해당 브로커 하나만 보는 상태 탭이 열린다. 우측 상단에 새로고침 버튼과 :doc:`dashboard`
-문서에서 설명한 자동 새로고침 설정 팝오버가 있다 — 이 화면의 자동 새로고침은 Dashboard/Broker 간격 설정 중
+행을 클릭하면 해당 브로커 하나만 보는 상태 탭이 열린다. 우측 상단에 새로고침 버튼과 :ref:`refresh-interval-settings`
+에서 설명한 자동 새로고침 설정 팝오버가 있다 — 이 화면의 자동 새로고침은 Dashboard/Broker 간격 설정 중
 **브로커(Broker)** 간격을 따른다. 간격이 0보다 크면 헤더에 LIVE 배지, 0(Off)이면 PAUSED 배지가 표시된다.
 
 ``cubrid_broker.conf`` 파일 전체를 여는 **브로커 설정 편집(Edit Broker Config)** 화면은 :ref:`broker-config-edit`

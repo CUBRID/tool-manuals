@@ -4,10 +4,17 @@
 
 호스트의 CUBRID 엔진, CMS, 브로커가 각각 사용하는 설정 파일을 NCA 화면에서 직접 열어 텍스트 그대로
 편집할 수 있다. 상단 메뉴 **호스트 서비스 관리(Host Service Management)** → **설정 파일 편집(Edit Config Files)**
-에서 아래 세 화면을 선택할 수 있다(사이드바에서 호스트가 선택되어 있어야 활성화된다).
+에서 아래 세 화면을 선택할 수 있다.
+
+.. note::
+
+    이 세 메뉴 항목은 사이드바에서 호스트가 선택되어 있지 않아도 항상 클릭할 수 있다 — 다만 그 상태에서
+    클릭하면 화면이 열리는 대신 "호스트가 선택되지 않음" 안내 대화창이 뜬다.
 
 세 화면 모두 문법 검사 없이 저장한 내용이 즉시 반영되는 순수 텍스트 편집기이며, 되돌리기(Undo) 버튼으로 직전
 입력을 취소할 수 있다. 단, 저장을 누른 뒤에는 되돌리기로 되돌릴 수 없다.
+
+.. _edit-cubrid-config:
 
 CUBRID 설정 편집(Edit CUBRID Config)
 ======================================
@@ -15,6 +22,8 @@ CUBRID 설정 편집(Edit CUBRID Config)
 .. image:: /images/server-cubrid-config-edit.png
 
 호스트의 ``cubrid.conf`` 설정 파일을 편집하는 화면이다. **CUBRID 설정 편집(Edit CUBRID Config)** 을 선택하면 열린다.
+
+.. _edit-cm-config:
 
 CM 설정 편집(Edit CM Config)
 ==============================

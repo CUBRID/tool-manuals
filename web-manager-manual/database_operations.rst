@@ -2,7 +2,7 @@
 데이터베이스 작업
 ****************************
 
-:doc:`database` 의 **데이터베이스 관리(Manage Database)** 메뉴와 트리 루트의 "ALL DATABASES" 메뉴에서
+:ref:`manage-database` 메뉴와 트리 루트의 "ALL DATABASES" 메뉴에서
 실행할 수 있는 각 작업(생성/로그인/시작·중지/백업·복원/언로드·로드 등)의 화면별 사용법을 정리한다.
 
 .. image:: /images/database-context-menu.png
@@ -16,6 +16,8 @@
 이 중 **데이터베이스 관리(Manage Database)** 에 마우스를 올리면 이 장에서 다루는 작업들이 위와 같이 하위
 메뉴로 나열된다.
 
+.. _create-database:
+
 데이터베이스 생성(Create Database)
 ====================================
 
@@ -25,7 +27,7 @@ General Information → Additional Volume Information → Automatic volume exten
 
 .. warning::
 
-    HA로 설정된 호스트에서는 새 데이터베이스 이름과 무관하게 생성 자체가 막힌다. 자세한 내용은 :doc:`ha` 참고.
+    HA로 설정된 호스트에서는 새 데이터베이스 이름과 무관하게 생성 자체가 막힌다. 자세한 내용은 :ref:`ha-restricted-operations` 참고.
 
 .. image:: /images/database-create.png
 
@@ -101,6 +103,8 @@ General Information → Additional Volume Information → Automatic volume exten
 
 **5단계. 검토(Database Information)** — 요약을 확인하고 **완료(Finish)** 를 클릭하면 실제 생성 작업이 시작된다.
 
+.. _login-database:
+
 데이터베이스 로그인(Login Database)
 =====================================
 
@@ -140,7 +144,7 @@ General Information → Additional Volume Information → Automatic volume exten
 **데이터베이스 시작(Start Database)** 확인 대화창.
 
 HA로 구성된 데이터베이스는 개별 시작/중지와 "전체 데이터베이스 시작/중지"의 동작이 다르다 — 자세한 내용은
-:doc:`ha` 참고.
+:ref:`ha-start-stop-difference` 참고.
 
 이름 변경(Rename Database)
 ============================
@@ -160,8 +164,8 @@ Manage Database → **데이터베이스 이름 변경(Rename Database)** (실�
 
 .. warning::
 
-    HA 복제에 포함된 데이터베이스는 이름을 바꿀 수 없다 — 시도하면 오류가 표시된다. 자세한 내용은 :doc:`ha`
-    참고.
+    HA 복제에 포함된 데이터베이스는 이름을 바꿀 수 없다 — 시도하면 오류가 표시된다. 자세한 내용은
+    :ref:`ha-restricted-operations` 참고.
 
 복사(Copy Database)
 =====================
@@ -215,6 +219,8 @@ Manage Database → **데이터베이스 복사(Copy Database)** (원본이 중�
     대신 복사가 끝난 뒤 원본 데이터베이스에 대해 별도로 삭제를 실행하는 방식으로 동작한다 — 복사와 삭제가
     순차적인 두 단계로 이뤄진다.
 
+.. _add-database-volume:
+
 볼륨 추가(Add Database Volume)
 ================================
 
@@ -257,8 +263,7 @@ Manage Database → **데이터베이스 볼륨 추가(Add Database Volume)**. �
 
 Manage Database 안의 **데이터베이스 검사(Check Database)**, **데이터베이스 공간 정리(Compact Database)**, **데이터베이스 최적화(Optimize Database)** 는 옵션을 선택하고
 실행 버튼을 누르면 작업이 시작되는 진단/유지보수성 실행 대화창이다. 실행하면 진행 상태 대화창으로 전환되고,
-완료되면 성공 대화창이 표시된다 (다른 CMS 작업과 동일하게 :doc:`automation` 에서 설명하는 백그라운드 전환도
-가능하다).
+완료되면 성공 대화창이 표시된다 (다른 CMS 작업과 동일하게 백그라운드 전환도 가능하다).
 
 .. image:: /images/database-check.png
 
@@ -320,6 +325,8 @@ Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한
 
 백업 볼륨 이름은 백업 레벨과 무관하게 항상 ``데이터베이스이름_backup`` 으로 고정되어 저장되며, 별도로
 지정할 수 없다.
+
+.. _backup-plan:
 
 백업 계획(Backup Plan)
 ========================
@@ -430,7 +437,7 @@ Manage Database → **데이터베이스 복구(Restore Database)** (데이터�
 .. warning::
 
     HA 복제에 포함된 데이터베이스는 이 화면으로 복원할 수 없다 — 시도하면 오류가 표시된다. 자세한 내용은
-    :doc:`ha` 참고.
+    :ref:`ha-restricted-operations` 참고.
 
 데이터베이스 언로드(Unload Database)
 ======================================
@@ -553,7 +560,7 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
       - —
     * - Trigger 파일 경로
       - ``--trigger-file``
-      - 화면에는 있지만 실제로 동작하지 않는다. :doc:`known_issues` 참고.
+      - 화면에는 있지만 실제로 동작하지 않는다. :ref:`unsupported-features` 참고.
       - —
 
 .. warning::
@@ -563,7 +570,7 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
 .. warning::
 
     HA 복제에 포함된 데이터베이스는 이 화면으로 로드할 수 없다 — 시도하면 오류가 표시된다. 자세한 내용은
-    :doc:`ha` 참고.
+    :ref:`ha-restricted-operations` 참고.
 
 삭제(Delete Database)
 =======================
@@ -582,4 +589,4 @@ Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계�
 .. warning::
 
     HA로 설정된 호스트에서는 삭제할 데이터베이스가 HA 구성원인지와 무관하게 이 화면 자체가 막힌다. 자세한
-    내용은 :doc:`ha` 참고.
+    내용은 :ref:`ha-restricted-operations` 참고.

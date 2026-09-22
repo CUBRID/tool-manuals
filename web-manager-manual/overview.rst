@@ -23,7 +23,6 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 * :doc:`install`
 * :doc:`desktop_app`
 * :doc:`access`
-* :doc:`auth`
 * :doc:`navigation`
 * :doc:`host`
 * :doc:`database`
@@ -43,14 +42,14 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 
 * **NCA** — Next CUBRID Admin의 약어. 이 메뉴얼이 다루는 웹 기반 관리 도구 자체를 가리키며, 이후 모든 장에서
   제품 이름 대신 NCA로 줄여 쓴다.
-* **호스트(Host)** — NCA가 접속해 관리하는 CUBRID 서버 한 대. 실제로는 그 서버에서 돌아가는
+* **호스트(Host)** — NCA가 접속해 관리하는 CUBRID 호스트 한 대. 실제로는 그 호스트에서 돌아가는
   CMS(CUBRID Manager Server)에 접속하는 것이다.
 * **CMS** — 각 호스트에서 실행되는 CUBRID Manager Server. NCA(그리고 예전 CA)가 호스트의 데이터베이스/
   브로커를 조회·제어할 때 실제로 통신하는 대상이다.
 * **브로커(Broker)** — CUBRID의 CAS(Cub Application Server)를 관리하는 미들웨어 프로세스. 호스트 하나에 여러 개
   등록될 수 있다.
 * **HA (High Availability)** — 여러 호스트가 복제 관계로 묶여 동작하는 구성. 노드별 역할(마스터/슬레이브/레플리카)과
-  데이터베이스 서버 프로세스별 복제 상태(active/standby 등)는 서로 다른 개념이다 (:doc:`database` 의 "HA 상태 표시" 참고).
+  데이터베이스 서버 프로세스별 복제 상태(active/standby 등)는 서로 다른 개념이다 (:ref:`database-ha-status` 참고).
 * **트리 / 탭** — 사이드바의 계층형 목록(호스트, 데이터베이스, 브로커, 로그)을 트리라고 부르고, 트리 항목을 더블클릭해
   여는 화면을 탭이라고 부른다 (:doc:`navigation` 참고).
 * **대화창(Dialog)** — 화면 위에 팝업으로 뜨는 창을 이 메뉴얼에서는 전부 대화창이라고 부른다(예: 호스트 추가
@@ -67,8 +66,8 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 
 **세 종류의 계정** — 저장 위치도, 비밀번호도 전부 별개다.
 
-1. NCA 로그인 계정(:doc:`auth`) — NCA 자체에 로그인할 때 쓰는 계정
-2. CMS 사용자(:doc:`host_operations` 의 "CMS 사용자 관리") — 호스트의 CMS 관리자 계정
+1. NCA 로그인 계정(:doc:`access`) — NCA 자체에 로그인할 때 쓰는 계정
+2. CMS 사용자(:ref:`cms-user-management`) — 호스트의 CMS 관리자 계정
 3. 데이터베이스 사용자(:doc:`db_user`) — CUBRID 데이터베이스 안의 DBA/일반 사용자 계정
 
 **네 종류의 계획/자동화** — 2·3은 예약 실행이고, 4는 이름은 비슷하지만 예약과 전혀 관계없는 실시간 조회
@@ -76,11 +75,11 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 
 1. 작업 자동화(Job automation) — 데이터베이스 트리 하위의 폴더 이름으로, 아래 세 항목을 묶는 상위
    분류일 뿐이다
-2. 질의 자동화(Query Plan, :doc:`automation`) — SQL문을 예약 시각에 자동 실행
-3. 백업 계획(Backup Plan, :doc:`database_operations`) — 백업을 예약 시각에 자동 실행
-4. 질의 수행 계획(Plan Dump, :doc:`dashboard`) — 예약과 무관하게 현재 캐시된 쿼리 실행 계획을 조회하는 화면
+2. 질의 자동화(:ref:`query-plan-automation`) — SQL문을 예약 시각에 자동 실행
+3. 백업 계획(:ref:`backup-plan`) — 백업을 예약 시각에 자동 실행
+4. 질의 수행 계획(Plan Dump, :ref:`database-info`) — 예약과 무관하게 현재 캐시된 쿼리 실행 계획을 조회하는 화면
 
 **자동 새로고침 / LIVE·PAUSED 배지** — 실시간 지표를 보여주는 화면(Server Dashboard, Database Dashboard,
 Broker 상태 보기, Space/Volume 모니터 등)에는 공통적으로 자동 새로고침 기능이 있다. 새로고침 간격이
-0보다 크면 **LIVE** 배지, 0(Off)이면 **PAUSED** 배지가 표시된다. 간격 설정 방법은 :doc:`dashboard` 의
-"자동 새로고침 간격 설정" 참고.
+0보다 크면 **LIVE** 배지, 0(Off)이면 **PAUSED** 배지가 표시된다. 간격 설정 방법은
+:ref:`refresh-interval-settings` 참고.

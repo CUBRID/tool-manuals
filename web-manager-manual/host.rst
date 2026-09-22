@@ -2,7 +2,7 @@
 호스트 관리
 ***************
 
-호스트 관리 화면은 NCA가 관리할 CUBRID 서버(호스트)를 등록·삭제하고 그룹으로 묶어 관리한다. 여기서 "호스트에 로그인"한다는 것은
+호스트 관리 화면은 NCA가 관리할 CUBRID 호스트를 등록·삭제하고 그룹으로 묶어 관리한다. 여기서 "호스트에 로그인"한다는 것은
 NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의 API에 접속하는 것이며, CUBRID 엔진에 직접 접속하는
 것이 아니다.
 
@@ -13,7 +13,7 @@ NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의
     config_editor.rst
     host_operations.rst
 
-사이드바 상단 섹션명은 **서버 목록(Server List)** 이다.
+사이드바 상단 섹션명은 **호스트 목록(Host List)** 이다.
 
 .. image:: /images/host-tree.png
 
@@ -47,12 +47,14 @@ NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의
     * - 호스트 내보내기/가져오기(Export/Import Host)
       - 등록된 호스트 목록을 파일로 내보내거나 파일에서 가져온다
 
-서버 버전(Server Version)
-===========================
+.. _server-version:
+
+호스트 엔진 버전(Host Engine Version)
+========================================
 
 .. image:: /images/host-server-version.png
 
-호스트 우클릭 → **서버 버전(Server Version)** 을 선택하거나, 상단 **도움말(Help)** 메뉴 → **서버 버전(Server Version)** 을 선택하면(이 경우
+호스트 우클릭 → **호스트 엔진 버전(Host Engine Version)** 을 선택하거나, 상단 **도움말(Help)** 메뉴 → **호스트 엔진 버전(Host Engine Version)** 을 선택하면(이 경우
 사이드바에서 호스트가 선택되어 있어야 활성화된다) 열린다. CMS에서 조회한 환경 정보를 보여주는 읽기 전용 화면이다.
 
 .. list-table::

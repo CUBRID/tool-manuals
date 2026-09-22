@@ -1,8 +1,10 @@
 **************************
-서버 / 서비스 대시보드
+호스트 / 서비스 대시보드
 **************************
 
-서버 대시보드(Server Dashboard)
+.. _server-dashboard-section:
+
+호스트 대시보드(Host Dashboard)
 =================================
 
 .. image:: /images/server-dashboard.png
@@ -24,9 +26,11 @@
     * - Databases
       - 이 호스트의 데이터베이스 목록과 실행 상태를 보여준다.
     * - Environment Details
-      - CUBRID 버전, 설치 경로 등 호스트 환경 정보를 보여준다 (:doc:`host` 의 "서버 버전" 절과 같은 정보다).
+      - CUBRID 버전, 설치 경로 등 호스트 환경 정보를 보여준다 (:ref:`server-version` 의 호스트 엔진 버전과 같은 정보다).
 
-HA로 구성된 호스트는 이 5개 섹션 위에 **HA 클러스터 상태** 카드가 추가로 나타난다 — 자세한 내용은 :doc:`ha` 참고.
+HA로 구성된 호스트는 이 5개 섹션 위에 **HA 클러스터 상태** 카드가 추가로 나타난다 — 자세한 내용은 :ref:`ha-in-dashboard` 참고.
+
+.. _service-dashboard-section:
 
 서비스 대시보드(Service Dashboard)
 ====================================
@@ -35,7 +39,7 @@ HA로 구성된 호스트는 이 5개 섹션 위에 **HA 클러스터 상태** �
 
 여러 호스트를 한 화면에서 비교하기 위한 대시보드이다. 상단 메뉴 **호스트 서비스 관리(Host Service Management)**
 → **서비스 대시보드(Service Dashboard)** 를 선택하면 열리며, 등록된 모든 호스트 목록을 확인할 수 있다.
-HA 필터(All/Master/Slave/Replica)에 대한 설명은 :doc:`ha` 참고.
+HA 필터(All/Master/Slave/Replica)에 대한 설명은 :ref:`ha-badges` 참고.
 
 호스트의 ``cubrid.conf`` / ``cm.conf`` / ``cubrid_broker.conf`` 설정 파일을 NCA에서 직접 열어 편집하는
 방법은 :doc:`config_editor` 문서에서 따로 설명한다.

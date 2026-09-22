@@ -5,6 +5,8 @@
 이 장에서 다루는 예약 실행(Query Plan/Backup Plan과 같은 계열)과 자동 볼륨 확장은 CMS가 직접 실행한다.
 따라서 NCA가 꺼져 있어도 CMS가 살아있는 호스트에서는 예약된 작업이 그대로 실행된다.
 
+.. _query-plan-automation:
+
 쿼리 자동 실행(Query Plan)
 ===========================
 
@@ -60,7 +62,7 @@
 
 데이터베이스 → **공간(Space)** 폴더 우클릭 → **볼륨 추가(Add Volume)**, 또는 데이터베이스 우클릭 → Manage Database →
 **데이터베이스 볼륨 추가(Add Database Volume)** — 둘 다 같은 대화창을 연다. 필드 설명(Purpose/Path/Size)과 ``addvoldb`` 유틸리티 옵션
-대응 관계는 :doc:`database_operations` 의 "볼륨 추가" 절 참고.
+대응 관계는 :ref:`add-database-volume` 참고.
 
 자동 볼륨 확장 설정(Set Automation Volume)
 ============================================
@@ -72,7 +74,7 @@
 .. important::
 
     이미 만들어진 데이터베이스의 자동 볼륨 확장 정책을 언제든 켜고 끄고 값을 바꿀 수 있는 화면이다. 데이터베이스
-    생성 마법사에 있는 1회성 "Automatic volume extension" 단계(:doc:`database_operations` 참고)와는 서로 다른 기능이니
+    생성 마법사에 있는 1회성 "Automatic volume extension" 단계(:ref:`create-database` 참고)와는 서로 다른 기능이니
     혼동하지 않는다 — 마법사 단계는 생성 시점에 값을 한 번 지정하는 것이고, 이 화면은 기존 데이터베이스에 대해
     언제든 다시 열어 값을 바꿀 수 있는 설정 화면이다.
 
@@ -94,6 +96,8 @@
       - 자동 확장 시 늘어나는 용량(MB). 16KB 페이지 크기 기준으로 환산한 **Extension Pages**\ (페이지 수)가
         옆에 읽기 전용으로 함께 표시된다
       - —
+
+.. _auto-volume-log:
 
 볼륨 자동 확장 로그(Auto Volume Log)
 ======================================
@@ -119,4 +123,4 @@
 
 .. warning::
 
-    이 화면은 항상 빈 목록만 표시된다 — 알려진 CMS 결함이다. 자세한 내용은 :doc:`known_issues` 참고.
+    이 화면은 항상 빈 목록만 표시된다. 자세한 내용은 :ref:`known-bugs` 참고.

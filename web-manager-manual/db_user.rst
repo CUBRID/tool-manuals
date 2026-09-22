@@ -3,7 +3,7 @@
 ***********************
 
 CUBRID 데이터베이스 안에 실제로 존재하는 DB 계정(``db_user``/``db_authorization`` 시스템 카탈로그)을 관리하는
-화면이다. NCA 자체 로그인 계정(:doc:`auth`)이나 호스트의 CMS 관리자 계정(:doc:`host_operations` 의 "CMS 사용자 관리")과는
+화면이다. NCA 자체 로그인 계정(:doc:`access`)이나 호스트의 CMS 관리자 계정(:ref:`cms-user-management`)과는
 완전히 별개의 계정 체계이다.
 
 .. image:: /images/database-users-menu.png

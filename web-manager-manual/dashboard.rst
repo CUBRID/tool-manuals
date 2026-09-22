@@ -28,6 +28,8 @@
     * - 작업 자동화(Job automation)
       - Backup Plan / Query Plan 요약
 
+.. _refresh-interval-settings:
+
 자동 새로고침 간격 설정
 ========================
 
