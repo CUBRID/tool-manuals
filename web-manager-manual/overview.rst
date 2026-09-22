@@ -65,15 +65,22 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 이 메뉴얼에는 이름이 비슷해 혼동하기 쉬운 세 종류의 "계정"과 네 종류의 "계획/자동화"가 나온다. 각각 서로
 다른 곳에 저장되고 서로 다른 화면에서 다루므로 구분해둔다.
 
-* **세 종류의 계정** — ① NCA 로그인 계정(:doc:`auth`, NCA 자체에 로그인할 때 쓰는 계정), ② CMS 사용자
-  (:doc:`host_operations` 의 "CMS 사용자 관리", 호스트의 CMS 관리자 계정), ③ 데이터베이스 사용자(:doc:`db_user`,
-  CUBRID 데이터베이스 안의 DBA/일반 사용자 계정). 셋은 저장 위치도, 비밀번호도 전부 별개다.
-* **네 종류의 계획/자동화** — ① 작업 자동화(Job automation, 데이터베이스 트리 하위의 폴더 이름으로, 아래
-  세 항목을 묶는 상위 분류일 뿐이다), ② 질의 자동화(Query Plan, :doc:`automation`, SQL문을 예약 시각에
-  자동 실행), ③ 백업 계획(Backup Plan, :doc:`database_operations`, 백업을 예약 시각에 자동 실행), ④ 질의 수행 계획
-  (Plan Dump, :doc:`dashboard`, 예약과 무관하게 현재 캐시된 쿼리 실행 계획을 조회하는 화면). ②·③은 예약
-  실행이고, ④는 이름은 비슷하지만 예약과 전혀 관계없는 실시간 조회 화면이다.
-* **자동 새로고침 / LIVE·PAUSED 배지** — 실시간 지표를 보여주는 화면(Server Dashboard, Database Dashboard,
-  Broker 상태 보기, Space/Volume 모니터 등)에는 공통적으로 자동 새로고침 기능이 있다. 새로고침 간격이
-  0보다 크면 **LIVE** 배지, 0(Off)이면 **PAUSED** 배지가 표시된다. 간격 설정 방법은 :doc:`dashboard` 의
-  "자동 새로고침 간격 설정" 참고.
+**세 종류의 계정** — 저장 위치도, 비밀번호도 전부 별개다.
+
+1. NCA 로그인 계정(:doc:`auth`) — NCA 자체에 로그인할 때 쓰는 계정
+2. CMS 사용자(:doc:`host_operations` 의 "CMS 사용자 관리") — 호스트의 CMS 관리자 계정
+3. 데이터베이스 사용자(:doc:`db_user`) — CUBRID 데이터베이스 안의 DBA/일반 사용자 계정
+
+**네 종류의 계획/자동화** — 2·3은 예약 실행이고, 4는 이름은 비슷하지만 예약과 전혀 관계없는 실시간 조회
+화면이다.
+
+1. 작업 자동화(Job automation) — 데이터베이스 트리 하위의 폴더 이름으로, 아래 세 항목을 묶는 상위
+   분류일 뿐이다
+2. 질의 자동화(Query Plan, :doc:`automation`) — SQL문을 예약 시각에 자동 실행
+3. 백업 계획(Backup Plan, :doc:`database_operations`) — 백업을 예약 시각에 자동 실행
+4. 질의 수행 계획(Plan Dump, :doc:`dashboard`) — 예약과 무관하게 현재 캐시된 쿼리 실행 계획을 조회하는 화면
+
+**자동 새로고침 / LIVE·PAUSED 배지** — 실시간 지표를 보여주는 화면(Server Dashboard, Database Dashboard,
+Broker 상태 보기, Space/Volume 모니터 등)에는 공통적으로 자동 새로고침 기능이 있다. 새로고침 간격이
+0보다 크면 **LIVE** 배지, 0(Off)이면 **PAUSED** 배지가 표시된다. 간격 설정 방법은 :doc:`dashboard` 의
+"자동 새로고침 간격 설정" 참고.
