@@ -10,17 +10,10 @@ Next CUBRID Admin(NCA)는 CUBRID Admin(CA)을 계승하는 차세대 CUBRID 데�
 
     overview.rst
     install.rst
-    desktop_app.rst
     access.rst
-    auth.rst
-    navigation.rst
     host.rst
     database.rst
-    automation.rst
-    dashboard.rst
-    db_user.rst
     broker.rst
     logs.rst
-    server_dashboard.rst
-    config_editor.rst
+    ha.rst
     known_issues.rst
