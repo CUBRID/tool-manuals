@@ -110,7 +110,7 @@ General Information → Additional Volume Information → Automatic volume exten
 
 .. image:: /images/database-login.png
 
-데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 대화창이 열린다. User name(기본값 "dba")과 Password를 입력한다.
+데이터베이스를 더블클릭하면 **데이터베이스 로그인(Login Database)** 대화창이 열린다. Username(기본값 "dba")과 Password를 입력한다.
 **비밀번호 저장(Save Password)** 를 켜두면 다음부터 다시 입력하지 않아도 된다.
 
 로그아웃(Logout Database) / 저장된 자격증명 관리
@@ -381,7 +381,7 @@ Backup Plan은 즉시 백업과 달리 지정한 시각에 예약 실행되는 �
 데이터베이스 → Job automation → **백업 자동화 계획(Backup Plan)** 폴더 우클릭 → **백업 자동화 계획 수행로그(Auto Backup Log)** 를 선택하면 열린다. 예약된
 Backup Plan이 실제로 실행된 이력을 보여주는 읽기 전용 로그 화면이다.
 
-컬럼은 **백업 ID(Backup ID)**, **로그 시간(Log Time)**, **설명(Description)** 으로 구성되며, Description
+칼럼은 **백업 ID(Backup ID)**, **로그 시간(Log Time)**, **설명(Description)** 으로 구성되며, Description
 텍스트 내용에 따라 다음과 같이 아이콘이 표시된다.
 
 .. list-table::
@@ -517,7 +517,7 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
       - CLI 대응
       - 설명
       - 기본값
-    * - 사용자 이름 / 비밀번호(User Name / Password)
+    * - 사용자 이름 / 비밀번호(Username / Password)
       - ``-u, --user`` / ``-p, --password``
       - 적재를 수행할 DB 계정 정보
       - —
@@ -545,9 +545,9 @@ Manage Database → **데이터베이스 로드(Load Database...)** 를 선택�
       - ``--no-statistics``
       - 적재 후 통계 정보를 갱신하지 않는다
       - 꺼짐
-    * - 에러 제어 파일(Error control file)
+    * - 오류 제어 파일(Error control file)
       - ``--error-control-file``
-      - 적재 중 발생하는 에러 처리 방식을 지정한 파일
+      - 적재 중 발생하는 오류 처리 방식을 지정한 파일
       - —
     * - 제외 테이블 파일(Ignored table file)
       - ``--ignore-class-file``
@@ -583,7 +583,7 @@ Manage Database → **데이터베이스 삭제(Delete Database)** 는 2단계�
 
 .. image:: /images/database-delete-confirm.png
 
-**2단계.** DBA User name(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
+**2단계.** DBA Username(기본값 "dba")/Password를 다시 입력하고 **삭제(Delete)** 를 클릭한다. 두 필드 모두 화면 자체의 필수 표시는
 없지만, 값이 올바르지 않으면 인증 단계에서 오류가 표시되어 삭제가 진행되지 않는다.
 
 .. warning::

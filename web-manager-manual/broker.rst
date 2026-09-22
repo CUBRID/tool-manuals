@@ -17,55 +17,13 @@
    :width: 480px
 
 * 탭-스위처 아이콘 자체를 우클릭하면 위와 같이 "ALL BROKERS" 메뉴(Start All / Stop All / Restart All /
-  **브로커 설정 편집(Edit Broker Config)** / **상태 보기(Show Status)** 등)가 나온다.
+  **브로커 설정 편집(Edit Broker Config)** / **상태 보기(Show Status)** 등)가 나온다. **상태 보기(Show Status)** 는
+  :ref:`broker-status-dashboard` 에서 따로 설명한다.
 
 .. note::
 
     이 호스트에서 다른 작업(백업, 데이터베이스 생성 등)이 진행 중이면 브로커 시작/중지 메뉴 전체가
     비활성화된다. CUBRID 엔진 자체의 제약이 아니라, 동시 요청으로 인한 충돌을 막기 위한 NCA 쪽 정책이다.
-
-전체 브로커 상태 보기(Show Status)
-====================================
-
-.. image:: /images/broker-show-status.png
-
-호스트에 등록된 브로커들이 지금 요청을 정상적으로 처리하고 있는지 한눈에 점검하기 위한 실시간 모니터링
-화면이다. 탭-스위처 아이콘 우클릭 → "ALL BROKERS" 메뉴 → **상태 보기(Show Status)** 를 선택하면 호스트의
-모든 브로커가 한 표에 나열되고, 개별 브로커 우클릭 → **상태 보기(Show Status)** 를 선택하면 그 브로커
-하나만 보는 상태 탭이 열린다(표 대신 브로커 하나의 상세 지표가 카드 형태로 표시된다).
-
-전체 브로커 표의 컬럼은 다음과 같다.
-
-.. list-table::
-    :header-rows: 1
-    :widths: 20 80
-
-    * - 컬럼
-      - 설명
-    * - 이름(Name) / 상태(Status)
-      - 브로커 이름과 현재 실행 상태(ON/OFF)
-    * - PID
-      - 브로커 프로세스의 OS 프로세스 ID
-    * - Port
-      - 브로커가 클라이언트 접속을 받는 포트 번호
-    * - AS
-      - Application Server(CAS) 프로세스 개수 — 이 브로커가 지금 띄우고 있는 CAS 수
-    * - JQ
-      - Job Queue — 처리를 기다리며 대기 중인 요청 수. 계속 쌓이면 CAS가 부족하다는 신호다
-    * - REQ
-      - 브로커가 시작된 뒤 지금까지 처리한 누적 요청 수
-    * - TPS / QPS
-      - 초당 트랜잭션 수 / 초당 쿼리 수 (실시간 처리량)
-    * - 장기 트랜잭션 수/시간
-      - 브로커 설정의 장기 트랜잭션 기준 시간을 넘겨 실행 중인 트랜잭션 수와 그 소요 시간
-    * - 장기 쿼리 수/시간
-      - 브로커 설정의 장기 쿼리 기준 시간을 넘겨 실행 중인 쿼리 수와 그 소요 시간
-    * - 오류 쿼리 수
-      - 오류로 끝난 쿼리의 누적 개수
-
-행을 클릭하면 해당 브로커 하나만 보는 상태 탭이 열린다. 우측 상단에 새로고침 버튼과 :ref:`refresh-interval-settings`
-에서 설명한 자동 새로고침 설정 팝오버가 있다 — 이 화면의 자동 새로고침은 Dashboard/Broker 간격 설정 중
-**브로커(Broker)** 간격을 따른다. 간격이 0보다 크면 헤더에 LIVE 배지, 0(Off)이면 PAUSED 배지가 표시된다.
 
 ``cubrid_broker.conf`` 파일 전체를 여는 **브로커 설정 편집(Edit Broker Config)** 화면은 :ref:`broker-config-edit`
 에서 따로 설명한다.

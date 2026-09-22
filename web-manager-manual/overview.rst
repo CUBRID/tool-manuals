@@ -24,14 +24,13 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
 * :doc:`desktop_app`
 * :doc:`access`
 * :doc:`navigation`
+* :doc:`dashboards`
 * :doc:`host`
 * :doc:`database`
 * :doc:`automation`
-* :doc:`dashboard`
 * :doc:`db_user`
 * :doc:`broker`
 * :doc:`logs`
-* :doc:`server_dashboard`
 * :doc:`config_editor`
 * :doc:`known_issues`
 
@@ -77,9 +76,9 @@ Electron 데스크톱 앱 환경에서도 사용할 수 있도록 제공한다. 
    분류일 뿐이다
 2. 질의 자동화(:ref:`query-plan-automation`) — SQL문을 예약 시각에 자동 실행
 3. 백업 계획(:ref:`backup-plan`) — 백업을 예약 시각에 자동 실행
-4. 질의 수행 계획(Plan Dump, :ref:`database-info`) — 예약과 무관하게 현재 캐시된 쿼리 실행 계획을 조회하는 화면
+4. 질의 수행 계획(Plan Dump, :ref:`database-info`) — 예약과 무관하게 현재 캐시된 질의 실행 계획을 조회하는 화면
 
-**자동 새로고침 / LIVE·PAUSED 배지** — 실시간 지표를 보여주는 화면(Server Dashboard, Database Dashboard,
+**자동 새로고침 / LIVE·PAUSED 배지** — 실시간 지표를 보여주는 화면(Host Dashboard, Database Dashboard,
 Broker 상태 보기, Space/Volume 모니터 등)에는 공통적으로 자동 새로고침 기능이 있다. 새로고침 간격이
 0보다 크면 **LIVE** 배지, 0(Off)이면 **PAUSED** 배지가 표시된다. 간격 설정 방법은
 :ref:`refresh-interval-settings` 참고.

@@ -9,7 +9,6 @@ NCA 서버가 해당 호스트에서 실행 중인 CMS(CUBRID Manager Server)의
 .. toctree::
     :hidden:
 
-    server_dashboard.rst
     config_editor.rst
     host_operations.rst
 

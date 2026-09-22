@@ -5,7 +5,6 @@
 .. toctree::
     :hidden:
 
-    dashboard.rst
     db_user.rst
     automation.rst
     database_operations.rst
@@ -109,7 +108,7 @@ HA로 구성된 데이터베이스는 트리에 **HA** 배지와 복제 상태 �
 
 .. image:: /images/database-plan-dump.png
 
-* **질의 수행 계획(Plan Dump)** — 쿼리 실행 계획 캐시 덤프.
+* **질의 수행 계획(Plan Dump)** — 질의 실행 계획 캐시 덤프.
 
 .. warning::
 

@@ -45,7 +45,7 @@ Manage Database의 각 작업은 CUBRID 엔진 자체의 제약을 그대로 물
       - 동시 실행 시 동작
     * - Create / Copy / Rename / Restore / Optimize / Compact / Delete / Load Database
       - 오프라인 전용. 같은 데이터베이스에 대해 이미 다른 프로세스(콘솔 직접 실행 포함)가 이 중 하나를
-        실행 중이면, 두 번째 시도는 에러로 안전하게 거부된다 (데이터 손상 없음).
+        실행 중이면, 두 번째 시도는 오류로 안전하게 거부된다 (데이터 손상 없음).
     * - Unload / Check Database, Add Database Volume, Backup Database
       - 데이터베이스가 실행 중인 상태에서도 동시에 실행할 수 있으며, 무결성은 엔진의 트랜잭션과 락 관리에
         의존한다.
