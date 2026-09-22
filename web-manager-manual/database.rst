@@ -79,6 +79,9 @@ HA로 구성된 데이터베이스는 트리에 **HA** 배지와 복제 상태 �
 
 우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다.
 
+.. image:: /images/database-info-menu.png
+   :width: 640px
+
 * **속성(Properties)** — 접속/서버 파라미터 조회 및 수정.
 
 .. image:: /images/database-param-dump.png
@@ -185,8 +188,6 @@ Space 하위 카테고리 노드는 다음과 같다(``Permanent Data``/``Perman
       - 데이터베이스 속성 화면을 연다
 
 .. image:: /images/database-start-all-confirm.png
-
-HA로 구성된 데이터베이스가 있으면 시작/중지/재시작 범위가 달라진다 — 자세한 내용은 :doc:`ha` 참고.
 
 데이터베이스 생성/로그인/시작·중지/백업·복원/언로드·로드 등 개별 작업의 화면별 사용법은 :doc:`database_operations`
 참고.

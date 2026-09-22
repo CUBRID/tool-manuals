@@ -8,6 +8,8 @@
 쿼리 자동 실행(Query Plan)
 ===========================
 
+.. image:: /images/database-query-plan-menu.png
+
 .. image:: /images/query-plan.png
 
 데이터베이스 → Job automation → **질의 자동화 계획(Query Plan)** 폴더 우클릭 → **질의 자동화 계획 추가(Add Query Plan)** 을 선택하면
@@ -43,6 +45,11 @@
 
 볼륨 추가(Add Volume)
 ======================
+
+.. image:: /images/database-space-menu.png
+
+아래 세 기능(볼륨 추가/자동 볼륨 확장 설정/자동 볼륨 확장 로그)은 모두 **공간(Space)** 폴더의 같은 우클릭
+메뉴에서 연다.
 
 .. image:: /images/database-add-volume.png
 

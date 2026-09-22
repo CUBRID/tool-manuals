@@ -6,6 +6,8 @@ CUBRID 데이터베이스 안에 실제로 존재하는 DB 계정(``db_user``/``
 화면이다. NCA 자체 로그인 계정(:doc:`auth`)이나 호스트의 CMS 관리자 계정(:doc:`host_operations` 의 "CMS 사용자 관리")과는
 완전히 별개의 계정 체계이다.
 
+.. image:: /images/database-users-menu.png
+
 .. image:: /images/db-user.png
 
 데이터베이스 → **사용자(Users)** 폴더 우클릭 → **사용자 추가(Add User)** 를 선택하면 **사용자 생성(Create User)** 대화창이 열린다.
