@@ -5,19 +5,19 @@
 사이드바 리소스 트리 상단의 세 탭(**데이터베이스(Database)** / **브로커(Broker)** / **로그(Log)**) 중 **로그(Log)** 를 클릭하면
 로그 트리로 전환된다.
 
-트리는 다음 세 섹션으로 구성된다.
+.. image:: /images/log-tree.png
+
+트리는 위와 같이 다음 세 섹션으로 구성된다.
 
 * 브로커 로그(Broker Logs)
 * 매니저 로그(Manager Logs)
 * 서버 로그(Server Logs)
 
-폴더는 우클릭 → **새로 고침(Refresh)** 으로 다시 불러올 수 있고, 개별 파일은 더블클릭하여 내용을 볼 수 있다
-(아래 "로그 뷰어(Log Viewer)" 참고).
-
-.. image:: /images/log-tree.png
-
 .. image:: /images/logs-context-menu.png
    :width: 480px
+
+폴더는 우클릭 → **새로 고침(Refresh)** 으로 다시 불러올 수 있고, 개별 파일은 더블클릭하여 내용을 볼 수 있다
+(아래 "로그 뷰어(Log Viewer)" 참고).
 
 브로커 로그(Broker Logs)
 ==========================

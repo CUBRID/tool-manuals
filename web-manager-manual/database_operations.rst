@@ -5,15 +5,16 @@
 :doc:`database` 의 **데이터베이스 관리(Manage Database)** 메뉴와 트리 루트의 "ALL DATABASES" 메뉴에서
 실행할 수 있는 각 작업(생성/로그인/시작·중지/백업·복원/언로드·로드 등)의 화면별 사용법을 정리한다.
 
-데이터베이스를 우클릭하면 아래와 같은 메뉴가 열린다.
-
 .. image:: /images/database-context-menu.png
    :width: 480px
 
-이 중 **데이터베이스 관리(Manage Database)** 에 마우스를 올리면 이 장에서 다루는 작업들이 하위 메뉴로 나열된다.
+데이터베이스를 우클릭하면 위와 같은 메뉴가 열린다.
 
 .. image:: /images/database-manage-menu.png
    :width: 640px
+
+이 중 **데이터베이스 관리(Manage Database)** 에 마우스를 올리면 이 장에서 다루는 작업들이 위와 같이 하위
+메뉴로 나열된다.
 
 데이터베이스 생성(Create Database)
 ====================================
@@ -308,11 +309,11 @@ Manage Database → **데이터베이스 백업(Backup Database)** 를 선택한
 백업 계획(Backup Plan)
 ========================
 
-**작업 자동화(Job automation)** 폴더를 펼치면 나오는 **백업 자동화 계획(Backup Plan)** 폴더를 우클릭하면
-아래와 같은 메뉴가 열린다.
-
 .. image:: /images/database-backup-plan-menu.png
    :width: 520px
+
+**작업 자동화(Job automation)** 폴더를 펼치면 나오는 **백업 자동화 계획(Backup Plan)** 폴더를 우클릭하면
+위와 같은 메뉴가 열린다.
 
 .. image:: /images/backup-plan.png
 

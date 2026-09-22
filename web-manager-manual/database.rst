@@ -36,6 +36,9 @@ HA 상태 표시
 HA로 구성된 데이터베이스는 트리에 **HA** 배지와 복제 상태 배지가 함께 표시된다. 배지가 뜨는 조건과 각 상태의
 의미는 :doc:`ha` 참고.
 
+데이터베이스 관리(Manage Database)
+=====================================
+
 데이터베이스를 우클릭하면 **데이터베이스 관리(Manage Database)** 하위에서 사용할 수 있는 기능은 다음과 같다
 (로그인 상태여야 실행할 수 있다. 각 기능의 실제 사용법은 :doc:`database_operations` 참고).
 
@@ -77,10 +80,12 @@ HA로 구성된 데이터베이스는 트리에 **HA** 배지와 복제 상태 �
 데이터베이스 정보(Database Info)
 ===================================
 
-우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다.
-
 .. image:: /images/database-info-menu.png
    :width: 640px
+
+우클릭 → **데이터베이스 정보(Database Info)** 하위에 아래 항목들이 있다.
+
+.. image:: /images/database-properties.png
 
 * **속성(Properties)** — 접속/서버 파라미터 조회 및 수정.
 

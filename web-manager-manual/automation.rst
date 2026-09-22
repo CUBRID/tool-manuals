@@ -8,11 +8,11 @@
 쿼리 자동 실행(Query Plan)
 ===========================
 
-**작업 자동화(Job automation)** 폴더를 펼치면 나오는 **질의 자동화 계획(Query Plan)** 폴더를 우클릭하면
-아래와 같은 메뉴가 열린다.
-
 .. image:: /images/database-query-plan-menu.png
    :width: 520px
+
+**작업 자동화(Job automation)** 폴더를 펼치면 나오는 **질의 자동화 계획(Query Plan)** 폴더를 우클릭하면
+위와 같은 메뉴가 열린다.
 
 .. image:: /images/query-plan.png
 
@@ -50,11 +50,11 @@
 볼륨 추가(Add Volume)
 ======================
 
-**공간(Space)** 폴더를 우클릭하면 아래와 같은 메뉴가 열린다. 이 절의 세 기능(볼륨 추가/자동 볼륨 확장
-설정/자동 볼륨 확장 로그)은 모두 이 같은 메뉴에서 연다.
-
 .. image:: /images/database-space-menu.png
    :width: 520px
+
+**공간(Space)** 폴더를 우클릭하면 위와 같은 메뉴가 열린다. 이 절의 세 기능(볼륨 추가/자동 볼륨 확장
+설정/자동 볼륨 확장 로그)은 모두 이 같은 메뉴에서 연다.
 
 .. image:: /images/database-add-volume.png
 
@@ -119,5 +119,4 @@
 
 .. warning::
 
-    CMS의 로그 기록/조회 코드 간 불일치로, 자동 볼륨 확장이 실제로 실행되어도 이 화면에는 **항상 빈 목록만
-    표시된다** (버전 무관, 구조적 결함). 자세한 내용은 :doc:`known_issues` 참고.
+    이 화면은 항상 빈 목록만 표시된다 — 알려진 CMS 결함이다. 자세한 내용은 :doc:`known_issues` 참고.
