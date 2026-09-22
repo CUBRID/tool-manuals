@@ -11,7 +11,7 @@
 .. image:: /images/broker-context-menu.png
    :width: 480px
 
-* 우클릭 시 위와 같이 **브로커 중지(Stop Broker)** 와 **브로커 시작(Start Broker)** 중 정확히 하나만 표시된다.
+* 우클릭 시 위와 같이 대상 브로커의 현재 상태에 따라 **브로커 중지(Stop Broker)** 또는 **브로커 시작(Start Broker)**\ 이 표시된다.
 
 .. image:: /images/broker-all-menu.png
    :width: 480px
@@ -67,15 +67,17 @@
 문서에서 설명한 자동 새로고침 설정 팝오버가 있다 — 이 화면의 자동 새로고침은 Dashboard/Broker 간격 설정 중
 **브로커(Broker)** 간격을 따른다. 간격이 0보다 크면 헤더에 LIVE 배지, 0(Off)이면 PAUSED 배지가 표시된다.
 
-``cubrid_broker.conf`` 파일 전체를 여는 **브로커 설정 편집(Edit Broker Config)** 화면은 :doc:`config_editor`
-문서에서 따로 설명한다.
+``cubrid_broker.conf`` 파일 전체를 여는 **브로커 설정 편집(Edit Broker Config)** 화면은 :ref:`broker-config-edit`
+에서 따로 설명한다.
+
+.. _broker-properties:
 
 브로커 속성(Properties)
 =========================
 
 .. image:: /images/broker-properties.png
 
-브로커 우클릭 → **속성(Properties)** 를 선택하면 열린다. :doc:`config_editor` 의 "브로커 설정 편집"이
+브로커 우클릭 → **속성(Properties)** 를 선택하면 열린다. :ref:`broker-config-edit` 이
 ``cubrid_broker.conf`` 파일 전체를 텍스트로 편집하는 화면인 것과 달리, 이 화면은 우클릭한 브로커 한 개의
 파라미터만 표 형태로 보여주고 수정하는 구조화된 편집기이다. 저장 시에도 그 브로커의 섹션에만 값이 반영되고,
 파일의 다른 브로커나 공통 ``[broker]`` 섹션은 건드리지 않는다.

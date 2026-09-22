@@ -88,8 +88,14 @@ General Information → Additional Volume Information → Automatic volume exten
 .. image:: /images/database-create-step4.png
 
 **4단계. DBA 비밀번호 설정(Set DBA Password)** — Password/Password Confirm은 선택적으로 입력할 수 있는 값이다. 둘 다 비워두면 DBA 계정에 비밀번호 없이
-생성되며, 값을 입력할 경우에는 8자 이상이어야 하고 Password/Password Confirm이 서로 일치해야 다음 단계로
-진행할 수 있다.
+생성되며, 값을 입력할 경우에는 8자 이상이어야 한다.
+
+.. note::
+
+    이 단계에서 비밀번호를 입력하면, 1단계의 **Start database after creation** 설정과 무관하게 데이터베이스가
+    자동으로 시작된다. DBA 비밀번호 변경은 CMS의 updateuser 작업으로 처리되는데, 이 작업은 데이터베이스가
+    실행 중이어야만 가능하기 때문이다. 이렇게 시작된 데이터베이스는 생성 작업이 끝난 뒤에도 다시 중지되지
+    않고 그대로 실행 상태로 남는다.
 
 .. image:: /images/database-create-step5.png
 

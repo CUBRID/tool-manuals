@@ -24,6 +24,8 @@ CM 설정 편집(Edit CM Config)
 호스트에서 실행 중인 CMS(CUBRID Manager Server) 자체의 설정 파일인 ``cm.conf`` 를 편집하는 화면이다.
 **CM 설정 편집(Edit CM Config)** 을 선택하면 열리며, 편집기 화면 구성과 저장 방식은 CUBRID 설정 편집과 동일하다.
 
+.. _broker-config-edit:
+
 브로커 설정 편집(Edit Broker Config)
 ======================================
 
@@ -36,5 +38,5 @@ CM 설정 편집(Edit CM Config)
 .. note::
 
     브로커 하나만 골라 파라미터를 표 형태로 보며 수정하고 싶다면, 파일 전체를 편집하는 이 화면 대신
-    :doc:`broker` 의 "브로커 속성(Properties)" 화면을 사용한다 — 그 화면은 선택한 브로커의 섹션만 구조화된
+    :ref:`broker-properties` 화면을 사용한다 — 그 화면은 선택한 브로커의 섹션만 구조화된
     표로 보여주고, 저장해도 그 브로커의 섹션만 반영된다.
