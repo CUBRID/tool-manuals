@@ -114,6 +114,11 @@ pre code, code, samp {
   max-width: 96%;
 }
 
+/* Tables previously had no visible boundary at all (just a header
+   background), so they blended into the surrounding prose whenever a
+   paragraph flowed straight into one. A real outer border + row separators
+   gives every table a clear block identity, matching the treatment already
+   applied to screenshots. */
 table {
   word-break: auto-phrase;
   word-wrap: break-word;
@@ -124,12 +129,38 @@ table {
      wrapped Korean cell text needs more vertical room or lines crowd/overlap
      each other. */
   line-height: 1.65;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dark table {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 table th,
 table td {
   font-size: 1rem;
   vertical-align: top;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark table th,
+.dark table td {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+table thead th {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.dark table thead th {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 table tbody td:first-child {
@@ -146,13 +177,17 @@ table tbody td:first-child {
 
 #content h2 {
     border-bottom-width: 1px;
-    border-color: hsl(var(--border));
+    border-color: rgba(0, 0, 0, 0.15);
     font-size: 1.75rem;
     font-weight: 600;
     line-height: 2.25rem;
     margin-top: 1.75rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
+}
+
+.dark #content h2 {
+    border-color: rgba(255, 255, 255, 0.18);
 }
 
 #content h3 {
@@ -237,7 +272,8 @@ html pre, html code, html samp, html kbd {
    that immediately follows — image + text should read as one set. */
 #content img {
     display: block;
-    margin: 2rem 0 0.5rem;
+    margin: 2rem auto 0.5rem;
+    max-width: min(100%, 760px);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
@@ -246,6 +282,14 @@ html pre, html code, html samp, html kbd {
 .dark #content img {
     border-color: rgba(255, 255, 255, 0.18);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Dashboard/monitor/editor screenshots crop out the sidebar but still carry
+   a real data table or code panel that can't be cropped further without
+   losing columns — let these breathe past the standard cap instead of
+   shrinking their text to the point of being unreadable. */
+#content img.wide-screenshot {
+    max-width: min(100%, 1200px);
 }
 
 /* `.. image:: ... :align: left/right` — float the screenshot so the
