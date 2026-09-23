@@ -278,7 +278,11 @@ html pre, html code, html samp, html kbd {
    whatever came before (e.g. the previous wizard step), while a smaller
    gap after it keeps the image visually paired with the caption/step text
    that immediately follows — image + text should read as one set. */
-#content img {
+#content img,
+/* The theme's own `#content figure img{display:inline-block}` rule is more
+   specific than a bare `#content img`, so figure-wrapped screenshots need
+   this exact selector repeated here to actually win and render centered. */
+#content figure img {
     display: block;
     margin: 2rem auto 0.5rem;
     max-width: min(100%, 760px);
