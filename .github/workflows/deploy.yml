@@ -1,0 +1,177 @@
+name: Deploy Docs
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+# ---------------------------------------------------------------------------
+# Triggered by workflow_run, so this workflow's own YAML always comes from
+# the default branch, never from a PR head — a fork PR cannot alter what
+# runs here. It never checks out the triggering PR's code; it only downloads
+# the already-built static HTML/PDF artifacts produced by build.yml and
+# publishes them, so it's safe to grant it write access even when the
+# triggering run came from a fork.
+#
+# Everything that decides WHAT gets deployed and WHERE comes only from
+# github.event.workflow_run.* (event/head_branch/head_sha) and a GitHub API
+# lookup keyed off head_sha — never from anything build.yml computed or
+# wrote to an artifact. build.yml's own steps run with fork-controlled
+# content, so a fork PR could edit them to fabricate e.g. event_name=push;
+# github.event.workflow_run.event is set by GitHub itself from how the
+# Build run actually got triggered and can't be spoofed that way.
+# ---------------------------------------------------------------------------
+jobs:
+  resolve_context:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      event_name: ${{ github.event.workflow_run.event }}
+      ref_name: ${{ github.event.workflow_run.head_branch }}
+      short_sha: ${{ steps.sha.outputs.short_sha }}
+      pr_number: ${{ steps.pr.outputs.pr_number }}
+    steps:
+      - name: Compute short SHA
+        id: sha
+        env:
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: echo "short_sha=${HEAD_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      # workflow_run.pull_requests is GitHub's own record of which PR(s) this
+      # run belongs to and is authoritative when present — prefer it over
+      # any API lookup. It's populated for pull_request runs from the same
+      # repository, but left empty for fork-originated PRs.
+      #
+      # For the fork case we fall back to searching by commit SHA, but that
+      # search can return multiple PRs if the same commit is shared across
+      # more than one open PR — blindly taking the first result could
+      # deploy this run's preview into a different PR's path and comment
+      # there instead. So for a pull_request run we filter the candidates
+      # down to the one whose head repo + branch match this run's own
+      # (both come from the trusted workflow_run event, not from anything
+      # build.yml computed). For a push run (post-merge, official deploy)
+      # there's no such ambiguity to resolve against — head_branch there is
+      # the branch merged INTO (e.g. develop), not the merged PR's own head
+      # — so we just take the PR the merge commit closed.
+      - name: Resolve associated PR number
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event.workflow_run.event }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
+          SAME_REPO_PRS: ${{ toJson(github.event.workflow_run.pull_requests) }}
+        run: |
+          PR_NUMBER=$(echo "$SAME_REPO_PRS" | jq -r '.[0].number // empty')
+
+          if [ -z "$PR_NUMBER" ] && [ "$EVENT_NAME" = "pull_request" ]; then
+            PR_NUMBER=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}/pulls" \
+              --jq --arg repo "$HEAD_REPO" --arg branch "$HEAD_BRANCH" \
+              '[.[] | select(.head.repo.full_name == $repo and .head.ref == $branch)][0].number // empty')
+          elif [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(gh api "repos/${{ github.repository }}/commits/${HEAD_SHA}/pulls" --jq '.[0].number // empty')
+          fi
+
+          echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+  # ---------------------------------------------------------------------------
+  # Deploy to gh-pages (one manual at a time)
+  # ---------------------------------------------------------------------------
+  deploy_docs:
+    needs: resolve_context
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
+    strategy:
+      matrix:
+        manual: [ca-manual, cmt-manual, web-manager-manual]
+      max-parallel: 1
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: build-artifact-${{ matrix.manual }}
+          path: ./dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      # --- PR Preview Deploy ---
+      - name: Deploy Preview
+        if: needs.resolve_context.outputs.event_name == 'pull_request'
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          destination_dir: pr-preview/${{ needs.resolve_context.outputs.pr_number }}/${{ matrix.manual }}
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      # --- Official Deploy (per-commit) ---
+      - name: Deploy Official (per-commit)
+        if: needs.resolve_context.outputs.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          destination_dir: ${{ matrix.manual }}/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+  # ---------------------------------------------------------------------------
+  # Post comments (after deploy finishes)
+  # ---------------------------------------------------------------------------
+  comment_on_pr:
+    needs: [resolve_context, deploy_docs]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      # --- Case A: PR Preview Links ---
+      - name: Comment PR Preview Links
+        if: needs.resolve_context.outputs.event_name == 'pull_request'
+        uses: thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6 # v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ needs.resolve_context.outputs.pr_number }}
+          message: |
+            ✅ **Manual Preview is Ready!**
+
+            | Manual | 🌐 Web | 📄 PDF |
+            | :--- | :--- | :--- |
+            | CUBRID Admin | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.resolve_context.outputs.pr_number }}/ca-manual/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.resolve_context.outputs.pr_number }}/ca-manual/CUBRID%20Admin.pdf) |
+            | CUBRID Migration Toolkit | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.resolve_context.outputs.pr_number }}/cmt-manual/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.resolve_context.outputs.pr_number }}/cmt-manual/CUBRID%20Migration%20Toolkit.pdf) |
+            | CUBRID Web Manager | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.resolve_context.outputs.pr_number }}/web-manager-manual/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/${{ needs.resolve_context.outputs.pr_number }}/web-manager-manual/CUBRID%20Web%20Manager.pdf) |
+          comment_tag: tool-manuals-preview
+          mode: recreate
+
+      # --- Case B: Official Deployment Success (merge only) ---
+      - name: Comment Official Deploy Success
+        if: needs.resolve_context.outputs.event_name == 'push' && needs.resolve_context.outputs.pr_number != ''
+        uses: thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6 # v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ needs.resolve_context.outputs.pr_number }}
+          message: |
+            🚀 **Official Deployment Complete!** (`${{ needs.resolve_context.outputs.short_sha }}`)
+
+            | Manual | 🌐 Web | 📄 PDF |
+            | :--- | :--- | :--- |
+            | CUBRID Admin | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/ca-manual/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/ca-manual/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}/CUBRID%20Admin.pdf) |
+            | CUBRID Migration Toolkit | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/cmt-manual/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/cmt-manual/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}/CUBRID%20Migration%20Toolkit.pdf) |
+            | CUBRID Web Manager | [View Docs](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/web-manager-manual/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}/index.html) | [Download](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/web-manager-manual/${{ needs.resolve_context.outputs.ref_name }}/${{ needs.resolve_context.outputs.short_sha }}/CUBRID%20Web%20Manager.pdf) |
+          comment_tag: tool-manuals-official-deploy
+          mode: create

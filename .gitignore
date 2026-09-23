@@ -5,6 +5,9 @@
 
 # Project-specific
 ca_manual_static
+web-manager-manual/debug/
+web-manager-manual/capture-*.js
+venv/
 
 # OS files
 .DS_Store

@@ -1,0 +1,74 @@
+@media print {
+    .body {
+        text-align: left;
+    }
+
+    .body h1, .body h2, .body h3, .body h4, .body h5, .body h6 {
+        break-after: avoid;
+    }
+
+    .docutils.literal.notranslate {
+        display: inline;
+        overflow-wrap: anywhere;
+    }
+
+    /* width/height: auto !important overrides the inline width= that Sphinx
+       writes onto <img> for figures with an explicit RST :width: — without
+       it, that fixed width fights this max-height cap and WeasyPrint
+       stretches/squashes the image instead of scaling it proportionally. */
+    .body img {
+        max-width: 100%;
+        max-height: 9cm;
+        width: auto !important;
+        height: auto !important;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* `.. image:: ... :align: left/right` — float so the paragraph right
+       after it wraps alongside instead of stacking below (matches the HTML
+       build's style.css rule for the same classes). */
+    .body img.align-left {
+        float: left;
+        display: block;
+        margin: 0 1.2em 0.8em 0;
+        max-height: 8cm;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .body img.align-right {
+        float: right;
+        display: block;
+        margin: 0 0 0.8em 1.2em;
+        max-height: 8cm;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    /* Sphinx's figure/figcaption/table cell spacing and color rely on
+       Tailwind CSS custom properties (--spacing, --text-sm, etc.) that
+       WeasyPrint fails to resolve, so those declarations silently drop out
+       in print only: figures lose their gap from the following paragraph,
+       captions render as plain body text, and table cells lose their
+       horizontal padding. Literal units below replace them for print. */
+    .body figure {
+        margin: 0.8cm auto 0.3cm;
+        text-align: center;
+    }
+
+    .body figcaption {
+        margin-top: 0.15cm;
+        margin-bottom: 0.7cm;
+        font-size: 0.85em;
+        font-style: italic;
+        color: #64748b;
+        text-align: center;
+    }
+
+    .body table th,
+    .body table td {
+        padding: 0.2cm 0.35cm !important;
+    }
+}
