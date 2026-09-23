@@ -130,33 +130,41 @@ table {
      each other. */
   line-height: 1.65;
   margin: 1.5rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  /* The theme sets border-collapse: collapse, under which a <table>'s own
+     border never paints (only cell borders participate in the collapsed
+     border grid) — so this box border would silently disappear without
+     this override, regardless of color/width. border-spacing: 0 keeps cells
+     flush since only border-bottom is set on them (no adjacent borders to
+     double up). */
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1.5px solid #94a3b8;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .dark table {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: #475569;
 }
 
 table th,
 table td {
   font-size: 1rem;
   vertical-align: top;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #cbd5e1;
 }
 
 .dark table th,
 .dark table td {
-  border-bottom-color: rgba(255, 255, 255, 0.12);
+  border-bottom-color: #334155;
 }
 
 table thead th {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  border-bottom: 1.5px solid #94a3b8;
 }
 
 .dark table thead th {
-  border-bottom-color: rgba(255, 255, 255, 0.2);
+  border-bottom-color: #475569;
 }
 
 table tbody tr:last-child td {
@@ -176,8 +184,8 @@ table tbody td:first-child {
 }
 
 #content h2 {
-    border-bottom-width: 1px;
-    border-color: rgba(0, 0, 0, 0.15);
+    border-bottom-width: 1.5px;
+    border-color: #94a3b8;
     font-size: 1.75rem;
     font-weight: 600;
     line-height: 2.25rem;
@@ -187,7 +195,7 @@ table tbody td:first-child {
 }
 
 .dark #content h2 {
-    border-color: rgba(255, 255, 255, 0.18);
+    border-color: #475569;
 }
 
 #content h3 {
@@ -290,6 +298,12 @@ html pre, html code, html samp, html kbd {
    shrinking their text to the point of being unreadable. */
 #content img.wide-screenshot {
     max-width: min(100%, 1200px);
+}
+
+/* `.. figure::` captions default to left-aligned text under a centered
+   image, which reads as misaligned. Center the caption to match. */
+#content figcaption {
+    text-align: center;
 }
 
 /* `.. image:: ... :align: left/right` — float the screenshot so the
