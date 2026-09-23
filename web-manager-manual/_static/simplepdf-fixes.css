@@ -22,7 +22,7 @@
         width: auto !important;
         height: auto !important;
         display: block;
-        margin-left: auto;
+        margin-left: 0;
         margin-right: auto;
     }
 
@@ -54,8 +54,8 @@
        captions render as plain body text, and table cells lose their
        horizontal padding. Literal units below replace them for print. */
     .body figure {
-        margin: 0.8cm auto 0.3cm;
-        text-align: center;
+        margin: 0.8cm 0 0.3cm;
+        text-align: left;
     }
 
     .body figcaption {
@@ -64,7 +64,7 @@
         font-size: 0.85em;
         font-style: italic;
         color: #64748b;
-        text-align: center;
+        text-align: left;
     }
 
     .body table th,
